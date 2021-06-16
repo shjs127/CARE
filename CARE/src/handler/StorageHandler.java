@@ -11,7 +11,7 @@ import auth.service.DetailService;
 import auth.service.DuplicateIdException;
 import auth.service.StoreRequest;
 import auth.service.StoreService;
-import member.model.STOREINFO;
+import member.model.Storeinfo;
 import mvc.command.CommandHandler;
 
 public class StorageHandler implements CommandHandler {

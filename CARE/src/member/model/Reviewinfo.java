@@ -2,16 +2,16 @@ package member.model;
 
 import java.util.Date;
 
-public class REVIEWINFO {
+public class Reviewinfo {
 
 	private int reviewNo;
 	private int userNo;
 	private int storeNo;
-	private int avgScore;
+	private double avgScore;
 	private String reviewContents;
 	private Date reviewDate;
 	
-	public REVIEWINFO(int reviewNo, int userNo, int storeNo, int avgScore, String reviewContents, Date reviewDate) {
+	public Reviewinfo(int reviewNo, int userNo, int storeNo, double avgScore, String reviewContents, Date reviewDate) {
 
 		this.reviewNo = reviewNo;
 		this.userNo = userNo;
@@ -45,11 +45,11 @@ public class REVIEWINFO {
 		this.storeNo = storeNo;
 	}
 
-	public int getAvgScore() {
+	public double getAvgScore() {
 		return avgScore;
 	}
 
-	public void setAvgScore(int avgScore) {
+	public void setAvgScore(double avgScore) {
 		this.avgScore = avgScore;
 	}
 

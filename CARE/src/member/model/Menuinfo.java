@@ -1,14 +1,14 @@
 package member.model;
 
 
-public class MENUINFO {
+public class Menuinfo {
 
 	private int storeNo;
 	private String menu;
 	private int price;
 	private String menuPic;
 	
-	public MENUINFO(int storeNo, String menu, int price, String menuPic) {
+	public Menuinfo(int storeNo, String menu, int price, String menuPic) {
 		
 		this.storeNo = storeNo;
 		this.menu = menu;

@@ -1,9 +1,7 @@
 package member.model;
 
-import java.util.Date;
-import member.model.STOREINFO;
 
-public class DETAILINFO {
+public class Detailinfo {
 
 	private int storeNo;
 	private int totalSeat;
@@ -18,7 +16,7 @@ public class DETAILINFO {
 	private String smokingArea;
 	
 	
-	public DETAILINFO(int storeNo, int totalSeat, int socketSeat, String dessertSales, String terrace, String roofTop,
+	public Detailinfo(int storeNo, int totalSeat, int socketSeat, String dessertSales, String terrace, String roofTop,
 			String wifi, String companionDog, String parkingSpace, String noKidsZone, String smokingArea) {
 
 		this.storeNo = storeNo;

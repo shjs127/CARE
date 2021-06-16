@@ -5,7 +5,7 @@ import member.model.*;
 
 public class DetailRequest {
 	
-	STOREINFO storeinfo=new STOREINFO();
+	Storeinfo storeinfo=new Storeinfo();
 	private int storeNo;
 	private int totalSeat;  // "lee"
 	private int socketSeat;
@@ -78,6 +78,10 @@ public class DetailRequest {
 	}
 	public void setSmokingArea(String smokingArea) {
 		this.smokingArea = smokingArea;
+	}
+	public String getStoreNo() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

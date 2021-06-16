@@ -7,6 +7,7 @@ import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
 import member.dao.USERINFODao;
 import member.model.USERINFO;
+import auth.service.InvalidPasswordException; 
 
 public class ChangePasswordService {
 
@@ -23,7 +24,7 @@ public class ChangePasswordService {
 				throw new MemberNotFoundException();
 			}
 			if (!userinfo.matchPassword(curPwd)) {
-				throw new InvalidPasswordException();
+				throw new InvalidPasswordException(newPwd);
 			}
 			userinfo.changePassword(newPwd);
 			userinfoDao.update(conn, userinfo);
