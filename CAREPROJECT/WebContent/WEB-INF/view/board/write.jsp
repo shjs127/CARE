@@ -1,6 +1,6 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,12 +33,7 @@ table {
 	border-collapse: collapse;
 }
 
-#category {
-	width: 100px;
-	height: 30px;
-}
-
-#title {
+#boardTitle {
 	width: 693px;
 }
 
@@ -61,10 +56,6 @@ button {
 	border-color: rgb(180, 180, 180);
 	border-width: 1px;
 }
-
-textarea {
-	resize: none;
-}
 </style>
 </head>
 <%@ include file="../include/header.jspf"%>
@@ -74,16 +65,35 @@ textarea {
 		<div id="wriTitle">
 			<b>게시글 작성</b>
 		</div>
-		<form action="write.do" method="post">
+		<script>
+		function writeConfirm()
+		{
+		         if(document.getElementById('boardTitle').value == '') 
+		         {      
+		        alert("글 제목을 작성해주세요");
+		              document.getElementById('boardTitle').focus();
+		        return false;       
+		        }
+		         else if(document.getElementById('boardContents').value == '')
+		         {      
+		        alert("글 내용을 작성해주세요");
+		               document.getElementById('boardContents').focus();
+		        return false;       
+		        }
+		         else
+		           return true;
+		}
+		</script>
+		<form  onsubmit="return writeConfirm();" action="write.do" method="post">
+
 			<table>
 				<tr>
 					<td>제목</td>
-					<td><input type="text" name="boardTitle" required id="title" />
-					</td>
+					<td><input type="text" name="boardTitle" id="boardTitle" /></td>
 				</tr>
 				<tr>
 					<td style="padding-top: 20px;" colspan="2"><textarea rows="12"
-							cols="50" name="boardContents"></textarea></td>
+							cols="50" id="boardContents" name="boardContents"></textarea></td>
 				</tr>
 				<tr>
 					<td align="left"><input type="submit" value="작성"

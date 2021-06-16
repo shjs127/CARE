@@ -5,6 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <%@ include file="../include/header.jspf"%>
 <!-- Search Section Starts -->
@@ -71,12 +72,13 @@
 
 			<!-- 검색창 Start -->
 			<div class="sidearea-filter">
-			<form class="teble-form">
-				<select name="f">
-					<option value="title">제목</option>
-					<option value="writerId">작성자</option>
-				</select>
-				<!-- Search Field Starts -->
+				<form class="teble-form">
+					<select name="f">
+						<option value="title">제목</option>
+						<option value="content">내용</option>
+						<option value="writer">작성자</option>
+					</select>
+					<!-- Search Field Starts -->
 					<div class="input-group sidearea-filter-search">
 						<input type="text" name="q" class="form-control rounded-0"
 							placeholder="Search for..."> <span
@@ -118,54 +120,77 @@
 						</tr>
 					</c:if>
 					<c:forEach var="article" items="${articlePage.list}">
-					<div class="list-box clearfix">
-						<h5 class="list-box-info-title">
-							<a href="read.do?boardNo=${article.boardNo}">${article.boardTitle}</a>
-						</h5>
-						<a href="read.do?boardNo=${article.boardNo}"
-							class="dropdown-item"><i class="fa fa-angle-right"></i> ${article.boardContents}</a>
-						<ul class="list-unstyled list-inline list-box-info-tags">
-							<li class="list-inline-item"><a href="#">Pizza</a>,</li>
-							<li class="list-inline-item"><a href="#">American</a>,</li>
-							<li class="list-inline-item"><a href="#">Sandwiches</a>,</li>
-							<li class="list-inline-item"><a href="#">Steak House</a>,</li>
-							<li class="list-inline-item"><a href="#">Pasta</a>,</li>
-							<li class="list-inline-item"><a href="#">Wraps</a></li>
-						</ul>
-						<ul
-							class="list-unstyled list-inline list-box-info-description text-weight-bold">
-							<li class="list-inline-item"><span>Delivery In</span><br>
-								1h 15min</li>
-							<li class="list-inline-item"><span>Delivery Fee</span><br>
-								$5.00</li>
-							<li class="list-inline-item"><span>Min Order</span><br>
-								$30.00</li>
-							<li class="list-inline-item"><span>Distance</span><br>
-								1.2 miles</li>
-						</ul>
-						<ul class="list-unstyled list-inline list-box-info-links">
-							<li class="list-inline-item"><i class="fa fa-info-circle"></i>${article.boardDate}</li>
-							<li class="list-inline-item"><i class="fa fa-star-half-full"></i>
-								<a href="">답글(몇개)</a></li>
-							<li class="list-inline-item"><i class="fa fa-asterisk"></i>${article.viewCount}</li>
-						</ul>
+						<div class="list-box clearfix">
+							<h5 class="list-box-info-title">
+								<a href="read.do?boardNo=${article.boardNo}">
+								<c:choose>
+								<c:when test = "${fn:length(article.boardTitle) gt 15}">
+								<c:out value = "${fn:substring(article.boardTitle,0,14)}...">
+								</c:out>
+								</c:when>
+								<c:otherwise>
+								<c:out value= "${article.boardTitle}"></c:out></c:otherwise>
+								</c:choose>
+								</a>
+							</h5>
+							<a href="read.do?boardNo=${article.boardNo}"
+								class="dropdown-item"><i class="fa fa-angle-right"></i>
+								<c:choose>
+								<c:when test = "${fn:length(article.boardContents) gt 50}">
+								<c:out value = "${fn:substring(article.boardContents,0,49)}...">
+								</c:out>
+								</c:when>
+								<c:otherwise>
+								<c:out value= "${article.boardContents}"></c:out></c:otherwise>
+								</c:choose></a>
+							<!-- <ul class="list-unstyled list-inline list-box-info-tags">
+								<li class="list-inline-item"><a href="#">Pizza</a>,</li>
+								<li class="list-inline-item"><a href="#">American</a>,</li>
+								<li class="list-inline-item"><a href="#">Sandwiches</a>,</li>
+								<li class="list-inline-item"><a href="#">Steak House</a>,</li>
+								<li class="list-inline-item"><a href="#">Pasta</a>,</li>
+								<li class="list-inline-item"><a href="#">Wraps</a></li>
+							</ul>
+							<ul
+								class="list-unstyled list-inline list-box-info-description text-weight-bold">
+								<li class="list-inline-item"><span>Delivery In</span><br>
+									1h 15min</li>
+								<li class="list-inline-item"><span>Delivery Fee</span><br>
+									$5.00</li>
+								<li class="list-inline-item"><span>Min Order</span><br>
+									$30.00</li>
+								<li class="list-inline-item"><span>Distance</span><br>
+									1.2 miles</li>
+							</ul> -->
+							<ul class="list-unstyled list-inline list-box-info-links">
+								<li class="list-inline-item"><i class="fa fa-info-circle"></i>${article.boardDate}</li>
+								<li class="list-inline-item"><i
+									class="fa fa-star-half-full"></i> <a href="">답글(몇개)</a></li>
+								<li class="list-inline-item"><i class="fa fa-asterisk"></i>${article.viewCount}</li>
+							</ul>
 						</div>
-						</c:forEach>
+					</c:forEach>
 				</div>
 				<!-- List Descriptions Ends -->
 				<!-- Pagination Starts -->
+				<%
+				if (session.getAttribute("authUser") != null) {
+				%>
 				<div style="float: right;">
 					<a href="write.do" class="btn btn-primary"
 						style="margin-bottom: 14px;">글쓰기</a>
 				</div>
+				<%
+					}
+				%>
 
 
 				<div class="pagination">
 					<ul style="margin: 0 auto;"
 						class="pagination animation float-lg-right">
 						<c:if test="${articlePage.startPage>1}">
-							<li class="page-item"><a href="?p=${articlePage.startPage-5}&f=&q="
-								class="page-link">&laquo;</a></li>
+							<li class="page-item"><a
+								href="?p=${articlePage.startPage-5}&f=&q=" class="page-link">&laquo;</a></li>
 						</c:if>
 						<c:if test="${articlePage.startPage<=1}">
 							<li class="page-item" onclick="alert('이전 페이지가 없습니다.');"><a
@@ -173,14 +198,15 @@
 						</c:if>
 						<c:forEach var="i" begin="0" end="4">
 							<c:choose>
-								<c:when test="${(articlePage.currentPage) == (articlePage.startPage+i)}">
+								<c:when
+									test="${(articlePage.currentPage) == (articlePage.startPage+i)}">
 									<li class="page-item active"><a
 										href="?p=${articlePage.startPage+i}&f=${param.f}&q=${param.q}"
 										class="page-link">${articlePage.startPage+i}</a></li>
 								</c:when>
 								<c:otherwise>
-									<li class="page-item"><a href="?p=${articlePage.startPage+i}&f=&q="
-										class="page-link">${articlePage.startPage+i}</a></li>
+									<li class="page-item"><a
+										href="?p=${articlePage.startPage+i}&f=&q=" class="page-link">${articlePage.startPage+i}</a></li>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>

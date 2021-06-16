@@ -17,8 +17,8 @@ public class ArticleContentDao {
 			pstmt = conn.prepareStatement(
 					"insert into BOARDINFO " + 
 					"(boardNo, boardcontents) values (?,?)");
-			pstmt.setLong(1, content.getboardNo());
-			pstmt.setString(2, content.getboardContents());
+			pstmt.setInt(1, content.getBoardNo());
+			pstmt.setString(2, content.getBoardContents());
 			int insertedCount = pstmt.executeUpdate();
 			if (insertedCount > 0) {
 				return content;
@@ -53,7 +53,7 @@ public class ArticleContentDao {
 	public int update(Connection conn, int boardNo, String boardContents) throws SQLException {
 		try (PreparedStatement pstmt = 
 				conn.prepareStatement(
-						"update BOARDINFO set boardContents = ? "+
+						"update BOARDINFO set boardContents = ?"+
 						"where boardNo = ?")) {
 			pstmt.setString(1, boardContents);
 			pstmt.setInt(2, boardNo);
@@ -61,7 +61,7 @@ public class ArticleContentDao {
 		}
 	}
 	
-	public int delete(Connection conn, int boardNo, String boardContents) throws SQLException {
+	public int delete(Connection conn, int boardNo) throws SQLException {
 		try (PreparedStatement pstmt = 
 				conn.prepareStatement(
 						"delete from BOARDINFO "+

@@ -18,7 +18,7 @@ public class ArticleData {
 	}
 
 	public String getContent() {
-		return content.getboardContents();
+		return content.getBoardContents();
 	}
 
 }
