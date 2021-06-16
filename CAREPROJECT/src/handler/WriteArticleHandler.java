@@ -7,9 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import auth.service.User;
-import member.model.WriteRequest;
+import auth.service.WriteArticleService;
+import auth.service.WriteRequest;
+import member.model.BOARDINFO;
 import member.model.Writer;
-import member.service.WriteArticleService;
 import mvc.command.CommandHandler;
 
 public class WriteArticleHandler implements CommandHandler {
@@ -33,6 +34,7 @@ public class WriteArticleHandler implements CommandHandler {
 	}
 	
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) {
+		System.out.println("WriteArticleHandler.processSubmit() ½ÇÇà...");
 		Map<String, Boolean> errors = new HashMap<>();
 		req.setAttribute("errors", errors);
 
@@ -44,15 +46,15 @@ public class WriteArticleHandler implements CommandHandler {
 			return FORM_VIEW;
 		}
 		
-		int newArticleNo = writeService.write(writeReq);
+		BOARDINFO newArticleNo = writeService.write(writeReq, user);
 		req.setAttribute("newArticleNo", newArticleNo);
 		
-		return "/WEB-INF/view/board/newArticleSuccess.jsp";
+		return "/WEB-INF/view/board/success.jsp";
 	}
 
 	private WriteRequest createWriteRequest(User user, HttpServletRequest req) {
 		return new WriteRequest(
-				new Writer(user.getId(),user.getName()),
+				new Writer(user.getUserId(),user.getNickName()),
 				req.getParameter("boardTitle"),
 				req.getParameter("boardContents"));
 	}

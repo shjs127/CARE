@@ -20,7 +20,19 @@ public class LoginService {
 			if (!userinfo.matchPassword(password)) {
 				throw new LoginFailException();
 			}
-			return new User(userinfo.getUserId(), userinfo.getName());
+			return new User(userinfo.getUserNo(), userinfo.getUserId(), userinfo.getNickName());
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public User selectByUserNo(int userNo) {
+		try (Connection conn = ConnectionProvider.getConnection()) {
+			USERINFO userinfo = userinfoDao.selectByUserNo(conn, userNo);
+			if (userinfo == null) {
+				throw new LoginFailException();
+			}
+			return new User(userinfo.getUserNo(), userinfo.getUserId(), userinfo.getNickName());
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}

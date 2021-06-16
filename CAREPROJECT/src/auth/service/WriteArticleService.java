@@ -4,28 +4,25 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Date;
 
-import member.model.WriteRequest;
-import member.dao.ArticleContentDao;
-import member.model.ArticleContent;
-import member.model.BOARDINFO;
-import member.dao.BOARDINFODao;
 import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
+import member.dao.BOARDINFODao;
+import member.model.BOARDINFO;
 
 public class WriteArticleService {
 
 	private BOARDINFODao boardInfoDao = new BOARDINFODao();
-	private ArticleContentDao contentDao = new ArticleContentDao();
 
-	public Integer write(WriteRequest req) {
+	public BOARDINFO write(WriteRequest req, User user) {
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
 
-			BOARDINFO boardInfo = toBoardInfo(req);
-			int savedBoardinfo = boardInfoDao.insert(conn, boardInfo);
-			if (savedBoardinfo == 0) {
+			BOARDINFO boardInfo = toBoardInfo(req, user);
+			
+			BOARDINFO savedBoardinfo = boardInfoDao.insert(conn, boardInfo);
+			if (savedBoardinfo == null) {
 				throw new RuntimeException("fail to insert article");
 			}
 			/*
@@ -49,9 +46,9 @@ public class WriteArticleService {
 		}
 	}
 
-	private BOARDINFO toBoardInfo(WriteRequest req) {
+	private BOARDINFO toBoardInfo(WriteRequest req, User user) {
 		Date now = new Date();
 		//return new BOARDINFO(null, req.getWriter(), req.getBoardTitle(), req.getBoardContents(), null, 0, now);
-		return new BOARDINFO(1, 4, req.getBoardTitle(), req.getBoardContents(), "n/a", 0, now);
+		return new BOARDINFO(1, user.getUserNo(), req.getBoardTitle(), req.getBoardContents(), "n/a", 0, now);
 	}
 }

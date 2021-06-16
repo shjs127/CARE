@@ -32,7 +32,7 @@
 		<param-name>poolConfig</param-name>
 		<param-value>
 			jdbcdriver=oracle.jdbc.driver.OracleDriver
-			jdbcUrl=jdbc:oracle:thin:@localhost:1521:xe
+			jdbcUrl=jdbc:oracle:thin:@proddb:1521:xe
 			dbUser=CARE
 			dbPass=CARE
 			validationQuery=select 1

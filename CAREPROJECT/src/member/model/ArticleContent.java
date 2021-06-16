@@ -10,11 +10,11 @@ public class ArticleContent {
 		this.boardContents = boardContents;
 	}
 
-	public Integer getboardNo() {
+	public Integer getBoardNo() {
 		return boardNo;
 	}
 
-	public String getboardContents() {
+	public String getBoardContents() {
 		return boardContents;
 	}
 

@@ -68,7 +68,7 @@
 						        // 현재 로그인된 아이디가 있다면 (= session에 저장된 id가 있다면)
 						        else {
 						            %>
-						        <li style=”color:white;" class="list-inline-item" >${authUser.nickName }
+						        <li style="color:white;" class="list-inline-item" >${authUser.nickName}
 						        <%
 							out.print("님");        
 						        %>
