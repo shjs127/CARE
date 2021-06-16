@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="CARE/src"/>
+	<classpathentry kind="src" path="CAREITSIR-main/src"/>
+	<classpathentry kind="src" path="CAREPROJECT/src"/>
+	<classpathentry kind="lib" path="CARE/WebContent/WEB-INF/lib/commons-dbcp2-2.1.jar"/>
+	<classpathentry kind="lib" path="CARE/WebContent/WEB-INF/lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="CARE/WebContent/WEB-INF/lib/commons-pool2-2.4.1.jar"/>
+	<classpathentry kind="lib" path="CARE/WebContent/WEB-INF/lib/gson-2.8.5.jar"/>
+	<classpathentry kind="lib" path="CARE/WebContent/WEB-INF/lib/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="CARE/WebContent/WEB-INF/lib/jstl-1.2.jar"/>
+	<classpathentry kind="lib" path="CARE/WebContent/WEB-INF/lib/ojdbc7.jar"/>
+	<classpathentry kind="lib" path="CAREITSIR-main/WebContent/WEB-INF/lib/commons-dbcp2-2.1.jar"/>
+	<classpathentry kind="lib" path="CAREITSIR-main/WebContent/WEB-INF/lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="CAREITSIR-main/WebContent/WEB-INF/lib/commons-pool2-2.4.1.jar"/>
+	<classpathentry kind="lib" path="CAREITSIR-main/WebContent/WEB-INF/lib/jstl-1.2.jar"/>
+	<classpathentry kind="lib" path="CAREITSIR-main/WebContent/WEB-INF/lib/ojdbc7.jar"/>
+	<classpathentry kind="lib" path="CAREPROJECT/WebContent/WEB-INF/lib/commons-dbcp2-2.1.jar"/>
+	<classpathentry kind="lib" path="CAREPROJECT/WebContent/WEB-INF/lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="CAREPROJECT/WebContent/WEB-INF/lib/commons-pool2-2.4.1.jar"/>
+	<classpathentry kind="lib" path="CAREPROJECT/WebContent/WEB-INF/lib/gson-2.8.5.jar"/>
+	<classpathentry kind="lib" path="CAREPROJECT/WebContent/WEB-INF/lib/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="CAREPROJECT/WebContent/WEB-INF/lib/jstl-1.2.jar"/>
+	<classpathentry kind="lib" path="CAREPROJECT/WebContent/WEB-INF/lib/ojdbc7.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
