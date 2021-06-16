@@ -7,14 +7,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import auth.service.LoginFailException;
-import auth.service.LoginService;
+import auth.service.StoreLoginService;
 import auth.service.Store;
 import mvc.command.CommandHandler;
 
 public class StoreInHandler implements CommandHandler {
 
 	private static final String FORM_VIEW = "/WEB-INF/view/login/login.jsp";
-	private LoginService loginService = new LoginService();
+	private StoreLoginService storeLoginService = new StoreLoginService();
+
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) 
@@ -33,27 +34,27 @@ public class StoreInHandler implements CommandHandler {
 		return FORM_VIEW;
 	}
 
+	
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) 
 	throws Exception {
 		String manageNo = trim(req.getParameter("manageNo"));
-		Integer storeNo = Integer.parseInt(req.getParameter("storeNo"));
-
+		String storeVal = trim(req.getParameter("storeNo"));
+		int storeNo=Integer.parseInt(storeVal);
+		
 		Map<String, Boolean> errors = new HashMap<>();
 		req.setAttribute("errors", errors);
 
 		if (manageNo == null || manageNo.isEmpty())
-			errors.put("manageNo", Boolean.TRUE);
-		if (storeNo == null || "".equals(storeNo))
-			errors.put("storeNo", Boolean.TRUE);
+			errors.put("manageNoErr", Boolean.TRUE);
+		if (storeVal == null || storeVal.isEmpty()/*"".equals(storeNo)*/)
+			errors.put("storeNoErr", Boolean.TRUE);
 
 		if (!errors.isEmpty()) {
 			return FORM_VIEW;
 		}
-
 		try {
-			User user = loginService.login(id, password);
-			req.getSession().setAttribute("authUser", user);
-			//res.sendRedirect(req.getContextPath() + "/view/test/index.jsp");
+			Store store = storeLoginService.login(manageNo, storeNo);
+			req.getSession().setAttribute("Store", store);
 			res.sendRedirect(req.getContextPath() + "/main/index.do");
 			return null;
 		} catch (LoginFailException e) {

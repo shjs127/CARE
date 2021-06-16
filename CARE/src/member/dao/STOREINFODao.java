@@ -16,7 +16,7 @@ import member.model.BOARDINFO;
 
 public class STOREINFODao {
 
-	public static STOREINFO selectById(Connection conn, String manageNo) throws SQLException {
+	public  STOREINFO selectById(Connection conn, String manageNo) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
@@ -32,7 +32,7 @@ public class STOREINFODao {
 						rs.getString("storePic"),
 						rs.getString("address"), 
 						rs.getString("hours"), 
-						rs.getString("closedDay"),
+						rs.getString("closedDays"),
 						rs.getString("callNumber"),
 						rs.getString("manageNo"));
 			}
