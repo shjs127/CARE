@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+
+=======
 package jdbc.connection;
 
 import java.sql.Connection;
@@ -9,5 +12,7 @@ public class ConnectionProvider {
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(
                 "jdbc:apache:commons:dbcp:CARE");
+       
     }
 }
+>>>>>>> origin/feature_reviw

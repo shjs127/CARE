@@ -8,25 +8,25 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 import jdbc.JdbcUtil;
-import member.model.REVIEWINFO;
+import member.model.Reviewinfo;
 
 public class REVIEWINFODao {
 
-	public REVIEWINFO selectById(Connection conn, String reviewNo) throws SQLException {
+	public Reviewinfo selectById(Connection conn, int storeNo) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(
-					"select * from REVIEWINFO where REVIEWNO = ?");
-			pstmt.setString(1, reviewNo);
+					"select * from Reviewinfo where storeNo = ?");
+			pstmt.setInt(1, storeNo); 
 			rs = pstmt.executeQuery();
-			REVIEWINFO reviewinfo = null;
+			Reviewinfo reviewinfo = null;
 			if (rs.next()) {
-				reviewinfo = new REVIEWINFO(
+				reviewinfo = new Reviewinfo(
 						rs.getInt("reviewNo"),
 						rs.getInt("userNo"), 
 						rs.getInt("storeNo"),
-						rs.getInt("avgScore"), 
+						rs.getDouble("avgScore"), 
 						rs.getString("reviewContents"), 
 						toDate(rs.getTimestamp("reviewDate")));
 			}
@@ -45,20 +45,26 @@ public class REVIEWINFODao {
 
 
 
-	public void insert(Connection conn, REVIEWINFO reviewinfo) throws SQLException {
+	public void insert(Connection conn, Reviewinfo reviewinfo) throws SQLException {
 		try (PreparedStatement pstmt = 
-				conn.prepareStatement("insert into reviewinfo values(REVIEWNUM.NEXTVAL,?,?,?,?,?)")) {
+				conn.prepareStatement("insert into Reviewinfo values(REVIEWNUM.NEXTVAL,?,?,?,?,?)")) {
 
 			pstmt.setInt(1, reviewinfo.getReviewNo());
 			pstmt.setInt(2, reviewinfo.getUserNo());
 			pstmt.setInt(3, reviewinfo.getStoreNo());
-			pstmt.setInt(4, reviewinfo.getAvgScore());
+			pstmt.setDouble(4, reviewinfo.getAvgScore());
 			pstmt.setString(5, reviewinfo.getReviewContents());
 			pstmt.setTimestamp(6, new Timestamp(reviewinfo.getReviewDate().getTime()));
 	
 
 			pstmt.executeUpdate();
 		}
+	}
+
+
+	public static Reviewinfo selectByREVIEWINFOId(Connection conn, int storeNo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/*

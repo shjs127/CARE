@@ -3,18 +3,18 @@ package auth.service;
 import java.util.List;
 
 import member.model.BOARDINFO;
-import member.model.STOREINFO;
+import member.model.Storeinfo;
 
 public class StorePage {
 
 	private int total;  // 2
 	private int currentPage;  // 1
-	private List<STOREINFO> list;  // 2개 Article 객체포함한 리스트
+	private List<Storeinfo> list;  // 2개 Article 객체포함한 리스트
 	private int totalPages;  // 1
 	private int startPage;   // 1
 	private int endPage;     // 1
 
-	public StorePage(int total, int currentPage, int size, List<STOREINFO> list) {
+	public StorePage(int total, int currentPage, int size, List<Storeinfo> list) {
 		this.total = total;
 		this.currentPage = currentPage;
 		this.list = list;
@@ -56,7 +56,7 @@ public class StorePage {
 		return totalPages;
 	}
 
-	public List<STOREINFO> getList() {
+	public List<Storeinfo> getList() {
 		return list;
 	}
 
