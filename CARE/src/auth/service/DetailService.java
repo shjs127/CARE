@@ -20,8 +20,8 @@ public class DetailService {
 		try {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
-
-			DETAILINFO detailinfo = detailinfoDao.selectById(conn, detailReq.getStoreNo());
+String k="manegeNo";
+			DETAILINFO detailinfo = detailinfoDao.selectById(conn, k);
 			if (detailinfo != null) {
 				JdbcUtil.rollback(conn);
 				throw new DuplicateIdException();

@@ -10,6 +10,7 @@ public class User {
 		this.userId = userId;
 		this.nickName = nickName;
 	}
+	
 	public Integer getUserNo() {
 		return userNo;
 	}
