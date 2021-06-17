@@ -2,18 +2,18 @@ package auth.service;
 
 import java.util.List;
 
-import member.model.STOREINFO;
+import member.model.Storeinfo;
 
 public class STOREINFOPage {
 
 	private int total;
 	private int currentPage;
-	private List<STOREINFO> content;
+	private List<Storeinfo> content;
 	private int totalPages;
 	private int startPage;
 	private int endPage;
 
-	public STOREINFOPage(int total, int currentPage, int size, List<STOREINFO> content) {
+	public STOREINFOPage(int total, int currentPage, int size, List<Storeinfo> content) {
 		this.total = total;
 		this.currentPage = currentPage;
 		this.content = content;
@@ -55,7 +55,7 @@ public class STOREINFOPage {
 		return totalPages;
 	}
 
-	public List<STOREINFO> getContent() {
+	public List<Storeinfo> getContent() {
 		return content;
 	}
 

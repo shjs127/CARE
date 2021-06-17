@@ -5,34 +5,31 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import jdbc.JdbcUtil;
-import member.model.STOREINFO;
-import member.model.BOARDINFO;
+import member.model.Storeinfo;
 
 public class STOREINFODao {
 
-	public  STOREINFO selectById(Connection conn, String manageNo) throws SQLException {
+	public static Storeinfo selectById(Connection conn, String manageNo) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(
-					"select * from STOREINFO where manageNo = ?");
+					"select * from storeinfo where manageNo = ?");
 			pstmt.setString(1, manageNo);
 			rs = pstmt.executeQuery();
-			STOREINFO storeinfo = null;
+			Storeinfo storeinfo = null;
 			if (rs.next()) {
-				storeinfo = new STOREINFO(
+				storeinfo = new Storeinfo(
 						rs.getInt("storeNo"),
 						rs.getString("storeName"), 
 						rs.getString("storePic"),
 						rs.getString("address"), 
 						rs.getString("hours"), 
-						rs.getString("closedDays"),
+						rs.getString("closedDay"),
 						rs.getString("callNumber"),
 						rs.getString("manageNo"));
 			}
@@ -42,13 +39,42 @@ public class STOREINFODao {
 			JdbcUtil.close(pstmt);
 		}
 	}
+	public static Storeinfo selectBySTOREINFOId(Connection conn, int storeno) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
-	public int insert(Connection conn, STOREINFO storeinfo) throws SQLException {
+		try {
+			pstmt = conn.prepareStatement("select * from storeinfo "
+					+ "where storeNo = ?");
+			pstmt.setInt(1, storeno);
+			rs = pstmt.executeQuery();
+			
+			Storeinfo storeinfo = null;
+			if (rs.next()) {
+				storeinfo = new Storeinfo(
+						rs.getInt("storeNo"), 
+						rs.getString("storeName"), 
+						rs.getString("storePic"), 
+						rs.getString("address"), 
+						rs.getString("hours"),
+						rs.getString("closedDays"), 
+						rs.getString("callNumber"),
+						rs.getString("manageNo"));
+			}
+			return storeinfo;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+		
+	}
+
+	public int insert(Connection conn, Storeinfo storeinfo) throws SQLException {
 		Statement stmt = null;
 		ResultSet rs = null;
 		
 		try(PreparedStatement pstmt = 
-				conn.prepareStatement("insert into STOREINFO"
+				conn.prepareStatement("insert into storeinfo"
 						+ " values(STORENUM.NEXTVAL,?,?,?,?,?,?,?)")) {
 
 			pstmt.setString(1, storeinfo.getStoreName());
@@ -90,18 +116,18 @@ public class STOREINFODao {
 	}
 	
 	//List<STOREINFO> select
-		public List<STOREINFO> select(Connection conn, int startRow, int size) throws SQLException{
+		public List<Storeinfo> select(Connection conn, int startRow, int size) throws SQLException{
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			try {
 				pstmt = conn.prepareStatement("select * from ("
-						+ "select row_number() over(order by storeno) num, storeinfo.*"
-						+ "from storeinfo order by storeno  desc)"
+						+ "select row_number() over(order by storeNo) num, storeinfo.*"
+						+ "from storeinfo order by storeNo  desc)"
 						+ "where num between ? and ?");
 				pstmt.setInt(1, startRow);
 				pstmt.setInt(2, size);
 				rs = pstmt.executeQuery();
-				List<STOREINFO> result = new ArrayList<>();
+				List<Storeinfo> result = new ArrayList<>();
 				while(rs.next()) {
 					result.add(convertStore(rs));
 				}
@@ -113,8 +139,8 @@ public class STOREINFODao {
 			}
 		}
 	
-		private STOREINFO convertStore(ResultSet rs) throws SQLException {
-			return new STOREINFO(rs.getInt("storeNo"),
+		private Storeinfo convertStore(ResultSet rs) throws SQLException {
+			return new Storeinfo(rs.getInt("storeNo"),
 								rs.getString("storeName"), 
 								rs.getString("storePic"),
 								rs.getString("address"), 
@@ -124,7 +150,7 @@ public class STOREINFODao {
 								rs.getString("manageNo"));
 		}
 
-		public void insertApi(Connection conn, STOREINFO storeinfo) throws SQLException {
+		public void insertApi(Connection conn, Storeinfo storeinfo) throws SQLException {
 			try (PreparedStatement pstmt = 
 					conn.prepareStatement("insert into storeinfo  (storeno, storename, address, callnumber, manageno) values(STORENUM.NEXTVAL,?,?,?,?)")) {
 				pstmt.setString(1, storeinfo.getStoreName());
@@ -135,8 +161,8 @@ public class STOREINFODao {
 			}
 		}
 		
-		public void updateApi(Connection conn, STOREINFO storeinfo) throws SQLException {
-			try (PreparedStatement pstmt = conn.prepareStatement("update storeinfo set storename = ?, address = ?, callnumber = ? where manageno = ?")){
+		public void updateApi(Connection conn, Storeinfo storeinfo) throws SQLException {
+			try (PreparedStatement pstmt = conn.prepareStatement("update storeinfo set storeName = ?, address = ?, callNumber = ? where manageNo = ?")){
 				pstmt.setString(1, storeinfo.getStoreName());
 				pstmt.setString(2, storeinfo.getAddress());
 				pstmt.setString(3, storeinfo.getCallNumber());
@@ -144,9 +170,9 @@ public class STOREINFODao {
 			}
 		}
 		
-		public void updateInfo(Connection conn, STOREINFO storeinfo) throws SQLException{
-			try(PreparedStatement pstmt = conn.prepareStatement("update storeinfo set storename = ?, storepic = ?, address = ?,"
-					+ "hours = ?, closedays = ?, callnumber = ? ")){
+		public void updateInfo(Connection conn, Storeinfo storeinfo) throws SQLException{
+			try(PreparedStatement pstmt = conn.prepareStatement("update storeinfo set storeName = ?, storePic = ?, address = ?,"
+					+ "hours = ?, closedDays = ?, callNumber = ? ")){
 				pstmt.setString(1, storeinfo.getStoreName());
 				pstmt.setString(2, storeinfo.getStorePic());
 				pstmt.setString(3, storeinfo.getAddress());

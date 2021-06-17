@@ -4,25 +4,26 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import jdbc.JdbcUtil;
-import member.model.MENUINFO;
+import member.model.Menuinfo;
 
 public class MENUINFODao {
 
-	public MENUINFO selectById(Connection conn, String storeNo) throws SQLException {
+	public Menuinfo selectById(Connection conn, int storeNo) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(
-					"select * from MENUINFO where STORENO = ?");
-			pstmt.setString(1, storeNo);
+					"select * from menuinfo where storeNo = ?");
+			pstmt.setInt(1, storeNo);
 			rs = pstmt.executeQuery();
-			MENUINFO menuinfo = null;
+			Menuinfo menuinfo = null;
 			if (rs.next()) {
-				menuinfo = new MENUINFO(
+				menuinfo = new Menuinfo(
 						rs.getInt("storeNo"),
 						rs.getString("menu"),
 						rs.getInt("price"), 
@@ -36,9 +37,9 @@ public class MENUINFODao {
 	}
 
 
-	public void insert(Connection conn, MENUINFO menuinfo) throws SQLException {
+	public void insert(Connection conn, Menuinfo menuinfo) throws SQLException {
 		try (PreparedStatement pstmt = 
-				conn.prepareStatement("insert into MENUINFO values(?,?,?,?)")) {
+				conn.prepareStatement("insert into menuinfo values(?,?,?,?)")) {
 
 			pstmt.setInt(1, menuinfo.getStoreNo());
 			pstmt.setString(2, menuinfo.getMenu());
@@ -51,14 +52,38 @@ public class MENUINFODao {
 		}
 	}
 
-	/*
-	 * public void update(Connection conn, menuinfo menuinfo) throws SQLException
-	 * { try (PreparedStatement pstmt = conn.prepareStatement(
-	 * "update menuinfo set USERNAME = ?, PASSWORD = ? where USERID = ?")) {
-	 * pstmt.setString(1, menuinfo.getName()); pstmt.setString(2,
-	 * menuinfo.getPassword()); pstmt.setString(3, menuinfo.getUserId());
-	 * pstmt.executeUpdate(); } }
-	 */
+	
+	public List<Menuinfo> selectList(Connection conn, int firstRow, int endRow) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement("select * from(select row_number() over(order by menuinfo.storeno) num, menuinfo.*"
+					+ "from storeinfo, menuinfo where storeinfo.storeno = menuinfo.storeno"
+					+ "order by menuinfo.storeno desc)"
+					+ "where num between ? and ?");
+			pstmt.setInt(1, firstRow - 1);
+			pstmt.setInt(2, endRow - firstRow + 1);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				List<Menuinfo> menuinfoList = new ArrayList<Menuinfo>();
+				do {
+					menuinfoList.add(makeMenuinfoFromResultSet(rs));
+				} while (rs.next());
+				return menuinfoList;
+			} else {
+				return Collections.emptyList();
+			}
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
+	private Menuinfo makeMenuinfoFromResultSet(ResultSet rs) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }
 
 

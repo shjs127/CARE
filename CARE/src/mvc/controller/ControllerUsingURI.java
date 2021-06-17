@@ -18,11 +18,10 @@ import mvc.command.NullHandler;
 
 public class ControllerUsingURI extends HttpServlet {
 
-    // <커맨드, 핸들러인스턴스> 매핑 정보 저장
+   
     private Map<String, CommandHandler> commandHandlerMap = 
     		new HashMap<>();
-    // {"/join.do":member.command.JoinHandler 객체, 
-    //  "/login.do":auth.command.LoginHandler 객체, ....}
+   
 
     public void init() throws ServletException {
         String configFile = getInitParameter("configFile");
@@ -70,7 +69,7 @@ public class ControllerUsingURI extends HttpServlet {
 			// "/join.do"
 		}
         CommandHandler handler = commandHandlerMap.get(command);
-        // member.command.JoinHandler 객체
+        // member.command.JoinHandler 媛앹껜
         if (handler == null) {
             handler = new NullHandler();
         }

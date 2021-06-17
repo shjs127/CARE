@@ -9,7 +9,7 @@ import javax.xml.crypto.Data;
 import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
 import member.dao.DETAILINFODao;
-import member.model.DETAILINFO;
+import member.model.Detailinfo;
 
 public class DetailService {
 
@@ -20,14 +20,14 @@ public class DetailService {
 		try {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
-String k="manegeNo";
-			DETAILINFO detailinfo = detailinfoDao.selectById(conn, k);
+
+			Detailinfo detailinfo = detailinfoDao.selectById(conn, detailReq.getStoreNo());
 			if (detailinfo != null) {
 				JdbcUtil.rollback(conn);
 				throw new DuplicateIdException();
 			}
 			
-			detailinfoDao.insert(conn, new DETAILINFO(
+			detailinfoDao.insert(conn, new Detailinfo(
 				0,detailReq.getTotalSeat() ,detailReq.getSocketSeat(),detailReq.getDessertSales(),detailReq.getTerrace(),
 				detailReq.getRoofTop(),detailReq.getWifi(),detailReq.getCompanionDog(),detailReq.getParkingSpace(),detailReq.getNokidsZone(),detailReq.getSmokingArea()));
 			conn.commit();
