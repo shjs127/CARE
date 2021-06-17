@@ -21,17 +21,17 @@ public class StoreService {
 	private DETAILINFODao detailinfoDao = new DETAILINFODao();
 	private STOREINFODao storeDao = new STOREINFODao();
 	
-	//매장 등록을 통한 storeinfo, detailinfo 저장
+	//留ㅼ옣 �벑濡앹쓣 �넻�븳 storeinfo, detailinfo ���옣
 	public int store(StoreRequest storeReq, DetailRequest detailReq) {
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
-			//데이터 확인
+			//�뜲�씠�꽣 �솗�씤
 			System.out.println("storeReq="+storeReq);
 			
-			Storeinfo storeSel = STOREINFODao.selectById(conn, storeReq.getManageNo());
-			//데이터 확인
+			Storeinfo storeSel = storeinfoDao.selectById(conn, storeReq.getManageNo());
+			//�뜲�씠�꽣 �솗�씤
 			System.out.println("storeSel="+storeSel);
 			
 			if (storeSel != null) {
@@ -57,7 +57,7 @@ public class StoreService {
 			  { throw new RuntimeException("fail to insert detailinfo"); }
 			 
 			conn.commit();
-			//storeno저장
+			//storeno���옣
 			System.out.println("savedStoreNo="+savedStoreNo);
 
 			return savedStoreNo;
@@ -71,17 +71,17 @@ public class StoreService {
 	private Storeinfo toStore(StoreRequest req) {
 		return new Storeinfo(0, req.getStoreName(), 
 				req.getStorePic(), req.getAddress(), req.getHours(), 
-				req.getClosedDays(), req.getCallNumber(),"x");
+				req.getClosedDays(), req.getCallNumber(),req.getManageNo());
 	}
 	
-	//api를 통해 storeinfo에 저장
+	//api瑜� �넻�빐 storeinfo�뿉 ���옣
 	public void store(StoreRequest storeReq) {
 		Connection conn  = null;
 		try {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
 			
-			//TODO 중복된 storeInfo가 있을 경우 에러를 강제로 발생시키는게 아니라 update구문으로 변경하거나 혹은 사전에 방어 소스가 필요함
+			//TODO 以묐났�맂 storeInfo媛� �엳�쓣 寃쎌슦 �뿉�윭瑜� 媛뺤젣濡� 諛쒖깮�떆�궎�뒗寃� �븘�땲�씪 update援щЦ�쑝濡� 蹂�寃쏀븯嫄곕굹 �샊�� �궗�쟾�뿉 諛⑹뼱 �냼�뒪媛� �븘�슂�븿
 			Storeinfo storeInfo = storeDao.selectById(conn, storeReq.getManageNo());
 			if(storeInfo != null) {
 				storeDao.updateApi(conn, new Storeinfo(storeReq.getStoreNo(), storeReq.getStoreName(),storeReq.getStorePic(),

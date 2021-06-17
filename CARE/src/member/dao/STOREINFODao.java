@@ -13,7 +13,7 @@ import member.model.Storeinfo;
 
 public class STOREINFODao {
 
-	public static Storeinfo selectById(Connection conn, String manageNo) throws SQLException {
+	public Storeinfo selectById(Connection conn, String manageNo) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
@@ -29,7 +29,7 @@ public class STOREINFODao {
 						rs.getString("storePic"),
 						rs.getString("address"), 
 						rs.getString("hours"), 
-						rs.getString("closedDay"),
+						rs.getString("closedDays"),
 						rs.getString("callNumber"),
 						rs.getString("manageNo"));
 			}

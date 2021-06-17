@@ -7,7 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.omg.CORBA.ORB;
+/*import org.omg.CORBA.ORB;*/
 
 import auth.service.ChangePasswordService;
 import auth.service.InvalidPasswordException;
@@ -76,15 +76,14 @@ public class ChangePasswordHandler implements CommandHandler {
 	}
 
 
-	public void printCommandHelp(PrintStream arg0, boolean arg1) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-	public boolean processCommand(String[] arg0, ORB arg1, PrintStream arg2) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	/*
+	 * public void printCommandHelp(PrintStream arg0, boolean arg1) { // TODO
+	 * Auto-generated method stub
+	 * 
+	 * }
+	 * 
+	 * 
+	 * public boolean processCommand(String[] arg0, ORB arg1, PrintStream arg2) { //
+	 * TODO Auto-generated method stub return false; }
+	 */
 }

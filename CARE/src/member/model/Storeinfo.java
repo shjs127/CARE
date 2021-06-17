@@ -91,5 +91,8 @@ public class Storeinfo {
 		this.manageNo = manageNo;
 	}
 	
+	public boolean matchStoreNo(int stNo) {
+		return storeNo==stNo;
+	}
 	
 }
