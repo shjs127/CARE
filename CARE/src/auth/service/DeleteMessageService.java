@@ -6,7 +6,7 @@ import java.util.Date;
 
 import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
-import member.dao.MESSAGEDao;
+import member.dao.MessageDao;
 public class DeleteMessageService {
 
 	private static DeleteMessageService instance = new DeleteMessageService();
@@ -24,7 +24,7 @@ public class DeleteMessageService {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
 
-			MESSAGEDao messageDao = MESSAGEDao.getInstance();
+			MessageDao messageDao = MessageDao.getInstance();
 			Message message = messageDao.select(conn, reviewno);
 			if (message == null) {
 				throw new MessageNotFoundException("硫붿떆吏� �뾾�쓬");

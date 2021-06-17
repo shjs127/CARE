@@ -8,10 +8,10 @@ import auth.service.FoodDetailsService;
 import auth.service.GetMessageListViewService;
 import auth.service.LoginFailException;
 import auth.service.MessageListView;
-import member.model.Detailinfo;
-import member.model.Menuinfo;
-import member.model.Reviewinfo;
-import member.model.Storeinfo;
+import member.model.DetailInfo;
+import member.model.MenuInfo;
+import member.model.ReviewInfo;
+import member.model.StoreInfo;
 import mvc.command.CommandHandler;
 
 
@@ -54,13 +54,13 @@ public class FoodDetailHandler implements CommandHandler {
 		
 		try {
 			int storeNo = 1;
-			Storeinfo storeinfo = fds.storeInfo(storeNo);
+			StoreInfo storeinfo = fds.storeInfo(storeNo);
 			req.getSession().setAttribute("storeinfo", storeinfo);
-			Menuinfo menuinfo = fds.menuInfo(storeNo);
+			MenuInfo menuinfo = fds.menuInfo(storeNo);
 			req.getSession().setAttribute("menuinfo", menuinfo);
-			Detailinfo detailinfo = fds.detailInfo(storeNo);
+			DetailInfo detailinfo = fds.detailInfo(storeNo);
 			req.getSession().setAttribute("detailinfo", detailinfo);
-			Reviewinfo reviewinfo = fds.reviewInfo(storeNo);
+			ReviewInfo reviewinfo = fds.reviewInfo(storeNo);
 			req.getSession().setAttribute("reviewinfo", reviewinfo);
 
 			GetMessageListViewService viewService = GetMessageListViewService.getInstance();

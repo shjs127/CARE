@@ -5,7 +5,7 @@ import member.model.*;
 
 public class DetailRequest {
 	
-	Storeinfo storeinfo=new Storeinfo();
+	StoreInfo storeinfo=new StoreInfo();
 	private int storeNo;
 	private int totalSeat;  // "lee"
 	private int socketSeat;

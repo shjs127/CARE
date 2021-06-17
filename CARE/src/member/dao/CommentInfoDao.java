@@ -8,11 +8,11 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 import jdbc.JdbcUtil;
-import member.model.COMMENTINFO;
+import member.model.CommentInfo;
 
-public class COMMENTINFODao {
+public class CommentInfoDao {
 
-	public COMMENTINFO selectById(Connection conn, String boardNo) throws SQLException {
+	public CommentInfo selectById(Connection conn, String boardNo) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
@@ -20,9 +20,9 @@ public class COMMENTINFODao {
 					"select * from COMMENTINFO where BOARDNO = ?");
 			pstmt.setString(1, boardNo);
 			rs = pstmt.executeQuery();
-			COMMENTINFO commentinfo = null;
+			CommentInfo commentinfo = null;
 			if (rs.next()) {
-				commentinfo = new COMMENTINFO(
+				commentinfo = new CommentInfo(
 						rs.getInt("boardNo"),
 						rs.getInt("commentNo"), 
 						rs.getInt("userNo"),
@@ -44,7 +44,7 @@ public class COMMENTINFODao {
 
 
 
-	public void insert(Connection conn, COMMENTINFO commentinfo) throws SQLException {
+	public void insert(Connection conn, CommentInfo commentinfo) throws SQLException {
 		try (PreparedStatement pstmt = 
 				conn.prepareStatement("insert into commentinfo values(?,COMMENTNUM.NEXTVAL,?,?,?)")) {
 

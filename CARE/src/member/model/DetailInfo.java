@@ -1,7 +1,7 @@
 package member.model;
 
 
-public class Detailinfo {
+public class DetailInfo {
 
 	private int storeNo;
 	private int totalSeat;
@@ -16,7 +16,7 @@ public class Detailinfo {
 	private String smokingArea;
 	
 	
-	public Detailinfo(int storeNo, int totalSeat, int socketSeat, String dessertSales, String terrace, String roofTop,
+	public DetailInfo(int storeNo, int totalSeat, int socketSeat, String dessertSales, String terrace, String roofTop,
 			String wifi, String companionDog, String parkingSpace, String noKidsZone, String smokingArea) {
 
 		this.storeNo = storeNo;
@@ -32,7 +32,7 @@ public class Detailinfo {
 		this.smokingArea = smokingArea;
 	}
 	
-	public Detailinfo() {
+	public DetailInfo() {
 		// TODO Auto-generated constructor stub
 	}
 

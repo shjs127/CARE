@@ -2,7 +2,7 @@ package member.model;
 
 import java.util.Date;
 
-public class Reviewinfo {
+public class ReviewInfo {
 
 	private int reviewNo;
 	private int userNo;
@@ -11,7 +11,7 @@ public class Reviewinfo {
 	private String reviewContents;
 	private Date reviewDate;
 	
-	public Reviewinfo(int reviewNo, int userNo, int storeNo, double avgScore, String reviewContents, Date reviewDate) {
+	public ReviewInfo(int reviewNo, int userNo, int storeNo, double avgScore, String reviewContents, Date reviewDate) {
 
 		this.reviewNo = reviewNo;
 		this.userNo = userNo;
@@ -20,7 +20,7 @@ public class Reviewinfo {
 		this.reviewContents = reviewContents;
 		this.reviewDate = reviewDate;
 	}
-	public Reviewinfo() {
+	public ReviewInfo() {
 		// TODO Auto-generated constructor stub
 	}
 

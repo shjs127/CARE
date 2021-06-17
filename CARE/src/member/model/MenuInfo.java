@@ -1,21 +1,21 @@
 package member.model;
 
 
-public class Menuinfo {
+public class MenuInfo {
 
 	private int storeNo;
 	private String menu;
 	private int price;
 	private String menuPic;
 	
-	public Menuinfo(int storeNo, String menu, int price, String menuPic) {
+	public MenuInfo(int storeNo, String menu, int price, String menuPic) {
 		
 		this.storeNo = storeNo;
 		this.menu = menu;
 		this.price = price;
 		this.menuPic = menuPic;
 	}
-	public Menuinfo() {
+	public MenuInfo() {
 		// TODO Auto-generated constructor stub
 	}
 

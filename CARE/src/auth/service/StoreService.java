@@ -9,17 +9,17 @@ import javax.xml.crypto.Data;
 
 import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
-import member.dao.STOREINFODao;
-import member.model.Storeinfo;
-import member.model.USERINFO;
-import member.dao.DETAILINFODao;
-import member.model.Detailinfo;
+import member.dao.StoreInfoDao;
+import member.model.StoreInfo;
+import member.model.UserInfo;
+import member.dao.DetailInfoDao;
+import member.model.DetailInfo;
 
 public class StoreService {
 
-	private STOREINFODao storeinfoDao = new STOREINFODao();
-	private DETAILINFODao detailinfoDao = new DETAILINFODao();
-	private STOREINFODao storeDao = new STOREINFODao();
+	private StoreInfoDao storeinfoDao = new StoreInfoDao();
+	private DetailInfoDao detailinfoDao = new DetailInfoDao();
+	private StoreInfoDao storeDao = new StoreInfoDao();
 	
 	//留ㅼ옣 �벑濡앹쓣 �넻�븳 storeinfo, detailinfo ���옣
 	public int store(StoreRequest storeReq, DetailRequest detailReq) {
@@ -30,7 +30,7 @@ public class StoreService {
 			//�뜲�씠�꽣 �솗�씤
 			System.out.println("storeReq="+storeReq);
 			
-			Storeinfo storeSel = storeinfoDao.selectById(conn, storeReq.getManageNo());
+			StoreInfo storeSel = storeinfoDao.selectById(conn, storeReq.getManageNo());
 			//�뜲�씠�꽣 �솗�씤
 			System.out.println("storeSel="+storeSel);
 			
@@ -38,20 +38,20 @@ public class StoreService {
 				JdbcUtil.rollback(conn);
 				throw new DuplicateIdException();
 			}
-			Storeinfo storeinfo =toStore(storeReq);
+			StoreInfo storeinfo =toStore(storeReq);
 			int savedStoreNo = storeinfoDao.insert(conn, storeinfo);
 			if (savedStoreNo == 0) {
 				JdbcUtil.rollback(conn);
 				throw new RuntimeException("fail to insert storeinfo");
 			}
 					
-			  Detailinfo detailInfo=new Detailinfo( savedStoreNo, detailReq.getTotalSeat(),
+			  DetailInfo detailInfo=new DetailInfo( savedStoreNo, detailReq.getTotalSeat(),
 			  detailReq.getSocketSeat(), detailReq.getDessertSales(),
 			  detailReq.getTerrace(), detailReq.getRoofTop(), detailReq.getWifi(),
 			  detailReq.getCompanionDog(), detailReq.getParkingSpace(),
 			  detailReq.getNokidsZone(), detailReq.getSmokingArea() ); 
 			  
-			  Detailinfo savedDetail=detailinfoDao.insert(conn, detailInfo); 
+			  DetailInfo savedDetail=detailinfoDao.insert(conn, detailInfo); 
 			  
 			  if (savedDetail == null)
 			  { throw new RuntimeException("fail to insert detailinfo"); }
@@ -68,8 +68,8 @@ public class StoreService {
 			JdbcUtil.close(conn);
 		}
 	}
-	private Storeinfo toStore(StoreRequest req) {
-		return new Storeinfo(0, req.getStoreName(), 
+	private StoreInfo toStore(StoreRequest req) {
+		return new StoreInfo(0, req.getStoreName(), 
 				req.getStorePic(), req.getAddress(), req.getHours(), 
 				req.getClosedDays(), req.getCallNumber(),req.getManageNo());
 	}
@@ -82,13 +82,13 @@ public class StoreService {
 			conn.setAutoCommit(false);
 			
 			//TODO 以묐났�맂 storeInfo媛� �엳�쓣 寃쎌슦 �뿉�윭瑜� 媛뺤젣濡� 諛쒖깮�떆�궎�뒗寃� �븘�땲�씪 update援щЦ�쑝濡� 蹂�寃쏀븯嫄곕굹 �샊�� �궗�쟾�뿉 諛⑹뼱 �냼�뒪媛� �븘�슂�븿
-			Storeinfo storeInfo = storeDao.selectById(conn, storeReq.getManageNo());
+			StoreInfo storeInfo = storeDao.selectById(conn, storeReq.getManageNo());
 			if(storeInfo != null) {
-				storeDao.updateApi(conn, new Storeinfo(storeReq.getStoreNo(), storeReq.getStoreName(),storeReq.getStorePic(),
+				storeDao.updateApi(conn, new StoreInfo(storeReq.getStoreNo(), storeReq.getStoreName(),storeReq.getStorePic(),
 						storeReq.getAddress(), storeReq.getHours(), storeReq.getClosedDays(), storeReq.getCallNumber(), storeReq.getManageNo()));
 			}
 			
-			storeDao.insertApi(conn, new Storeinfo(0, storeReq.getStoreName(), null, storeReq.getAddress(), null, null, storeReq.getCallNumber(), storeReq.getManageNo()));
+			storeDao.insertApi(conn, new StoreInfo(0, storeReq.getStoreName(), null, storeReq.getAddress(), null, null, storeReq.getCallNumber(), storeReq.getManageNo()));
 			conn.commit();
 			
 		}catch(SQLException e) {

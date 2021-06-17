@@ -8,11 +8,11 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 import jdbc.JdbcUtil;
-import member.model.Reviewinfo;
+import member.model.ReviewInfo;
 
-public class REVIEWINFODao {
+public class ReviewInfoDao {
 
-	public Reviewinfo selectById(Connection conn, int storeNo) throws SQLException {
+	public ReviewInfo selectById(Connection conn, int storeNo) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
@@ -20,9 +20,9 @@ public class REVIEWINFODao {
 					"select * from reviewinfo where storeNo = ?");
 			pstmt.setInt(1, storeNo); 
 			rs = pstmt.executeQuery();
-			Reviewinfo reviewinfo = null;
+			ReviewInfo reviewinfo = null;
 			if (rs.next()) {
-				reviewinfo = new Reviewinfo(
+				reviewinfo = new ReviewInfo(
 						rs.getInt("reviewNo"),
 						rs.getInt("userNo"), 
 						rs.getInt("storeNo"),
@@ -45,7 +45,7 @@ public class REVIEWINFODao {
 
 
 
-	public void insert(Connection conn, Reviewinfo reviewinfo) throws SQLException {
+	public void insert(Connection conn, ReviewInfo reviewinfo) throws SQLException {
 		try (PreparedStatement pstmt = 
 				conn.prepareStatement("insert into reviewinfo values(REVIEWNUM.NEXTVAL,?,?,?,?,?)")) {
 
@@ -62,7 +62,7 @@ public class REVIEWINFODao {
 	}
 
 
-	public static Reviewinfo selectByREVIEWINFOId(Connection conn, int storeNo) {
+	public static ReviewInfo selectByREVIEWINFOId(Connection conn, int storeNo) {
 		// TODO Auto-generated method stub
 		return null;
 	}

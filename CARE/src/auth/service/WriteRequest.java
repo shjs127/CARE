@@ -2,21 +2,21 @@ package auth.service;
 
 import java.util.Map;
 
-import member.model.Writer;
+import member.model.writer;
 
 public class WriteRequest {
 	
-	private Writer writer;
+	private writer writer;
 	private String boardTitle;
 	private String boardContents;
 
-	public WriteRequest(Writer writer, String boardTitle, String boardContents) {
+	public WriteRequest(writer writer, String boardTitle, String boardContents) {
 		this.writer = writer;
 		this.boardTitle = boardTitle;
 		this.boardContents = boardContents;
 	}
 	
-	public Writer getWriter() {
+	public writer getWriter() {
 		return writer;
 	}
 

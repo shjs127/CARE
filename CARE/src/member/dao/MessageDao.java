@@ -1,5 +1,5 @@
 package member.dao;
-//�̼��� �߰�����
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,14 +16,14 @@ import jdbc.JdbcUtil;
 
 
 
-public class MESSAGEDao {
-	private static MESSAGEDao MESSAGEDao = new MESSAGEDao();
+public class MessageDao {
+	private static MessageDao MESSAGEDao = new MessageDao();
 
-	public static MESSAGEDao getInstance() {
+	public static MessageDao getInstance() {
 		return MESSAGEDao;
 	}
 
-	private MESSAGEDao() {
+	private MessageDao() {
 	}
 
 	public static int insert(Connection conn, Message message) throws SQLException {

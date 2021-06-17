@@ -8,12 +8,12 @@ import javax.xml.crypto.Data;
 
 import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
-import member.dao.DETAILINFODao;
-import member.model.Detailinfo;
+import member.dao.DetailInfoDao;
+import member.model.DetailInfo;
 
 public class DetailService {
 
-	private DETAILINFODao detailinfoDao = new DETAILINFODao();
+	private DetailInfoDao detailinfoDao = new DetailInfoDao();
 
 	public void detail(DetailRequest detailReq) {
 		Connection conn = null;
@@ -21,13 +21,13 @@ public class DetailService {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
 
-			Detailinfo detailinfo = detailinfoDao.selectById(conn, detailReq.getStoreNo());
+			DetailInfo detailinfo = detailinfoDao.selectById(conn, detailReq.getStoreNo());
 			if (detailinfo != null) {
 				JdbcUtil.rollback(conn);
 				throw new DuplicateIdException();
 			}
 			
-			detailinfoDao.insert(conn, new Detailinfo(
+			detailinfoDao.insert(conn, new DetailInfo(
 				0,detailReq.getTotalSeat() ,detailReq.getSocketSeat(),detailReq.getDessertSales(),detailReq.getTerrace(),
 				detailReq.getRoofTop(),detailReq.getWifi(),detailReq.getCompanionDog(),detailReq.getParkingSpace(),detailReq.getNokidsZone(),detailReq.getSmokingArea()));
 			conn.commit();

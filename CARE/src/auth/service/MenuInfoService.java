@@ -4,20 +4,20 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import jdbc.connection.ConnectionProvider;
-import member.dao.MENUINFODao;
-import member.model.Menuinfo;
-import member.model.Reviewinfo;
+import member.dao.MenuInfoDao;
+import member.model.MenuInfo;
+import member.model.ReviewInfo;
 
 
 
 public class MenuInfoService {
 
 			
-	
+	private MenuInfoDao menuInfoDao=new MenuInfoDao();
 
-	public Menuinfo menuInfo(int storeNo) {
+	public MenuInfo menuInfo(int storeNo) {
 		try (Connection conn = ConnectionProvider.getConnection()) {
-			Menuinfo menuinfo = MENUINFODao.selectByMENUINFOId(conn, storeNo);
+			MenuInfo menuinfo = menuInfoDao.selectById(conn, storeNo);
 			if (menuinfo == null) {
 				
 			}
@@ -29,7 +29,7 @@ public class MenuInfoService {
 		}
 	}
 
-	public static Menuinfo MENUINFO(int storeNo) {
+	public static MenuInfo MENUINFO(int storeNo) {
 		// TODO Auto-generated method stub
 		return null;
 	}

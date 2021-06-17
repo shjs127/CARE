@@ -2,7 +2,7 @@ package member.model;
 
 import java.util.Date;
 
-public class COMMENTINFO {
+public class CommentInfo {
 
 	private int boardNo;
 	private int commentNo;
@@ -10,7 +10,7 @@ public class COMMENTINFO {
 	private String commentContents;
 	private Date commentDate;
 
-	public COMMENTINFO(int boardNo, int commentNo, int userNo, String commentContents, Date commentDate) {
+	public CommentInfo(int boardNo, int commentNo, int userNo, String commentContents, Date commentDate) {
 
 		this.boardNo = boardNo;
 		this.commentNo = commentNo;

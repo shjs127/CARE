@@ -5,13 +5,13 @@ import java.sql.SQLException;
 
 import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
-import member.dao.USERINFODao;
-import member.model.USERINFO;
+import member.dao.UserInfoDao;
+import member.model.UserInfo;
 import auth.service.InvalidPasswordException; 
 
 public class ChangePasswordService {
 
-	private USERINFODao userinfoDao = new USERINFODao();
+	private UserInfoDao userinfoDao = new UserInfoDao();
 	
 	public void changePassword(String userId, String curPwd, String newPwd) {
 		Connection conn = null;
@@ -19,7 +19,7 @@ public class ChangePasswordService {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
 			
-			USERINFO userinfo = userinfoDao.selectById(conn, userId);
+			UserInfo userinfo = userinfoDao.selectById(conn, userId);
 			if (userinfo == null) {
 				throw new MemberNotFoundException();
 			}

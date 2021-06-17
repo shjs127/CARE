@@ -2,7 +2,7 @@ package member.model;
 
 import java.util.Date;
 
-public class BOARDINFO {
+public class BoardInfo {
 
 	private int boardNo;
 	private int userNo;
@@ -12,7 +12,7 @@ public class BOARDINFO {
 	private int viewCount;
 	private Date boardDate;
 	
-	public BOARDINFO(int boardNo, int userNo, String boardTitle, String boardContents, String boardPic, int viewCount,
+	public BoardInfo(int boardNo, int userNo, String boardTitle, String boardContents, String boardPic, int viewCount,
 			Date boardDate) {
 	
 		this.boardNo = boardNo;

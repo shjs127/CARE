@@ -5,19 +5,19 @@ import java.sql.SQLException;
 
 import jdbc.connection.ConnectionProvider;
 import member.dao.ArticleContentDao;
-import member.dao.BOARDINFODao;
+import member.dao.BoardInfoDao;
 import member.model.ArticleContent;
-import member.model.BOARDINFO;
+import member.model.BoardInfo;
 
 
 public class ReadArticleService {
 
-	private BOARDINFODao boardInfoDao = new BOARDINFODao();
+	private BoardInfoDao boardInfoDao = new BoardInfoDao();
 	private ArticleContentDao contentDao = new ArticleContentDao();
 	
 	public ArticleData getArticle(int boardNo, boolean increaseReadCount) {
 		try (Connection conn = ConnectionProvider.getConnection()){
-			BOARDINFO boardInfo = boardInfoDao.selectById(conn, boardNo);
+			BoardInfo boardInfo = boardInfoDao.selectById(conn, boardNo);
 			if (boardInfo == null) {
 				throw new ArticleContentNotFoundException();
 			}

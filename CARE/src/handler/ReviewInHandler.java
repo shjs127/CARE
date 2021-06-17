@@ -7,7 +7,7 @@ import auth.service.GetMessageListViewService;
 import auth.service.LoginFailException;
 import auth.service.MessageListView;
 import auth.service.ReviewInfoService;
-import member.model.Reviewinfo;
+import member.model.ReviewInfo;
 import mvc.command.CommandHandler;
 
 public class ReviewInHandler implements CommandHandler {
@@ -34,7 +34,7 @@ public class ReviewInHandler implements CommandHandler {
 		try {
 			int storeNo = 1;
 			
-			Reviewinfo reviewinfo = ReviewInfoService.REVIEWINFO(storeNo);
+			ReviewInfo reviewinfo = ReviewInfoService.REVIEWINFO(storeNo);
 			req.getSession().setAttribute("reviewinfo", reviewinfo);
 			
 			

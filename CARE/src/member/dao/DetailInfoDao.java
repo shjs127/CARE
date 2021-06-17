@@ -8,12 +8,11 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 import jdbc.JdbcUtil;
-import member.model.DETAILINFO;
-import member.model.STOREINFO;
+import member.model.DetailInfo;
 
-public class DETAILINFODao {
+public class DetailInfoDao {
 
-	public DETAILINFO selectById(Connection conn, String manageNo) throws SQLException {
+	public DetailInfo selectById(Connection conn, String manageNo) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
@@ -21,9 +20,9 @@ public class DETAILINFODao {
 					"select * from DETAILINFO where manageNo = ?");
 			pstmt.setString(1, manageNo);
 			rs = pstmt.executeQuery();
-			DETAILINFO detailinfo = null;
+			DetailInfo detailinfo = null;
 			if (rs.next()) {
-				detailinfo = new DETAILINFO(
+				detailinfo = new DetailInfo(
 						rs.getInt("storeNo"),
 						rs.getInt("totalSeat"), 
 						rs.getInt("socketSeat"),
@@ -51,7 +50,7 @@ public class DETAILINFODao {
 
 
 
-	public DETAILINFO insert(Connection conn, DETAILINFO detailinfo) throws SQLException {
+	public DetailInfo insert(Connection conn, DetailInfo detailinfo) throws SQLException {
 
 		try (PreparedStatement pstmt = 
 				conn.prepareStatement("insert into detailinfo values(?,?,?,?,?,?,?,?,?,?,?)")) {

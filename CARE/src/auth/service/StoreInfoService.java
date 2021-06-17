@@ -4,18 +4,18 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import jdbc.connection.ConnectionProvider;
-import member.dao.STOREINFODao;
-import member.model.Reviewinfo;
-import member.model.Storeinfo;
+import member.dao.StoreInfoDao;
+import member.model.ReviewInfo;
+import member.model.StoreInfo;
 
 
 public class StoreInfoService {
 
 	
 
-	public Storeinfo storeInfo(int storeNo) {
+	public StoreInfo storeInfo(int storeNo) {
 		try (Connection conn = ConnectionProvider.getConnection()) {
-			Storeinfo storeinfo = STOREINFODao.selectBySTOREINFOId(conn, storeNo);
+			StoreInfo storeinfo = StoreInfoDao.selectBySTOREINFOId(conn, storeNo);
 			if (storeinfo == null) {
 
 			}
@@ -26,7 +26,7 @@ public class StoreInfoService {
 		}
 	}
 
-	public static Storeinfo STOREINFO(int storeNo) {
+	public static StoreInfo STOREINFO(int storeNo) {
 		// TODO Auto-generated method stub
 		return null;
 	}

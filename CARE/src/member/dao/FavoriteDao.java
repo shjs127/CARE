@@ -8,11 +8,11 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 import jdbc.JdbcUtil;
-import member.model.FAVORITE;
+import member.model.Favorite;
 
-public class FAVORITEDao {
+public class FavoriteDao {
 
-	public FAVORITE selectById(Connection conn, String userNo) throws SQLException {
+	public Favorite selectById(Connection conn, String userNo) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
@@ -20,9 +20,9 @@ public class FAVORITEDao {
 					"select * from FAVORITE where USERNO = ?");
 			pstmt.setString(1, userNo);
 			rs = pstmt.executeQuery();
-			FAVORITE favorite = null;
+			Favorite favorite = null;
 			if (rs.next()) {
-				favorite = new FAVORITE(
+				favorite = new Favorite(
 						rs.getInt("userNo"),
 						rs.getInt("storeNo"), 
 						rs.getString("favoriteCheck"));
@@ -35,7 +35,7 @@ public class FAVORITEDao {
 	}
 
 
-	public void insert(Connection conn, FAVORITE favorite) throws SQLException {
+	public void insert(Connection conn, Favorite favorite) throws SQLException {
 		try (PreparedStatement pstmt = 
 				conn.prepareStatement("insert into favorite values(?,?,?)")) {
 

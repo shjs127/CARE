@@ -1,7 +1,7 @@
 package member.model;
 
 
-public class USERINFO {
+public class UserInfo {
 
 	private int userNo;
 	private String userId;  // "lee"
@@ -13,7 +13,7 @@ public class USERINFO {
 	private String gender;
 	private String administer;
 
-	public USERINFO(int userNo, String userId, String password, String name, String nickName, String birth, String email,
+	public UserInfo(int userNo, String userId, String password, String name, String nickName, String birth, String email,
 			String gender, String administer) {
 		this.userNo = userNo;
 		this.userId = userId;

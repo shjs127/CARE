@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jdbc.JdbcUtil;
-import member.model.Storeinfo;
+import member.model.StoreInfo;
 
-public class STOREINFODao {
+public class StoreInfoDao {
 
-	public Storeinfo selectById(Connection conn, String manageNo) throws SQLException {
+	public StoreInfo selectById(Connection conn, String manageNo) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
@@ -21,9 +21,9 @@ public class STOREINFODao {
 					"select * from storeinfo where manageNo = ?");
 			pstmt.setString(1, manageNo);
 			rs = pstmt.executeQuery();
-			Storeinfo storeinfo = null;
+			StoreInfo storeinfo = null;
 			if (rs.next()) {
-				storeinfo = new Storeinfo(
+				storeinfo = new StoreInfo(
 						rs.getInt("storeNo"),
 						rs.getString("storeName"), 
 						rs.getString("storePic"),
@@ -39,7 +39,7 @@ public class STOREINFODao {
 			JdbcUtil.close(pstmt);
 		}
 	}
-	public static Storeinfo selectBySTOREINFOId(Connection conn, int storeno) throws SQLException {
+	public static StoreInfo selectBySTOREINFOId(Connection conn, int storeno) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
@@ -49,9 +49,9 @@ public class STOREINFODao {
 			pstmt.setInt(1, storeno);
 			rs = pstmt.executeQuery();
 			
-			Storeinfo storeinfo = null;
+			StoreInfo storeinfo = null;
 			if (rs.next()) {
-				storeinfo = new Storeinfo(
+				storeinfo = new StoreInfo(
 						rs.getInt("storeNo"), 
 						rs.getString("storeName"), 
 						rs.getString("storePic"), 
@@ -69,7 +69,7 @@ public class STOREINFODao {
 		
 	}
 
-	public int insert(Connection conn, Storeinfo storeinfo) throws SQLException {
+	public int insert(Connection conn, StoreInfo storeinfo) throws SQLException {
 		Statement stmt = null;
 		ResultSet rs = null;
 		
@@ -116,7 +116,7 @@ public class STOREINFODao {
 	}
 	
 	//List<STOREINFO> select
-		public List<Storeinfo> select(Connection conn, int startRow, int size) throws SQLException{
+		public List<StoreInfo> select(Connection conn, int startRow, int size) throws SQLException{
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			try {
@@ -127,7 +127,7 @@ public class STOREINFODao {
 				pstmt.setInt(1, startRow);
 				pstmt.setInt(2, size);
 				rs = pstmt.executeQuery();
-				List<Storeinfo> result = new ArrayList<>();
+				List<StoreInfo> result = new ArrayList<>();
 				while(rs.next()) {
 					result.add(convertStore(rs));
 				}
@@ -139,8 +139,8 @@ public class STOREINFODao {
 			}
 		}
 	
-		private Storeinfo convertStore(ResultSet rs) throws SQLException {
-			return new Storeinfo(rs.getInt("storeNo"),
+		private StoreInfo convertStore(ResultSet rs) throws SQLException {
+			return new StoreInfo(rs.getInt("storeNo"),
 								rs.getString("storeName"), 
 								rs.getString("storePic"),
 								rs.getString("address"), 
@@ -150,7 +150,7 @@ public class STOREINFODao {
 								rs.getString("manageNo"));
 		}
 
-		public void insertApi(Connection conn, Storeinfo storeinfo) throws SQLException {
+		public void insertApi(Connection conn, StoreInfo storeinfo) throws SQLException {
 			try (PreparedStatement pstmt = 
 					conn.prepareStatement("insert into storeinfo  (storeno, storename, address, callnumber, manageno) values(STORENUM.NEXTVAL,?,?,?,?)")) {
 				pstmt.setString(1, storeinfo.getStoreName());
@@ -161,7 +161,7 @@ public class STOREINFODao {
 			}
 		}
 		
-		public void updateApi(Connection conn, Storeinfo storeinfo) throws SQLException {
+		public void updateApi(Connection conn, StoreInfo storeinfo) throws SQLException {
 			try (PreparedStatement pstmt = conn.prepareStatement("update storeinfo set storeName = ?, address = ?, callNumber = ? where manageNo = ?")){
 				pstmt.setString(1, storeinfo.getStoreName());
 				pstmt.setString(2, storeinfo.getAddress());
@@ -170,7 +170,7 @@ public class STOREINFODao {
 			}
 		}
 		
-		public void updateInfo(Connection conn, Storeinfo storeinfo) throws SQLException{
+		public void updateInfo(Connection conn, StoreInfo storeinfo) throws SQLException{
 			try(PreparedStatement pstmt = conn.prepareStatement("update storeinfo set storeName = ?, storePic = ?, address = ?,"
 					+ "hours = ?, closedDays = ?, callNumber = ? ")){
 				pstmt.setString(1, storeinfo.getStoreName());

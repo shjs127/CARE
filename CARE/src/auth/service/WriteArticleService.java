@@ -6,22 +6,22 @@ import java.util.Date;
 
 import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
-import member.dao.BOARDINFODao;
-import member.model.BOARDINFO;
+import member.dao.BoardInfoDao;
+import member.model.BoardInfo;
 
 public class WriteArticleService {
 
-	private BOARDINFODao boardInfoDao = new BOARDINFODao();
+	private BoardInfoDao boardInfoDao = new BoardInfoDao();
 
-	public BOARDINFO write(WriteRequest req, User user) {
+	public BoardInfo write(WriteRequest req, User user) {
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
 
-			BOARDINFO boardInfo = toBoardInfo(req, user);
+			BoardInfo boardInfo = toBoardInfo(req, user);
 			
-			BOARDINFO savedBoardinfo = boardInfoDao.insert(conn, boardInfo);
+			BoardInfo savedBoardinfo = boardInfoDao.insert(conn, boardInfo);
 			if (savedBoardinfo == null) {
 				throw new RuntimeException("fail to insert article");
 			}
@@ -46,9 +46,9 @@ public class WriteArticleService {
 		}
 	}
 
-	private BOARDINFO toBoardInfo(WriteRequest req, User user) {
+	private BoardInfo toBoardInfo(WriteRequest req, User user) {
 		Date now = new Date();
 		//return new BOARDINFO(null, req.getWriter(), req.getBoardTitle(), req.getBoardContents(), null, 0, now);
-		return new BOARDINFO(1, user.getUserNo(), req.getBoardTitle(), req.getBoardContents(), "n/a", 0, now);
+		return new BoardInfo(1, user.getUserNo(), req.getBoardTitle(), req.getBoardContents(), "n/a", 0, now);
 	}
 }

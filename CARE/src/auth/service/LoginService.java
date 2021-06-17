@@ -4,16 +4,16 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import jdbc.connection.ConnectionProvider;
-import member.dao.USERINFODao;
-import member.model.USERINFO;
+import member.dao.UserInfoDao;
+import member.model.UserInfo;
 
 public class LoginService {
 
-	private USERINFODao userinfoDao = new USERINFODao();
+	private UserInfoDao userinfoDao = new UserInfoDao();
 
 	public User login(String userId, String password) {
 		try (Connection conn = ConnectionProvider.getConnection()) {
-			USERINFO userinfo = userinfoDao.selectById(conn, userId);
+			UserInfo userinfo = userinfoDao.selectById(conn, userId);
 			if (userinfo == null) {
 				throw new LoginFailException();
 			}
@@ -28,7 +28,7 @@ public class LoginService {
 	
 	public User selectByUserNo(int userNo) {
 		try (Connection conn = ConnectionProvider.getConnection()) {
-			USERINFO userinfo = userinfoDao.selectByUserNo(conn, userNo);
+			UserInfo userinfo = userinfoDao.selectByUserNo(conn, userNo);
 			if (userinfo == null) {
 				throw new LoginFailException();
 			}

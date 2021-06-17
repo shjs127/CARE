@@ -6,12 +6,12 @@ import java.sql.SQLException;
 import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
 import member.dao.ArticleContentDao;
-import member.dao.BOARDINFODao;
-import member.model.BOARDINFO;
+import member.dao.BoardInfoDao;
+import member.model.BoardInfo;
 
 public class ModifyArticleService {
 
-	private BOARDINFODao boardinfoDao = new BOARDINFODao();
+	private BoardInfoDao boardinfoDao = new BoardInfoDao();
 	private ArticleContentDao contentDao = new ArticleContentDao();
 
 	public void modify(ModifyRequest modReq) {
@@ -19,7 +19,7 @@ public class ModifyArticleService {
 		try {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
-			BOARDINFO boardInfo = boardinfoDao.selectById(conn, 
+			BoardInfo boardInfo = boardinfoDao.selectById(conn, 
 					modReq.getBoardNo());
 			if (boardInfo == null) {
 				throw new ArticleNotFoundException();
@@ -44,7 +44,7 @@ public class ModifyArticleService {
 		}
 	}
 
-	private boolean canModify(int modfyingUserNo, BOARDINFO boardInfo) {
+	private boolean canModify(int modfyingUserNo, BoardInfo boardInfo) {
 		return boardInfo.getUserNo() == modfyingUserNo;
 	}
 }

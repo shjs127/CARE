@@ -7,7 +7,7 @@ import java.util.List;
 
 import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
-import member.dao.MESSAGEDao;
+import member.dao.MessageDao;
 
 
 
@@ -25,7 +25,7 @@ public class GetMessageListViewService {
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
-			MESSAGEDao msgDAO = MESSAGEDao.getInstance();
+			MessageDao msgDAO = MessageDao.getInstance();
 
 			List<Message> messageList = null;
 			int totalMessages = msgDAO.selectCount(conn);

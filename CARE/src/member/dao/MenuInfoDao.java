@@ -9,11 +9,11 @@ import java.util.Collections;
 import java.util.List;
 
 import jdbc.JdbcUtil;
-import member.model.Menuinfo;
+import member.model.MenuInfo;
 
-public class MENUINFODao {
+public class MenuInfoDao {
 
-	public Menuinfo selectById(Connection conn, int storeNo) throws SQLException {
+	public MenuInfo selectById(Connection conn, int storeNo) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
@@ -21,9 +21,9 @@ public class MENUINFODao {
 					"select * from menuinfo where storeNo = ?");
 			pstmt.setInt(1, storeNo);
 			rs = pstmt.executeQuery();
-			Menuinfo menuinfo = null;
+			MenuInfo menuinfo = null;
 			if (rs.next()) {
-				menuinfo = new Menuinfo(
+				menuinfo = new MenuInfo(
 						rs.getInt("storeNo"),
 						rs.getString("menu"),
 						rs.getInt("price"), 
@@ -37,7 +37,7 @@ public class MENUINFODao {
 	}
 
 
-	public void insert(Connection conn, Menuinfo menuinfo) throws SQLException {
+	public void insert(Connection conn, MenuInfo menuinfo) throws SQLException {
 		try (PreparedStatement pstmt = 
 				conn.prepareStatement("insert into menuinfo values(?,?,?,?)")) {
 
@@ -53,7 +53,7 @@ public class MENUINFODao {
 	}
 
 	
-	public List<Menuinfo> selectList(Connection conn, int firstRow, int endRow) throws SQLException {
+	public List<MenuInfo> selectList(Connection conn, int firstRow, int endRow) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
@@ -65,7 +65,7 @@ public class MENUINFODao {
 			pstmt.setInt(2, endRow - firstRow + 1);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				List<Menuinfo> menuinfoList = new ArrayList<Menuinfo>();
+				List<MenuInfo> menuinfoList = new ArrayList<MenuInfo>();
 				do {
 					menuinfoList.add(makeMenuinfoFromResultSet(rs));
 				} while (rs.next());
@@ -78,7 +78,7 @@ public class MENUINFODao {
 			JdbcUtil.close(pstmt);
 		}
 	}
-	private Menuinfo makeMenuinfoFromResultSet(ResultSet rs) {
+	private MenuInfo makeMenuinfoFromResultSet(ResultSet rs) {
 		// TODO Auto-generated method stub
 		return null;
 	}

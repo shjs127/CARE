@@ -1,11 +1,11 @@
 package member.model;
 
-public class Writer {
+public class writer {
 
 	private String userId;
 	private String name;
 
-	public Writer(String userId, String name) {
+	public writer(String userId, String name) {
 		this.userId = userId;
 		this.name = name;
 	}

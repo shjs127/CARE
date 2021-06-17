@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import auth.service.User;
 import auth.service.WriteArticleService;
 import auth.service.WriteRequest;
-import member.model.BOARDINFO;
-import member.model.Writer;
+import member.model.BoardInfo;
+import member.model.writer;
 import mvc.command.CommandHandler;
 
 public class WriteArticleHandler implements CommandHandler {
@@ -34,7 +34,7 @@ public class WriteArticleHandler implements CommandHandler {
 	}
 	
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) {
-		System.out.println("WriteArticleHandler.processSubmit() ½ÇÇà...");
+		System.out.println("WriteArticleHandler.processSubmit() ï¿½ï¿½ï¿½ï¿½...");
 		Map<String, Boolean> errors = new HashMap<>();
 		req.setAttribute("errors", errors);
 
@@ -46,7 +46,7 @@ public class WriteArticleHandler implements CommandHandler {
 			return FORM_VIEW;
 		}
 		
-		BOARDINFO newArticleNo = writeService.write(writeReq, user);
+		BoardInfo newArticleNo = writeService.write(writeReq, user);
 		req.setAttribute("newArticleNo", newArticleNo);
 		
 		return "/WEB-INF/view/board/success.jsp";
@@ -54,7 +54,7 @@ public class WriteArticleHandler implements CommandHandler {
 
 	private WriteRequest createWriteRequest(User user, HttpServletRequest req) {
 		return new WriteRequest(
-				new Writer(user.getUserId(),user.getNickName()),
+				new writer(user.getUserId(),user.getNickName()),
 				req.getParameter("boardTitle"),
 				req.getParameter("boardContents"));
 	}

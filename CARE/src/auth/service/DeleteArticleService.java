@@ -6,12 +6,12 @@ import java.sql.SQLException;
 import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
 import member.dao.ArticleContentDao;
-import member.dao.BOARDINFODao;
-import member.model.BOARDINFO;
+import member.dao.BoardInfoDao;
+import member.model.BoardInfo;
 
 public class DeleteArticleService {
 
-	private BOARDINFODao boardInfoDao = new BOARDINFODao();
+	private BoardInfoDao boardInfoDao = new BoardInfoDao();
 	private ArticleContentDao contentDao = new ArticleContentDao();
 
 	public void delete(ModifyRequest modReq) {
@@ -20,7 +20,7 @@ public class DeleteArticleService {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
 			
-			BOARDINFO boardInfo = boardInfoDao.selectById(conn, 
+			BoardInfo boardInfo = boardInfoDao.selectById(conn, 
 					modReq.getBoardNo());
 			if (boardInfo == null) {
 				throw new ArticleNotFoundException();
@@ -42,7 +42,7 @@ public class DeleteArticleService {
 		}
 	}
 
-	private boolean canModify(int modfyingUserNo, BOARDINFO boardInfo) {
+	private boolean canModify(int modfyingUserNo, BoardInfo boardInfo) {
 		return (boardInfo.getUserNo())==(modfyingUserNo);
 	}
 }

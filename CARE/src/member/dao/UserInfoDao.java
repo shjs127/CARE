@@ -8,11 +8,11 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 import jdbc.JdbcUtil;
-import member.model.USERINFO;
+import member.model.UserInfo;
 
-public class USERINFODao {
+public class UserInfoDao {
 
-	public USERINFO selectById(Connection conn, String userId) throws SQLException {
+	public UserInfo selectById(Connection conn, String userId) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
@@ -20,9 +20,9 @@ public class USERINFODao {
 					"select * from USERINFO where userId = ?");
 			pstmt.setString(1, userId);
 			rs = pstmt.executeQuery();
-			USERINFO userinfo = null;
+			UserInfo userinfo = null;
 			if (rs.next()) {
-				userinfo = new USERINFO(
+				userinfo = new UserInfo(
 						rs.getInt("userNo"),
 						rs.getString("userId"), 
 						rs.getString("password"),
@@ -41,7 +41,7 @@ public class USERINFODao {
 	}
 
 
-	public USERINFO selectByUserNo(Connection conn, int userNo) throws SQLException {
+	public UserInfo selectByUserNo(Connection conn, int userNo) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
@@ -49,9 +49,9 @@ public class USERINFODao {
 					"select * from USERINFO where userNo = ?");
 			pstmt.setInt(1, userNo);
 			rs = pstmt.executeQuery();
-			USERINFO userinfo = null;
+			UserInfo userinfo = null;
 			if (rs.next()) {
-				userinfo = new USERINFO(
+				userinfo = new UserInfo(
 						rs.getInt("userNo"),
 						rs.getString("userId"), 
 						rs.getString("password"),
@@ -69,7 +69,7 @@ public class USERINFODao {
 		}
 	}
 
-	public void insert(Connection conn, USERINFO userinfo) throws SQLException {
+	public void insert(Connection conn, UserInfo userinfo) throws SQLException {
 		try (PreparedStatement pstmt = 
 				conn.prepareStatement("insert into USERINFO values(USERNUM.NEXTVAL,?,?,?,?,sysdate,?,?,?)")) {
 
@@ -86,7 +86,7 @@ public class USERINFODao {
 		}
 	}
 
-	public void update(Connection conn, USERINFO userinfo) throws SQLException {
+	public void update(Connection conn, UserInfo userinfo) throws SQLException {
 		try (PreparedStatement pstmt = conn.prepareStatement(
 				"update USERINFO set USERNAME = ?, PASSWORD = ? where USERID = ?")) {
 			pstmt.setString(1, userinfo.getName());

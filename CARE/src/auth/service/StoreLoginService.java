@@ -4,18 +4,18 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import jdbc.connection.ConnectionProvider;
-import member.dao.STOREINFODao;
-import member.model.Storeinfo;
+import member.dao.StoreInfoDao;
+import member.model.StoreInfo;
 import auth.service.*;
 
 public class StoreLoginService {
 
-	private STOREINFODao storeinfoDao = new STOREINFODao();
+	private StoreInfoDao storeinfoDao = new StoreInfoDao();
 
 	public Store login(String manageNo, int storeNo) {
 		try (Connection conn = ConnectionProvider.getConnection()) {
-			Storeinfo storeinfo = storeinfoDao.selectById(conn, manageNo);
-			System.out.println("¼¿·º");
+			StoreInfo storeinfo = storeinfoDao.selectById(conn, manageNo);
+			System.out.println("ï¿½ï¿½ï¿½ï¿½");
 			if (storeinfo == null) {
 				throw new LoginFailException();
 			}

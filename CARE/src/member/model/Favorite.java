@@ -2,13 +2,13 @@ package member.model;
 
 import java.util.Date;
 
-public class FAVORITE {
+public class Favorite {
 
 	private int userNo;
 	private int storeNo;
 	private String favoriteCheck;
 
-	public FAVORITE(int userNo, int storeNo, String favoriteCheck) {
+	public Favorite(int userNo, int storeNo, String favoriteCheck) {
 
 		this.userNo = userNo;
 		this.storeNo = storeNo;

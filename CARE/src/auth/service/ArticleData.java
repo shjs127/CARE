@@ -1,19 +1,19 @@
 package auth.service;
 
 import member.model.ArticleContent;
-import member.model.BOARDINFO;
+import member.model.BoardInfo;
 
 public class ArticleData {
 
-	private BOARDINFO boardInfo;
+	private BoardInfo boardInfo;
 	private ArticleContent content;
 
-	public ArticleData(BOARDINFO boardInfo, ArticleContent content) {
+	public ArticleData(BoardInfo boardInfo, ArticleContent content) {
 		this.boardInfo = boardInfo;
 		this.content = content;
 	}
 
-	public BOARDINFO getBoardInfo() {
+	public BoardInfo getBoardInfo() {
 		return boardInfo;
 	}
 
