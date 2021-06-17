@@ -72,7 +72,7 @@
 
 			<!-- 검색창 Start -->
 			<div class="sidearea-filter">
-				<form class="teble-form">
+				<form class="teble-form" action = "list.do" method = "post">
 					<select name="f">
 						<option value="title">제목</option>
 						<option value="content">내용</option>
