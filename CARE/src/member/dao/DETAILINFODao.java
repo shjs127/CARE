@@ -8,22 +8,22 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 import jdbc.JdbcUtil;
-import member.model.Detailinfo;
-import member.model.Storeinfo;
+import member.model.DETAILINFO;
+import member.model.STOREINFO;
 
 public class DETAILINFODao {
 
-	public Detailinfo selectById(Connection conn, String manageNo) throws SQLException {
+	public DETAILINFO selectById(Connection conn, String manageNo) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(
-					"select * from detailinfo where manageNo = ?");
+					"select * from DETAILINFO where manageNo = ?");
 			pstmt.setString(1, manageNo);
 			rs = pstmt.executeQuery();
-			Detailinfo detailinfo = null;
+			DETAILINFO detailinfo = null;
 			if (rs.next()) {
-				detailinfo = new Detailinfo(
+				detailinfo = new DETAILINFO(
 						rs.getInt("storeNo"),
 						rs.getInt("totalSeat"), 
 						rs.getInt("socketSeat"),
@@ -51,7 +51,7 @@ public class DETAILINFODao {
 
 
 
-	public Detailinfo insert(Connection conn, Detailinfo detailinfo) throws SQLException {
+	public DETAILINFO insert(Connection conn, DETAILINFO detailinfo) throws SQLException {
 
 		try (PreparedStatement pstmt = 
 				conn.prepareStatement("insert into detailinfo values(?,?,?,?,?,?,?,?,?,?,?)")) {
@@ -73,12 +73,14 @@ public class DETAILINFODao {
 		return detailinfo;
 	}
 
-
-	public static Detailinfo selectByDETAILINFOId(Connection conn, int storeNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	/*
+	 * public void update(Connection conn, detailinfo detailinfo) throws SQLException
+	 * { try (PreparedStatement pstmt = conn.prepareStatement(
+	 * "update detailinfo set USERNAME = ?, PASSWORD = ? where USERID = ?")) {
+	 * pstmt.setString(1, detailinfo.getName()); pstmt.setString(2,
+	 * detailinfo.getPassword()); pstmt.setString(3, detailinfo.getUserId());
+	 * pstmt.executeUpdate(); } }
+	 */
 }
 
 

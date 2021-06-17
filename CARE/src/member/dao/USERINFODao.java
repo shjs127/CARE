@@ -41,6 +41,33 @@ public class USERINFODao {
 	}
 
 
+	public USERINFO selectByUserNo(Connection conn, int userNo) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(
+					"select * from USERINFO where userNo = ?");
+			pstmt.setInt(1, userNo);
+			rs = pstmt.executeQuery();
+			USERINFO userinfo = null;
+			if (rs.next()) {
+				userinfo = new USERINFO(
+						rs.getInt("userNo"),
+						rs.getString("userId"), 
+						rs.getString("password"),
+						rs.getString("userName"), 
+						rs.getString("nickName"), 
+						rs.getString("birth"),
+						rs.getString("email"),
+						rs.getString("gender"),
+						rs.getString("administer"));
+			}
+			return userinfo;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
 
 	public void insert(Connection conn, USERINFO userinfo) throws SQLException {
 		try (PreparedStatement pstmt = 

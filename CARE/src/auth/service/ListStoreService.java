@@ -6,7 +6,7 @@ import java.util.List;
 
 import jdbc.connection.ConnectionProvider;
 import member.dao.STOREINFODao;
-import member.model.Storeinfo;
+import member.model.STOREINFO;
 
 public class ListStoreService {
 
@@ -16,7 +16,7 @@ public class ListStoreService {
 	public StorePage getStorePage(int pageNum) {
 		try (Connection conn = ConnectionProvider.getConnection()) {
 			int total = storeInfoDao.selectCount(conn);
-			List<Storeinfo> storeList = storeInfoDao.select(
+			List<STOREINFO> storeList = storeInfoDao.select(
 					conn, (pageNum - 1) * size, size);
 			return new StorePage(total, pageNum, size, storeList);
 		} catch (SQLException e) {
