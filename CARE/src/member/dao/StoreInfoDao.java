@@ -68,7 +68,7 @@ public class StoreInfoDao {
 			}
 			return 0;
 		}
-}
+	}
 
 	public int selectCount(Connection conn) throws SQLException {
 		Statement stmt = null;
@@ -86,74 +86,101 @@ public class StoreInfoDao {
 		}
 	}
 	
-	//List<STOREINFO> select
-		public List<StoreInfo> select(Connection conn, int startRow, int size) throws SQLException{
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			try {
-				pstmt = conn.prepareStatement("select * from ("
-						+ "select row_number() over(order by storeNo) num, storeinfo.*"
-						+ "from storeinfo order by storeNo  desc)"
-						+ "where num between ? and ?");
-				pstmt.setInt(1, startRow);
-				pstmt.setInt(2, size);
-				rs = pstmt.executeQuery();
-				List<StoreInfo> result = new ArrayList<>();
-				while(rs.next()) {
-					result.add(convertStore(rs));
-				}
-				return result;
-				
-			}finally {
-				JdbcUtil.close(rs);
-				JdbcUtil.close(pstmt);
+	// List<STOREINFO> select
+	public List<StoreInfo> select(Connection conn, int startRow, int size) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement("select storeinfo.* " 
+					+ "from (select rownum as rnum, storeinfo.* "
+						+ "from storeinfo " 
+						+ "order by storeno desc" 
+					+ ") storeinfo " 
+					+ "where rnum between ? and ?");
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, size);
+			rs = pstmt.executeQuery();
+			List<StoreInfo> result = new ArrayList<>();
+			while (rs.next()) {
+				result.add(convertStore(rs));
 			}
-		}
-	
-		private StoreInfo convertStore(ResultSet rs) throws SQLException {
-			return new StoreInfo(rs.getInt("storeNo"),
-								rs.getString("storeName"), 
-								rs.getString("storePic"),
-								rs.getString("address"), 
-								rs.getString("hours"), 
-								rs.getString("closedDays"),
-								rs.getString("callNumber"),
-								rs.getString("manageNo"));
-		}
+			return result;
 
-		public void insertApi(Connection conn, StoreInfo storeinfo) throws SQLException {
-			try (PreparedStatement pstmt = 
-					conn.prepareStatement("insert into storeinfo  (storeno, storename, address, callnumber, manageno) values(STORENUM.NEXTVAL,?,?,?,?)")) {
-				pstmt.setString(1, storeinfo.getStoreName());
-				pstmt.setString(2, storeinfo.getAddress());
-				pstmt.setString(3, storeinfo.getCallNumber());
-				pstmt.setString(4, storeinfo.getManageNo());
-				pstmt.executeUpdate();
-			}
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
 		}
+	}
+	
+	// main select
+	public List<StoreInfo> getSearch(Connection conn, String location, String searchKeyword) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		
-		public void updateApi(Connection conn, StoreInfo storeinfo) throws SQLException {
-			try (PreparedStatement pstmt = conn.prepareStatement("update storeinfo set storeName = ?, address = ?, callNumber = ? where manageNo = ?")){
-				pstmt.setString(1, storeinfo.getStoreName());
-				pstmt.setString(2, storeinfo.getAddress());
-				pstmt.setString(3, storeinfo.getCallNumber());
-				pstmt.setString(4, storeinfo.getManageNo());
+		try {
+			pstmt = conn.prepareStatement("select storeinfo "
+						+ "from (select rownum as rnum, storeinfo.* "
+							+ "from storeinfo "
+							+ "where " + location + " like %?% "
+							+ "order by storeno desc"
+							+ ") storeinfo");
+			pstmt.setString(1, searchKeyword);
+			rs = pstmt.executeQuery();
+			List<StoreInfo> result = new ArrayList<>();
+			while(rs.next()) {
+				result.add(convertStore(rs));
 			}
+			return result;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
 		}
-		
-		public void updateInfo(Connection conn, StoreInfo storeinfo) throws SQLException{
-			try(PreparedStatement pstmt = conn.prepareStatement("update storeinfo set storeName = ?, storePic = ?, address = ?,"
-					+ "hours = ?, closedDays = ?, callNumber = ? ")){
-				pstmt.setString(1, storeinfo.getStoreName());
-				pstmt.setString(2, storeinfo.getStorePic());
-				pstmt.setString(3, storeinfo.getAddress());
-				pstmt.setString(4, storeinfo.getHours());
-				pstmt.setString(5, storeinfo.getClosedDays());
-				pstmt.setString(6, storeinfo.getCallNumber());
-				
-				pstmt.executeUpdate();
-			}
-}
+	}
+	
+	private StoreInfo convertStore(ResultSet rs) throws SQLException {
+		return new StoreInfo(rs.getInt("storeNo"),
+							rs.getString("storeName"), 
+							rs.getString("storePic"),
+							rs.getString("address"), 
+							rs.getString("hours"), 
+							rs.getString("closedDays"),
+							rs.getString("callNumber"),
+							rs.getString("manageNo"));
+	}
+
+	public void insertApi(Connection conn, StoreInfo storeinfo) throws SQLException {
+		try (PreparedStatement pstmt = 
+				conn.prepareStatement("insert into storeinfo  (storeno, storename, address, callnumber, manageno) values(STORENUM.NEXTVAL,?,?,?,?)")) {
+			pstmt.setString(1, storeinfo.getStoreName());
+			pstmt.setString(2, storeinfo.getAddress());
+			pstmt.setString(3, storeinfo.getCallNumber());
+			pstmt.setString(4, storeinfo.getManageNo());
+			pstmt.executeUpdate();
+		}
+	}
+	
+	public void updateApi(Connection conn, StoreInfo storeinfo) throws SQLException {
+		try (PreparedStatement pstmt = conn.prepareStatement("update storeinfo set storeName = ?, address = ?, callNumber = ? where manageNo = ?")){
+			pstmt.setString(1, storeinfo.getStoreName());
+			pstmt.setString(2, storeinfo.getAddress());
+			pstmt.setString(3, storeinfo.getCallNumber());
+			pstmt.setString(4, storeinfo.getManageNo());
+		}
+	}
+	
+	public void updateInfo(Connection conn, StoreInfo storeinfo) throws SQLException{
+		try(PreparedStatement pstmt = conn.prepareStatement("update storeinfo set storeName = ?, storePic = ?, address = ?,"
+				+ "hours = ?, closedDays = ?, callNumber = ? ")){
+			pstmt.setString(1, storeinfo.getStoreName());
+			pstmt.setString(2, storeinfo.getStorePic());
+			pstmt.setString(3, storeinfo.getAddress());
+			pstmt.setString(4, storeinfo.getHours());
+			pstmt.setString(5, storeinfo.getClosedDays());
+			pstmt.setString(6, storeinfo.getCallNumber());
+			
+			pstmt.executeUpdate();
+		}
+	}
 }
 
 
