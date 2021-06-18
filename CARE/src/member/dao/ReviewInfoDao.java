@@ -62,7 +62,7 @@ public class ReviewInfoDao {
 	}
 
 
-	public static ReviewInfo selectByREVIEWINFOId(Connection conn, int storeNo) {
+	public ReviewInfo selectByREVIEWINFOId(Connection conn, int storeNo) {
 		// TODO Auto-generated method stub
 		return null;
 	}

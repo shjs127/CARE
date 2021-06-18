@@ -4,17 +4,17 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import jdbc.connection.ConnectionProvider;
-import member.dao.DETAILINFODao;
-import member.model.Detailinfo;
-import member.model.Reviewinfo;
+import member.dao.DetailInfoDao;
+import member.model.DetailInfo;
+import member.model.ReviewInfo;
 
 
 public class DetailInfoService {
 
-	
-	public  Detailinfo detailInfo(int storeNo) {
+	private DetailInfoDao detailInfoDao=new DetailInfoDao();
+	public  DetailInfo detailInfo(int storeNo) {
 		try (Connection conn = ConnectionProvider.getConnection()) {
-			Detailinfo detailinfo = DETAILINFODao.selectByDETAILINFOId(conn, storeNo);
+			DetailInfo detailinfo = detailInfoDao.selectById(conn, storeNo);
 			if (detailinfo == null) {
 				//throw new LoginFailException();
 			}
@@ -25,10 +25,6 @@ public class DetailInfoService {
 		}
 	}
 
-	public static Detailinfo DETAILINFO(int storeNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
 	
 

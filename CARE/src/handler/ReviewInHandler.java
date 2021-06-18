@@ -7,13 +7,13 @@ import auth.service.GetMessageListViewService;
 import auth.service.LoginFailException;
 import auth.service.MessageListView;
 import auth.service.ReviewInfoService;
-import member.model.Reviewinfo;
+import member.model.ReviewInfo;
 import mvc.command.CommandHandler;
 
 public class ReviewInHandler implements CommandHandler {
 
 	private static final String FORM_VIEW = "/WEB-INF/view/main/food-details.jsp";
-	private ReviewInfoService reviewinfoService = new ReviewInfoService();
+	private ReviewInfoService reviewInfoService = new ReviewInfoService();
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -34,7 +34,7 @@ public class ReviewInHandler implements CommandHandler {
 		try {
 			int storeNo = 1;
 			
-			Reviewinfo reviewinfo = ReviewInfoService.REVIEWINFO(storeNo);
+			ReviewInfo reviewinfo = reviewInfoService.reviewInfo(storeNo);
 			req.getSession().setAttribute("reviewinfo", reviewinfo);
 			
 			

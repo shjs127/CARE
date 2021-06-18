@@ -13,13 +13,13 @@ import member.model.StoreInfo;
 
 public class StoreInfoDao {
 
-	public StoreInfo selectById(Connection conn, String manageNo) throws SQLException {
+	public StoreInfo selectById(Connection conn, int storeNo) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(
-					"select * from storeinfo where manageNo = ?");
-			pstmt.setString(1, manageNo);
+					"select * from storeinfo where storeNo = ?");
+			pstmt.setInt(1, storeNo);
 			rs = pstmt.executeQuery();
 			StoreInfo storeinfo = null;
 			if (rs.next()) {

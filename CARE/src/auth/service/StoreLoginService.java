@@ -14,7 +14,7 @@ public class StoreLoginService {
 
 	public Store login(String manageNo, int storeNo) {
 		try (Connection conn = ConnectionProvider.getConnection()) {
-			StoreInfo storeinfo = storeinfoDao.selectById(conn, manageNo);
+			StoreInfo storeinfo = storeinfoDao.selectById(conn, storeNo);
 			System.out.println("����");
 			if (storeinfo == null) {
 				throw new LoginFailException();

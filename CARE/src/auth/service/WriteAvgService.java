@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
-import member.dao.MESSAGEDao;
+import member.dao.MessageDao;
 
 public class WriteAvgService {
 	private static WriteAvgService instance = new WriteAvgService();
@@ -21,8 +21,8 @@ public class WriteAvgService {
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
-			MESSAGEDao messageDao = MESSAGEDao.getInstance();
-			MESSAGEDao.insert(conn, message);
+			MessageDao messageDao = MessageDao.getInstance();
+			MessageDao.insert(conn, message);
 		} catch (SQLException e) {
 			throw new ServiceException(
 					"에러 내용: " + e.getMessage(), e);

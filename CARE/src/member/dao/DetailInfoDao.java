@@ -12,13 +12,13 @@ import member.model.DetailInfo;
 
 public class DetailInfoDao {
 
-	public DetailInfo selectById(Connection conn, String manageNo) throws SQLException {
+	public DetailInfo selectById(Connection conn, int storeNo) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(
-					"select * from DETAILINFO where manageNo = ?");
-			pstmt.setString(1, manageNo);
+					"select * from DETAILINFO where storeNo = ?");
+			pstmt.setInt(1, storeNo);
 			rs = pstmt.executeQuery();
 			DetailInfo detailinfo = null;
 			if (rs.next()) {

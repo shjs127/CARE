@@ -11,10 +11,10 @@ import auth.service.MenuInfoService;
 import auth.service.MessageListView;
 import auth.service.ReviewInfoService;
 import auth.service.StoreInfoService;
-import member.model.Detailinfo;
-import member.model.Menuinfo;
-import member.model.Reviewinfo;
-import member.model.Storeinfo;
+import member.model.DetailInfo;
+import member.model.MenuInfo;
+import member.model.ReviewInfo;
+import member.model.StoreInfo;
 import mvc.command.CommandHandler;
 
 
@@ -55,13 +55,13 @@ public class FoodDetailHandler implements CommandHandler {
 		
 		try {
 			int storeNo = 1;
-			Storeinfo storeinfo = storeinfoService.storeInfo(storeNo);
+			StoreInfo storeinfo = storeinfoService.storeInfo(storeNo);
 			req.getSession().setAttribute("storeinfo", storeinfo);
-			Menuinfo menuinfo = menuinfoService.menuInfo(storeNo);
+			MenuInfo menuinfo = menuinfoService.menuInfo(storeNo);
 			req.getSession().setAttribute("menuinfo", menuinfo);
-			Detailinfo detailinfo = detailinfoService.detailInfo(storeNo);
+			DetailInfo detailinfo = detailinfoService.detailInfo(storeNo);
 			req.getSession().setAttribute("detailinfo", detailinfo);
-			Reviewinfo reviewinfo = reviewinfoService.reviewInfo(storeNo);
+			ReviewInfo reviewinfo = reviewinfoService.reviewInfo(storeNo);
 			req.getSession().setAttribute("reviewinfo", reviewinfo);
 
 			GetMessageListViewService viewService = GetMessageListViewService.getInstance();

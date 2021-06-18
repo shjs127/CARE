@@ -4,15 +4,17 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import jdbc.connection.ConnectionProvider;
-import member.dao.REVIEWINFODao;
-import member.model.Reviewinfo;
+import member.dao.ReviewInfoDao;
+import member.model.ReviewInfo;
 
 
 public class ReviewInfoService {
 
-	public Reviewinfo reviewInfo(int storeNo) {
+	private ReviewInfoDao reviewInfoDao=new ReviewInfoDao();
+	
+	public ReviewInfo reviewInfo(int storeNo) {
 		try (Connection conn = ConnectionProvider.getConnection()) {
-			Reviewinfo reviewinfo = REVIEWINFODao.selectByREVIEWINFOId(conn, storeNo);
+			ReviewInfo reviewinfo = reviewInfoDao.selectByREVIEWINFOId(conn, storeNo);
 			if (reviewinfo == null) {
 				//throw new LoginFailException();
 			}
@@ -23,10 +25,7 @@ public class ReviewInfoService {
 		}
 	}
 
-	public static Reviewinfo REVIEWINFO(int storeNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 }
 	
 	

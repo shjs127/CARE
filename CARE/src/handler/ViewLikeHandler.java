@@ -10,16 +10,19 @@ import auth.service.MenuInfoService;
 import auth.service.MessageListView;
 import auth.service.ReviewInfoService;
 import auth.service.StoreInfoService;
-import member.model.Detailinfo;
-import member.model.Menuinfo;
-import member.model.Reviewinfo;
-import member.model.Storeinfo;
+import member.model.DetailInfo;
+import member.model.MenuInfo;
+import member.model.ReviewInfo;
+import member.model.StoreInfo;
 import mvc.command.CommandHandler;
 public class ViewLikeHandler implements CommandHandler {
 
 	private static final String FORM_VIEW = "/WEB-INF/view/main/viewLike.jsp";
 	
-
+	private DetailInfoService detailInfoService=new DetailInfoService();
+	private ReviewInfoService reviewInfoService=new ReviewInfoService();
+	private	StoreInfoService storeInfoService=new StoreInfoService();
+	private MenuInfoService menuInfoService=new MenuInfoService();
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		if (req.getMethod().equalsIgnoreCase("GET")) {
@@ -39,13 +42,13 @@ public class ViewLikeHandler implements CommandHandler {
 		try {
 			int storeNo = 1;
 			
-			Detailinfo detailinfo = DetailInfoService.DETAILINFO(storeNo);
+			DetailInfo detailinfo = detailInfoService.detailInfo(storeNo);
 			req.getSession().setAttribute("detailinfo", detailinfo);
-			Reviewinfo reviewinfo = ReviewInfoService.REVIEWINFO(storeNo);
+			ReviewInfo reviewinfo = reviewInfoService.reviewInfo(storeNo);
 			req.getSession().setAttribute("reviewinfo", reviewinfo);
-			Storeinfo storeinfo = StoreInfoService.STOREINFO(storeNo);
+			StoreInfo storeinfo = storeInfoService.storeInfo(storeNo);
 			req.getSession().setAttribute("storeinfo", storeinfo);
-			Menuinfo menuinfo = MenuInfoService.MENUINFO(storeNo);
+			MenuInfo menuinfo = menuInfoService.menuInfo(storeNo);
 			req.getSession().setAttribute("menuinfo", menuinfo);
 			
 			

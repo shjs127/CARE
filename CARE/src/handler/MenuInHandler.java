@@ -7,7 +7,7 @@ import auth.service.GetMessageListViewService;
 import auth.service.LoginFailException;
 import auth.service.MenuInfoService;
 import auth.service.MessageListView;
-import member.model.Menuinfo;
+import member.model.MenuInfo;
 import mvc.command.CommandHandler;
 
 public class MenuInHandler implements CommandHandler {
@@ -34,7 +34,7 @@ public class MenuInHandler implements CommandHandler {
 		try {
 			int storeNo = 1;
 			
-			Menuinfo menuinfo = MenuInfoService.MENUINFO(storeNo);
+			MenuInfo menuinfo = menuinfoService.menuInfo(storeNo);
 			req.getSession().setAttribute("menuinfo", menuinfo);
 			
 

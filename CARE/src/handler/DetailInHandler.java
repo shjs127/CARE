@@ -8,11 +8,11 @@ import auth.service.GetMessageListViewService;
 import auth.service.LoginFailException;
 import auth.service.MessageListView;
 import mvc.command.CommandHandler;
-import member.model.Detailinfo;
+import member.model.DetailInfo;
 public class DetailInHandler implements CommandHandler {
 
 	private static final String FORM_VIEW = "/WEB-INF/view/main/food-details.jsp";
-	private DetailInfoService detailinfoService = new DetailInfoService();
+	private DetailInfoService detailInfoService = new DetailInfoService();
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -33,7 +33,7 @@ public class DetailInHandler implements CommandHandler {
 		try {
 			int storeNo = 1;
 			
-			Detailinfo detailinfo = DetailInfoService.DETAILINFO(storeNo);
+			DetailInfo detailinfo = detailInfoService.detailInfo(storeNo);
 			req.getSession().setAttribute("detailinfo", detailinfo);
 			
 			

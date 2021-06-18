@@ -30,7 +30,7 @@ public class StoreService {
 			//�뜲�씠�꽣 �솗�씤
 			System.out.println("storeReq="+storeReq);
 			
-			StoreInfo storeSel = storeinfoDao.selectById(conn, storeReq.getManageNo());
+			StoreInfo storeSel = storeinfoDao.selectById(conn, storeReq.getStoreNo());
 			//�뜲�씠�꽣 �솗�씤
 			System.out.println("storeSel="+storeSel);
 			
@@ -82,7 +82,7 @@ public class StoreService {
 			conn.setAutoCommit(false);
 			
 			//TODO 以묐났�맂 storeInfo媛� �엳�쓣 寃쎌슦 �뿉�윭瑜� 媛뺤젣濡� 諛쒖깮�떆�궎�뒗寃� �븘�땲�씪 update援щЦ�쑝濡� 蹂�寃쏀븯嫄곕굹 �샊�� �궗�쟾�뿉 諛⑹뼱 �냼�뒪媛� �븘�슂�븿
-			StoreInfo storeInfo = storeDao.selectById(conn, storeReq.getManageNo());
+			StoreInfo storeInfo = storeDao.selectById(conn, storeReq.getStoreNo());
 			if(storeInfo != null) {
 				storeDao.updateApi(conn, new StoreInfo(storeReq.getStoreNo(), storeReq.getStoreName(),storeReq.getStorePic(),
 						storeReq.getAddress(), storeReq.getHours(), storeReq.getClosedDays(), storeReq.getCallNumber(), storeReq.getManageNo()));

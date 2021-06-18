@@ -79,9 +79,9 @@ public class DetailRequest {
 	public void setSmokingArea(String smokingArea) {
 		this.smokingArea = smokingArea;
 	}
-	public String getStoreNo() {
+	public int getStoreNo() {
 		// TODO Auto-generated method stub
-		return null;
+		return storeNo;
 	}
 
 	
