@@ -11,11 +11,11 @@ import member.model.StoreInfo;
 
 public class StoreInfoService {
 
-
+	private StoreInfoDao storeInfoDao=new StoreInfoDao();
 
 	public StoreInfo storeInfo(int storeNo) {
 		try (Connection conn = ConnectionProvider.getConnection()) {
-			StoreInfo storeinfo = StoreInfoDao.selectBySTOREINFOId(conn, storeNo);
+			StoreInfo storeinfo = storeInfoDao.selectById(conn, storeNo);
 			if (storeinfo == null) {
 
 			}

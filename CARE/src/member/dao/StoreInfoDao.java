@@ -39,35 +39,6 @@ public class StoreInfoDao {
 			JdbcUtil.close(pstmt);
 		}
 	}
-	public static StoreInfo selectBySTOREINFOId(Connection conn, int storeno) throws SQLException {
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-			pstmt = conn.prepareStatement("select * from storeinfo "
-					+ "where storeNo = ?");
-			pstmt.setInt(1, storeno);
-			rs = pstmt.executeQuery();
-			
-			StoreInfo storeinfo = null;
-			if (rs.next()) {
-				storeinfo = new StoreInfo(
-						rs.getInt("storeNo"), 
-						rs.getString("storeName"), 
-						rs.getString("storePic"), 
-						rs.getString("address"), 
-						rs.getString("hours"),
-						rs.getString("closedDays"), 
-						rs.getString("callNumber"),
-						rs.getString("manageNo"));
-			}
-			return storeinfo;
-		} finally {
-			JdbcUtil.close(rs);
-			JdbcUtil.close(pstmt);
-		}
-		
-	}
 
 	public int insert(Connection conn, StoreInfo storeinfo) throws SQLException {
 		Statement stmt = null;
