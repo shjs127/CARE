@@ -4,14 +4,17 @@ package handler;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import auth.service.FoodDetailsService;
+import auth.service.DetailInfoService;
 import auth.service.GetMessageListViewService;
 import auth.service.LoginFailException;
+import auth.service.MenuInfoService;
 import auth.service.MessageListView;
-import member.model.DetailInfo;
-import member.model.MenuInfo;
-import member.model.ReviewInfo;
-import member.model.StoreInfo;
+import auth.service.ReviewInfoService;
+import auth.service.StoreInfoService;
+import member.model.Detailinfo;
+import member.model.Menuinfo;
+import member.model.Reviewinfo;
+import member.model.Storeinfo;
 import mvc.command.CommandHandler;
 
 
@@ -19,12 +22,10 @@ import mvc.command.CommandHandler;
 public class FoodDetailHandler implements CommandHandler {
 
 	private static final String FORM_VIEW = "/WEB-INF/view/main/food-details.jsp";
-	private FoodDetailsService fds = new FoodDetailsService();
-	/*
-	 * private StoreInfoService storeinfoService = new StoreInfoService(); private
-	 * DetailInfoService detailinfoService = new DetailInfoService(); private
-	 * ReviewInfoService reviewinfoService = new ReviewInfoService();
-	 */
+	private MenuInfoService menuinfoService = new MenuInfoService();
+	private StoreInfoService storeinfoService = new StoreInfoService();
+	private DetailInfoService detailinfoService = new DetailInfoService();
+	private ReviewInfoService reviewinfoService = new ReviewInfoService();
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -54,13 +55,13 @@ public class FoodDetailHandler implements CommandHandler {
 		
 		try {
 			int storeNo = 1;
-			StoreInfo storeinfo = fds.storeInfo(storeNo);
+			Storeinfo storeinfo = storeinfoService.storeInfo(storeNo);
 			req.getSession().setAttribute("storeinfo", storeinfo);
-			MenuInfo menuinfo = fds.menuInfo(storeNo);
+			Menuinfo menuinfo = menuinfoService.menuInfo(storeNo);
 			req.getSession().setAttribute("menuinfo", menuinfo);
-			DetailInfo detailinfo = fds.detailInfo(storeNo);
+			Detailinfo detailinfo = detailinfoService.detailInfo(storeNo);
 			req.getSession().setAttribute("detailinfo", detailinfo);
-			ReviewInfo reviewinfo = fds.reviewInfo(storeNo);
+			Reviewinfo reviewinfo = reviewinfoService.reviewInfo(storeNo);
 			req.getSession().setAttribute("reviewinfo", reviewinfo);
 
 			GetMessageListViewService viewService = GetMessageListViewService.getInstance();

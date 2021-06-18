@@ -4,27 +4,27 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import jdbc.connection.ConnectionProvider;
-import member.dao.DetailInfoDao;
-import member.dao.MenuInfoDao;
-import member.dao.ReviewInfoDao;
-import member.dao.StoreInfoDao;
-import member.dao.UserInfoDao;
-import member.model.DetailInfo;
-import member.model.MenuInfo;
-import member.model.ReviewInfo;
-import member.model.StoreInfo;
+import member.dao.DETAILINFODao;
+import member.dao.MENUINFODao;
+import member.dao.REVIEWINFODao;
+import member.dao.STOREINFODao;
+import member.dao.USERINFODao;
+import member.model.Detailinfo;
+import member.model.Menuinfo;
+import member.model.Reviewinfo;
+import member.model.Storeinfo;
 
 
 public class FoodDetailsService {
 	
-	private MenuInfoDao menuInfoDao = new MenuInfoDao();
-	private ReviewInfoDao reviewInfoDao = new ReviewInfoDao();
-	private DetailInfoDao detailInfoDao = new DetailInfoDao();
-	private StoreInfoDao storeInfoDao = new StoreInfoDao();
+	private MENUINFODao menuInfoDao = new MENUINFODao();
+	private REVIEWINFODao reviewInfoDao = new REVIEWINFODao();
+	private DETAILINFODao detailInfoDao = new DETAILINFODao();
+	private STOREINFODao storeInfoDao = new STOREINFODao();
 	
-	public  DetailInfo detailInfo(int storeNo) {
+	public  Detailinfo detailInfo(int storeNo) {
 		try (Connection conn = ConnectionProvider.getConnection()) {
-			DetailInfo detailinfo = detailInfoDao.selectById(conn, storeNo);
+			Detailinfo detailinfo = detailInfoDao.selectById(conn, storeNo);
 			if (detailinfo == null) {
 				//throw new LoginFailException();
 			}
@@ -35,16 +35,16 @@ public class FoodDetailsService {
 		}
 	}
 
-	public DetailInfo DETAILINFO(int storeNo) {
+	public Detailinfo DETAILINFO(int storeNo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	
 
-		public ReviewInfo reviewInfo(int storeNo) {
+		public Reviewinfo reviewInfo(int storeNo) {
 			try (Connection conn = ConnectionProvider.getConnection()) {
-				ReviewInfo reviewinfo = ReviewInfoDao.selectByREVIEWINFOId(conn, storeNo);
+				Reviewinfo reviewinfo = reviewInfoDao.selectById(conn, storeNo);
 				if (reviewinfo == null) {
 					//throw new LoginFailException();
 				}
@@ -55,14 +55,14 @@ public class FoodDetailsService {
 			}
 		}
 
-		public ReviewInfo REVIEWINFO(int storeNo) {
+		public Reviewinfo REVIEWINFO(int storeNo) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
-		public MenuInfo menuInfo(int storeNo) {
+		public Menuinfo menuInfo(int storeNo) {
 			try (Connection conn = ConnectionProvider.getConnection()) {
-				MenuInfo menuinfo = menuInfoDao.selectById(conn, storeNo);
+				Menuinfo menuinfo = menuInfoDao.selectById(conn, storeNo);
 				if (menuinfo == null) {
 					
 				}
@@ -74,14 +74,14 @@ public class FoodDetailsService {
 			}
 		}
 
-		public  MenuInfo MENUINFO(int storeNo) {
+		public  Menuinfo MENUINFO(int storeNo) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
-		public StoreInfo storeInfo(int storeNo) {
+		public Storeinfo storeInfo(int storeNo) {
 			try (Connection conn = ConnectionProvider.getConnection()) {
-				StoreInfo storeinfo = StoreInfoDao.selectBySTOREINFOId(conn, storeNo);
+				Storeinfo storeinfo = storeInfoDao.selectById(conn, storeNo);
 				if (storeinfo == null) {
 
 				}
@@ -92,7 +92,7 @@ public class FoodDetailsService {
 			}
 		}
 
-		public StoreInfo STOREINFO(int storeNo) {
+		public Storeinfo STOREINFO(int storeNo) {
 			// TODO Auto-generated method stub
 			return null;
 		}

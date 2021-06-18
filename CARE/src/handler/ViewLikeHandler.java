@@ -10,10 +10,10 @@ import auth.service.MenuInfoService;
 import auth.service.MessageListView;
 import auth.service.ReviewInfoService;
 import auth.service.StoreInfoService;
-import member.model.DetailInfo;
-import member.model.MenuInfo;
-import member.model.ReviewInfo;
-import member.model.StoreInfo;
+import member.model.Detailinfo;
+import member.model.Menuinfo;
+import member.model.Reviewinfo;
+import member.model.Storeinfo;
 import mvc.command.CommandHandler;
 public class ViewLikeHandler implements CommandHandler {
 
@@ -39,13 +39,13 @@ public class ViewLikeHandler implements CommandHandler {
 		try {
 			int storeNo = 1;
 			
-			DetailInfo detailinfo = DetailInfoService.DETAILINFO(storeNo);
+			Detailinfo detailinfo = DetailInfoService.DETAILINFO(storeNo);
 			req.getSession().setAttribute("detailinfo", detailinfo);
-			ReviewInfo reviewinfo = ReviewInfoService.REVIEWINFO(storeNo);
+			Reviewinfo reviewinfo = ReviewInfoService.REVIEWINFO(storeNo);
 			req.getSession().setAttribute("reviewinfo", reviewinfo);
-			StoreInfo storeinfo = StoreInfoService.STOREINFO(storeNo);
+			Storeinfo storeinfo = StoreInfoService.STOREINFO(storeNo);
 			req.getSession().setAttribute("storeinfo", storeinfo);
-			MenuInfo menuinfo = MenuInfoService.MENUINFO(storeNo);
+			Menuinfo menuinfo = MenuInfoService.MENUINFO(storeNo);
 			req.getSession().setAttribute("menuinfo", menuinfo);
 			
 			

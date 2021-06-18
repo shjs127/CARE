@@ -5,15 +5,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import auth.service.GetMessageListViewService;
 import auth.service.LoginFailException;
+import auth.service.MenuInfoService;
 import auth.service.MessageListView;
-import auth.service.ReviewInfoService;
-import member.model.Reviewinfo;
+import member.model.Menuinfo;
 import mvc.command.CommandHandler;
 
-public class ReviewInHandler implements CommandHandler {
+public class MenuInHandler implements CommandHandler {
 
 	private static final String FORM_VIEW = "/WEB-INF/view/main/food-details.jsp";
-	private ReviewInfoService reviewinfoService = new ReviewInfoService();
+	private MenuInfoService menuinfoService = new MenuInfoService();
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -29,17 +29,15 @@ public class ReviewInHandler implements CommandHandler {
 
 	private String processForm(HttpServletRequest req, HttpServletResponse res) {
 
-		
+	
 		
 		try {
 			int storeNo = 1;
 			
-			Reviewinfo reviewinfo = ReviewInfoService.REVIEWINFO(storeNo);
-			req.getSession().setAttribute("reviewinfo", reviewinfo);
+			Menuinfo menuinfo = MenuInfoService.MENUINFO(storeNo);
+			req.getSession().setAttribute("menuinfo", menuinfo);
 			
-			
-			
-			
+
 			GetMessageListViewService viewService = GetMessageListViewService.getInstance();
 			String pageStr = req.getParameter("page");
 			int pageNum = pageStr == null ? 1 : Integer.parseInt(pageStr);
@@ -57,6 +55,7 @@ public class ReviewInHandler implements CommandHandler {
 
 		try {
 			
+
 			return FORM_VIEW;
 		} catch (LoginFailException e) {
 			return FORM_VIEW;

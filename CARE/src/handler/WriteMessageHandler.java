@@ -1,25 +1,27 @@
 package handler;
+
 //�̼��� �߰� ����
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import auth.service.GetMessageListViewService;
+import auth.service.DetailInfoService;
 import auth.service.LoginFailException;
-import auth.service.MessageListView;
-import auth.service.ReviewInfoService;
-import member.model.Reviewinfo;
+import auth.service.Message;
+import auth.service.WriteMessageService;
 import mvc.command.CommandHandler;
 
-public class ReviewInHandler implements CommandHandler {
+public class WriteMessageHandler implements CommandHandler {
 
 	private static final String FORM_VIEW = "/WEB-INF/view/main/food-details.jsp";
-	private ReviewInfoService reviewinfoService = new ReviewInfoService();
+	private DetailInfoService detailinfoService = new DetailInfoService();
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		if (req.getMethod().equalsIgnoreCase("GET")) {
+			System.out.println("WriteMessageHandler GET 실행...");
 			return processForm(req, res);
 		} else if (req.getMethod().equalsIgnoreCase("POST")) {
+			System.out.println("WriteMessageHandler POST 실행...");
 			return processSubmit(req, res);
 		} else {
 			res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
@@ -28,35 +30,23 @@ public class ReviewInHandler implements CommandHandler {
 	}
 
 	private String processForm(HttpServletRequest req, HttpServletResponse res) {
-
-		
-		
-		try {
-			int storeNo = 1;
-			
-			Reviewinfo reviewinfo = ReviewInfoService.REVIEWINFO(storeNo);
-			req.getSession().setAttribute("reviewinfo", reviewinfo);
-			
-			
-			
-			
-			GetMessageListViewService viewService = GetMessageListViewService.getInstance();
-			String pageStr = req.getParameter("page");
-			int pageNum = pageStr == null ? 1 : Integer.parseInt(pageStr);
-			MessageListView view = viewService.getMessageListView(pageNum);
-			
-			req.getSession().setAttribute("view", view);
-
-			return FORM_VIEW;
-		} catch (LoginFailException e) {
-			return FORM_VIEW;
-		}
+		return FORM_VIEW;
 	}
 
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
 		try {
+			Message message = new Message();
 			
+			message.setReviewContents(req.getParameter("reviewContents"));
+			System.out.println("message.reveiewContents=" + message.getReviewContents());
+
+			WriteMessageService writeService = WriteMessageService.getInstance();
+			int writeResult = writeService.writeMessage(message); // 원래 메소드명은 write()였던 것으로 기억합니다.
+			// WriteMessageService 클래스에서 msgDAO.insert()의 리턴값을 반환하도록 수정해야 합니다.
+
+			req.getSession().setAttribute("view", writeResult);
+
 			return FORM_VIEW;
 		} catch (LoginFailException e) {
 			return FORM_VIEW;

@@ -7,17 +7,17 @@ import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
 import member.dao.MESSAGEDao;
 
-public class WriteMessageService {
-	private static WriteMessageService instance = new WriteMessageService();
+public class WriteAvgService {
+	private static WriteAvgService instance = new WriteAvgService();
 
-	public static WriteMessageService getInstance() {
+	public static WriteAvgService getInstance() {
 		return instance;
 	}
 
-	private WriteMessageService() {
+	private WriteAvgService() {
 	}
 
-	public int writeMessage(Message message) {
+	public int writeAvg(Message message) {
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();

@@ -1,21 +1,21 @@
 package auth.service;
-
+//�̼��� �߰� ����
 import java.sql.Connection;
 import java.sql.SQLException;
 
 import jdbc.connection.ConnectionProvider;
-import member.dao.StoreInfoDao;
-import member.model.ReviewInfo;
-import member.model.StoreInfo;
+import member.dao.STOREINFODao;
+import member.model.Reviewinfo;
+import member.model.Storeinfo;
 
 
 public class StoreInfoService {
 
 	
 
-	public StoreInfo storeInfo(int storeNo) {
+	public Storeinfo storeInfo(int storeNo) {
 		try (Connection conn = ConnectionProvider.getConnection()) {
-			StoreInfo storeinfo = StoreInfoDao.selectBySTOREINFOId(conn, storeNo);
+			Storeinfo storeinfo = STOREINFODao.selectBySTOREINFOId(conn, storeNo);
 			if (storeinfo == null) {
 
 			}
@@ -26,7 +26,7 @@ public class StoreInfoService {
 		}
 	}
 
-	public static StoreInfo STOREINFO(int storeNo) {
+	public static Storeinfo STOREINFO(int storeNo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
