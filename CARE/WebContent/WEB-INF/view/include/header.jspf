@@ -101,7 +101,7 @@
 						<li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
 						<li class="nav-item"><a href="food-listing.html" class="nav-link">Food List</a></li>
 						<li class="nav-item"><a href="food-grid.html" class="nav-link">Food Grid</a></li>
-						<li class="nav-item"><a href="foodDetail.do" class="nav-link">Food Detail</a></li>
+						<li class="nav-item"><a href="${pageContext.request.contextPath }/main/foodDetail.do" class="nav-link">Food Detail</a></li>
 						<li class="nav-item"><a href="login.html" class="nav-link">Login &amp; Register</a></li>
 						<li class="nav-item"><a href="terms.html" class="nav-link">Terms</a></li>
 						<li class="nav-item"><a href="policy.html" class="nav-link">Policy</a></li>

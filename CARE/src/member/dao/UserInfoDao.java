@@ -71,15 +71,16 @@ public class UserInfoDao {
 
 	public void insert(Connection conn, UserInfo userinfo) throws SQLException {
 		try (PreparedStatement pstmt = 
-				conn.prepareStatement("insert into USERINFO values(USERNUM.NEXTVAL,?,?,?,?,sysdate,?,?,?)")) {
+				conn.prepareStatement("insert into USERINFO values(USERNUM.NEXTVAL,?,?,?,?,?,?,?,?)")) {
 
 			pstmt.setString(1, userinfo.getUserId());
 			pstmt.setString(2, userinfo.getPassword());
 			pstmt.setString(3, userinfo.getName());
 			pstmt.setString(4, userinfo.getNickName());
-			pstmt.setString(5, userinfo.getEmail());
-			pstmt.setString(6, userinfo.getGender());
-			pstmt.setString(7, userinfo.getAdminister());
+			pstmt.setString(5, userinfo.getBirth());
+			pstmt.setString(6, userinfo.getEmail());
+			pstmt.setString(7, userinfo.getGender());
+			pstmt.setString(8, userinfo.getAdminister());
 	
 
 			pstmt.executeUpdate();
@@ -88,13 +89,16 @@ public class UserInfoDao {
 
 	public void update(Connection conn, UserInfo userinfo) throws SQLException {
 		try (PreparedStatement pstmt = conn.prepareStatement(
-				"update USERINFO set USERNAME = ?, PASSWORD = ? where USERID = ?")) {
+				"update USERINFO set USERNAME = ?, PASSWORD = ?, NICKNAME = ?, EMAIL = ?, GENDER = ? where USERID = ?")) {
 			pstmt.setString(1, userinfo.getName());
 			pstmt.setString(2, userinfo.getPassword());
-			pstmt.setString(3, userinfo.getUserId());
+			pstmt.setString(3, userinfo.getNickName());
+			pstmt.setString(4, userinfo.getEmail());
+			pstmt.setString(5, userinfo.getGender());
+			pstmt.setString(6, userinfo.getUserId());
 			pstmt.executeUpdate();
-		}
-	}
+			}	
+			}
 }
 
 
