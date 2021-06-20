@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jspf"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- Main Container Starts -->
 <div class="main-container container">
@@ -43,12 +44,14 @@
 													<form class="form-horizontal" action="profile.do"
 														method="post">
 														<!-- Personal Information Starts -->
+														
 														<div class="form-group row">
 															<label for="inputFname"
 																class="col-sm-3 col-form-label text-right">이 름 :</label>
 															<div class="col-sm-9">
-																<input type="text" class="form-control" name="name"
-																	placeholder="${authUser.nickName }">
+																<input type="text" class="form-control"
+																	name="newUserName" placeholder="${userInfo.name}" required readonly>
+																<%-- 	<p>${userInfo.name}</p> --%>
 															</div>
 														</div>
 														<div class="form-group row">
@@ -56,9 +59,12 @@
 																class="col-sm-3 col-form-label text-right">비밀번호
 																:</label>
 															<div class="col-sm-9">
-																<input type="text" class="form-control" name="curPwd"
-																	placeholder="비밀번호">
-																<c:if test="${errors.badCurPwd}">현재 암호가 일치하지 않습니다.</c:if>
+																<input type="password" class="form-control"
+																	name="curPwd" placeholder="비밀번호">
+																<c:choose>
+																	<c:when test="${errors.badCurPwd}">현재 암호가 일치하지 않습니다..</c:when>
+																	<c:otherwise>현재 암호를 입력하세요</c:otherwise>
+																</c:choose>
 															</div>
 														</div>
 														<div class="form-group row">
@@ -66,25 +72,29 @@
 																class="col-sm-3 col-form-label text-right">새비밀번호
 																:</label>
 															<div class="col-sm-9">
-																<input type="text" class="form-control" name="newPwd"
-																	placeholder="새비밀번호">
-																<c:if test="${errors.newPwd}">새 암호를 입력하세요.</c:if>
+																<input type="password" class="form-control"
+																	name="newPwd" placeholder="새비밀번호">
+																<%-- <c:choose>
+																	<c:when test="${errors.newPwd}">새 비밀번호를 입력하세요</c:when>
+																	<c:when test="${newPwd==null}">새 비밀번호를 입력하세요</c:when>
+
+																</c:choose> --%>
 															</div>
 														</div>
 														<div class="form-group row">
-															<label for="inputNickName"
+															<label for="inputFname"
 																class="col-sm-3 col-form-label text-right">닉네임 :</label>
 															<div class="col-sm-9">
-																<input type="text" class="form-control" name="NickName"
-																	placeholder="닉네임">
+																<input type="text" class="form-control"
+																	name="newNickName" placeholder="${userInfo.nickName}">
 															</div>
 														</div>
 														<div class="form-group row">
 															<label for="inputBirth"
 																class="col-sm-3 col-form-label text-right">생 일 :</label>
 															<div class="col-sm-9">
-																<input type="text" class="form-control" name="Birth"
-																	placeholder="Birth">
+																<input type="text" class="form-control" name="newBirth"
+																	placeholder="${userInfo.birth}">
 															</div>
 														</div>
 														<div class="form-group row">
@@ -92,19 +102,24 @@
 																class="col-sm-3 col-form-label text-right">Email
 																:</label>
 															<div class="col-sm-9">
-																<input type="email" class="form-control" id="inputEmail"
-																	placeholder="Email">
+																<input type="email" class="form-control" name="newEmail"
+																	placeholder="${userInfo.email}">
 															</div>
 														</div>
 														<div class="form-group row">
 															<label for="inputGender"
 																class="col-sm-3 col-form-label text-right">성 별 :</label>
 															<div class="col-sm-9">
-																<input type="text" class="form-control" name="Gender"
-																	placeholder="성별">
+																<div class="radio">
+																	<label> <input type="radio" name="newGender"
+																		value="male" <c:if test="${userInfo.gender eq 'male'}">checked="checked"</c:if>
+																		>남성 <input type="radio" name="newGender"
+																		value="female" <c:if test="${userInfo.gender eq 'female'}">checked="checked"</c:if>
+																		>여성
+																	</label>
+																</div>
 															</div>
 														</div>
-
 														<div class="form-group row">
 
 															<button type="submit"

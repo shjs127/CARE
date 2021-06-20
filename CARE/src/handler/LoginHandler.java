@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import auth.service.LoginFailException;
 import auth.service.LoginService;
 import auth.service.User;
+import member.model.*;
 import mvc.command.CommandHandler;
 
 public class LoginHandler implements CommandHandler {
@@ -52,7 +53,9 @@ public class LoginHandler implements CommandHandler {
 
 		try {
 			User user = loginService.login(id, password);
+			UserInfo userInfo=loginService.userInfo(id, password);
 			req.getSession().setAttribute("authUser", user);
+			req.getSession().setAttribute("userInfo", userInfo);
 			//res.sendRedirect(req.getContextPath() + "/view/test/index.jsp");
 			res.sendRedirect(req.getContextPath() + "/main/index.do");
 			return null;

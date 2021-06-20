@@ -37,6 +37,34 @@
 		<link href="<%=request.getContextPath()%>/CARE/css/style.css" rel="stylesheet">
 		<link href="<%=request.getContextPath()%>/CARE/css/responsive.css" rel="stylesheet">
 
+<link rel="stylesheet"
+href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+new google.translate.TranslateElement({
+pageLanguage : 'ko',
+includedLanguages : 'en,ja,ko,zh-CN',
+layout : google.translate.TranslateElement.InlineLayout.SIMPLE
+}, 'google_translate_element');
+}
+</script>
+
+<script type="text/javascript"
+src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<!-- 언어선택 시작 -->
+<script type="text/javascript">
+//<![CDATA[
+$(function() {
+$("#locale option[value=${param.locale}]").attr("selected","selected");
+$("#locale").change(function(){
+var locale = $(this).val();
+window.location.href="index.jsp?locale="+locale;
+});
+});
+//]]>
+</script>
+
 	</head>
 	<body>
 	<!-- Header Starts -->
@@ -55,6 +83,7 @@
 					<div class="col-md-8 col-sm-12">
 					<!-- Top Links Starts -->
 						<ul class="list-unstyled list-inline top-links text-md-right text-weight-bold">
+						<li class="list-inline-item"><div style="margin-left: 11px;"id="google_translate_element"></div></li>
 							<li class="list-inline-item"><a href="${pageContext.request.contextPath }/main/profile.do">마이페이지</a></li>
 							<li class="list-inline-item"><a href="${pageContext.request.contextPath}/board/list.do">게시판</a></li>
 							 <%

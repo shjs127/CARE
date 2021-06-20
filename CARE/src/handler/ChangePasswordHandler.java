@@ -58,7 +58,7 @@ public class ChangePasswordHandler implements CommandHandler {
 		}
 		
 		try {
-			changePwdSvc.changePassword(user.getUserId(), curPwd, newPwd);
+			changePwdSvc.changePassword(user.getUserId(), curPwd, newPwd, newPwd, newPwd, newPwd, newPwd);
 			return "/WebContent/CARE/changePwdSuccess.jsp";
 		} catch (InvalidPasswordException e) {
 			errors.put("badCurPwd", Boolean.TRUE);

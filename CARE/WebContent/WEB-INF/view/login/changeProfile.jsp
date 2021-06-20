@@ -5,6 +5,6 @@
 %>
 
 <script>
-	alert("성공적으로 회원가입이 되었습니다.");
+	alert("성공적으로 회원정보가 수정되었습니다.");
 	location.href="${pageContext.request.contextPath }/login.do"; 
 </script>

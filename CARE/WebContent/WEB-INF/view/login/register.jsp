@@ -33,7 +33,7 @@
 				});
 			});
 		</script>
-
+<div class="register-box">
 		<div class="register-box-body">
 			<p class="login-box-msg">
 				<c:if test="${errors.id}">ID를 입력하세요.</c:if>
@@ -49,7 +49,7 @@
 			<!-- <form action="registerProcess.jsp" method="post"> -->
 			<form action="join.do" method="post">
 				<div class="form-group has-feedback">
-					<input type="text" class="form-control" name="userid"
+					<input id="ID" type="text" class="form-control" name="userid"
 						placeholder="ID"> <span
 						class="glyphicon glyphicon-user form-control-feedback"></span>
 				</div>
@@ -64,7 +64,7 @@
 						class="glyphicon glyphicon-log-in form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
-					<input type="text" class="form-control" name="name"
+					<input id="name" type="text" class="form-control" name="name"
 						placeholder="name"> <span
 						class="glyphicon glyphicon-user form-control-feedback"></span>
 				</div>
@@ -89,7 +89,7 @@
 
 				<div class="form-group row">
 					<span class="col-sm-3 col-form-label text-right">성별 :</span>
-					<div class="col-sm-9">
+					<div class="col-sm-9has-feedbarck">
 						<div class="radio">
 							<label> <input type="radio" name="sex" value="male">
 								남성 <input type="radio" name="sex" value="female" checked>
@@ -135,7 +135,7 @@
 		<a href="login.do" class="text-center">가입 취소</a>
 	</div>
 	<!-- /.form-box -->
-	
+	</div>
 	<!-- /.register-box -->
 
 

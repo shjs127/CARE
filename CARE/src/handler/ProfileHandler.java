@@ -45,20 +45,25 @@ public class ProfileHandler implements CommandHandler {
 
 		String curPwd = req.getParameter("curPwd");
 		String newPwd = req.getParameter("newPwd");
-		
+		String newNickName = req.getParameter("newNickName");
+		String newBirth = req.getParameter("newBirth");
+		String newEmail = req.getParameter("newEmail");
+		String newGender = req.getParameter("newGender");
+		System.out.println("변경된 데이터 저장");
 		if (curPwd == null || curPwd.isEmpty()) {
 			errors.put("curPwd", Boolean.TRUE);
 		}
-		if (newPwd == null || newPwd.isEmpty()) {
-			errors.put("newPwd", Boolean.TRUE);
-		}
+		/*
+		 * if (newPwd == null || newPwd.isEmpty()) { errors.put("newPwd", Boolean.TRUE);
+		 * }
+		 */
 		if (!errors.isEmpty()) {
 			return FORM_VIEW;
 		}
 		
 		try {
-			changePwdSvc.changePassword(user.getUserId(), curPwd, newPwd);
-			return "/WEB-INF/view/main/changePwdSuccess.jsp";
+			changePwdSvc.changePassword(user.getUserId(), curPwd, newPwd, newNickName, newBirth, newEmail, newGender);
+			return "/WEB-INF/view/login/changeProfile.jsp";
 		} catch (InvalidPasswordException e) {
 			errors.put("badCurPwd", Boolean.TRUE);
 			return FORM_VIEW;

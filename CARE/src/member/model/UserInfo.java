@@ -78,20 +78,18 @@ public class UserInfo {
 		this.password = newPwd;
 	}
 
-	public void changeGender(String newGender) {
-		this.gender = newGender;
-	}
-	
-	public void changeName(String newName) {
-		this.name = newName;
-	}
-	
 	public void changeNickName(String newNickName) {
 		this.nickName = newNickName;
 	}
 	
+	public void changeBirth(String newBirth) {
+		this.birth = newBirth;
+	}
 	public void changeEmail(String newEmail) {
 		this.email = newEmail;
+	}
+	public void changeGender(String newGender) {
+		this.gender = newGender;
 	}
 	
 }

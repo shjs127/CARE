@@ -26,6 +26,23 @@ public class LoginService {
 		}
 	}
 	
+	public UserInfo userInfo(String userId, String password) {
+		try (Connection conn = ConnectionProvider.getConnection()) {
+			UserInfo userinfo = userinfoDao.selectById(conn, userId);
+			if (userinfo == null) {
+				throw new LoginFailException();
+			}
+			if (!userinfo.matchPassword(password)) {
+				throw new LoginFailException();
+			}
+			return new UserInfo(userinfo.getUserNo(), userinfo.getUserId(), userinfo.getPassword(), 
+					userinfo.getName(), userinfo.getNickName(), userinfo.getBirth(), userinfo.getEmail(), 
+					userinfo.getGender(), userinfo.getAdminister());
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
 	public User selectByUserNo(int userNo) {
 		try (Connection conn = ConnectionProvider.getConnection()) {
 			UserInfo userinfo = userinfoDao.selectByUserNo(conn, userNo);

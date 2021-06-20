@@ -39,7 +39,7 @@ public class JoinHandler implements CommandHandler {
 		joinReq.setName(req.getParameter("name"));
 		joinReq.setBirth(req.getParameter("birth"));
 		joinReq.setEmail(req.getParameter("email"));
-		joinReq.setGender(req.getParameter("gender"));
+		joinReq.setGender(req.getParameter("sex"));
 		joinReq.setPassword(req.getParameter("password"));
 		joinReq.setConfirmPassword(req.getParameter("confirmPassword"));
 		

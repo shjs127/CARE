@@ -89,10 +89,10 @@ public class UserInfoDao {
 
 	public void update(Connection conn, UserInfo userinfo) throws SQLException {
 		try (PreparedStatement pstmt = conn.prepareStatement(
-				"update USERINFO set USERNAME = ?, PASSWORD = ?, NICKNAME = ?, EMAIL = ?, GENDER = ? where USERID = ?")) {
-			pstmt.setString(1, userinfo.getName());
-			pstmt.setString(2, userinfo.getPassword());
-			pstmt.setString(3, userinfo.getNickName());
+				"update USERINFO set PASSWORD = ?, NICKNAME = ?, BIRTH = ? ,EMAIL = ?, GENDER = ? where USERID = ?")) {
+			pstmt.setString(1, userinfo.getPassword());
+			pstmt.setString(2, userinfo.getNickName());
+			pstmt.setString(3, userinfo.getBirth());
 			pstmt.setString(4, userinfo.getEmail());
 			pstmt.setString(5, userinfo.getGender());
 			pstmt.setString(6, userinfo.getUserId());
