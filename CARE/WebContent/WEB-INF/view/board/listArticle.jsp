@@ -196,17 +196,17 @@
 							<li class="page-item" onclick="alert('이전 페이지가 없습니다.');"><a
 								class="page-link">&laquo;</a></li>
 						</c:if>
-						<c:forEach var="i" begin="0" end="4">
+						<c:forEach var="pNo" begin="${articlePage.startPage}" end="${articlePage.endPage}">
 							<c:choose>
 								<c:when
-									test="${(articlePage.currentPage) == (articlePage.startPage+i)}">
+									test="${(param.p) == (articlePage.startPage+pNo-1)}">
 									<li class="page-item active"><a
-										href="?p=${articlePage.startPage+i}&f=${param.f}&q=${param.q}"
-										class="page-link">${articlePage.startPage+i}</a></li>
+										href="?p=${pNo}&f=${param.f}&q=${param.q}"
+										class="page-link">${pNo}</a></li>
 								</c:when>
 								<c:otherwise>
 									<li class="page-item"><a
-										href="?p=${articlePage.startPage+i}&f=&q=" class="page-link">${articlePage.startPage+i}</a></li>
+										href="?p=${pNo}&f=${param.f}&q=${param.q}" class="page-link">${pNo}</a></li>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>

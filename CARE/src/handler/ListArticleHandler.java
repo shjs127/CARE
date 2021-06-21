@@ -3,9 +3,9 @@ package handler;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import mvc.command.CommandHandler;
 import auth.service.ArticlePage;
 import auth.service.ListArticleService;
+import mvc.command.CommandHandler;
 
 public class ListArticleHandler implements CommandHandler {
 
@@ -14,7 +14,7 @@ public class ListArticleHandler implements CommandHandler {
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) 
 			throws Exception {
-		String pageNoVal = req.getParameter("pageNo");
+		String pageNoVal = req.getParameter("p");
 		int pageNo = 1;
 		if (pageNoVal != null) {
 			pageNo = Integer.parseInt(pageNoVal);
