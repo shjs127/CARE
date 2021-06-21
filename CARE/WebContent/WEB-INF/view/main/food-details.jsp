@@ -635,10 +635,10 @@
 												%>
 
 												<div class="box-body">
-													<form action="ReviewInfo.do" method="post" id="writeForm">
+													<form action="review.do" method="post" id="writeForm">
 														<!-- // form에 ID 지정 -->
 														<p>
-															<textarea name="reviewcontents" cols="60" rows="10"
+															<textarea name="reviewContents" cols="60" rows="10"
 																placeholder="리뷰를 작성하세요"></textarea>
 														</p>
 														<p>
@@ -769,30 +769,72 @@
 																	$(
 																			"#writeForm")
 																			.submit(
-																					function() {
+																					function(
+																							event) {
+																						alert("리뷰가 등록되었습니다.");
+
 																						var formData = { // Plain Object 변수에 form의 data 저장
-																							reviewcontents : this.reviewcontents.value
+																							reviewContents : this.reviewContents.value
+																							/* avgScore : this.avgScore.value */
 																						};
+																						
 
 																						$
 																								.ajax({
-																									url : "/CARE/WEB-INF/view/guestbook/writeMessage.jsp",
+																									url : "writeMessage.do", 
 																									method : "POST",
 																									data : formData,
 																									success : function() { // 요청 성공 시 (HTTP 200 OK)
 																										$(
-																												"#writeForm [name=reviewcontents]")
+																												"#writeForm [name=reviewContents]")
 																												.val(
 																														""); // 입력했던 정보 비우기
-																										$("#list")
-																												.load(window.location.href + " #list"); // 글목록만 새로고침
+																										$(
+																												"#list")
+																												.load(
+																														window.location.href
+																																+ " #list"); // 글목록만 새로고침
 																									}
 																								});
 
 																						event
 																								.preventDefault(); // submit 시 페이지 이동하지 않게
+
 																					});
+
 																});
+
+																/* 											$(function() {
+																												$(
+																														"#writeForm")FoodDetailHandler.java
+																														.submit(
+																																alert("제출누름...");
+																																
+																																
+																																function() {
+																																	var formData = { // Plain Object 변수에 form의 data 저장
+																																		reviewcontents : this.reviewcontents.value
+																																	};
+
+																																	$
+																																			.ajax({
+																																				url : "/CARE/WEB-INF/view/guestbook/writeMessage.jsp",
+																																				method : "POST",
+																																				data : formData,
+																																				success : function() { // 요청 성공 시 (HTTP 200 OK)
+																																					$(
+																																							"#writeForm [name=reviewcontents]")
+																																							.val(
+																																									""); // 입력했던 정보 비우기
+																																					$("#list")
+																																							.load(window.location.href + " #list"); // 글목록만 새로고침
+																																				}
+																																			});
+
+																																	event
+																																			.preventDefault(); // submit 시 페이지 이동하지 않게
+																																});
+																											}); */
 															</script>
 
 
@@ -1154,7 +1196,7 @@
 				충전기가 있는 좌석 수: <span class="float-right text-spl-color">${detailinfo.socketSeat }개</span><br>
 				디저트: <span class="float-right text-spl-color">${detailinfo.dessertSales }</span><br>
 				테라스: <span class="float-right text-spl-color">${detailinfo.terrace }</span><br>
-				루프탑: <span class="float-right text-spl-color">${detailinfo.rooftop }</span><br>
+				루프탑: <span class="float-right text-spl-color">${detailinfo.roofTop }</span><br>
 				와이파이: <span class="float-right text-spl-color">${detailinfo.wifi }</span><br>
 				애견동반: <span class="float-right text-spl-color">${detailinfo.companionDog }</span><br>
 				주차공간: <span class="float-right text-spl-color">${detailinfo.parkingSpace }</span><br>
