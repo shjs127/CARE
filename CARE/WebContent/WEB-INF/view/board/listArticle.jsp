@@ -93,13 +93,13 @@
 
 
 				<!-- Sort By Field Starts -->
-				<select class="form-control rounded-0 sidearea-filter-sort">
-					<option>Sort by : 평점높은순</option>
-					<option>Top Rated</option>
-					<option>Latest</option>
-					<option>Cost</option>
-					<option>Cheap</option>
+				<form class="teble-form">
+				<select name = "v" class="form-control rounded-0 sidearea-filter-sort" onchange="this.form.submit()">
+					<option></option>
+					<option value ="5">5개씩보기</option>
+					<option value ="10">10개씩 보기</option>
 				</select>
+				</form>
 				<!-- Sort By Field Ends -->
 			</div>
 		</div>
@@ -190,7 +190,7 @@
 						class="pagination animation float-lg-right">
 						<c:if test="${articlePage.startPage>1}">
 							<li class="page-item"><a
-								href="?p=${articlePage.startPage-5}&f=&q=" class="page-link">&laquo;</a></li>
+								href="?p=${articlePage.startPage-5}&f=&q=&v=${param.v}" class="page-link">&laquo;</a></li>
 						</c:if>
 						<c:if test="${articlePage.startPage<=1}">
 							<li class="page-item" onclick="alert('이전 페이지가 없습니다.');"><a
@@ -201,18 +201,18 @@
 								<c:when
 									test="${(param.p) == (articlePage.startPage+pNo-1)}">
 									<li class="page-item active"><a
-										href="?p=${pNo}&f=${param.f}&q=${param.q}"
+										href="?p=${pNo}&f=${param.f}&q=${param.q}&v=${param.v}"
 										class="page-link">${pNo}</a></li>
 								</c:when>
 								<c:otherwise>
 									<li class="page-item"><a
-										href="?p=${pNo}&f=${param.f}&q=${param.q}" class="page-link">${pNo}</a></li>
+										href="?p=${pNo}&f=${param.f}&q=${param.q}&v=${param.v}" class="page-link">${pNo}</a></li>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
 
 						<c:if test="${articlePage.startPage+5<articlePage.endPage}">
-							<li class="page-item"><a href="?p=${startPage+5}&f=&q="
+							<li class="page-item"><a href="?p=${startPage+5}&f=&q=&v=${param.v}"
 								class="page-link">&raquo;</a></li>
 						</c:if>
 						<c:if test="${articlePage.startPage+5>articlePage.endPage}">

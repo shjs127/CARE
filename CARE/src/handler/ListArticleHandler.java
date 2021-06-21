@@ -15,11 +15,16 @@ public class ListArticleHandler implements CommandHandler {
 	public String process(HttpServletRequest req, HttpServletResponse res) 
 			throws Exception {
 		String pageNoVal = req.getParameter("p");
+		String pageView = req.getParameter("v");
 		int pageNo = 1;
+		int pageV = 10;
 		if (pageNoVal != null) {
 			pageNo = Integer.parseInt(pageNoVal);
 		}
-		ArticlePage articlePage = listService.getArticlePage(pageNo);
+		if(pageView != null) {
+			pageV = Integer.parseInt(pageView);
+		}
+		ArticlePage articlePage = listService.getArticlePage(pageNo,pageV);
 		req.setAttribute("articlePage", articlePage);
 		return "/WEB-INF/view/board/listArticle.jsp";
 	}
