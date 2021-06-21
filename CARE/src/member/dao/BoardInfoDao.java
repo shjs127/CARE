@@ -72,8 +72,8 @@ public class BoardInfoDao {
 		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(
-					"select * from ( " + "select row_number() over(order by boardno) num, boardinfo.* "
-							+ "from boardinfo order by boardno desc) " + "where num between ? and ? ");
+					"select boardinfo.* from (select rownum as rnum, boardinfo.* from boardinfo order by BOARDNO desc) boardinfo "
+					+ "where rnum between ? and ? ");
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, size);
 			rs = pstmt.executeQuery();
