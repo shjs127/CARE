@@ -11,7 +11,7 @@
 		<div class="container text-center">
 			<h3 class="text-weight-normal">Find the best Restaurants, Cafes
 				&amp; Cuisine in Your Place</h3>
-			<form class="top-search" action="search.do" method="post" name="frm" id="frm">
+			<form class="top-search" action="board/search.do" method="post" name="frm" id="frm">
 				<div class="input-group">
 					<div class="input-group-prepend search-panel">
 					</div>
