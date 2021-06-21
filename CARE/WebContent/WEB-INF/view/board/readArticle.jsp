@@ -52,7 +52,7 @@
 <input type="hidden" name="boardNo">
 <div style="text-align: right;">
 
-			<%-- <c:if test="${articleData.boardInfo.userNo == session.getAttribute('}"> --%>
+		<c:if test="${articleData.boardInfo.userNo == authUser.userNo}"> 
 	<form name="removefrm" action="delete.do" method="post">
 		<!-- <td> -->
 		<button class="btn1" onclick="removeCheck()">삭제</button>
@@ -85,7 +85,7 @@
 		<button class="btn1">수정</button>
 	</a>
 	<!-- </td> -->
-	<%-- 	</c:if> --%>
+	</c:if> 
 </div>
 <!-- 	</form> -->
 
