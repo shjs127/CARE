@@ -28,4 +28,21 @@ public class ListStoreService {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	public StorePage getStoreSelectPage(int pageNum, String searchKeyword) {
+		
+		endSize = pageNum * size;
+		
+		try (Connection conn = ConnectionProvider.getConnection() ) {
+			int total = storeInfoDao.selectSearchCount(conn, searchKeyword);
+			List<StoreInfo> storeList = storeInfoDao.getSearch(
+					conn, (pageNum -1) * size + 1, endSize, searchKeyword);
+	
+			return new StorePage(total, pageNum, size, storeList);	
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		
+	}
+	
 }

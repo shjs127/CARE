@@ -86,6 +86,33 @@ public class StoreInfoDao {
 		}
 	}
 	
+	public int selectSearchCount(Connection conn, String searchKeyword) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select count(*) "
+				+ "from storeinfo "
+				+ "where storeinfo.storename LIKE '%'||?||'%' "
+		        + "OR storeinfo.address LIKE '%'||?||'%' "
+		        + "order by storeinfo.storeno desc";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, searchKeyword);
+			pstmt.setString(2, searchKeyword);
+			rs = pstmt.executeQuery();
+			
+			
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+			return 0;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
+	
 	// List<STOREINFO> select
 	public List<StoreInfo> select(Connection conn, int startRow, int size) throws SQLException {
 		PreparedStatement pstmt = null;
@@ -113,29 +140,46 @@ public class StoreInfoDao {
 	}
 	
 	// main select
-	public List<StoreInfo> getSearch(Connection conn, String location, String searchKeyword) throws SQLException {
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			pstmt = conn.prepareStatement("select storeinfo "
+		public List<StoreInfo> getSearch(Connection conn, int startRow, int size, String searchKeyword) throws SQLException {
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = "select storeinfo.* "
 						+ "from (select rownum as rnum, storeinfo.* "
-							+ "from storeinfo "
-							+ "where " + location + " like %?% "
-							+ "order by storeno desc"
-							+ ") storeinfo");
-			pstmt.setString(1, searchKeyword);
-			rs = pstmt.executeQuery();
-			List<StoreInfo> result = new ArrayList<>();
-			while(rs.next()) {
-				result.add(convertStore(rs));
+						+ "from storeinfo "
+						+ "where storeinfo.storename LIKE '%'||?||'%' "
+				        + "OR storeinfo.address LIKE '%'||?||'%' "
+				        + "order by storeinfo.storeno desc) storeinfo "
+				        + "where rnum between ? and ?";
+			
+//			String sql = "select storeinfo.* "
+//					+ "from (select rownum as rnum, storeinfo.* "
+//					+ "from storeinfo, menuinfo "
+//					+ "where storeinfo.storeno = menuinfo.storeno "
+//					+ "and storeinfo.storename LIKE '%'||?||'%' "
+//			        + "OR storeinfo.address LIKE '%'||?||'%' "
+//			        + "OR menuinfo.menu LIKE '%'||?||'%' "
+//			        + "order by storeinfo.storeno desc) storeinfo, menuinfo "
+//			        + "where rnum between ? and ?";
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, searchKeyword);
+				pstmt.setString(2, searchKeyword);
+//				pstmt.setString(3, searchKeyword);
+				pstmt.setInt(3, startRow);
+				pstmt.setInt(4, size);
+				rs = pstmt.executeQuery();
+				List<StoreInfo> result = new ArrayList<>();
+				while(rs.next()) {
+					result.add(convertStore(rs));
+				}
+				return result;
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
 			}
-			return result;
-		} finally {
-			JdbcUtil.close(rs);
-			JdbcUtil.close(pstmt);
 		}
-	}
 	
 	private StoreInfo convertStore(ResultSet rs) throws SQLException {
 		return new StoreInfo(rs.getInt("storeNo"),

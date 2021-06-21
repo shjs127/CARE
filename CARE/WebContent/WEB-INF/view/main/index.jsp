@@ -6,33 +6,22 @@
 		
 	<!-- Main Menu Ends -->
 	<!-- Search Section Starts -->
-		<section class="search-area parallax">
+	<section class="search-area condensed parallax">
 		<!-- Nested Container Starts -->
-			<div class="container text-center">
-				<h3 class="text-weight-normal">Find the best Restaurants, Cafes &amp; Cuisine in Your Place</h3>
-				<form class="top-search"  action="search.do" method="post">
-					<div class="input-group">
-						<div class="input-group-prepend search-panel">
-							<button type="button" class="btn btn-lg btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<span class="fa fa-map-marker"></span>
-								<span class="text-label">Please type location</span> 
-							</button>
-							<ul class="dropdown-menu rounded-0">
-								<a href="#" class="dropdown-item">All of Texas</a>
-								<a href="#" class="dropdown-item lead text-uppercase">Popular Places</a>
-								<a href="#" class="dropdown-item">Huston, Texas</a>
-								<a href="#" class="dropdown-item">San Antonio, Texas</a>
-								<a href="#" class="dropdown-item">Galveston, Texas</a>
-								<a href="#" class="dropdown-item">Corpus Christi, Texas</a>
-							</ul>
-						</div>
-						<input type="text" class="form-control input-lg rounded-0" name="search-location" placeholder="지역, 카페 또는 메뉴">
-						<button class="btn btn-lg btn-prime animation text-uppercase" type="button">검색</button>
+		<div class="container text-center">
+			<h3 class="text-weight-normal">Find the best Restaurants, Cafes
+				&amp; Cuisine in Your Place</h3>
+			<form class="top-search" action="search.do" method="post" name="frm" id="frm">
+				<div class="input-group">
+					<div class="input-group-prepend search-panel">
 					</div>
-				</form>
-			</div>
+					<input type="text" class="form-control input-lg rounded-0" name="searchKeyword" id="searchKeyword" placeholder="지역, 카페 또는 메뉴" value="${param.searchKeyword}">
+					<button class="btn btn-lg btn-prime animation text-uppercase" type="submit">검색</button>
+				</div>
+			</form>
+		</div>
 		<!-- Nested Container Ends -->
-		</section>
+	</section>
 	<!-- Search Section Ends -->
 	<!-- Intro Section Ends -->
 	<section class="welcome section">
@@ -252,5 +241,17 @@
 <!-- Newsletter Section Starts -->
 <!-- Nested Container Ends -->
 <!-- Newsletter Section Ends -->
+	
+<script type="text/javascript">
+	$(function(){
+		$("#frm").submit(function(){
+			if($("#searchKeyword").val() == ""){
+				alert("검색어를 입력하세요!");
+				$("#searchKeyword").focus();
+				return false;
+			}
+		});
+	});
+</script>	
 	
 <%@ include file="../include/footer.jspf"%>

@@ -9,44 +9,12 @@
 	<div class="container text-center">
 		<h3 class="text-weight-normal">Find the best Restaurants, Cafes
 			&amp; Cuisine in Your Place</h3>
-		<form class="top-search" action="search.do" method="post" name="frm">
+		<form class="top-search" action="search.do" method="post" name="frm" id="frm">
 			<div class="input-group">
 				<div class="input-group-prepend search-panel">
-					<select class="btn btn-lg btn-default dropdown-toggle" aria-haspopup="true" name="location" id="location">
-						<option ${(param.location == "address")? "selected" : "" } value="address"> 지역 </option>
-						<option ${(param.location == "storeName")? "selected" : "" } value="storeName"> 가게명 </option>
-<%-- 						<option ${(param.location == "menu")? "selected" : "" } value="menu"> 메뉴 </option> --%>
-						
-						
-						<!-- <option value="">서울 지역 선택</option>
-						<option value="서울특별시 강남구">강남구</option>
-						<option value="서울특별시 강북구">강북구</option>
-						<option value="서울특별시 강서구">강서구</option>
-						<option value="서울특별시 관악구">관악구</option>
-						<option value="서울특별시 광진구">광진구</option>
-						<option value="서울특별시 구로구">구로구</option>
-						<option value="서울특별시 금천구">금천구</option>
-						<option value="서울특별시 노원구">노원구</option>
-						<option value="서울특별시 도봉구">도봉구</option>
-						<option value="서울특별시 동대문구">동대문구</option>
-						<option value="서울특별시 동작구">동작구</option>
-						<option value="서울특별시 마포구">마포구</option>
-						<option value="서울특별시 서대문구">서대문구</option>
-						<option value="서울특별시 서초구">서초구</option>
-						<option value="서울특별시 성동구">성동구</option>
-						<option value="서울특별시 성북구">성북구</option>
-						<option value="서울특별시 송파구">송파구</option>
-						<option value="서울특별시 양천구">양천구</option>
-						<option value="서울특별시 영등포구">영등포구</option>
-						<option value="서울특별시 용산구">용산구</option>
-						<option value="서울특별시 은평구">은평구</option>
-						<option value="서울특별시 종로구">종로구</option>
-						<option value="서울특별시 중구">중구</option>
-						<option value="서울특별시 중랑구">중랑구</option> -->
-					</select>
 				</div>
 				<input type="text" class="form-control input-lg rounded-0" name="searchKeyword" id="searchKeyword" placeholder="지역, 카페 또는 메뉴" value="${param.searchKeyword}">
-				<button class="btn btn-lg btn-prime animation text-uppercase" type="submit" onclick="searchBtnChk()">검색</button>
+				<button class="btn btn-lg btn-prime animation text-uppercase" type="submit">검색</button>
 			</div>
 		</form>
 	</div>
@@ -450,8 +418,8 @@
 
 <script type="text/javascript">
 	$(function(){
-		$("form").submit(function(){
-			if($("#searchKeyword").val().equals(""))){
+		$("#frm").submit(function(){
+			if($("#searchKeyword").val() == ""){
 				alert("검색어를 입력하세요!");
 				$("#searchKeyword").focus();
 				return false;
