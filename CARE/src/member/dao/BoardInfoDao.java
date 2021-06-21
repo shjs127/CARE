@@ -67,15 +67,40 @@ public class BoardInfoDao {
 		}
 	}
 
-	public List<BoardInfo> select(Connection conn, int startRow, int size) throws SQLException {
+	public int searchCount(Connection conn, String search) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int count=0;
+		String sql=
+				"select count(*) from boardinfo WHERE BOARDTITLE LIKE '%'||?||'%' OR BOARDCONTENTS LIKE '%'||?||'%'";
+		try {
+			pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1,search);
+				pstmt.setString(2,search);
+				rs=pstmt.executeQuery();
+				if (rs.next()) {
+				count= rs.getInt(1);
+				}
+				return count;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
+	public List<BoardInfo> search(Connection conn, int startRow, int size, String search) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			pstmt = conn.prepareStatement(
-					"select boardinfo.* from (select rownum as rnum, boardinfo.* from boardinfo order by BOARDNO desc) boardinfo "
-					+ "where rnum between ? and ? ");
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, size);
+			String sql="select boardinfo.* from (select rownum as rnum, boardinfo.* from boardinfo "
+					+"WHERE boardinfo.BOARDTITLE LIKE '%'||?||'%' OR boardinfo.BOARDCONTENTS LIKE '%'||?||'%' "
+					+"order by BOARDNO desc) boardinfo "
+					+ "where rnum between ? and ? ";
+			
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1,search);
+			pstmt.setString(2,search);
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, size);
 			rs = pstmt.executeQuery();
 			List<BoardInfo> result = new ArrayList<>();
 			while (rs.next()) {
@@ -89,6 +114,28 @@ public class BoardInfoDao {
 		}
 	}
 
+	public List<BoardInfo> select(Connection conn, int startRow, int size) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(
+					"select boardinfo.* from (select rownum as rnum, boardinfo.* from boardinfo order by BOARDNO desc) boardinfo "
+					+ "where rnum between ? and ? ");
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, size); 
+			rs = pstmt.executeQuery();
+			List<BoardInfo> result = new ArrayList<>();
+			while (rs.next()) {
+				result.add(convertBoard(rs));
+			}
+			return result;
+
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
+	
 	private BoardInfo convertBoard(ResultSet rs) throws SQLException {
 		return new BoardInfo(rs.getInt("boardno"), rs.getInt("userno"), rs.getString("boardtitle"),
 				rs.getString("boardcontents"), rs.getString("boardpic"), rs.getInt("viewcount"),

@@ -25,4 +25,19 @@ public class ListArticleService {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	public ArticlePage searchArticlePage(int pageNum, int pageV, String search) {
+		
+		endSize = pageNum * pageV;
+		
+		try (Connection conn = ConnectionProvider.getConnection()) {
+			int total = boardInfoDao.searchCount(conn, search);
+			System.out.println("total="+total);
+			List<BoardInfo> boardList = boardInfoDao.search(conn, (pageNum - 1) * pageV + 1, endSize, search);
+			System.out.println("boardList입력");
+			return new ArticlePage(total, pageNum, pageV, boardList);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }
