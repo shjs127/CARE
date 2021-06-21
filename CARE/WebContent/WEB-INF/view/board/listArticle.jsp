@@ -191,7 +191,7 @@
 						class="pagination animation float-lg-right">
 						<c:if test="${articlePage.startPage>1}">
 							<li class="page-item"><a
-								href="?p=${articlePage.startPage-5}&f=&q=&v=${param.v}" class="page-link">&laquo;</a></li>
+								href="?p=${articlePage.startPage-5}&f=&q=&v=${articlePage.pageV}" class="page-link">&laquo;</a></li>
 						</c:if>
 						<c:if test="${articlePage.startPage<=1}">
 							<li class="page-item" onclick="alert('이전 페이지가 없습니다.');"><a
@@ -200,23 +200,23 @@
 						<c:forEach var="pNo" begin="${articlePage.startPage}" end="${articlePage.endPage}">
 							<c:choose>
 								<c:when
-									test="${(param.p) == (articlePage.startPage+pNo-1)}">
+									test="${(param.p) == (pNo)}">
 									<li class="page-item active"><a
-										href="?p=${pNo}&f=${param.f}&q=${param.q}&v=${param.v}"
+										href="?p=${pNo}&f=${param.f}&q=${param.q}&v=${articlePage.pageV}"
 										class="page-link">${pNo}</a></li>
 								</c:when>
 								<c:otherwise>
 									<li class="page-item"><a
-										href="?p=${pNo}&f=${param.f}&q=${param.q}&v=${param.v}" class="page-link">${pNo}</a></li>
+										href="?p=${pNo}&f=${param.f}&q=${param.q}&v=${articlePage.pageV}" class="page-link">${pNo}</a></li>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
 
-						<c:if test="${articlePage.startPage+5<articlePage.endPage}">
-							<li class="page-item"><a href="?p=${startPage+5}&f=&q=&v=${param.v}"
+						<c:if test="${articlePage.startPage+5 <= articlePage.totalPages}">
+							<li class="page-item"><a href="?p=${articlePage.startPage+5}&f=&q=&v=${articlePage.pageV}"
 								class="page-link">&raquo;</a></li>
 						</c:if>
-						<c:if test="${articlePage.startPage+5>articlePage.endPage}">
+						<c:if test="${articlePage.startPage+5 > articlePage.totalPages}">
 							<li class="page-item" onclick="alert('다음 페이지가 없습니다.');"><a
 								class="page-link">&raquo;</a></li>
 						</c:if>

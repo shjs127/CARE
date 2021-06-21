@@ -12,11 +12,13 @@ public class ArticlePage {
 	private int totalPages;  // 1
 	private int startPage;   // 1
 	private int endPage;     // 1
+	private int pageV=10;
 
 	public ArticlePage(int total, int currentPage, int size, List<BoardInfo> list) {
 		this.total = total;
 		this.currentPage = currentPage;
 		this.list = list;
+		this.pageV = size;
 		if (total == 0) {
 			totalPages = 0;
 			startPage = 0;
@@ -65,5 +67,8 @@ public class ArticlePage {
 	
 	public int getEndPage() {
 		return endPage;
+	}
+	public int getPageV() {
+		return pageV;
 	}
 }
