@@ -5,9 +5,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import auth.service.DetailInfoService;
+import auth.service.GetMenuListViewService;
 import auth.service.GetMessageListViewService;
 import auth.service.LoginFailException;
 import auth.service.MenuInfoService;
+import auth.service.MenuListView;
 import auth.service.MessageListView;
 import auth.service.ReviewInfoService;
 import auth.service.StoreInfoService;
@@ -26,6 +28,7 @@ public class FoodDetailHandler implements CommandHandler {
 	private StoreInfoService storeinfoService = new StoreInfoService();
 	private DetailInfoService detailinfoService = new DetailInfoService();
 	private ReviewInfoService reviewinfoService = new ReviewInfoService();
+	//private GetMenuListViewService getMenuListViewService = new GetMenuListViewService();
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -63,13 +66,25 @@ public class FoodDetailHandler implements CommandHandler {
 			req.getSession().setAttribute("detailinfo", detailinfo);
 			ReviewInfo reviewinfo = reviewinfoService.reviewInfo(storeNo);
 			req.getSession().setAttribute("reviewinfo", reviewinfo);
-
+			
 			GetMessageListViewService viewService = GetMessageListViewService.getInstance();
 			String pageStr = req.getParameter("page");
 			int pageNum = pageStr == null ? 1 : Integer.parseInt(pageStr);
 			MessageListView view = viewService.getMessageListView(pageNum);
 			
 			req.getSession().setAttribute("view", view);
+			
+			GetMenuListViewService getMenuListViewService = GetMenuListViewService.getInstance();
+			MenuListView menuListView = getMenuListViewService.getMenuListView(pageNum);
+			
+			/*
+			 * for(int i=0; i<menuListView.getMenuInfoList().size(); i++) {
+			 * System.out.println(i+"="+menuListView.getMenuInfoList().get(i).getMenu());
+			 * System.out.println(i+"="+menuListView.getMenuInfoList().get(i).getMenuPic());
+			 * }
+			 */
+			
+			req.getSession().setAttribute("menuListView", menuListView);
 
 			return FORM_VIEW;
 		} catch (LoginFailException e) {

@@ -14,7 +14,7 @@ public class WriteMessageService {
 		return instance;
 	}
 
-	private WriteMessageService() {
+	public WriteMessageService() {
 	}
 
 	public int writeMessage(Message message) {

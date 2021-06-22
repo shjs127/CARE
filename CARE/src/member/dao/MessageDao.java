@@ -30,7 +30,7 @@ public class MessageDao {
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement("insert into Reviewinfo "
-					+ "(reviewNo, userNo, storeNo, avgScore, reviewContents, reviewDate ) values (Reviewinfo_seq.nextval, 1, 1, 4.8, ?, sysdate)");
+					+ "(reviewNo, userNo, storeNo, avgScore, reviewContents, reviewDate ) values (Reviewinfo_seq.nextval, ?, 1, 4.8, ?, sysdate)");
 			pstmt.setString(1, message.getReviewContents());
 			return pstmt.executeUpdate();
 		} finally {
@@ -42,7 +42,7 @@ public class MessageDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			pstmt = conn.prepareStatement("select * from Reviewinfo where storeNo = ?");
+			pstmt = conn.prepareStatement("select * from Reviewinfo where reviewno = ?");
 			pstmt.setInt(1, messageId);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
@@ -65,6 +65,8 @@ public class MessageDao {
 		message.setAvgScore(rs.getInt("avgScore"));
 		message.setReviewContents(rs.getString("reviewContents"));
 		message.setReviewDate(rs.getDate("reviewDate"));
+		
+		
 		return message;
 	}
 

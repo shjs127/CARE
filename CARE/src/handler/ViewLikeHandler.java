@@ -52,6 +52,8 @@ public class ViewLikeHandler implements CommandHandler {
 			req.getSession().setAttribute("menuinfo", menuinfo);
 			
 			
+		
+			
 			GetMessageListViewService viewService = GetMessageListViewService.getInstance();
 			String pageStr = req.getParameter("page");
 			int pageNum = pageStr == null ? 1 : Integer.parseInt(pageStr);

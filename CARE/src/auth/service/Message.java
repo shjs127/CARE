@@ -10,7 +10,11 @@ public class Message {
 	private double avgScore;
 	private String reviewContents;
 	private Date reviewDate;
+
 	
+	
+
+
 	public Message() {}
 	
 	public Message(int reviewNo, int storeNo, int userNo, double avgScore, String reviewContents, Date reviewDate) {
@@ -73,4 +77,6 @@ public class Message {
 	public void setReviewDate(Date reviewDate) {
 		this.reviewDate = reviewDate;
 	}
+
+	
 }

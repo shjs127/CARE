@@ -342,12 +342,12 @@
 
 
 
-
-									1.메뉴 이름: ${menuinfo.menu } &nbsp;&nbsp;&nbsp;
-									 -가격: ${menuinfo.price } <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<c:forEach var="menuInfo2" items="${menuListView.menuInfoList}">
+								    메뉴 이름: ${menuInfo2.menu } &nbsp;&nbsp;&nbsp;
+									 -가격: ${menuInfo2.price } <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									-사진: ${menuinfo.menuPic }<br> <br>
-
+									-사진: ${menuInfo2.menuPic }<br> <br>
+									</c:forEach>
 
 									<div class="spacer"></div>
 									<div class="order-menu-item clearfix">
@@ -703,8 +703,10 @@
 																		<h6>
 																			<i class="fa fa-calendar"></i> ${message.reviewDate}
 																		</h6>
-																		<h6>By ${message.userNo}</h6>
-																		<ul class="list-unstyled list-inline rating-star-list">
+																		<h6>회원 닉네임: ${userInfo.nickName}</h6>
+																		
+																		
+																		<!-- <ul class="list-unstyled list-inline rating-star-list">
 																			<li class="list-inline-item"><i
 																				class="fa fa-star"></i></li>
 																			<li class="list-inline-item"><i
@@ -716,7 +718,7 @@
 																			<li class="list-inline-item"><i
 																				class="fa fa-star-o"></i></li>
 																		</ul>
-
+ -->
 																	</div>
 																	<img src="images/review-thumb-img1.png" alt="Image"
 																		class="img-fluid float-right">
@@ -725,6 +727,8 @@
 																	<p>리뷰내용: ${message.reviewContents}</p>
 																	<p>평점: ${message.avgScore}</p>
 																	<p>메시지 번호: ${message.reviewNo}</p>
+																	
+																		 
 																	
 																</div>
 																</div>

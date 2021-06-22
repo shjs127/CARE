@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="auth.service.Message"
-		 import="guestbook.service.WriteMessageService" %>
+		 import="auth.service.WriteMessageService" %>
+		 
 
 <%
 	request.setCharacterEncoding("UTF-8");
