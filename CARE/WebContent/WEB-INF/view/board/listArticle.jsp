@@ -82,25 +82,32 @@
 					<!-- Search Field Starts -->
 					<div class="input-group sidearea-filter-search">
 						<input type="text" name="searching" class="form-control rounded-0"
-							placeholder="Search for..."> <span
+							placeholder="Search for..." value="${param.searching}"><span
 							class="input-group-append">
 							<button class="btn btn-default rounded-0" type="submit">
 								<i class="fa fa-search"></i>
 							</button>
 						</span>
 					</div>
+						<select id ="v" name = "v" class="form-control rounded-0 sidearea-filter-sort" onchange="this.form.submit()">
+					<option value = "10"></option>
+					<option value ="5" <c:if test="${articlePage.pageV == 5}" > selected </c:if>>5개씩보기</option>
+					<option value ="10"<c:if test="${articlePage.pageV == 10}">selected</c:if>>10개씩 보기</option>
+					</select>
 				</form>
 				<!-- 검색창 Ends -->
 
 
 				<!-- Sort By Field Starts -->
-				<form class="teble-form">
-				<select name = "v" class="form-control rounded-0 sidearea-filter-sort" onchange="this.form.submit()">
-					<option></option>
-					<option value ="5">5개씩보기</option>
-					<option value ="10">10개씩 보기</option>
-				</select>
-				</form>
+<!-- 				<form class="teble-form"> -->
+<!-- 					<select name="v" -->
+<!-- 						class="form-control rounded-0 sidearea-filter-sort" -->
+<!-- 						onchange="this.form.submit()"> -->
+<!-- 						<option></option> -->
+<!-- 						<option value="5">5개씩보기</option> -->
+<!-- 						<option value="10">10개씩 보기</option> -->
+<!-- 					</select> -->
+<!-- 				</form> -->
 				<!-- Sort By Field Ends -->
 			</div>
 		</div>
@@ -191,7 +198,7 @@
 						class="pagination animation float-lg-right">
 						<c:if test="${articlePage.startPage>1}">
 							<li class="page-item"><a
-								href="?p=${articlePage.startPage-5}&f=&q=&v=${articlePage.pageV}" class="page-link">&laquo;</a></li>
+								href="?p=${articlePage.startPage-5}&f=${param.f}&searching=${param.searching}&v=${articlePage.pageV}" class="page-link">&laquo;</a></li>
 						</c:if>
 						<c:if test="${articlePage.startPage<=1}">
 							<li class="page-item" onclick="alert('이전 페이지가 없습니다.');"><a
@@ -202,18 +209,18 @@
 								<c:when
 									test="${(param.p) == (pNo)}">
 									<li class="page-item active"><a
-										href="?p=${pNo}&f=${param.f}&q=${param.q}&v=${articlePage.pageV}"
+										href="?p=${pNo}&f=${param.f}&searching=${param.searching}&v=${articlePage.pageV}"
 										class="page-link">${pNo}</a></li>
 								</c:when>
 								<c:otherwise>
 									<li class="page-item"><a
-										href="?p=${pNo}&f=${param.f}&q=${param.q}&v=${articlePage.pageV}" class="page-link">${pNo}</a></li>
+										href="?p=${pNo}&f=${param.f}&searching=${param.searching}&v=${articlePage.pageV}" class="page-link">${pNo}</a></li>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
 
 						<c:if test="${articlePage.startPage+5 <= articlePage.totalPages}">
-							<li class="page-item"><a href="?p=${articlePage.startPage+5}&f=&q=&v=${articlePage.pageV}"
+							<li class="page-item"><a href="?p=${articlePage.startPage+5}&f=${param.f}&searching=${param.searching}&v=${articlePage.pageV}"
 								class="page-link">&raquo;</a></li>
 						</c:if>
 						<c:if test="${articlePage.startPage+5 > articlePage.totalPages}">

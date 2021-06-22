@@ -7,9 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import auth.service.ArticlePage;
-import auth.service.InvalidPasswordException;
 import auth.service.ListArticleService;
-import auth.service.MemberNotFoundException;
 import mvc.command.CommandHandler;
 
 public class ListArticleHandler implements CommandHandler {
@@ -30,6 +28,7 @@ public class ListArticleHandler implements CommandHandler {
 	}
 	private String processForm(HttpServletRequest req, HttpServletResponse res) {
 
+		String search=req.getParameter("searching");
 		String pageNoVal = req.getParameter("p");
 		String pageView = req.getParameter("v");
 		int pageNo = 1;
@@ -40,7 +39,7 @@ public class ListArticleHandler implements CommandHandler {
 		if(pageView != null) {
 			pageV = Integer.parseInt(pageView);
 		}
-		ArticlePage articlePage = listService.getArticlePage(pageNo,pageV);
+		ArticlePage articlePage = listService.getArticlePage(pageNo,pageV,search);
 		req.setAttribute("articlePage", articlePage);
 		return "/WEB-INF/view/board/listArticle.jsp";
 	}
@@ -63,7 +62,7 @@ public class ListArticleHandler implements CommandHandler {
 					pageV = Integer.parseInt(pageView);
 				}
 				System.out.println("데이터 입력");
-				ArticlePage articlePage = listService.searchArticlePage(pageNo,pageV,search);
+				ArticlePage articlePage = listService.getArticlePage(pageNo,pageV,search);
 				req.setAttribute("articlePage", articlePage);
 					return "/WEB-INF/view/board/listArticle.jsp";
 
