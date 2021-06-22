@@ -13,6 +13,8 @@ import member.model.MenuInfo;
 
 public class MenuInfoDao {
 
+	
+	
 	public MenuInfo selectById(Connection conn, int storeNo) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -54,15 +56,13 @@ public class MenuInfoDao {
 
 	
 	public List<MenuInfo> selectList(Connection conn, int firstRow, int endRow) throws SQLException {
+		System.out.println("MenuInfoDao.selectList() 실행...");
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			pstmt = conn.prepareStatement("select * from(select row_number() over(order by menuinfo.storeno) num, menuinfo.*"
-					+ "from storeinfo, menuinfo where storeinfo.storeno = menuinfo.storeno"
-					+ "order by menuinfo.storeno desc)"
-					+ "where num between ? and ?");
-			pstmt.setInt(1, firstRow - 1);
-			pstmt.setInt(2, endRow - firstRow + 1);
+			pstmt = conn.prepareStatement("select * from menuinfo");
+			//pstmt.setInt(1, firstRow - 1);
+			//pstmt.setInt(2, endRow - firstRow + 1);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				List<MenuInfo> menuinfoList = new ArrayList<MenuInfo>();
@@ -78,9 +78,21 @@ public class MenuInfoDao {
 			JdbcUtil.close(pstmt);
 		}
 	}
-	private MenuInfo makeMenuinfoFromResultSet(ResultSet rs) {
+	private MenuInfo makeMenuinfoFromResultSet(ResultSet rs) throws SQLException {
+		// TODO Auto-generated method stub
+		return new MenuInfo(rs.getInt("storeNo"), rs.getString("menu"), rs.getInt("price"), rs.getString("menuPic"));
+	}
+
+
+	public static MenuInfoDao getInstance() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	public int selectCount(Connection conn) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 
