@@ -607,7 +607,7 @@
 									<!-- Reviews Form Box Starts -->
 									<div class="reviews-form-box">
 										<h6>리뷰쓰기</h6>
-
+										
 
 
 										<section class="content">
@@ -664,7 +664,18 @@
 														<%
 															}
 														%>
-
+														 <h9>별점을 선택하세요.</h9>
+													<form action="review.do" method="post" id="writeForm">
+														<select name="별점" textarea name="avgScore">
+															size="2"
+															<option value="1">★☆☆☆☆</option>
+															<option value="2">★★☆☆☆</option>
+															<option value="3">★★★☆☆</option>
+															<option value="4">★★★★☆</option>
+															<option value="5">★★★★★</option>
+															</select>
+															<br><br>
+															</form>
 														<form action="file.do" method="post"
 															enctype="multipart/form-data">
 															<tr>
@@ -673,6 +684,8 @@
 															</tr>
 															<br>
 														</form>
+														
+													
 										</section>
 
 
@@ -706,7 +719,7 @@
 																		<h6>회원 닉네임: ${userInfo.nickName}</h6>
 																		
 																		
-																		<!-- <ul class="list-unstyled list-inline rating-star-list">
+																		 <!-- <ul class="list-unstyled list-inline rating-star-list">
 																			<li class="list-inline-item"><i
 																				class="fa fa-star"></i></li>
 																			<li class="list-inline-item"><i
@@ -717,8 +730,10 @@
 																				class="fa fa-star-o"></i></li>
 																			<li class="list-inline-item"><i
 																				class="fa fa-star-o"></i></li>
-																		</ul>
- -->
+																		</ul> -->
+ 
+ 
+ 																    
 																	</div>
 																	<img src="images/review-thumb-img1.png" alt="Image"
 																		class="img-fluid float-right">
@@ -732,7 +747,10 @@
 																	
 																</div>
 																</div>
+																
 															</c:forEach>
+															
+															
 
 															<%-- <tr>
 																<td>
