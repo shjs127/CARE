@@ -46,6 +46,7 @@ public class WriteMessageHandler implements CommandHandler {
 		
 		
 		System.out.println("message.reveiewContents=" + message.getReviewContents());
+		System.out.println("message.AvgScore=" + message.getAvgScore());
 		
 		
 		

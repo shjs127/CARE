@@ -2,45 +2,46 @@ package auth.service;
 //이수하 추가파일
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Date;
 
 import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
 import member.dao.MessageDao;
 public class DeleteMessageService {
-
-	private static DeleteMessageService instance = new DeleteMessageService();
-
-	public static DeleteMessageService getInstance() {
-		return instance;
-	}
-
-	private DeleteMessageService() {
-	}
-
-	public void deleteMessage(int reviewno,int storeno, int userno, int avgscore, String reviewcontents, Date reviewdate) {
+	
+	private MessageDao messageDao = new MessageDao();
+	private int messageUserNo;
+	
+	public void delete(MessageRequest msgReq) {
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
-
-			MessageDao messageDao = MessageDao.getInstance();
-			Message message = messageDao.select(conn, reviewno);
-			if (message == null) {
-				throw new MessageNotFoundException("硫붿떆吏� �뾾�쓬");
-			}
 			
-			messageDao.delete(conn, reviewno);
-
+			Message message = messageDao.select(conn, msgReq.getStoreNo());
+			if (message == null) {
+				throw new ArticleNotFoundException();
+			}
+			if (!canMessage(msgReq.getUserNo(), message)) {
+				throw new PermissionDeniedException();
+			}
+			messageDao.delete(conn, 
+					msgReq.getStoreNo());
 			conn.commit();
-		} catch (SQLException ex) {
+		} catch (SQLException e) {
 			JdbcUtil.rollback(conn);
-			throw new ServiceException("�궘�젣 �떎�뙣:" + ex.getMessage(), ex);
-		} catch (InvalidPasswordException | MessageNotFoundException ex) {
+			throw new RuntimeException(e);
+		} catch (PermissionDeniedException e) {
 			JdbcUtil.rollback(conn);
-			throw ex;
+			throw e;
 		} finally {
 			JdbcUtil.close(conn);
 		}
 	}
+
+	private boolean canMessage(int userNo, Message message) {
+		
+		return (message.getUserNo())==(messageUserNo);
+	}
+
+	
 }

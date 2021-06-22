@@ -5,5 +5,5 @@
 <script>
 alert('처리되었습니다.');
 
-document.location.href="msglist.do";
+document.location.href="list.do";
 	</script>;

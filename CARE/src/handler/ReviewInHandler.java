@@ -27,7 +27,7 @@ public class ReviewInHandler implements CommandHandler {
 		}
 	}
 
-	private String processForm(HttpServletRequest req, HttpServletResponse res) {
+	private String processSubmit(HttpServletRequest req, HttpServletResponse res) {
 
 		
 		
@@ -53,7 +53,7 @@ public class ReviewInHandler implements CommandHandler {
 		}
 	}
 
-	private String processSubmit(HttpServletRequest req, HttpServletResponse res) throws Exception {
+	private String processForm(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
 		try {
 			

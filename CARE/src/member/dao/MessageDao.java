@@ -12,6 +12,7 @@ import java.util.List;
 
 import auth.service.Message;
 import jdbc.JdbcUtil;
+import member.model.ReviewInfo;
 
 
 
@@ -23,7 +24,7 @@ public class MessageDao {
 		return MESSAGEDao;
 	}
 
-	private MessageDao() {
+	public MessageDao() {
 	}
 
 	public static int insert(Connection conn, Message message) throws SQLException {
@@ -117,5 +118,6 @@ public class MessageDao {
 			JdbcUtil.close(pstmt);
 		}
 	}
+
 
 }

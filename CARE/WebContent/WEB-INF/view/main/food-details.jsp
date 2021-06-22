@@ -16,6 +16,31 @@
 
 <%@ include file="../include/header.jspf"%>
 
+<style type="text/css">
+#wrap {
+	width: 800px;
+	margin: 0 auto 0 auto;
+}
+
+#detailBoard {
+	text-align: center;
+}
+
+#title {
+	height: 16;
+	font-family: '돋움';
+	font-size: 12;
+	text-align: center;
+	background-color: #F7F7F7;
+}
+
+#btn {
+	font-family: '돋움';
+	font-size: 14;
+	text-align: center;
+}
+</style>
+
 <%--  <%
  	GetMessageListViewService viewService = GetMessageListViewService.getInstance();
 	String pageStr = request.getParameter("page");
@@ -26,103 +51,6 @@
 <%-- <c:set var="view" value="<%= view %>" /> 
  --%>
 
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
-
-<title>Food Bingo - Bootstrap Template</title>
-
-<!-- Bootstrap -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Google Web Fonts -->
-<link
-	href="https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic"
-	rel="stylesheet" type="text/css">
-
-<!-- Template CSS Files  -->
-<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
-<link href="js/plugins/owl-carousel/owl.carousel.css" rel="stylesheet">
-<link href="js/plugins/owl-carousel/owl.transitions.css"
-	rel="stylesheet">
-<link href="js/plugins/owl-carousel/owl.theme.css" rel="stylesheet">
-<link href="js/plugins/magnific-popup/magnific-popup.css"
-	rel="stylesheet">
-<link href="js/plugins/datepicker/datepicker.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
-<link href="css/responsive.css" rel="stylesheet">
-
-
-
-
-</div>
-</div>
-<!-- Nested Row Ends -->
-</div>
-<!-- Nested Container Ends -->
-</header>
-<!-- Header Ends -->
-<!-- Main Menu Starts -->
-<nav id="nav" class="main-menu navbar navbar-expand-md rounded-0">
-	<!-- Nested Container Starts -->
-	<div class="container">
-		<!-- Navbar Toggler Starts -->
-		<button class="navbar-toggler ml-auto rounded-0" type="button"
-			data-toggle="collapse" data-target=".navbar-cat-collapse"
-			aria-controls=".navbar-cat-collapse" aria-expanded="false"
-			aria-badge="Toggle navigation">
-			<span class="navbar-toggler-icon fa fa-bars"></span>
-		</button>
-		<!-- Navbar Toggler Ends -->
-		<!-- Navbar Cat collapse Starts -->
-		<div class="collapse navbar-collapse navbar-cat-collapse">
-			<ul class="nav navbar-nav text-uppercase text-weight-bold">
-				<li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-				<li class="nav-item"><a href="about.html" class="nav-link">About
-						Us</a></li>
-				<li class="nav-item"><a href="food-listing.html"
-					class="nav-link">Food List</a></li>
-				<li class="nav-item"><a href="food-grid.html" class="nav-link">Food
-						Grid</a></li>
-				<li class="nav-item active"><a href="food-details.html"
-					class="nav-link">Food Detail</a></li>
-				<li class="nav-item"><a href="/login/login.jsp"
-					class="nav-link">Login &amp; Register</a></li>
-				<li class="nav-item"><a href="terms.html" class="nav-link">Terms</a></li>
-				<li class="nav-item"><a href="policy.html" class="nav-link">Policy</a></li>
-				<li class="nav-item"><a href="contact.html" class="nav-link">Contact
-						Us</a></li>
-				<li class="nav-item dropdown"><a href="#"
-					class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-					<ul class="dropdown-menu rounded-0 float-md-right">
-						<a href="index.html" class="dropdown-item"><i
-							class="fa fa-angle-right"></i> Home</a>
-						<a href="about.html" class="dropdown-item"><i
-							class="fa fa-angle-right"></i> About Us</a>
-						<a href="food-listing.html" class="dropdown-item"><i
-							class="fa fa-angle-right"></i> Food List</a>
-						<a href="food-grid.html" class="dropdown-item"><i
-							class="fa fa-angle-right"></i> Food Grid</a>
-						<a href="food-details.html" class="dropdown-item active"><i
-							class="fa fa-angle-right"></i> Food Detail</a>
-						<a href="/login/login.jsp" class="dropdown-item"><i
-							class="fa fa-angle-right"></i> Login &amp; Register</a>
-						<a href="terms.html" class="dropdown-item"><i
-							class="fa fa-angle-right"></i> Terms</a>
-						<a href="policy.html" class="dropdown-item"><i
-							class="fa fa-angle-right"></i> Policy</a>
-						<a href="contact.html" class="dropdown-item"><i
-							class="fa fa-angle-right"></i> Contact Us</a>
-					</ul></li>
-			</ul>
-		</div>
-		<!-- Navbar Cat collapse Ends -->
-	</div>
-	<!-- Nested Container Ends -->
-</nav>
-<!-- Main Menu Ends -->
 <!-- Search Section Starts -->
 <section class="search-area condensed parallax">
 	<!-- Nested Container Starts -->
@@ -180,32 +108,23 @@
 	<h4 class="main-heading-1 text-xs-center text-sm-center text-md-left">
 		안녕카페
 
-		<ul
-			class="list-unstyled list-inline grid-box-ratings float-lg-right text-lg-right">
+		<ul class="list-unstyled list-inline grid-box-ratings float-lg-right text-lg-right">
 			<li class="list-inline-item star-rating"><i class="fa fa-star"
 				onclick="wishList();"> </i></li>
-
-
 		</ul>
 	</h4>
-
-
 	<!-- Heading Ends -->
 	<!-- Main Banner Starts -->
 	<div class="banner-area"></div>
 	<!-- Main Banner Ends -->
 	<!-- Nested Row Starts -->
 	<div class="row">
-
-
-
 		<!-- Mainarea Starts -->
 		<div class="col-md-9 col-sm-12">
 			<!-- Menu Tabs Starts -->
 			<div class="menu-tabs-wrap">
 				<!-- Menu Tabs List Starts -->
-				<ul
-					class="nav nav-tabs nav-menu-tabs text-xs-center text-sm-center text-md-left">
+				<ul class="nav nav-tabs nav-menu-tabs text-xs-center text-sm-center text-md-left">
 					<li class="nav-item"><a href="#menu" class="nav-link active"
 						data-toggle="tab">Menu</a></li>
 					<li class="nav-item"><a href="#information" class="nav-link"
@@ -222,15 +141,6 @@
 				<!-- Menu Tabs Content Starts -->
 				<div class="tab-content">
 
-
-
-
-
-
-
-
-
-
 					<!-- Tab #1 Starts -->
 					<div id="menu" class="tab-pane fade show active">
 
@@ -243,10 +153,6 @@
 
 										/*  let answer;
 										    let YesUrl="/viewLike.jsp"; 
-										   
-										    
-
-
 										    let NoUrl="./food-details.jsp"; */
 
 										let answer = confirm("로그인이 필요합니다.");
@@ -264,10 +170,6 @@
 
 										/*  let answer;
 										    let YesUrl="/viewLike.jsp"; 
-										   
-										    
-
-
 										    let NoUrl="./food-details.jsp"; */
 
 										let answer = confirm("즐겨찾기 목록에 담겼습니다. 나의 즐겨찾기 목록을 확인할까요?");
@@ -306,14 +208,6 @@
 									session.setAttribute("count", new Integer(count));
 								%>
 
-
-
-
-
-
-
-
-
 								<div class="side-block-1">
 									<h6>Delivery Menu</h6>
 									<ul class="list-unstyled list-style-2">
@@ -339,8 +233,6 @@
 									class="order-menu-tab-pane text-xs-center text-sm-center text-md-left">
 									<p class="text-center"></p>
 									<!-- Order Menu List #1 Starts -->
-
-
 
 									<c:forEach var="menuInfo2" items="${menuListView.menuInfoList}">
 								    메뉴 이름: ${menuInfo2.menu } &nbsp;&nbsp;&nbsp;
@@ -447,20 +339,12 @@
 									<!-- Spacer Starts -->
 									<div class="spacer big"></div>
 									<!-- Spacer Ends -->
-
-
-
 									가게 사진: ${storeinfo.storePic }<br>
 									가게주소: ${storeinfo.address }<br> 
 									영업시간: ${storeinfo.hours }<br>
 									쉬는 날: ${storeinfo.closedDays }<br> 
 									전화번호:${storeinfo.callNumber }<br>
 									
-									
-
-
-
-
 									<!-- Spacer Starts -->
 									<div class="spacer"></div>
 									<!-- Spacer Ends -->
@@ -608,18 +492,12 @@
 									<div class="reviews-form-box">
 										<h6>리뷰쓰기</h6>
 										
-
-
 										<section class="content">
 
 											<!-- Default box -->
 
 											<div class="box-body">
-
-
-
-
-												<form action="write.do" method="post"></form>
+												
 												<%
 													// 현재 로그인된 아이디가 없다면 (= session에 저장된 id가 없다면)
 												if (session.getAttribute("authUser") == null) {
@@ -663,8 +541,11 @@
 													class="btn btn-black animation text-uppercase float-right">리뷰쓰기</a> -->
 														<%
 															}
+												
 														%>
-														 <h9>별점을 선택하세요.</h9>
+
+
+															 <h9>별점을 선택하세요.</h9>
 													<form action="review.do" method="post" id="writeForm">
 														<select name="별점" textarea name="avgScore">
 															size="2"
@@ -673,19 +554,21 @@
 															<option value="3">★★★☆☆</option>
 															<option value="4">★★★★☆</option>
 															<option value="5">★★★★★</option>
-															</select>
-															<br><br>
-															</form>
-														<form action="file.do" method="post"
-															enctype="multipart/form-data">
+														</select>
+														<br><br>
+													</form>
+															
+													<form action="file.do" method="post" enctype="multipart/form-data">
 															<tr>
 																<td></td>
 																<td><input type="file" name="fileName1"></td>
 															</tr>
 															<br>
-														</form>
-														
+													</form> 
 													
+													</div>
+												</div>
+											</div>
 										</section>
 
 
@@ -743,14 +626,9 @@
 																	<p>평점: ${message.avgScore}</p>
 																	<p>메시지 번호: ${message.reviewNo}</p>
 																	
-																		 
-																	
-																</div>
 																</div>
 																
 															</c:forEach>
-															
-															
 
 															<%-- <tr>
 																<td>
@@ -882,44 +760,11 @@
 							<!-- Default box -->
 							<div class="box">
 								<div class="box-header with-border">
-
-
 									<div class="box-tools pull-right"></div>
 								</div>
 								<div class="box-body">
 
-
-
-
-
-
-
 									<div class="reviews-box">
-
-										<style type="text/css">
-#wrap {
-	width: 800px;
-	margin: 0 auto 0 auto;
-}
-
-#detailBoard {
-	text-align: center;
-}
-
-#title {
-	height: 16;
-	font-family: '돋움';
-	font-size: 12;
-	text-align: center;
-	background-color: #F7F7F7;
-}
-
-#btn {
-	font-family: '돋움';
-	font-size: 14;
-	text-align: center;
-}
-</style>
 
 										<script type="text/javascript">
 											function changeView(value) {

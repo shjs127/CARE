@@ -5,8 +5,6 @@ import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 
-import com.sun.glass.ui.Menu;
-
 import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
 import member.model.MenuInfo;
