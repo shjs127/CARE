@@ -128,7 +128,7 @@ window.location.href="index.jsp?locale="+locale;
 					<ul class="nav navbar-nav text-uppercase text-weight-bold">
 						<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
 						<li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
-						<li class="nav-item"><a href="food-listing.html" class="nav-link">Food List</a></li>
+						<li class="nav-item"><a href="${pageContext.request.contextPath }/board/storelist.do" class="nav-link">Food List</a></li>
 						<li class="nav-item"><a href="food-grid.html" class="nav-link">Food Grid</a></li>
 						<li class="nav-item"><a href="${pageContext.request.contextPath }/main/foodDetail.do" class="nav-link">Food Detail</a></li>
 						<li class="nav-item"><a href="login.html" class="nav-link">Login &amp; Register</a></li>

@@ -9,7 +9,7 @@
 	<div class="container text-center">
 		<h3 class="text-weight-normal">Find the best Restaurants, Cafes
 			&amp; Cuisine in Your Place</h3>
-		<form class="top-search" action="search.do" method="post" name="frm" id="frm">
+		<form class="top-search" action="${pageContext.request.contextPath }/board/search.do" method="post" name="frm" id="frm">
 			<div class="input-group">
 				<div class="input-group-prepend search-panel">
 				</div>
@@ -163,7 +163,7 @@
 								<div class="content text-center text-lg-left">
 									<!-- Title Starts -->
 									<h6 class="grid-box-title">
-										<a href="#">${storeinfo.storeName}</a>
+										<a href="${pageContext.request.contextPath}/main/foodDetail.do?storeno=${storeinfo.storeNo}">${storeinfo.storeName}</a>
 									</h6>
 									<!-- Title Ends -->
 									<!-- Tags Starts -->
