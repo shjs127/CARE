@@ -76,6 +76,19 @@
 	<welcome-file-list>
 		<welcome-file>/WEB-INF/view/main/index.jsp</welcome-file>
 	</welcome-file-list>
+<!-- 로그인 필터 -->
+	<filter> <filter-name>LoginCheck</filter-name> 
+	<filter-class>filter.LoginCheckFilter</filter-class> 
+		</filter> 
+		<filter-mapping> 
+		<filter-name>LoginCheck</filter-name>
+		 <url-pattern>/view/main/profile.do</url-pattern> 
+		<url-pattern>/view/board/write.do</url-pattern>
+		<url-pattern>/view/board/modify.do</url-pattern>
+		<url-pattern>/view/board/delete.do</url-pattern>
+		<url-pattern>/view/changePwd.do</url-pattern> 
+		</filter-mapping>
+
 
 </web-app>
 
