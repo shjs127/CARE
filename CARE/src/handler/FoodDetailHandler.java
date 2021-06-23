@@ -1,9 +1,11 @@
 package handler;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import auth.service.DetailInfoService;
+import auth.service.FavoriteCheckService;
 import auth.service.GetMenuListViewService;
 import auth.service.GetMessageListViewService;
 import auth.service.LoginFailException;
@@ -12,7 +14,9 @@ import auth.service.MenuListView;
 import auth.service.MessageListView;
 import auth.service.ReviewInfoService;
 import auth.service.StoreInfoService;
+import auth.service.User;
 import member.model.DetailInfo;
+import member.model.Favorite;
 import member.model.MenuInfo;
 import member.model.ReviewInfo;
 import member.model.StoreInfo;
@@ -25,6 +29,7 @@ public class FoodDetailHandler implements CommandHandler {
 	private StoreInfoService storeinfoService = new StoreInfoService();
 	private DetailInfoService detailinfoService = new DetailInfoService();
 	private ReviewInfoService reviewinfoService = new ReviewInfoService();
+	private FavoriteCheckService favoriteService=new FavoriteCheckService();
 	//private GetMenuListViewService getMenuListViewService = new GetMenuListViewService();
 
 	
@@ -42,7 +47,9 @@ public class FoodDetailHandler implements CommandHandler {
 		}
 	}
 
-	private String processForm(HttpServletRequest req, HttpServletResponse res) {
+	private String processForm(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		User user = (User)req.getSession().getAttribute("authUser");
+		
 
 		try {
 			// storeNo 받아오기
@@ -68,7 +75,18 @@ public class FoodDetailHandler implements CommandHandler {
 			
 			GetMenuListViewService getMenuListViewService = GetMenuListViewService.getInstance();
 			MenuListView menuListView = getMenuListViewService.getMenuListView(pageNum);
-			
+		
+			if(user!= null) {
+				
+				Favorite favorite=new Favorite(user.getUserNo(),storeNo, "n");
+				
+				boolean isExisFavoriteData=favoriteService.isExistFavoriteData(favorite);
+				System.out.println("isExisFavoriteData="+isExisFavoriteData);
+				
+				req.getSession().setAttribute("isExisFavoriteData", isExisFavoriteData);
+				
+				System.out.println("userNo="+user.getUserNo());
+			}
 			/*
 			 * for(int i=0; i<menuListView.getMenuInfoList().size(); i++) {
 			 * System.out.println(i+"="+menuListView.getMenuInfoList().get(i).getMenu());

@@ -117,11 +117,24 @@
 	<h4 class="main-heading-1 text-xs-center text-sm-center text-md-left">
 		${storeinfo.storeName}
 
-		<ul
-			class="list-unstyled list-inline grid-box-ratings float-lg-right text-lg-right">
-			<li class="list-inline-item star-rating"><i class="fa fa-star"
-				onclick="wishList();"> </i></li>
+		<c:if test="${isExisFavoriteData}">
+		<button id="starCheck">
+		<ul class="list-unstyled list-inline grid-box-ratings float-lg-right text-lg-right">
+			<li class="list-inline-item star-rating">
+			<i class="fa fa-star"></i>
+			</li>
 		</ul>
+		</button>
+	</c:if>
+	<c:if test="${!isExisFavoriteData}">
+		<button id="starCheck">
+		<ul class="list-unstyled list-inline grid-box-ratings float-lg-right text-lg-right">
+			<li class="list-inline-item star-rating">
+			<i class="fa fa-star-o"></i>
+			</li>
+		</ul>
+		</button>
+	</c:if>
 
 	</h4>
 
@@ -316,24 +329,36 @@
 										}
 
 									}
+									$(function(){
+										$("#starCheck").on("click",function(){
+			
+											var storeNo = "${storeinfo.storeNo}";
+											var userNo = "${authUser.userNo}";
+											var sendData = 'storeNo='+storeNo+'&userNo='+userNo;
+											
+											if (userNo == "") {
+												
+												let answer = confirm("로그인이 필요합니다.");
+												if (answer == true) {
+													location.href = "/CARE/login.do";
+												} else if (answer != true) {
+									
+												}
+
+											} 
+											
+											$.ajax({
+												url: "favorite.do",
+												type: "POST",
+												data: sendData,
+								                success: function() {
+								                	location.reload();
+								                }
+											}); 
+										});
+									});
 								</script>
-								<script>
-									function wishList() {
-
-										/*  let answer;
-										    let YesUrl="/viewLike.jsp"; 
-										    let NoUrl="./food-details.jsp"; */
-
-										let answer = confirm("즐겨찾기 목록에 담겼습니다. 나의 즐겨찾기 목록을 확인할까요?");
-
-										if (answer == true) {
-											location.href = "viewLike.do";
-										} else if (answer != true) {
-											location.href = "food.do";
-										}
-
-									}
-								</script>
+		
 								<br>
 
 								<%-- 전체 : ${sessionScope.totalCount } <br> 
@@ -872,5 +897,7 @@
 		</section>
 		<!-- Newsletter Section Ends -->
 
+</div>
+</div>
 
 		<%@ include file="../include/footer.jspf"%>
