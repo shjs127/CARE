@@ -14,10 +14,10 @@ public class ReviewInfoService {
 	
 	public ReviewInfo reviewInfo(int storeNo) {
 		try (Connection conn = ConnectionProvider.getConnection()) {
-			ReviewInfo reviewinfo = reviewInfoDao.selectByREVIEWINFOId(conn, storeNo);
-			if (reviewinfo == null) {
-				//throw new LoginFailException();
-			}
+			ReviewInfo reviewinfo = reviewInfoDao.selectById(conn, storeNo);
+//			if (reviewinfo == null) {
+//				throw new ReviewNotFoundException();
+//			}
 			
 			return reviewinfo;
 		} catch (SQLException e) {

@@ -3,6 +3,7 @@ package auth.service;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
 import member.dao.StoreInfoDao;
 import member.model.ReviewInfo;
@@ -17,7 +18,8 @@ public class StoreInfoService {
 		try (Connection conn = ConnectionProvider.getConnection()) {
 			StoreInfo storeinfo = storeInfoDao.selectById(conn, storeNo);
 			if (storeinfo == null) {
-
+				JdbcUtil.rollback(conn);
+				throw new DuplicateIdException();
 			}
 			
 			return storeinfo;

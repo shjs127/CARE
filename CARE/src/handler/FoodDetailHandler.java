@@ -1,6 +1,5 @@
 package handler;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,8 +18,6 @@ import member.model.ReviewInfo;
 import member.model.StoreInfo;
 import mvc.command.CommandHandler;
 
-
-
 public class FoodDetailHandler implements CommandHandler {
 
 	private static final String FORM_VIEW = "/WEB-INF/view/main/food-details.jsp";
@@ -30,6 +27,9 @@ public class FoodDetailHandler implements CommandHandler {
 	private ReviewInfoService reviewinfoService = new ReviewInfoService();
 	//private GetMenuListViewService getMenuListViewService = new GetMenuListViewService();
 
+	
+	
+	
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		if (req.getMethod().equalsIgnoreCase("GET")) {
@@ -44,22 +44,14 @@ public class FoodDetailHandler implements CommandHandler {
 
 	private String processForm(HttpServletRequest req, HttpServletResponse res) {
 
-		/*
-		 * GetMessageListViewService viewService =
-		 * GetMessageListViewService.getInstance(); String pageStr =
-		 * req.getParameter("page"); int pageNum = pageStr == null ? 1 :
-		 * Integer.parseInt(pageStr); MessageListView view =
-		 * viewService.getMessageListView(pageNum);
-		 * 
-		 * req.getSession().setAttribute("view", view);
-		 * 
-		 * return FORM_VIEW;
-		 */
-		
 		try {
-			int storeNo = 1;
+			// storeNo 받아오기
+			int storeNo = Integer.parseInt(req.getParameter("storeno"));
+			
 			StoreInfo storeinfo = storeinfoService.storeInfo(storeNo);
 			req.getSession().setAttribute("storeinfo", storeinfo);
+			
+			
 			MenuInfo menuinfo = menuinfoService.menuInfo(storeNo);
 			req.getSession().setAttribute("menuinfo", menuinfo);
 			DetailInfo detailinfo = detailinfoService.detailInfo(storeNo);

@@ -231,19 +231,40 @@
 				<div class="pagination-block clearfix">
 					<ul class="pagination animation float-lg-right">
 						<c:if test="${storePage.startPage > 5}">
-							<li class="page-item"><a
-								href="storelist.do?pageNo=${storePage.startPage -5}"
+							<c:if test="${Keyword == null}">
+								<li class="page-item">
+									<a href="storelist.do?pageNo=${storePage.startPage -5}"
+										class="page-link">&laquo;</a></li>
+							</c:if>
+							<c:if test="${Keyword != null}">
+								<li class="page-item"><a
+								href="search.do?pageNo=${storePage.startPage -5}&searchKeyword=${Keyword}"
 								class="page-link">&laquo;</a></li>
+							</c:if>
 						</c:if>
 						<c:forEach var="pNo" begin="${storePage.startPage}"
 							end="${storePage.endPage}">
-							<li class="page-item"><a href="storelist.do?pageNo=${pNo}"
+							<c:if test="${Keyword == null}">
+								<li class="page-item"><a href="storelist.do?pageNo=${pNo}"
 								class="page-link">${pNo}</a></li>
+							</c:if>
+							<c:if test="${Keyword != null}">
+								<li class="page-item"><a href="search.do?pageNo=${pNo}&searchKeyword=${Keyword}"
+								class="page-link">${pNo}</a></li>
+							</c:if>
+							
 						</c:forEach>
 						<c:if test="${storePage.endPage < storePage.totalPages}">
-							<li class="page-item"><a
-								href="storelist.do?pageNo=${storePage.startPage + 5}"
+							<c:if test="${Keyword == null}">
+								<li class="page-item"><a
+									href="storelist.do?pageNo=${storePage.startPage + 5}"
+									class="page-link">&raquo;</a></li>
+							</c:if>
+							<c:if test="${Keyword != null}">
+								<li class="page-item"><a
+								href="search.do?pageNo=${storePage.startPage + 5}&searchKeyword=${Keyword}"
 								class="page-link">&raquo;</a></li>
+							</c:if>
 						</c:if>
 					</ul>
 				</div>

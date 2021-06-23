@@ -32,7 +32,10 @@ public class ReviewInHandler implements CommandHandler {
 		
 		
 		try {
-			int storeNo = 1;
+			// storeNo 받아오기
+			int storeNo = Integer.parseInt(req.getParameter("storeno"));
+			
+//			int storeNo = 1;
 			
 			ReviewInfo reviewinfo = reviewInfoService.reviewInfo(storeNo);
 			req.getSession().setAttribute("reviewinfo", reviewinfo);

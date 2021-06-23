@@ -39,8 +39,16 @@
 	font-size: 14;
 	text-align: center;
 }
-</style>
 
+#map{
+	width: 100%; 
+	height: 450px; 
+	position: relative; 
+	overflow: hidden; 
+	background:url('./pages/image/loading_n.png');
+	margin-top:2%;
+}
+</style>
 <%--  <%
  	GetMessageListViewService viewService = GetMessageListViewService.getInstance();
 	String pageStr = request.getParameter("page");
@@ -106,7 +114,7 @@
 <div class="main-container container">
 	<!-- Heading Starts -->
 	<h4 class="main-heading-1 text-xs-center text-sm-center text-md-left">
-		안녕카페
+		${storeinfo.storeName}
 
 		<ul class="list-unstyled list-inline grid-box-ratings float-lg-right text-lg-right">
 			<li class="list-inline-item star-rating"><i class="fa fa-star"
@@ -125,10 +133,10 @@
 			<div class="menu-tabs-wrap">
 				<!-- Menu Tabs List Starts -->
 				<ul class="nav nav-tabs nav-menu-tabs text-xs-center text-sm-center text-md-left">
-					<li class="nav-item"><a href="#menu" class="nav-link active"
-						data-toggle="tab">Menu</a></li>
-					<li class="nav-item"><a href="#information" class="nav-link"
+					<li class="nav-item"><a href="#information" class="nav-link active"
 						data-toggle="tab">매장 정보</a></li>
+					<li class="nav-item"><a href="#menu" class="nav-link "
+						data-toggle="tab">Menu</a></li>
 					<li class="nav-item"><a href="#gallery" class="nav-link"
 						data-toggle="tab">매장 사진첩</a></li>
 					<li class="nav-item"><a href="#reviews" class="nav-link"
@@ -140,9 +148,103 @@
 				<!-- Menu Tabs List Ends -->
 				<!-- Menu Tabs Content Starts -->
 				<div class="tab-content">
-
 					<!-- Tab #1 Starts -->
-					<div id="menu" class="tab-pane fade show active">
+					<div id="information" class="tab-pane fade show active">
+						<!-- Tab #2 Nested Row Starts -->
+						<div class="row">
+							<!-- Left Column Starts -->
+							<div class="col-md-4 col-sm-12">
+								<div class="side-block-1">
+									<h6>정보</h6>
+									<ul class="list-unstyled list-style-2">
+										<li>주소 : ${storeinfo.address }</li>
+										<li>영업시간 : ${storeinfo.hours }</li>
+										<li>휴무일 : ${storeinfo.closedDays }</li>
+										<li>전화번호 : ${storeinfo.callNumber }</li>
+									</ul>
+								</div>
+							</div>
+							<!-- Left Column Ends -->
+							<!-- Right Column Starts -->
+							<div class="col-md-8 col-sm-12">
+								<!-- Information Tab Pane Starts -->
+								<div class="information-tab-pane">
+									<p class="text-center"></p>
+									<!-- Spacer Starts -->
+									<div class="spacer big"></div>
+									<!-- Spacer Ends -->
+									
+									<!-- 지도를 보여주는 html --> 
+									<div id="map">
+									</div>
+									
+									<!-- 자바스크립트 --> 
+									<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ecfa9545ea95f1247efbf60cf9429d4c&libraries=services"></script> 
+									<script> 
+									
+										var storeAddress = "${storeinfo.address}";
+										var storeName = "${storeinfo.storeName}";
+										var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+										mapOption = { 
+												center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표 
+												level: 3 // 지도의 확대 레벨 
+												}; 
+										// 지도를 생성합니다 
+										var map = new daum.maps.Map(mapContainer, mapOption); 
+										// 주소-좌표 변환 객체를 생성합니다 
+										var geocoder = new daum.maps.services.Geocoder(); 
+										
+										// 주소로 좌표를 검색합니다 
+										geocoder.addressSearch(storeAddress, function(result, status) { 
+											// 정상적으로 검색이 완료됐으면 
+											if (status === daum.maps.services.Status.OK) { 
+												var coords = new daum.maps.LatLng(result[0].y, result[0].x); 
+												// 결과값으로 받은 위치를 마커로 표시합니다 
+												var marker = new daum.maps.Marker({ 
+													map: map, 
+													position: coords 
+												}); 
+												// 인포윈도우로 장소에 대한 설명을 표시합니다 
+												var infowindow = new daum.maps.InfoWindow({ 
+													content: '<div style="width:150px;text-align:center;padding:6px 0;">'+storeName+'</div>' 
+													}); 
+												infowindow.open(map, marker); 
+												
+												// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다 
+												map.relayout();
+												map.setCenter(coords); 
+// 												map.setLevel(4);
+// 												map.setLevel(3);
+// 												map.relayout();
+// 												setTimeout(function(){ 
+// 													map.relayout(); 
+// 												}, 0);
+											} 
+										}); 
+										
+										</script>
+
+									
+									
+									<!-- Spacer Starts -->
+									<div class="spacer"></div>
+									<!-- Spacer Ends -->
+									<!-- Banners Starts -->
+									<div class="row text-center">
+										<div class="col-6"></div>
+										<div class="col-6"></div>
+									</div>
+									<!-- Banners Ends -->
+								</div>
+								<!-- Information Tab Pane Ends -->
+							</div>
+							<!-- Right Column Ends -->
+						</div>
+						<!-- Tab #2 Nested Row Ends -->
+					</div>
+					<!-- Tab #1 Ends -->
+					<!-- Tab #2 Starts -->
+					<div id="menu" class="tab-pane fade">
 
 						<!-- Tab #1 Nested Row Starts -->
 						<div class="row">
@@ -305,63 +407,9 @@
 						<!-- Tab #1 Nested Row Ends -->
 
 					</div>
-					<!-- Tab #1 Ends -->
-
-					<!-- Tab #2 Starts -->
-					<div id="information" class="tab-pane fade">
-						<!-- Tab #2 Nested Row Starts -->
-						<div class="row">
-							<!-- Left Column Starts -->
-							<div class="col-md-4 col-sm-12">
-								<div class="side-block-1">
-									<h6>Delivery Menu</h6>
-									<ul class="list-unstyled list-style-2">
-										<li>Soups</li>
-										<li>Southern Grills: Veg.</li>
-										<li>Southern Grills: Non-Veg.</li>
-										<li>Starters</li>
-										<li>Chinese Starters</li>
-										<li>North Indian Main Course</li>
-										<li>Traditional Telugu Maincourse</li>
-										<li>Indian Breads</li>
-										<li>Rice, Biryani &amp; Pulao</li>
-										<li>Accompaniments</li>
-										<li>Desserts &amp; Beverages</li>
-									</ul>
-								</div>
-							</div>
-							<!-- Left Column Ends -->
-							<!-- Right Column Starts -->
-							<div class="col-md-8 col-sm-12">
-								<!-- Information Tab Pane Starts -->
-								<div class="information-tab-pane">
-									<p class="text-center"></p>
-									<!-- Spacer Starts -->
-									<div class="spacer big"></div>
-									<!-- Spacer Ends -->
-									가게 사진: ${storeinfo.storePic }<br>
-									가게주소: ${storeinfo.address }<br> 
-									영업시간: ${storeinfo.hours }<br>
-									쉬는 날: ${storeinfo.closedDays }<br> 
-									전화번호:${storeinfo.callNumber }<br>
-									
-									<!-- Spacer Starts -->
-									<div class="spacer"></div>
-									<!-- Spacer Ends -->
-									<!-- Banners Starts -->
-									<div class="row text-center">
-										<div class="col-6"></div>
-										<div class="col-6"></div>
-									</div>
-									<!-- Banners Ends -->
-								</div>
-								<!-- Information Tab Pane Ends -->
-							</div>
-							<!-- Right Column Ends -->
-						</div>
-						<!-- Tab #2 Nested Row Ends -->
-					</div>
 					<!-- Tab #2 Ends -->
+
+					
 					<!-- Tab #3 Starts -->
 					<div id="gallery" class="tab-pane fade">
 						<!-- Image Gallery Starts -->
@@ -519,17 +567,30 @@
 															<textarea name="reviewContents" cols="60" rows="10"
 																placeholder="리뷰를 작성하세요"></textarea>
 														</p>
+														
+														<h9>별점을 선택하세요.</h9>
+															<select name="별점" textarea name="avgScore">
+<!-- 															size="2" -->
+															<option value="1">★☆☆☆☆</option>
+															<option value="2">★★☆☆☆</option>
+															<option value="3">★★★☆☆</option>
+															<option value="4">★★★★☆</option>
+															<option value="5">★★★★★</option>
+														</select>
+														<br>
+														
 														<p>
 															<input type="submit" value="리뷰쓰기"
 																class="btn btn-black animation text-uppercase float-right" />
 														</p>
 													</form>
 
-													<div id="list">
-														<%--  // <c:if> 태그로 생성되는 글목록을 감싸는 wrapper 요소 --%>
-														<c:if test="${view.isEmpty()}">
-															<p>등록된 메시지가 없습니다.</p>
-														</c:if>
+													<form action="file.do" method="post" enctype="multipart/form-data">
+															<tr>
+																<td></td>
+																<td><input type="file" name="fileName1"></td>
+															</tr>
+														</form> 
 
 														<!-- <tr>
 												
@@ -543,30 +604,7 @@
 															}
 												
 														%>
-
-
-															 <h9>별점을 선택하세요.</h9>
-													<form action="review.do" method="post" id="writeForm">
-														<select name="별점" textarea name="avgScore">
-															size="2"
-															<option value="1">★☆☆☆☆</option>
-															<option value="2">★★☆☆☆</option>
-															<option value="3">★★★☆☆</option>
-															<option value="4">★★★★☆</option>
-															<option value="5">★★★★★</option>
-														</select>
-														<br><br>
-													</form>
-															
-													<form action="file.do" method="post" enctype="multipart/form-data">
-															<tr>
-																<td></td>
-																<td><input type="file" name="fileName1"></td>
-															</tr>
-															<br>
-													</form> 
-													
-													</div>
+														
 												</div>
 											</div>
 										</section>
@@ -589,8 +627,11 @@
 													<div class="box-tools pull-right"></div>
 												</div>
 
-												</table>
 												<div class="review-list">
+												<%--  // <c:if> 태그로 생성되는 글목록을 감싸는 wrapper 요소 --%>
+													<c:if test="${view.isEmpty()}">
+															<p>등록된 메시지가 없습니다.</p>
+													</c:if>	 
 													<c:if test="${!view.isEmpty()}">
 														<table border="1">
 															<c:forEach var="message" items="${view.messageList}">
@@ -629,7 +670,7 @@
 																</div>
 																
 															</c:forEach>
-
+														</table>
 															<%-- <tr>
 																<td>
 
@@ -765,94 +806,7 @@
 								<div class="box-body">
 
 									<div class="reviews-box">
-
-										<script type="text/javascript">
-											function changeView(value) {
-												if (value == 0)
-													location.href = 'BoardListAction.bo?page=${pageNum}';
-												else if (value == 1)
-													location.href = 'BoardReplyFormAction.bo?num=${board.board_num}&page=${pageNum}';
-											}
-
-											function doAction(value) {
-												if (value == 0) // 수정
-													location.href = "BoardUpdateFormAction.bo?num=${board.board_num}&page=${pageNum}";
-												else if (value == 1) // 삭제
-													location.href = "BoardDeleteAction.bo?num=${board.board_num}";
-											}
-
-											var httpRequest = null;
-
-											// httpRequest 객체 생성
-											function getXMLHttpRequest() {
-												var httpRequest = null;
-
-												if (window.ActiveXObject) {
-													try {
-														httpRequest = new ActiveXObject(
-																"Msxml2.XMLHTTP");
-													} catch (e) {
-														try {
-															httpRequest = new ActiveXObject(
-																	"Microsoft.XMLHTTP");
-														} catch (e2) {
-															httpRequest = null;
-														}
-													}
-												} else if (window.XMLHttpRequest) {
-													httpRequest = new window.XMLHttpRequest();
-												}
-												return httpRequest;
-											}
-
-											// 댓글 등록
-											function writeCmt() {
-												var form = document
-														.getElementById("writeCommentForm");
-
-												var board = form.reviewinfo.value
-												var id = form.userno.value
-												var content = form.reviewcontents.value;
-
-												if (!content) {
-													alert("내용을 입력하세요.");
-													return false;
-												} else {
-													var param = "REVIEWINFO="
-															+ board
-															+ "&userNo="
-															+ id
-															+ "&reviewContents="
-															+ content;
-
-													httpRequest = getXMLHttpRequest();
-													httpRequest.onreadystatechange = checkFunc;
-													httpRequest
-															.open(
-																	"POST",
-																	"CommentWriteAction.co",
-																	true);
-													httpRequest
-															.setRequestHeader(
-																	'Content-Type',
-																	'application/x-www-form-urlencoded;charset=EUC-KR');
-													httpRequest.send(param);
-												}
-											}
-
-											function checkFunc() {
-												if (httpRequest.readyState == 4) {
-													// 결과값을 가져온다.
-													var resultText = httpRequest.responseText;
-													if (resultText == 1) {
-														document.location
-																.reload(); // 상세보기 창 새로고침
-													}
-												}
-											}
-										</script>
-
-
+									
 										<!-- Review #1 Starts -->
 										<div class="review-list">
 											<div class="clearfix">
@@ -1144,9 +1098,6 @@
 	<!-- Nested Container Ends -->
 </section>
 <!-- Newsletter Section Ends -->
-
-
-
 
 
 <%@ include file="../include/footer.jspf"%>
