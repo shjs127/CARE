@@ -9,8 +9,7 @@
 	<section class="search-area condensed parallax">
 		<!-- Nested Container Starts -->
 		<div class="container text-center">
-			<h3 class="text-weight-normal">Find the best Restaurants, Cafes
-				&amp; Cuisine in Your Place</h3>
+			<h3 class="text-weight-normal">솔직한 리뷰, 믿을 수 있는 평점! <br> 카레</h3>
 			<form class="top-search" action="${pageContext.request.contextPath }/board/search.do" method="post" name="frm" id="frm">
 				<div class="input-group">
 					<div class="input-group-prepend search-panel">
@@ -40,7 +39,7 @@
 <div class="col-lg-4 col-md-6 col-sm-12">
 <div class="hover-content">
 <a href="#" target="_blank">
-<img src="<%=request.getContextPath()%>/WEB-INF/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
+<img src="<%=request.getContextPath()%>/CARE/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
 </a>
 <h4 class="text-uppercase">cafe</h4>
 </div>
@@ -50,7 +49,7 @@
 <div class="col-lg-4 col-md-6 col-sm-12">
 <div class="hover-content">
 <a href="#" target="_blank">
-<img src="<%=request.getContextPath()%>/WEB-INF/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
+<img src="<%=request.getContextPath()%>/CARE/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
 </a>
 <h4 class="text-uppercase">cafe</h4>
 </div>
@@ -60,7 +59,7 @@
 <div class="col-lg-4 col-md-6 col-sm-12">
 <div class="hover-content">
 <a href="#" target="_blank">
-<img src="<%=request.getContextPath()%>/WEB-INF/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
+<img src="<%=request.getContextPath()%>/CARE/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
 </a>
 <h4 class="text-uppercase">cafe</h4>
 </div>
@@ -70,7 +69,7 @@
 <div class="col-lg-4 col-md-6 col-sm-12">
 <div class="hover-content">
 <a href="#" target="_blank">
-<img src="<%=request.getContextPath()%>/WEB-INF/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
+<img src="<%=request.getContextPath()%>/CARE/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
 </a>
 <h4 class="text-uppercase">cafe</h4>
 </div>
@@ -80,7 +79,7 @@
 <div class="col-lg-4 col-md-6 col-sm-12">
 <div class="hover-content">
 <a href="#" target="_blank">
-<img src="<%=request.getContextPath()%>/WEB-INF/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
+<img src="<%=request.getContextPath()%>/CARE/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
 </a>
 <h4 class="text-uppercase">cafe</h4>
 </div>
@@ -90,7 +89,7 @@
 <div class="col-lg-4 col-md-6 col-sm-12">
 <div class="hover-content">
 <a href="#" target="_blank">
-<img src="<%=request.getContextPath()%>/WEB-INF/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
+<img src="<%=request.getContextPath()%>/CARE/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
 </a>
 <h4 class="text-uppercase">cafe</h4>
  
@@ -105,7 +104,7 @@
 <div class="col-lg-4 col-md-6 col-sm-12">
 <div class="hover-content">
 <a href="#" target="_blank">
-<img src="<%=request.getContextPath()%>/WEB-INF/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
+<img src="<%=request.getContextPath()%>/CARE/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
 </a>
 <h4 class="text-uppercase">cafe</h4>
 </div>
@@ -115,7 +114,7 @@
 <div class="col-lg-4 col-md-6 col-sm-12">
 <div class="hover-content">
 <a href="#" target="_blank">
-<img src="<%=request.getContextPath()%>/WEB-INF/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
+<img src="<%=request.getContextPath()%>/CARE/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
 </a>
 <h4 class="text-uppercase">cafe</h4>
 </div>
@@ -125,7 +124,7 @@
 <div class="col-lg-4 col-md-6 col-sm-12">
 <div class="hover-content">
 <a href="#" target="_blank">
-<img src="<%=request.getContextPath()%>/WEB-INF/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
+<img src="<%=request.getContextPath()%>/CARE/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
 </a>
 <h4 class="text-uppercase">cafe</h4>
 </div>
@@ -135,7 +134,7 @@
 <div class="col-lg-4 col-md-6 col-sm-12">
 <div class="hover-content">
 <a href="#" target="_blank">
-<img src="<%=request.getContextPath()%>/WEB-INF/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
+<img src="<%=request.getContextPath()%>/CARE/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
 </a>
 <h4 class="text-uppercase">cafe</h4>
 </div>
@@ -145,7 +144,7 @@
 <div class="col-lg-4 col-md-6 col-sm-12">
 <div class="hover-content">
 <a href="#" target="_blank">
-<img src="<%=request.getContextPath()%>/WEB-INF/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
+<img src="<%=request.getContextPath()%>/CARE/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
 </a>
 <h4 class="text-uppercase">cafe</h4>
 </div>
@@ -155,7 +154,7 @@
 <div class="col-lg-4 col-md-6 col-sm-12">
 <div class="hover-content">
 <a href="#" target="_blank">
-<img src="<%=request.getContextPath()%>/WEB-INF/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
+<img src="<%=request.getContextPath()%>/CARE/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
 </a>
 <h4 class="text-uppercase">cafe</h4>
 </div>
@@ -170,7 +169,7 @@
 <div class="col-lg-4 col-md-6 col-sm-12">
 <div class="hover-content">
 <a href="#" target="_blank">
-<img src="<%=request.getContextPath()%>/WEB-INF/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
+<img src="<%=request.getContextPath()%>/CARE/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
 </a>
 <h4 class="text-uppercase">cafe</h4>
 </div>
@@ -180,7 +179,7 @@
 <div class="col-lg-4 col-md-6 col-sm-12">
 <div class="hover-content">
 <a href="#" target="_blank">
-<img src="<%=request.getContextPath()%>/WEB-INF/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
+<img src="<%=request.getContextPath()%>/CARE/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
 </a>
 <h4 class="text-uppercase">cafe</h4>
 </div>
@@ -190,7 +189,7 @@
 <div class="col-lg-4 col-md-6 col-sm-12">
 <div class="hover-content">
 <a href="#" target="_blank">
-<img src="<%=request.getContextPath()%>/WEB-INF/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
+<img src="<%=request.getContextPath()%>/CARE/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
 </a>
 <h4 class="text-uppercase">cafe</h4>
 </div>
@@ -200,7 +199,7 @@
 <div class="col-lg-4 col-md-6 col-sm-12">
 <div class="hover-content">
 <a href="#" target="_blank">
-<img src="<%=request.getContextPath()%>/WEB-INF/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
+<img src="<%=request.getContextPath()%>/CARE/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
 </a>
 <h4 class="text-uppercase">cafe</h4>
 </div>
@@ -210,7 +209,7 @@
 <div class="col-lg-4 col-md-6 col-sm-12">
 <div class="hover-content">
 <a href="#" target="_blank">
-<img src="<%=request.getContextPath()%>/WEB-INF/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
+<img src="<%=request.getContextPath()%>/CARE/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
 </a>
 <h4 class="text-uppercase">cafe</h4>
 </div>
@@ -220,7 +219,7 @@
 <div class="col-lg-4 col-md-6 col-sm-12">
 <div class="hover-content">
 <a href="#" target="_blank">
-<img src="<%=request.getContextPath()%>/WEB-INF/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
+<img src="<%=request.getContextPath()%>/CARE/images/menu/thumb/chinese-menu.jpg" alt="chinese" class="img-fluid animation">
 </a>
 <h4 class="text-uppercase">cafe</h4>
 </div>

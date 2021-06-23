@@ -19,7 +19,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 
-		<title>Food Bingo - Bootstrap Template</title>
+		<title>Cafe Recommendation - CA RE</title>
 
 		<!-- Bootstrap -->
 		<link href="<%=request.getContextPath()%>/CARE/css/bootstrap.min.css" rel="stylesheet">
@@ -34,7 +34,7 @@
 		<link href="<%=request.getContextPath()%>/CARE/js/plugins/owl-carousel/owl.theme.css" rel="stylesheet">
 		<link href="<%=request.getContextPath()%>/CARE/js/plugins/magnific-popup/magnific-popup.css" rel="stylesheet">
 		<link href="<%=request.getContextPath()%>/CARE/js/plugins/datepicker/datepicker.css" rel="stylesheet">
-		<link href="<%=request.getContextPath()%>/CARE/css/style.css" rel="stylesheet">
+		<link href="<%=request.getContextPath()%>/CARE/css/style.css?after" rel="stylesheet">
 		<link href="<%=request.getContextPath()%>/CARE/css/responsive.css" rel="stylesheet">
 
 <link rel="stylesheet"
