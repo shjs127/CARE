@@ -86,24 +86,33 @@ window.location.href="index.jsp?locale="+locale;
 						<li class="list-inline-item"><div style="margin-left: 11px;"id="google_translate_element"></div></li>
 							<li class="list-inline-item"><a href="${pageContext.request.contextPath }/main/profile.do">마이페이지</a></li>
 							<li class="list-inline-item"><a href="${pageContext.request.contextPath}/board/list.do">게시판</a></li>
-							 <%
-							    
+							 <%							    
 						        // 현재 로그인된 아이디가 없다면 (= session에 저장된 id가 없다면)
-						        if(session.getAttribute("authUser") == null) {
+						        if(session.getAttribute("authUser") == null && session.getAttribute("Store")==null) {
 						            %>
 								<li class="list-inline-item"><a href="${pageContext.request.contextPath }/login.do" >로그인</a></li>
 						            <%
 						        } 
 						        // 현재 로그인된 아이디가 있다면 (= session에 저장된 id가 있다면)
-						        else {
+						        else if(session.getAttribute("Store") !=null ){
 						            %>
-						        <li style=”color:white;" class="list-inline-item" >${authUser.nickName }
+						        <li style=”color:white;" class="list-inline-item" >${Store.manageNo}
 						        <%
 							out.print("님");        
 						        %>
 						        </li>
 						        <li class="list-inline-item"><a href="${pageContext.request.contextPath }/logout.do" >로그아웃</a></li>
 						            <%
+						        }
+						        else{
+						        	%>
+						        	<li style=”color:white;" class="list-inline-item" >${authUser.nickName }
+							        <%
+								out.print("님");        
+							        %>
+							        </li>
+							        <li class="list-inline-item"><a href="${pageContext.request.contextPath }/logout.do" >로그아웃</a></li>
+							            <%
 						        }
 						    %>
 						</ul>

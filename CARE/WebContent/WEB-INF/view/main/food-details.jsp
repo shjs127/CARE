@@ -135,11 +135,13 @@
 		</ul>
 		</button>
 	</c:if>
-			<div class="col-md-8 col-sm-12">
+			<ul class="list-unstyled list-inline grid-box-ratings float-lg-right text-lg-right">
+			<li class="list-inline-item star-rating">${storeAvg}
+		
+			</li>
+		</ul>
 				
-					<h6 class="text-center">${storeAvg}</h6>
-				
-					</div>
+		
 					
 	</h4>
 
