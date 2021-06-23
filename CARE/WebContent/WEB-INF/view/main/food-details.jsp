@@ -40,13 +40,13 @@
 	text-align: center;
 }
 
-#map{
-	width: 100%; 
-	height: 450px; 
-	position: relative; 
-	overflow: hidden; 
-	background:url('./pages/image/loading_n.png');
-	margin-top:2%;
+#map {
+	width: 100%;
+	height: 450px;
+	position: relative;
+	overflow: hidden;
+	background: url('./pages/image/loading_n.png');
+	margin-top: 2%;
 }
 </style>
 <%--  <%
@@ -106,6 +106,7 @@
 			<li class="list-inline-item"><a href="#">Begumpet</a></li>
 			<li class="active list-inline-item">Hyderabad Spl Food Dabha</li>
 		</ul>
+
 	</div>
 	<!-- Nested Container Ends -->
 </div>
@@ -116,7 +117,8 @@
 	<h4 class="main-heading-1 text-xs-center text-sm-center text-md-left">
 		${storeinfo.storeName}
 
-		<ul class="list-unstyled list-inline grid-box-ratings float-lg-right text-lg-right">
+		<ul
+			class="list-unstyled list-inline grid-box-ratings float-lg-right text-lg-right">
 			<li class="list-inline-item star-rating"><i class="fa fa-star"
 				onclick="wishList();"> </i></li>
 		</ul>
@@ -132,17 +134,16 @@
 			<!-- Menu Tabs Starts -->
 			<div class="menu-tabs-wrap">
 				<!-- Menu Tabs List Starts -->
-				<ul class="nav nav-tabs nav-menu-tabs text-xs-center text-sm-center text-md-left">
-					<li class="nav-item"><a href="#information" class="nav-link active"
-						data-toggle="tab">매장 정보</a></li>
-					<li class="nav-item"><a href="#menu" class="nav-link "
-						data-toggle="tab">Menu</a></li>
-					<li class="nav-item"><a href="#gallery" class="nav-link"
-						data-toggle="tab">매장 사진첩</a></li>
+				<ul
+					class="nav nav-tabs nav-menu-tabs text-xs-center text-sm-center text-md-left">
+					<li class="nav-item"><a href="#information"
+						class="nav-link active" data-toggle="tab">매장 정보</a></li>
+
+					<!-- <li class="nav-item"><a href="#gallery" class="nav-link"
+						data-toggle="tab">매장 사진첩</a></li> -->
 					<li class="nav-item"><a href="#reviews" class="nav-link"
 						data-toggle="tab">리뷰</a></li>
-					<li class="nav-item"><a href="#reachus" class="nav-link"
-						data-toggle="tab">찾아오시는 길</a></li>
+					
 				</ul>
 
 				<!-- Menu Tabs List Ends -->
@@ -162,7 +163,21 @@
 										<li>휴무일 : ${storeinfo.closedDays }</li>
 										<li>전화번호 : ${storeinfo.callNumber }</li>
 									</ul>
+									<hr>
+									&ensp;&ensp;총 좌석 수: <span class="float-right text-spl-color">${detailinfo.totalSeat }개&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
+									&ensp;&ensp;충전기가 있는 좌석 수: <span class="float-right text-spl-color">${detailinfo.socketSeat }개&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
+									&ensp;&ensp;디저트: <span class="float-right text-spl-color">${detailinfo.dessertSales }&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
+									&ensp;&ensp;테라스: <span class="float-right text-spl-color">${detailinfo.terrace }&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
+									&ensp;&ensp;루프탑: <span class="float-right text-spl-color">${detailinfo.roofTop }&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
+									&ensp;&ensp;와이파이: <span class="float-right text-spl-color">${detailinfo.wifi }&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
+									&ensp;&ensp;애견동반: <span class="float-right text-spl-color">${detailinfo.companionDog }&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
+									&ensp;&ensp;주차공간: <span class="float-right text-spl-color">${detailinfo.parkingSpace }&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
+									&ensp;&ensp;노키즈존: <span class="float-right text-spl-color">${detailinfo.noKidsZone }&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
+									&ensp;&ensp;흡연존: <span class="float-right text-spl-color">${detailinfo.smokingArea }&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
+								
 								</div>
+
+
 							</div>
 							<!-- Left Column Ends -->
 							<!-- Right Column Starts -->
@@ -171,69 +186,78 @@
 								<div class="information-tab-pane">
 									<p class="text-center"></p>
 									<!-- Spacer Starts -->
-									<div class="spacer big"></div>
 									<!-- Spacer Ends -->
-									
-									<!-- 지도를 보여주는 html --> 
-									<div id="map">
-									</div>
-									
-									<!-- 자바스크립트 --> 
-									<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ecfa9545ea95f1247efbf60cf9429d4c&libraries=services"></script> 
-									<script> 
-									
+
+									<!-- 지도를 보여주는 html -->
+									<div id="map"></div>
+
+									<!-- 자바스크립트 -->
+									<script type="text/javascript"
+										src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ecfa9545ea95f1247efbf60cf9429d4c&libraries=services"></script>
+									<script>
 										var storeAddress = "${storeinfo.address}";
 										var storeName = "${storeinfo.storeName}";
-										var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-										mapOption = { 
-												center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표 
-												level: 3 // 지도의 확대 레벨 
-												}; 
+										var mapContainer = document
+												.getElementById('map'), // 지도를 표시할 div 
+										mapOption = {
+											center : new daum.maps.LatLng(
+													33.450701, 126.570667), // 지도의 중심좌표 
+											level : 3
+										// 지도의 확대 레벨 
+										};
 										// 지도를 생성합니다 
-										var map = new daum.maps.Map(mapContainer, mapOption); 
+										var map = new daum.maps.Map(
+												mapContainer, mapOption);
 										// 주소-좌표 변환 객체를 생성합니다 
-										var geocoder = new daum.maps.services.Geocoder(); 
-										
-										// 주소로 좌표를 검색합니다 
-										geocoder.addressSearch(storeAddress, function(result, status) { 
-											// 정상적으로 검색이 완료됐으면 
-											if (status === daum.maps.services.Status.OK) { 
-												var coords = new daum.maps.LatLng(result[0].y, result[0].x); 
-												// 결과값으로 받은 위치를 마커로 표시합니다 
-												var marker = new daum.maps.Marker({ 
-													map: map, 
-													position: coords 
-												}); 
-												// 인포윈도우로 장소에 대한 설명을 표시합니다 
-												var infowindow = new daum.maps.InfoWindow({ 
-													content: '<div style="width:150px;text-align:center;padding:6px 0;">'+storeName+'</div>' 
-													}); 
-												infowindow.open(map, marker); 
-												
-												// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다 
-												map.relayout();
-												map.setCenter(coords); 
-// 												map.setLevel(4);
-// 												map.setLevel(3);
-// 												map.relayout();
-// 												setTimeout(function(){ 
-// 													map.relayout(); 
-// 												}, 0);
-											} 
-										}); 
-										
-										</script>
+										var geocoder = new daum.maps.services.Geocoder();
 
-									
-									
+										// 주소로 좌표를 검색합니다 
+										geocoder
+												.addressSearch(
+														storeAddress,
+														function(result, status) {
+															// 정상적으로 검색이 완료됐으면 
+															if (status === daum.maps.services.Status.OK) {
+																var coords = new daum.maps.LatLng(
+																		result[0].y,
+																		result[0].x);
+																// 결과값으로 받은 위치를 마커로 표시합니다 
+																var marker = new daum.maps.Marker(
+																		{
+																			map : map,
+																			position : coords
+																		});
+																// 인포윈도우로 장소에 대한 설명을 표시합니다 
+																var infowindow = new daum.maps.InfoWindow(
+																		{
+																			content : '<div style="width:150px;text-align:center;padding:6px 0;">'
+																					+ storeName
+																					+ '</div>'
+																		});
+																infowindow
+																		.open(
+																				map,
+																				marker);
+
+																// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다 
+																map.relayout();
+																map
+																		.setCenter(coords);
+																// 												map.setLevel(4);
+																// 												map.setLevel(3);
+																// 												map.relayout();
+																// 												setTimeout(function(){ 
+																// 													map.relayout(); 
+																// 												}, 0);
+															}
+														});
+									</script>
+
+
+
 									<!-- Spacer Starts -->
-									<div class="spacer"></div>
 									<!-- Spacer Ends -->
 									<!-- Banners Starts -->
-									<div class="row text-center">
-										<div class="col-6"></div>
-										<div class="col-6"></div>
-									</div>
 									<!-- Banners Ends -->
 								</div>
 								<!-- Information Tab Pane Ends -->
@@ -310,23 +334,9 @@
 									session.setAttribute("count", new Integer(count));
 								%>
 
-								<div class="side-block-1">
-									<h6>Delivery Menu</h6>
-									<ul class="list-unstyled list-style-2">
-										<li>Soups</li>
-										<li>Southern Grills: Veg.</li>
-										<li>Southern Grills: Non-Veg.</li>
-										<li>Starters</li>
-										<li>Chinese Starters</li>
-										<li>North Indian Main Course</li>
-										<li>Traditional Telugu Maincourse</li>
-										<li>Indian Breads</li>
-										<li>Rice, Biryani &amp; Pulao</li>
-										<li>Accompaniments</li>
-										<li>Desserts &amp; Beverages</li>
-									</ul>
-								</div>
+								
 							</div>
+							
 							<!-- Left Column Ends -->
 							<!-- Right Column Starts -->
 							<div class="col-md-8 col-sm-12">
@@ -336,12 +346,6 @@
 									<p class="text-center"></p>
 									<!-- Order Menu List #1 Starts -->
 
-									<c:forEach var="menuInfo2" items="${menuListView.menuInfoList}">
-								    메뉴 이름: ${menuInfo2.menu } &nbsp;&nbsp;&nbsp;
-									 -가격: ${menuInfo2.price } <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									-사진: ${menuInfo2.menuPic }<br> <br>
-									</c:forEach>
 
 									<div class="spacer"></div>
 									<div class="order-menu-item clearfix">
@@ -409,101 +413,11 @@
 					</div>
 					<!-- Tab #2 Ends -->
 
-					
+
 					<!-- Tab #3 Starts -->
 					<div id="gallery" class="tab-pane fade">
 						<!-- Image Gallery Starts -->
-						<ul class="row list-unstyled gallery-grid">
-							<!-- Gallery Image #1 Starts -->
-							<li class="col-md-4 col-sm-6">
-								<div class="hover-content text-center">
-
-									<div class="overlay animation"></div>
-								</div>
-							</li>
-							<!-- Gallery Image #1 Ends -->
-							<!-- Gallery Image #2 Starts -->
-							<li class="col-md-4 col-sm-6">
-								<div class="hover-content text-center">
-
-									<div class="overlay animation"></div>
-								</div>
-							</li>
-							<!-- Gallery Image #2 Ends -->
-							<!-- Gallery Image #3 Starts -->
-							<li class="col-md-4 col-sm-6">
-								<div class="hover-content text-center">
-
-
-									<div class="overlay animation"></div>
-								</div>
-							</li>
-							<!-- Gallery Image #3 Ends -->
-							<!-- Gallery Image #4 Starts -->
-							<li class="col-md-4 col-sm-6">
-								<div class="hover-content text-center">
-									<div class="overlay animation"></div>
-								</div>
-							</li>
-							<!-- Gallery Image #4 Ends -->
-							<!-- Gallery Image #5 Starts -->
-							<li class="col-md-4 col-sm-6">
-								<div class="hover-content text-center">
-
-
-									<div class="overlay animation"></div>
-								</div>
-							</li>
-							<!-- Gallery Image #5 Ends -->
-							<!-- Gallery Image #6 Starts -->
-							<li class="col-md-4 col-sm-6">
-								<div class="hover-content text-center">
-									<img src="images/gallery/thumb/gallery-thumb-img6.jpg"
-										alt="Gallery Image" class="img-fluid">
-									<div class="overlay animation">
-										<a href="images/gallery/big/gallery-big-img6.jpg"
-											class="btn btn-link zoom"><i class="fa fa-search-plus"></i></a>
-									</div>
-								</div>
-							</li>
-							<!-- Gallery Image #6 Ends -->
-							<!-- Gallery Image #7 Starts -->
-							<li class="col-md-4 col-sm-6">
-								<div class="hover-content text-center">
-									<img src="images/gallery/thumb/gallery-thumb-img7.jpg"
-										alt="Gallery Image" class="img-fluid">
-									<div class="overlay animation">
-										<a href="images/gallery/big/gallery-big-img7.jpg"
-											class="btn btn-link zoom"><i class="fa fa-search-plus"></i></a>
-									</div>
-								</div>
-							</li>
-							<!-- Gallery Image #7 Ends -->
-							<!-- Gallery Image #8 Starts -->
-							<li class="col-md-4 col-sm-6">
-								<div class="hover-content text-center">
-									<img src="images/gallery/thumb/gallery-thumb-img8.jpg"
-										alt="Gallery Image" class="img-fluid">
-									<div class="overlay animation">
-										<a href="images/gallery/big/gallery-big-img8.jpg"
-											class="btn btn-link zoom"><i class="fa fa-search-plus"></i></a>
-									</div>
-								</div>
-							</li>
-							<!-- Gallery Image #8 Ends -->
-							<!-- Gallery Image #9 Starts -->
-							<li class="col-md-4 col-sm-6">
-								<div class="hover-content text-center">
-									<img src="images/gallery/thumb/gallery-thumb-img9.jpg"
-										alt="Gallery Image" class="img-fluid">
-									<div class="overlay animation">
-										<a href="images/gallery/big/gallery-big-img9.jpg"
-											class="btn btn-link zoom"><i class="fa fa-search-plus"></i></a>
-									</div>
-								</div>
-							</li>
-							<!-- Gallery Image #9 Ends -->
-						</ul>
+						
 						<!-- Image Gallery Ends -->
 					</div>
 					<!-- Tab #3 Ends -->
@@ -514,20 +428,25 @@
 							<!-- Left Column Starts -->
 							<div class="col-md-4 col-sm-12">
 								<div class="side-block-1">
-									<h6>Delivery Menu</h6>
+									<h6>정보</h6>
 									<ul class="list-unstyled list-style-2">
-										<li>Soups</li>
-										<li>Southern Grills: Veg.</li>
-										<li>Southern Grills: Non-Veg.</li>
-										<li>Starters</li>
-										<li>Chinese Starters</li>
-										<li>North Indian Main Course</li>
-										<li>Traditional Telugu Maincourse</li>
-										<li>Indian Breads</li>
-										<li>Rice, Biryani &amp; Pulao</li>
-										<li>Accompaniments</li>
-										<li>Desserts &amp; Beverages</li>
+										<li>주소 : ${storeinfo.address }</li>
+										<li>영업시간 : ${storeinfo.hours }</li>
+										<li>휴무일 : ${storeinfo.closedDays }</li>
+										<li>전화번호 : ${storeinfo.callNumber }</li>
 									</ul>
+									<hr>
+									&ensp;&ensp;총 좌석 수: <span class="float-right text-spl-color">${detailinfo.totalSeat }개&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
+									&ensp;&ensp;충전기가 있는 좌석 수: <span class="float-right text-spl-color">${detailinfo.socketSeat }개&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
+									&ensp;&ensp;디저트: <span class="float-right text-spl-color">${detailinfo.dessertSales }&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
+									&ensp;&ensp;테라스: <span class="float-right text-spl-color">${detailinfo.terrace }&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
+									&ensp;&ensp;루프탑: <span class="float-right text-spl-color">${detailinfo.roofTop }&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
+									&ensp;&ensp;와이파이: <span class="float-right text-spl-color">${detailinfo.wifi }&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
+									&ensp;&ensp;애견동반: <span class="float-right text-spl-color">${detailinfo.companionDog }&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
+									&ensp;&ensp;주차공간: <span class="float-right text-spl-color">${detailinfo.parkingSpace }&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
+									&ensp;&ensp;노키즈존: <span class="float-right text-spl-color">${detailinfo.noKidsZone }&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
+									&ensp;&ensp;흡연존: <span class="float-right text-spl-color">${detailinfo.smokingArea }&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
+								
 								</div>
 							</div>
 							<!-- Left Column Ends -->
@@ -539,13 +458,13 @@
 									<!-- Reviews Form Box Starts -->
 									<div class="reviews-form-box">
 										<h6>리뷰쓰기</h6>
-										
+
 										<section class="content">
 
 											<!-- Default box -->
 
 											<div class="box-body">
-												
+
 												<%
 													// 현재 로그인된 아이디가 없다면 (= session에 저장된 id가 없다면)
 												if (session.getAttribute("authUser") == null) {
@@ -567,44 +486,43 @@
 															<textarea name="reviewContents" cols="60" rows="10"
 																placeholder="리뷰를 작성하세요"></textarea>
 														</p>
-														
+
 														<h9>별점을 선택하세요.</h9>
-															<select name="별점" textarea name="avgScore">
-<!-- 															size="2" -->
+														<select name="별점" textarea name="avgScore">
+															<!-- 															size="2" -->
 															<option value="1">★☆☆☆☆</option>
 															<option value="2">★★☆☆☆</option>
 															<option value="3">★★★☆☆</option>
 															<option value="4">★★★★☆</option>
 															<option value="5">★★★★★</option>
-														</select>
-														<br>
-														
+														</select> <br>
+
 														<p>
 															<input type="submit" value="리뷰쓰기"
 																class="btn btn-black animation text-uppercase float-right" />
 														</p>
 													</form>
 
-													<form action="file.do" method="post" enctype="multipart/form-data">
-															<tr>
-																<td></td>
-																<td><input type="file" name="fileName1"></td>
-															</tr>
-														</form> 
+													<form action="file.do" method="post"
+														enctype="multipart/form-data">
+														<tr>
+															<td></td>
+															<td><input type="file" name="fileName1"></td>
+														</tr>
+													</form>
 
-														<!-- <tr>
+													<!-- <tr>
 												
 													<td colspan=2 align=center><input type="submit"
 														value="리뷰등록"
 														class="btn btn-black animation text-uppercase float-right"></td>
 												</tr> -->
-														<!-- <a href="#"
+													<!-- <a href="#"
 													class="btn btn-black animation text-uppercase float-right">리뷰쓰기</a> -->
-														<%
-															}
-												
-														%>
-														
+													<%
+														}
+													%>
+
 												</div>
 											</div>
 										</section>
@@ -617,21 +535,16 @@
 										<section class="content-header"></section>
 
 										<!-- Main content -->
-										<section class="content">
-
+										
 											<!-- Default box -->
 											<div class="box">
-												<div class="box-header with-border">
-
-
-													<div class="box-tools pull-right"></div>
-												</div>
+												
 
 												<div class="review-list">
-												<%--  // <c:if> 태그로 생성되는 글목록을 감싸는 wrapper 요소 --%>
+													<%--  // <c:if> 태그로 생성되는 글목록을 감싸는 wrapper 요소 --%>
 													<c:if test="${view.isEmpty()}">
-															<p>등록된 메시지가 없습니다.</p>
-													</c:if>	 
+														<p>등록된 메시지가 없습니다.</p>
+													</c:if>
 													<c:if test="${!view.isEmpty()}">
 														<table border="1">
 															<c:forEach var="message" items="${view.messageList}">
@@ -641,9 +554,9 @@
 																			<i class="fa fa-calendar"></i> ${message.reviewDate}
 																		</h6>
 																		<h6>회원 닉네임: ${userInfo.nickName}</h6>
-																		
-																		
-																		 <!-- <ul class="list-unstyled list-inline rating-star-list">
+
+
+																		<!-- <ul class="list-unstyled list-inline rating-star-list">
 																			<li class="list-inline-item"><i
 																				class="fa fa-star"></i></li>
 																			<li class="list-inline-item"><i
@@ -655,9 +568,9 @@
 																			<li class="list-inline-item"><i
 																				class="fa fa-star-o"></i></li>
 																		</ul> -->
- 
- 
- 																    
+
+
+
 																	</div>
 																	<img src="images/review-thumb-img1.png" alt="Image"
 																		class="img-fluid float-right">
@@ -666,12 +579,12 @@
 																	<p>리뷰내용: ${message.reviewContents}</p>
 																	<p>평점: ${message.avgScore}</p>
 																	<p>메시지 번호: ${message.reviewNo}</p>
-																	
+
 																</div>
-																
+
 															</c:forEach>
 														</table>
-															<%-- <tr>
+														<%-- <tr>
 																<td>
 
 																	<p>
@@ -681,339 +594,211 @@
 																	</p>
 																</td>
 															</tr> --%>
-															
-															<div>
-																<c:forEach var="pageNum" begin="1"
-																	end="${view.totalPages}">
-																	<span><a href="messageList.jsp?page=${pageNum}">[${pageNum}]</a></span>
-																</c:forEach>
-															</div>
-															</c:if>
-															</div>
-															</div>
-															<!-- /.box-body -->
 
-															<!-- /.box-footer-->
-															</div>
-															<!-- /.box -->
-
-															</section>
-															<!-- /.content -->
-															</div>
-
-
-
-
-															<script>
-																// 제이쿼리로 form submit 이벤트 처리
-																$(function() {
-																	$(
-																			"#writeForm")
-																			.submit(
-																					function(
-																							event) {
-																						alert("리뷰가 등록되었습니다.");
-
-																						var formData = { // Plain Object 변수에 form의 data 저장
-																							reviewContents : this.reviewContents.value
-																							/* avgScore : this.avgScore.value */
-																						};
-																						
-
-																						$
-																								.ajax({
-																									url : "writeMessage.do", 
-																									method : "POST",
-																									data : formData,
-																									success : function() { // 요청 성공 시 (HTTP 200 OK)
-																										$(
-																												"#writeForm [name=reviewContents]")
-																												.val(
-																														""); // 입력했던 정보 비우기
-																										$(
-																												"#list")
-																												.load(
-																														window.location.href
-																																+ " #list"); // 글목록만 새로고침
-																									}
-																								});
-
-																						event
-																								.preventDefault(); // submit 시 페이지 이동하지 않게
-
-																					});
-
-																});
-
-																/* 											$(function() {
-																												$(
-																														"#writeForm")FoodDetailHandler.java
-																														.submit(
-																																alert("제출누름...");
-																																
-																																
-																																function() {
-																																	var formData = { // Plain Object 변수에 form의 data 저장
-																																		reviewcontents : this.reviewcontents.value
-																																	};
-
-																																	$
-																																			.ajax({
-																																				url : "/CARE/WEB-INF/view/guestbook/writeMessage.jsp",
-																																				method : "POST",
-																																				data : formData,
-																																				success : function() { // 요청 성공 시 (HTTP 200 OK)
-																																					$(
-																																							"#writeForm [name=reviewcontents]")
-																																							.val(
-																																									""); // 입력했던 정보 비우기
-																																					$("#list")
-																																							.load(window.location.href + " #list"); // 글목록만 새로고침
-																																				}
-																																			});
-
-																																	event
-																																			.preventDefault(); // submit 시 페이지 이동하지 않게
-																																});
-																											}); */
-															</script>
-
-
-													
-												</div>
-										</table>
-										
-										</div>
-										</div>
-										</section>
-										</div>
-										</div>
-										</div>
-										
-								
-								
-							
-	
-
-
-							<!-- Reviews Form Box Ends -->
-							<!-- Reviews List Starts -->
-							<!-- Default box -->
-							<div class="box">
-								<div class="box-header with-border">
-									<div class="box-tools pull-right"></div>
-								</div>
-								<div class="box-body">
-
-									<div class="reviews-box">
-									
-										<!-- Review #1 Starts -->
-										<div class="review-list">
-											<div class="clearfix">
-												<div class="float-left"></div>
-
-
-
-											</div>
-											<div class="review-list-content"></div>
-										</div>
-										<!-- Review #1 Ends -->
-										<!-- Review #2 Starts -->
-										<div class="review-list">
-											<div class="clearfix">
-												<div class="float-left"></div>
-
-											</div>
-											<div class="review-list-content"></div>
-										</div>
-										<!-- Review #2 Ends -->
-										<!-- Review #3 Starts -->
-										<div class="review-list">
-											<div class="clearfix">
-												<div class="float-left"></div>
-
-											</div>
-											<div class="review-list-content"></div>
-										</div>
-										<!-- Review #3 Ends -->
-										<!-- Review #4 Starts -->
-										<div class="review-list">
-											<div class="clearfix">
-												<div class="float-left"></div>
-
-											</div>
-											<div class="review-list-content"></div>
-										</div>
-										<!-- Review #4 Ends -->
-									</div>
-									<!-- Reviews List Ends -->
-									<!-- Spacer Starts -->
-									<div class="spacer-1 condensed"></div>
-									<!-- Spacer Ends -->
-									<!-- Banners Starts -->
-									<div class="row text-center">
-										<div class="col-6"></div>
-										<div class="col-6"></div>
-									</div>
-									<!-- Banners Ends -->
-								</div>
-								<!-- Reviews Tab Pane Ends -->
-							</div>
-							<!-- Right Column Ends -->
-						</div>
-						<!-- Tab #4 Nested Row Ends -->
-					</div>
-					<!-- Tab #4 Ends -->
-					<!-- Tab #5 Starts -->
-					<div id="reachus" class="tab-pane fade">
-						<!-- Tab #5 Nested Row Starts -->
-						<div class="row">
-							<!-- Left Column Starts -->
-							<div class="col-md-4 col-sm-12">
-
-
-
-
-								<div class="side-block-1">
-									<h6>Delivery Menu</h6>
-									<ul class="list-unstyled list-style-2">
-										<li>Soups</li>
-										<li>Southern Grills: Veg.</li>
-										<li>Southern Grills: Non-Veg.</li>
-										<li>Starters</li>
-										<li>Chinese Starters</li>
-										<li>North Indian Main Course</li>
-										<li>Traditional Telugu Maincourse</li>
-										<li>Indian Breads</li>
-										<li>Rice, Biryani &amp; Pulao</li>
-										<li>Accompaniments</li>
-										<li>Desserts &amp; Beverages</li>
-									</ul>
-								</div>
-							</div>
-							<!-- Left Column Ends -->
-							<!-- Right Column Starts -->
-							<div class="col-md-8 col-sm-12">
-								<!-- Reach Us Tab Pane Starts -->
-								<div class="reachus-tab-pane">
-									<!-- Map Starts -->
-									<div class="map"></div>
-									<!-- Map Ends -->
-									<!-- Address Block Starts -->
-									<div class="address-block">
-										<h6>
-											<i class="fa fa-tag"></i> Address
-										</h6>
-										<ul class="list-unstyled">
-											<li># 201, Plot No. 39, Abids Road, Near Chirag Ali
-												Lane,</li>
-											<li>Hyderabad - 500 001 , Telangana, India.</li>
-										</ul>
-										<h6>
-											<i class="fa fa-phone"></i> Phone Numbers
-										</h6>
-										<ul class="list-unstyled">
-											<li>040-80180280, 040-22113366</li>
-										</ul>
-										<h6>
-											<i class="fa fa-mobile"></i> Can be in touch with Watsapp
-										</h6>
-										<ul class="list-unstyled">
-											<li>+21 998 909 9999</li>
-										</ul>
-									</div>
-									<!-- Address Block Ends -->
-									<!-- Reach Form Starts -->
-									<div class="reachus-form">
-										<h6>Drop us a mail for Table Reservation</h6>
-										<form action="#">
-											<div class="form-group">
-												<label class="sr-only" for="reachus-name">Name</label> <input
-													type="text" class="form-control rounded-0"
-													id="reachus-name" placeholder="Name">
-											</div>
-											<div class="form-group">
-												<label class="sr-only" for="reachus-email">E-mail</label> <input
-													type="email" class="form-control rounded-0"
-													id="reachus-email" placeholder="e-mail">
-											</div>
-											<div class="form-group">
-												<label class="sr-only" for="reachus-mobileno">Mobile
-													No</label> <input type="text" class="form-control rounded-0"
-													id="reachus-mobileno" placeholder="Mobile No">
-											</div>
-											<div class="row">
-												<div class="col-6">
-													<div class="form-group">
-														<div class="input-group">
-															<label class="sr-only" for="reachus-date">Date</label> <input
-																type="text"
-																class="form-control rounded-0 datepickerInput"
-																id="reachus-date" placeholder="Date"> <span
-																class="input-group-append input-group-text rounded-0">
-																<span class="fa fa-calendar"></span>
-															</span>
+														<div>
+															<c:forEach var="pageNum" begin="1"
+																end="${view.totalPages}">
+																<span><a href="messageList.jsp?page=${pageNum}">[${pageNum}]</a></span>
+															</c:forEach>
 														</div>
-													</div>
-												</div>
-												<div class="col-6">
-													<div class="form-group">
-														<label class="sr-only" for="reachus-persons">No.of
-															Persons</label> <select class="form-control rounded-0">
-															<option>No.of Persons</option>
-															<option>1</option>
-															<option>2</option>
-															<option>3</option>
-															<option>4</option>
-															<option>5</option>
-														</select>
-													</div>
+													</c:if>
 												</div>
 											</div>
-											<div class="form-group">
-												<label class="sr-only" for="reachus-info">Your
-													Information</label>
-												<textarea class="form-control rounded-0" id="reachus-info"
-													placeholder="Your Information" rows="5"></textarea>
-											</div>
-											<div class="clearfix">
-												<button type="submit"
-													class="btn btn-prime text-uppercase animation pull-right">Submit</button>
-											</div>
-										</form>
+											<!-- /.box-body -->
+
+											<!-- /.box-footer-->
 									</div>
-									<!-- Reach Form Ends -->
-									<!-- Banners Starts -->
-									<div class="row text-center"></div>
-									<!-- Banners Ends -->
+									<!-- /.box -->
+
+									</div>
+									<!-- /.content -->
 								</div>
-								<!-- Reach Us Tab Pane Ends -->
+
+
+
+
+								<script>
+									// 제이쿼리로 form submit 이벤트 처리
+									$(function() {
+										$("#writeForm")
+												.submit(
+														function(event) {
+															alert("리뷰가 등록되었습니다.");
+
+															var formData = { // Plain Object 변수에 form의 data 저장
+																reviewContents : this.reviewContents.value
+															/* avgScore : this.avgScore.value */
+															};
+
+															$
+																	.ajax({
+																		url : "writeMessage.do",
+																		method : "POST",
+																		data : formData,
+																		success : function() { // 요청 성공 시 (HTTP 200 OK)
+																			$(
+																					"#writeForm [name=reviewContents]")
+																					.val(
+																							""); // 입력했던 정보 비우기
+																			$(
+																					"#list")
+																					.load(
+																							window.location.href
+																									+ " #list"); // 글목록만 새로고침
+																		}
+																	});
+
+															event
+																	.preventDefault(); // submit 시 페이지 이동하지 않게
+
+														});
+
+									});
+
+									/* 											$(function() {
+																					$(
+																							"#writeForm")FoodDetailHandler.java
+																							.submit(
+																									alert("제출누름...");
+																									
+																									
+																									function() {
+																										var formData = { // Plain Object 변수에 form의 data 저장
+																											reviewcontents : this.reviewcontents.value
+																										};
+
+																										$
+																												.ajax({
+																													url : "/CARE/WEB-INF/view/guestbook/writeMessage.jsp",
+																													method : "POST",
+																													data : formData,
+																													success : function() { // 요청 성공 시 (HTTP 200 OK)
+																														$(
+																																"#writeForm [name=reviewcontents]")
+																																.val(
+																																		""); // 입력했던 정보 비우기
+																														$("#list")
+																																.load(window.location.href + " #list"); // 글목록만 새로고침
+																													}
+																												});
+
+																										event
+																												.preventDefault(); // submit 시 페이지 이동하지 않게
+																									});
+																				}); */
+								</script>
+
+
+
 							</div>
-							<!-- Right Column Ends -->
+							
+</div>
+</div>
+</div>
 						</div>
-						<!-- Tab #5 Nested Row Ends -->
+			
+
+
+
+
+
+
+
+		<!-- Reviews Form Box Ends -->
+		<!-- Reviews List Starts -->
+		<!-- Default box -->
+		<div class="box">
+			
+			<div class="box-body">
+
+				<div class="reviews-box">
+
+					<!-- Review #1 Starts -->
+					<div class="review-list">
+						<div class="clearfix">
+							<div class="float-left"></div>
+
+
+
+						</div>
+						<div class="review-list-content"></div>
 					</div>
-					<!-- Tab #5 Ends -->
+					<!-- Review #1 Ends -->
+					<!-- Review #2 Starts -->
+					<div class="review-list">
+						<div class="clearfix">
+							<div class="float-left"></div>
+
+						</div>
+						<div class="review-list-content"></div>
+					</div>
+					<!-- Review #2 Ends -->
+					<!-- Review #3 Starts -->
+					<div class="review-list">
+						<div class="clearfix">
+							<div class="float-left"></div>
+
+						</div>
+						<div class="review-list-content"></div>
+					</div>
+					<!-- Review #3 Ends -->
+					<!-- Review #4 Starts -->
+					<div class="review-list">
+						<div class="clearfix">
+							<div class="float-left"></div>
+
+						</div>
+						<div class="review-list-content"></div>
+					</div>
+					<!-- Review #4 Ends -->
 				</div>
-				<!-- Menu Tabs Content Ends -->
+				<!-- Reviews List Ends -->
+				<!-- Spacer Starts -->
+				<div class="spacer-1 condensed"></div>
+				<!-- Spacer Ends -->
+				<!-- Banners Starts -->
+				<div class="row text-center">
+					<div class="col-6"></div>
+					<div class="col-6"></div>
+				</div>
+				<!-- Banners Ends -->
 			</div>
-			<!-- Menu Tabs Ends -->
+			<!-- Reviews Tab Pane Ends -->
 		</div>
-		<!-- Mainarea Ends -->
-		<!-- Sidearea Starts -->
-		<div class="col-md-3 col-sm-12">
-			<!-- Spacer Starts -->
-			<div class="spacer-1 medium d-xs-block d-sm-block d-md-none"></div>
-			<!-- Spacer Ends -->
-			<!-- Your Order Starts -->
-			<div class="side-block-order border-radius-4">
-				<!-- Heading Starts -->
-				<h6 class="text-center">가게 편의정보</h6>
-				<!-- Heading Ends -->
-				<!-- Order Content Starts -->
+		<!-- Right Column Ends -->
+	</div>
+	<!-- Tab #4 Nested Row Ends -->
+</div>
+<!-- Tab #4 Ends -->
+<!-- Tab #5 Starts -->
+<div id="reachus" class="tab-pane fade">
+	<!-- Tab #5 Nested Row Starts -->
+	<div class="row">
+		<!-- Left Column Starts -->
+		
+	<!-- Tab #5 Nested Row Ends -->
+</div>
+<!-- Tab #5 Ends -->
+</div>
+<!-- Menu Tabs Content Ends -->
+
+<!-- Menu Tabs Ends -->
+
+<!-- Mainarea Ends -->
+<!-- Sidearea Starts -->
+<div class="col-md-3 col-sm-12">
+	<!-- Spacer Starts -->
+	<div class="spacer-1 medium d-xs-block d-sm-block d-md-none"></div>
+	<!-- Spacer Ends -->
+	<!-- Your Order Starts -->
+	<div class="side-block-order border-radius-4">
+		<!-- Heading Starts -->
+		<h6 class="text-center">가게 메뉴</h6>
+		<!-- Heading Ends -->
+		<!-- Order Content Starts -->
 
 
-				총 좌석 수: <span class="float-right text-spl-color">${detailinfo.totalSeat }개</span><br>
+		<%-- 	총 좌석 수: <span class="float-right text-spl-color">${detailinfo.totalSeat }개</span><br>
 				충전기가 있는 좌석 수: <span class="float-right text-spl-color">${detailinfo.socketSeat }개</span><br>
 				디저트: <span class="float-right text-spl-color">${detailinfo.dessertSales }</span><br>
 				테라스: <span class="float-right text-spl-color">${detailinfo.terrace }</span><br>
@@ -1023,33 +808,44 @@
 				주차공간: <span class="float-right text-spl-color">${detailinfo.parkingSpace }</span><br>
 				노키즈존: <span class="float-right text-spl-color">${detailinfo.noKidsZone }</span><br>
 				흡연존: <span class="float-right text-spl-color">${detailinfo.smokingArea }</span><br>
+ --%>
+
+		<c:forEach var="menuInfo2" items="${menuListView.menuInfoList}">
+								   &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+								    메뉴 이름: ${menuInfo2.menu }&ensp;<br>
+									&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+									 -가격: <span class="float-right text-spl-color">${menuInfo2.price }
+				&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<br>
+			</span>
+			<%-- -사진: ${menuInfo2.menuPic }<br> <br> --%>
+			<br>
+		</c:forEach>
+
+
+		<div class="side-block-order-content">
+			<!-- Order Item List Starts -->
 
 
 
-				<div class="side-block-order-content">
-					<!-- Order Item List Starts -->
+		
+			<!-- Order Item List Ends -->
+			<!-- Order Item Total Starts -->
 
+			<!-- Order Item Total Ends -->
 
-
-					</ul>
-					<!-- Order Item List Ends -->
-					<!-- Order Item Total Starts -->
-
-					<!-- Order Item Total Ends -->
-
-				</div>
-				<!-- Order Content Ends -->
-			</div>
-			<!-- Your Order Ends -->
-			<!-- Sponsors Banners Starts -->
-
-
-			<!-- Sponsors Banners Ends -->
 		</div>
-		<!-- Sidearea Ends -->
+		<!-- Order Content Ends -->
 	</div>
-	<!-- Nested Row Ends -->
+	<!-- Your Order Ends -->
+	<!-- Sponsors Banners Starts -->
+
+
+	<!-- Sponsors Banners Ends -->
 </div>
+<!-- Sidearea Ends -->
+</div>
+<!-- Nested Row Ends -->
+
 <!-- Main Container Ends -->
 <!-- Newsletter Section Starts -->
 <section class="footer-top">
