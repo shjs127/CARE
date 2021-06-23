@@ -82,11 +82,11 @@
 		</filter> 
 		<filter-mapping> 
 		<filter-name>LoginCheck</filter-name>
-		 <url-pattern>/view/main/profile.do</url-pattern> 
-		<url-pattern>/view/board/write.do</url-pattern>
-		<url-pattern>/view/board/modify.do</url-pattern>
-		<url-pattern>/view/board/delete.do</url-pattern>
-		<url-pattern>/view/changePwd.do</url-pattern> 
+		 <url-pattern>/main/profile.do</url-pattern> 
+		<url-pattern>/board/write.do</url-pattern>
+		<url-pattern>/board/modify.do</url-pattern>
+		<url-pattern>/board/delete.do</url-pattern>
+		<url-pattern>/changePwd.do</url-pattern> 
 		</filter-mapping>
 
 
