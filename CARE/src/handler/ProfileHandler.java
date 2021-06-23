@@ -7,9 +7,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import auth.service.ChangePasswordService;
+import auth.service.FavoriteListView;
+import auth.service.GetFavoriteListViewService;
+import auth.service.GetMessageListViewService;
 import auth.service.InvalidPasswordException;
+import auth.service.LoginFailException;
 import auth.service.MemberNotFoundException;
+import auth.service.MessageListView;
 import auth.service.User;
+import member.model.UserInfo;
 import mvc.command.CommandHandler;
 
 public class ProfileHandler implements CommandHandler {
@@ -17,6 +23,8 @@ public class ProfileHandler implements CommandHandler {
 	private static final String FORM_VIEW = "/WEB-INF/view/main/profile.jsp";
 	//private JoinService joinService = new JoinService();
 	private ChangePasswordService changePwdSvc = new ChangePasswordService();
+	private GetMessageListViewService getMessageListViewService = GetMessageListViewService.getInstance();
+	private GetFavoriteListViewService getFavoriteListViewService = GetFavoriteListViewService.getInstance();
 	
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -33,7 +41,26 @@ public class ProfileHandler implements CommandHandler {
 	}
 
 	private String processForm(HttpServletRequest req, HttpServletResponse res) {
-		return FORM_VIEW;
+		try {
+			
+			UserInfo userInfo = (UserInfo) req.getSession().getAttribute("userInfo");
+			int userNo = userInfo.getUserNo();
+			
+			MessageListView messageListView = getMessageListViewService.selectByUserNo(userNo);
+			req.getSession().setAttribute("messageListView", messageListView);
+			
+			FavoriteListView favoriteListView = getFavoriteListViewService.selectByUserNo(userNo);
+			req.getSession().setAttribute("favoriteListView", favoriteListView);
+			
+			
+		
+		// 1. session에서 userInfo.userNo 구함
+		// 2. userNo를 갖고 reviewInfo 테이블에서 조회하여 review목록은 갖고 온다.
+		// 3. session.setAtribute("reviewInfoList", reviewInfoList);
+			return FORM_VIEW;
+		} catch (LoginFailException e) {
+			return FORM_VIEW;
+		}
 	}
 
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res)

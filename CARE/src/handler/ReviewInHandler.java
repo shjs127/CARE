@@ -36,15 +36,19 @@ public class ReviewInHandler implements CommandHandler {
 			
 			ReviewInfo reviewInfo = reviewInfoService.reviewInfo(storeNo);
 			req.getSession().setAttribute("reviewInfo", reviewInfo);
+			/*
+			 * Message message = message.avgScore(storeNo);
+			 */
+			//System.out.println("avgScore: "+reviewInfo.getAvgScore());
+			
+		
 			
 			GetMessageListViewService viewService = GetMessageListViewService.getInstance();
 			String pageStr = req.getParameter("page");
 			int pageNum = pageStr == null ? 1 : Integer.parseInt(pageStr);
 			MessageListView view = viewService.getMessageListView(pageNum);
-			req.getSession().setAttribute("view", view);
 			
-			float storeAvg=reviewInfoService.storeAvg(storeNo);
-			req.getSession().setAttribute("storeAvg", storeAvg);
+			req.getSession().setAttribute("view", view);
 
 			return FORM_VIEW;
 		} catch (LoginFailException e) {

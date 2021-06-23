@@ -3,6 +3,16 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jspf"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.sql.DriverManager"%>
+<%@ page import="java.sql.Connection"%>
+<%@ page import="java.sql.Statement"%>
+<%@ page import="java.sql.ResultSet"%>
+<%@ page import="java.sql.*"%>
+
+
+<%@ page import="auth.service.Message"
+	import="auth.service.MessageListView"
+	import="auth.service.GetMessageListViewService"%>
 
 <!-- Main Container Starts -->
 <div class="main-container container">
@@ -44,13 +54,14 @@
 													<form class="form-horizontal" action="profile.do"
 														method="post">
 														<!-- Personal Information Starts -->
-														
+
 														<div class="form-group row">
 															<label for="inputFname"
 																class="col-sm-3 col-form-label text-right">이 름 :</label>
 															<div class="col-sm-9">
 																<input type="text" class="form-control"
-																	name="newUserName" placeholder="${userInfo.name}" required readonly>
+																	name="newUserName" placeholder="${userInfo.name}"
+																	required readonly>
 																<%-- 	<p>${userInfo.name}</p> --%>
 															</div>
 														</div>
@@ -112,10 +123,10 @@
 															<div class="col-sm-9">
 																<div class="radio">
 																	<label> <input type="radio" name="newGender"
-																		value="male" <c:if test="${userInfo.gender eq 'male'}">checked="checked"</c:if>
-																		>남성 <input type="radio" name="newGender"
-																		value="female" <c:if test="${userInfo.gender eq 'female'}">checked="checked"</c:if>
-																		>여성
+																		value="male"
+																		<c:if test="${userInfo.gender eq 'male'}">checked="checked"</c:if>>남성
+																		<input type="radio" name="newGender" value="female"
+																		<c:if test="${userInfo.gender eq 'female'}">checked="checked"</c:if>>여성
 																	</label>
 																</div>
 															</div>
@@ -147,117 +158,82 @@
 						<div class="row">
 							<!-- Left Column Starts -->
 							<div class="col-md-4 col-sm-12">
-								<div class="side-block-1">
-									<h6>Delivery Menu</h6>
-									<ul class="list-unstyled list-style-2">
-										<li>Soups</li>
-										<li>Southern Grills: Veg.</li>
-										<li>Southern Grills: Non-Veg.</li>
-										<li>Starters</li>
-										<li>Chinese Starters</li>
-										<li>North Indian Main Course</li>
-										<li>Traditional Telugu Maincourse</li>
-										<li>Indian Breads</li>
-										<li>Rice, Biryani &amp; Pulao</li>
-										<li>Accompaniments</li>
-										<li>Desserts &amp; Beverages</li>
-									</ul>
-								</div>
+								
 							</div>
+							</div>
+							
+							
 							<!-- Left Column Ends -->
 							<!-- Right Column Starts -->
 							<div class="col-md-8 col-sm-12">
 								<!-- Information Tab Pane Starts -->
 								<div class="information-tab-pane">
-									<p class="text-center">
-										<img src="images/banners/banner-discount.png"
-											alt="Discount Banner" class="img-fluid">
-									</p>
+									<%
+										// 현재 로그인된 아이디가 없다면 (= session에 저장된 id가 없다면)
+									if (session.getAttribute("authUser") == null) {
+									%>
+									로그인을 해주세요.
+									<li class="list-inline-item"><a
+										href="${pageContext.request.contextPath }/login.do">로그인</a></li>
+									<%
+										}
+									// 현재 로그인된 아이디가 있다면 (= session에 저장된 id가 있다면)
+									else {
+									%>
+									<li style="”color: white;" " class="list-inline-item">${authUser.nickName }
+										<%
+											out.print("님의 댓글 목록입니다.");
+										%>
+									</li>
+							     
+							      </div>
+									
+									<table border="1">
+							       		<tr>
+							       		
+							       		<th><p>리뷰 번호</p></th>
+							       		<th><p>리뷰 내용</p> </th>
+							       		<th><p>수정</p></th>
+							       		<th><p>삭제</p></th>
+							       		
+							       </tr>
+							       <c:forEach var="message" items="${messageListView.messageList}">
+							       <tr>
+							       <td>${message.reviewNo }</td>
+							       <td> ${message.reviewContents }</td>
+							        <td><input type='button' value='수정' action='msgmodify.do'></td>
+							        <td><input type='button' value='삭제' action='msgdelete.do'></td>
+							       </tr>
+							        </c:forEach>
+							       </table>
+							      
+									
+										<!-- 	
+										<form>
+											<input type='button' value='수정' action='msgmodify.do'>
+											<input type='button' value='삭제' action='msgdelete.do'>
+										</form> -->
+									</div>
+									</div>
+									
+									
+									
+									<%
+										}
+									%>
+
+
 									<!-- Spacer Starts -->
 									<div class="spacer big"></div>
 									<!-- Spacer Ends -->
-									<p>Check out the $20 menu any drink or
-										snack.........Cheers.</p>
-									<p>Bring your friends along &amp; party hard.</p>
-									<p>Spread the word - Food and Drinks at $20 bucks! Between
-										4.00 to 8.00 pm Last order @ 7.45 pm Club rules apply. Dress
-										code mandatory.</p>
-									<p>Restaurants are solely responsible for the service;
-										availability and quality of the events including all or any
-										cancellations/ modifications/ complaints.</p>
-									<hr>
+
 									<!-- Delivery Hours Starts -->
-									<h6>
-										<i class="fa fa-clock-o"></i> Delivery Hours
-									</h6>
-									<ul class="list-unstyled timing-list">
-										<li class="clearfix"><span class="float-left">Monday</span>
-											<span class="float-right text-right">12:00 - 15:30,
-												18:00 - 22:30</span></li>
-										<li class="clearfix"><span class="float-left">Tuesday</span>
-											<span class="float-right text-right">12:00 - 15:30,
-												18:00 - 22:30</span></li>
-										<li class="clearfix"><span class="float-left">Wednesday</span>
-											<span class="float-right text-right">12:00 - 15:30,
-												18:00 - 22:30</span></li>
-										<li class="clearfix"><span class="float-left">Thursday</span>
-											<span class="float-right text-right">12:00 - 15:30,
-												18:00 - 22:30</span></li>
-										<li class="clearfix"><span class="float-left">Friday</span>
-											<span class="float-right text-right">12:00 - 15:30,
-												18:00 - 22:30</span></li>
-										<li class="clearfix"><span class="float-left">Saturday</span>
-											<span class="float-right text-right">12:00 - 15:30,
-												18:00 - 22:30</span></li>
-										<li class="clearfix"><span class="float-left">Sunday</span>
-											<span class="float-right text-right">12:00 - 15:30,
-												18:00 - 22:30</span></li>
-									</ul>
 									<!-- Delivery Hours Ends -->
-									<hr>
 									<!-- Takeway Hours Starts -->
-									<h6>
-										<i class="fa fa-clock-o"></i> Takeway Hours
-									</h6>
-									<ul class="list-unstyled timing-list">
-										<li class="clearfix"><span class="float-left">Monday</span>
-											<span class="float-right text-right">12:00 - 15:30,
-												18:00 - 22:30</span></li>
-										<li class="clearfix"><span class="float-left">Tuesday</span>
-											<span class="float-right text-right">12:00 - 15:30,
-												18:00 - 22:30</span></li>
-										<li class="clearfix"><span class="float-left">Wednesday</span>
-											<span class="float-right text-right">12:00 - 15:30,
-												18:00 - 22:30</span></li>
-										<li class="clearfix"><span class="float-left">Thursday</span>
-											<span class="float-right text-right">12:00 - 15:30,
-												18:00 - 22:30</span></li>
-										<li class="clearfix"><span class="float-left">Friday</span>
-											<span class="float-right text-right">12:00 - 15:30,
-												18:00 - 22:30</span></li>
-										<li class="clearfix"><span class="float-left">Saturday</span>
-											<span class="float-right text-right">12:00 - 15:30,
-												18:00 - 22:30</span></li>
-										<li class="clearfix"><span class="float-left">Sunday</span>
-											<span class="float-right text-right">12:00 - 15:30,
-												18:00 - 22:30</span></li>
-									</ul>
 									<!-- Takeway Hours Ends -->
-									<hr>
 									<!-- Spacer Starts -->
-									<div class="spacer"></div>
 									<!-- Spacer Ends -->
 									<!-- Banners Starts -->
-									<div class="row text-center">
-										<div class="col-6">
-											<img src="images/banners/banner-img1.png" alt="Banner 1"
-												class="img-fluid">
-										</div>
-										<div class="col-6">
-											<img src="images/banners/banner-img2.png" alt="Banner 2"
-												class="img-fluid">
-										</div>
-									</div>
 									<!-- Banners Ends -->
 								</div>
 								<!-- Information Tab Pane Ends -->
@@ -270,16 +246,56 @@
 					<!-- Tab #3 Starts -->
 					<div id="gallery" class="tab-pane fade">
 						<!-- Image Gallery Starts -->
-						<ul class="row list-unstyled gallery-grid">
-							<!-- Gallery Image #1 Starts -->
-							<li class="col-md-4 col-sm-6">
-								<div class="hover-content text-center">
-									<img src="images/gallery/thumb/gallery-thumb-img1.jpg"
-										alt="Gallery Image" class="img-fluid">
-									<div class="overlay animation">
-										<a href="images/gallery/big/gallery-big-img1.jpg"
-											class="btn btn-link zoom"><i class="fa fa-search-plus"></i></a>
+						<div class="row">
+							<!-- Left Column Starts -->
+							<div class="col-md-4 col-sm-12">
+								
+							</div>
+							<!-- Left Column Ends -->
+							<!-- Right Column Starts -->
+							<div class="col-md-8 col-sm-12">
+								<!-- Information Tab Pane Starts -->
+								<div class="information-tab-pane">
+									<%
+										// 현재 로그인된 아이디가 없다면 (= session에 저장된 id가 없다면)
+									if (session.getAttribute("authUser") == null) {
+									%>
+									로그인을 해주세요.
+									<li class="list-inline-item"><a
+										href="${pageContext.request.contextPath }/login.do">로그인</a></li>
+									<%
+										}
+									// 현재 로그인된 아이디가 있다면 (= session에 저장된 id가 있다면)
+									else {
+									%>
+									<li style="”color: white;" " class="list-inline-item">${authUser.nickName }
+										<%
+											out.print("님의 즐겨찾기 목록입니다.");
+										%>
+									</li>
+									
+									
+									
+									<table border="1">
+							       		<tr>
+							       		
+							       		<th><p>가게 번호: ${favorite.storeNo }</p></th>
+							       		<th><p>가게 이름: ${reviewInfo.storeName }</p> </th>
+							       </tr>
+							       <c:forEach var="favorite" items="${favoriteListView.favoriteList}">
+							       <tr>
+							       <td>${favorite.storeNo }</td>
+							       <td>${reviewInfo.storeName }</td>
+							       </tr>
+							        </c:forEach>
+							       </table>
+							      
+										
 									</div>
+									<%
+										}
+									%>
+								</div>
 								</div>
 							</li>
 							<!-- Gallery Image #1 Ends -->
@@ -312,5 +328,6 @@
 						<!-- Nested Row Ends -->
 					</div>
 					<!-- Main Container Ends -->
+</div>
 
 					<%@ include file="../include/footer.jspf"%>

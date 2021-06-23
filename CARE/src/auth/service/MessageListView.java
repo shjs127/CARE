@@ -19,6 +19,10 @@ public class MessageListView {
 		this.endRow = endRow;
 		setTotalPages();
 	}
+	
+	public MessageListView(List<Message> messageList) {
+		this.messageList = messageList;
+	}
 
 	private void setTotalPages() {
 		if (isEmpty())

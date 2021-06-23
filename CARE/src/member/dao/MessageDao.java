@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import auth.service.Message;
@@ -31,7 +32,7 @@ public class MessageDao {
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement("insert into Reviewinfo "
-					+ "(reviewNo, userNo, storeNo, avgScore, reviewContents, reviewDate ) values (REVIEWNUM.nextval, 1, 1, ?, ?, sysdate)");
+					+ "(reviewNo, userNo, storeNo, avgScore, reviewContents, reviewDate ) values (Reviewinfo_seq.nextval, 1, 1, ?, ?, sysdate)");
 			pstmt.setDouble(1, message.getAvgScore());
 			pstmt.setString(2, message.getReviewContents());
 			return pstmt.executeUpdate();
@@ -108,6 +109,30 @@ public class MessageDao {
 			JdbcUtil.close(pstmt);
 		}
 	}
+	
+	
+	public List<Message> selectByUserNo(Connection conn, int userNo) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement("select * from Reviewinfo "  + "where userNo = ?" + "order by reviewno asc");
+			pstmt.setInt(1, userNo);
+			// pstmt.setInt(2, endRow - firstRow + 1);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				List<Message> messageList = new ArrayList<Message>();
+				do {
+					messageList.add(makeMessageFromResultSet(rs));
+				} while (rs.next());
+				return messageList;
+			} else {
+				return Collections.emptyList();
+			}
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
 
 	public int delete(Connection conn, int messageId) throws SQLException {
 		PreparedStatement pstmt = null;
@@ -119,6 +144,8 @@ public class MessageDao {
 			JdbcUtil.close(pstmt);
 		}
 	}
+
+	
 
 
 }

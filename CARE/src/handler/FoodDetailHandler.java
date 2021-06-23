@@ -30,7 +30,6 @@ public class FoodDetailHandler implements CommandHandler {
 	private DetailInfoService detailinfoService = new DetailInfoService();
 	private ReviewInfoService reviewinfoService = new ReviewInfoService();
 	private FavoriteCheckService favoriteService=new FavoriteCheckService();
-	private ReviewInfoService reviewInfoService = new ReviewInfoService();
 	//private GetMenuListViewService getMenuListViewService = new GetMenuListViewService();
 
 	
@@ -88,9 +87,6 @@ public class FoodDetailHandler implements CommandHandler {
 				
 				System.out.println("userNo="+user.getUserNo());
 			}
-			
-			float storeAvg=reviewInfoService.storeAvg(storeNo);
-			req.getSession().setAttribute("storeAvg", storeAvg);
 			/*
 			 * for(int i=0; i<menuListView.getMenuInfoList().size(); i++) {
 			 * System.out.println(i+"="+menuListView.getMenuInfoList().get(i).getMenu());
