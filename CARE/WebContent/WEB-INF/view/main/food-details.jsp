@@ -122,10 +122,13 @@
 			<li class="list-inline-item star-rating"><i class="fa fa-star"
 				onclick="wishList();"> </i></li>
 		</ul>
+		
 	</h4>
+	
 	<!-- Heading Ends -->
 	<!-- Main Banner Starts -->
-	<div class="banner-area"></div>
+	<div class="banner-area">
+	</div>
 	<!-- Main Banner Ends -->
 	<!-- Nested Row Starts -->
 	<div class="row">
@@ -133,6 +136,7 @@
 		<div class="col-md-9 col-sm-12">
 			<!-- Menu Tabs Starts -->
 			<div class="menu-tabs-wrap">
+			
 				<!-- Menu Tabs List Starts -->
 				<ul
 					class="nav nav-tabs nav-menu-tabs text-xs-center text-sm-center text-md-left">
@@ -145,7 +149,30 @@
 						data-toggle="tab">리뷰</a></li>
 					
 				</ul>
+<%
+									int count;
 
+								if (session.getAttribute("count") != null) {
+									count = ((Integer) session.getAttribute("count")).intValue();
+
+								}
+
+								else {
+									count = 0;
+								}
+
+								count++;
+								%>
+
+								- 방문 횟수 :
+								<%=count%>
+
+								<%
+									session.setAttribute("count", new Integer(count));
+								%>
+								<br>
+								<br>
+								<br>
 				<!-- Menu Tabs List Ends -->
 				<!-- Menu Tabs Content Starts -->
 				<div class="tab-content">
@@ -312,27 +339,7 @@
 
 								<%-- 전체 : ${sessionScope.totalCount } <br> 
 								오늘 : ${sessionScope.todayCount } <br> --%>
-								<%
-									int count;
-
-								if (session.getAttribute("count") != null) {
-									count = ((Integer) session.getAttribute("count")).intValue();
-
-								}
-
-								else {
-									count = 0;
-								}
-
-								count++;
-								%>
-
-								- 방문 횟수 :
-								<%=count%>
-
-								<%
-									session.setAttribute("count", new Integer(count));
-								%>
+								
 
 								
 							</div>
@@ -423,6 +430,7 @@
 					<!-- Tab #3 Ends -->
 					<!-- Tab #4 Starts -->
 					<div id="reviews" class="tab-pane fade">
+					
 						<!-- Tab #4 Nested Row Starts -->
 						<div class="row">
 							<!-- Left Column Starts -->
@@ -607,10 +615,10 @@
 											<!-- /.box-body -->
 
 											<!-- /.box-footer-->
-									</div>
+									
 									<!-- /.box -->
 
-									</div>
+									
 									<!-- /.content -->
 								</div>
 
@@ -694,9 +702,9 @@
 							
 </div>
 </div>
-</div>
-						</div>
-			
+
+						
+			</div>
 
 
 
