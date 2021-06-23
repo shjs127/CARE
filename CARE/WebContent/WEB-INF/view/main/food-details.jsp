@@ -135,7 +135,12 @@
 		</ul>
 		</button>
 	</c:if>
-
+			<div class="col-md-8 col-sm-12">
+				
+					<h6 class="text-center">${storeAvg}</h6>
+				
+					</div>
+					
 	</h4>
 
 	<!-- Heading Ends -->
@@ -325,7 +330,7 @@
 										if (answer == true) {
 											location.href = "/CARE/login.do";
 										} else if (answer != true) {
-											location.href = "/login/login.jsp";
+											
 										}
 
 									}

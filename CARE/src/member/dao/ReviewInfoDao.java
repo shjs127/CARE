@@ -42,9 +42,6 @@ public class ReviewInfoDao {
 		return date == null ? null : new Date(date.getTime());
 	}
 
-
-
-
 	public void insert(Connection conn, ReviewInfo reviewinfo) throws SQLException {
 		try (PreparedStatement pstmt = 
 				conn.prepareStatement("insert into reviewinfo values(REVIEWNUM.NEXTVAL,?,?,?,?,?)")) {
@@ -67,14 +64,26 @@ public class ReviewInfoDao {
 		return null;
 	}
 
-	/*
-	 * public void update(Connection conn, reviewinfo reviewinfo) throws SQLException
-	 * { try (PreparedStatement pstmt = conn.prepareStatement(
-	 * "update reviewinfo set USERNAME = ?, PASSWORD = ? where USERID = ?")) {
-	 * pstmt.setString(1, reviewinfo.getName()); pstmt.setString(2,
-	 * reviewinfo.getPassword()); pstmt.setString(3, reviewinfo.getUserId());
-	 * pstmt.executeUpdate(); } }
-	 */
+	public float storeAvg(Connection conn, int storeNo) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		float count=0;
+		try {
+			pstmt = conn.prepareStatement(
+					"select AVG(avgscore) from reviewinfo where storeno=? ");
+			pstmt.setInt(1, storeNo); 
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+					count= rs.getFloat(1);
+					}
+				return count;
+
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
 }
 
 

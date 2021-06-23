@@ -25,7 +25,16 @@ public class ReviewInfoService {
 		}
 	}
 
-
+	public float storeAvg(int storeNo) {
+		try (Connection conn = ConnectionProvider.getConnection()) {
+			float storeAvg = reviewInfoDao.storeAvg(conn, storeNo);
+//	
+			
+			return storeAvg;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }
 	
 	
