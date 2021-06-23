@@ -122,13 +122,12 @@
 			<li class="list-inline-item star-rating"><i class="fa fa-star"
 				onclick="wishList();"> </i></li>
 		</ul>
-		
+
 	</h4>
-	
+
 	<!-- Heading Ends -->
 	<!-- Main Banner Starts -->
-	<div class="banner-area">
-	</div>
+	<div class="banner-area"></div>
 	<!-- Main Banner Ends -->
 	<!-- Nested Row Starts -->
 	<div class="row">
@@ -136,7 +135,7 @@
 		<div class="col-md-9 col-sm-12">
 			<!-- Menu Tabs Starts -->
 			<div class="menu-tabs-wrap">
-			
+
 				<!-- Menu Tabs List Starts -->
 				<ul
 					class="nav nav-tabs nav-menu-tabs text-xs-center text-sm-center text-md-left">
@@ -147,32 +146,31 @@
 						data-toggle="tab">매장 사진첩</a></li> -->
 					<li class="nav-item"><a href="#reviews" class="nav-link"
 						data-toggle="tab">리뷰</a></li>
-					
+
 				</ul>
-<%
-									int count;
+				<%
+					int count;
 
-								if (session.getAttribute("count") != null) {
-									count = ((Integer) session.getAttribute("count")).intValue();
+				if (session.getAttribute("count") != null) {
+					count = ((Integer) session.getAttribute("count")).intValue();
 
-								}
+				}
 
-								else {
-									count = 0;
-								}
+				else {
+					count = 0;
+				}
 
-								count++;
-								%>
+				count++;
+				%>
 
-								- 방문 횟수 :
-								<%=count%>
+				- 방문 횟수 :
+				<%=count%>
 
-								<%
-									session.setAttribute("count", new Integer(count));
-								%>
-								<br>
-								<br>
-								<br>
+				<%
+					session.setAttribute("count", new Integer(count));
+				%>
+				<br> <br>
+
 				<!-- Menu Tabs List Ends -->
 				<!-- Menu Tabs Content Starts -->
 				<div class="tab-content">
@@ -192,7 +190,8 @@
 									</ul>
 									<hr>
 									&ensp;&ensp;총 좌석 수: <span class="float-right text-spl-color">${detailinfo.totalSeat }개&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
-									&ensp;&ensp;충전기가 있는 좌석 수: <span class="float-right text-spl-color">${detailinfo.socketSeat }개&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
+									&ensp;&ensp;충전기가 있는 좌석 수: <span
+										class="float-right text-spl-color">${detailinfo.socketSeat }개&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
 									&ensp;&ensp;디저트: <span class="float-right text-spl-color">${detailinfo.dessertSales }&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
 									&ensp;&ensp;테라스: <span class="float-right text-spl-color">${detailinfo.terrace }&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
 									&ensp;&ensp;루프탑: <span class="float-right text-spl-color">${detailinfo.roofTop }&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
@@ -201,7 +200,7 @@
 									&ensp;&ensp;주차공간: <span class="float-right text-spl-color">${detailinfo.parkingSpace }&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
 									&ensp;&ensp;노키즈존: <span class="float-right text-spl-color">${detailinfo.noKidsZone }&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
 									&ensp;&ensp;흡연존: <span class="float-right text-spl-color">${detailinfo.smokingArea }&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
-								
+
 								</div>
 
 
@@ -339,11 +338,11 @@
 
 								<%-- 전체 : ${sessionScope.totalCount } <br> 
 								오늘 : ${sessionScope.todayCount } <br> --%>
-								
 
-								
+
+
 							</div>
-							
+
 							<!-- Left Column Ends -->
 							<!-- Right Column Starts -->
 							<div class="col-md-8 col-sm-12">
@@ -424,13 +423,13 @@
 					<!-- Tab #3 Starts -->
 					<div id="gallery" class="tab-pane fade">
 						<!-- Image Gallery Starts -->
-						
+
 						<!-- Image Gallery Ends -->
 					</div>
 					<!-- Tab #3 Ends -->
 					<!-- Tab #4 Starts -->
 					<div id="reviews" class="tab-pane fade">
-					
+
 						<!-- Tab #4 Nested Row Starts -->
 						<div class="row">
 							<!-- Left Column Starts -->
@@ -445,7 +444,8 @@
 									</ul>
 									<hr>
 									&ensp;&ensp;총 좌석 수: <span class="float-right text-spl-color">${detailinfo.totalSeat }개&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
-									&ensp;&ensp;충전기가 있는 좌석 수: <span class="float-right text-spl-color">${detailinfo.socketSeat }개&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
+									&ensp;&ensp;충전기가 있는 좌석 수: <span
+										class="float-right text-spl-color">${detailinfo.socketSeat }개&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
 									&ensp;&ensp;디저트: <span class="float-right text-spl-color">${detailinfo.dessertSales }&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
 									&ensp;&ensp;테라스: <span class="float-right text-spl-color">${detailinfo.terrace }&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
 									&ensp;&ensp;루프탑: <span class="float-right text-spl-color">${detailinfo.roofTop }&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
@@ -454,7 +454,7 @@
 									&ensp;&ensp;주차공간: <span class="float-right text-spl-color">${detailinfo.parkingSpace }&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
 									&ensp;&ensp;노키즈존: <span class="float-right text-spl-color">${detailinfo.noKidsZone }&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
 									&ensp;&ensp;흡연존: <span class="float-right text-spl-color">${detailinfo.smokingArea }&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
-								
+
 								</div>
 							</div>
 							<!-- Left Column Ends -->
@@ -488,7 +488,7 @@
 												%>
 
 												<div class="box-body">
-													<form action="review.do" method="post" id="writeForm">
+													<form method="post" id="writeForm">
 														<!-- // form에 ID 지정 -->
 														<p>
 															<textarea name="reviewContents" cols="60" rows="10"
@@ -496,14 +496,15 @@
 														</p>
 
 														<h9>별점을 선택하세요.</h9>
-														<select name="별점" textarea name="avgScore">
-															<!-- 															size="2" -->
+														<select name="avgScore">
+
 															<option value="1">★☆☆☆☆</option>
 															<option value="2">★★☆☆☆</option>
 															<option value="3">★★★☆☆</option>
 															<option value="4">★★★★☆</option>
 															<option value="5">★★★★★</option>
 														</select> <br>
+														<br>
 
 														<p>
 															<input type="submit" value="리뷰쓰기"
@@ -543,28 +544,28 @@
 										<section class="content-header"></section>
 
 										<!-- Main content -->
-										
-											<!-- Default box -->
-											<div class="box">
-												
 
-												<div class="review-list">
-													<%--  // <c:if> 태그로 생성되는 글목록을 감싸는 wrapper 요소 --%>
-													<c:if test="${view.isEmpty()}">
-														<p>등록된 메시지가 없습니다.</p>
-													</c:if>
-													<c:if test="${!view.isEmpty()}">
-														<table border="1">
-															<c:forEach var="message" items="${view.messageList}">
-																<div class="clearfix">
-																	<div class="float-left">
-																		<h6>
-																			<i class="fa fa-calendar"></i> ${message.reviewDate}
-																		</h6>
-																		<h6>회원 닉네임: ${userInfo.nickName}</h6>
+										<!-- Default box -->
+										<div class="box">
 
 
-																		<!-- <ul class="list-unstyled list-inline rating-star-list">
+											<div class="review-list">
+												<%--  // <c:if> 태그로 생성되는 글목록을 감싸는 wrapper 요소 --%>
+												<c:if test="${view.isEmpty()}">
+													<p>등록된 메시지가 없습니다.</p>
+												</c:if>
+												<c:if test="${!view.isEmpty()}">
+													<table border="1">
+														<c:forEach var="message" items="${view.messageList}">
+															<div class="clearfix">
+																<div class="float-left">
+																	<h6>
+																		<i class="fa fa-calendar"></i> ${message.reviewDate}
+																	</h6>
+																	<h6>회원 닉네임: ${userInfo.nickName}</h6>
+
+
+																	<!-- <ul class="list-unstyled list-inline rating-star-list">
 																			<li class="list-inline-item"><i
 																				class="fa fa-star"></i></li>
 																			<li class="list-inline-item"><i
@@ -579,20 +580,20 @@
 
 
 
-																	</div>
-																	<img src="images/review-thumb-img1.png" alt="Image"
-																		class="img-fluid float-right">
 																</div>
-																<div class="review-list-content">
-																	<p>리뷰내용: ${message.reviewContents}</p>
-																	<p>평점: ${message.avgScore}</p>
-																	<p>메시지 번호: ${message.reviewNo}</p>
+																<img src="images/review-thumb-img1.png" alt="Image"
+																	class="img-fluid float-right">
+															</div>
+															<div class="review-list-content">
+																<p>리뷰내용: ${message.reviewContents}</p>
+																<p>평점: ${message.avgScore}</p>
+																<p>메시지 번호: ${message.reviewNo}</p>
 
-																</div>
+															</div>
 
-															</c:forEach>
-														</table>
-														<%-- <tr>
+														</c:forEach>
+													</table>
+													<%-- <tr>
 																<td>
 
 																	<p>
@@ -603,210 +604,178 @@
 																</td>
 															</tr> --%>
 
-														<div>
-															<c:forEach var="pageNum" begin="1"
-																end="${view.totalPages}">
-																<span><a href="messageList.jsp?page=${pageNum}">[${pageNum}]</a></span>
-															</c:forEach>
-														</div>
-													</c:if>
-												</div>
+													<div>
+														<c:forEach var="pageNum" begin="1"
+															end="${view.totalPages}">
+															<span><a href="messageList.jsp?page=${pageNum}">[${pageNum}]</a></span>
+														</c:forEach>
+													</div>
+												</c:if>
 											</div>
-											<!-- /.box-body -->
+										</div>
+										<!-- /.box-body -->
 
-											<!-- /.box-footer-->
-									
-									<!-- /.box -->
+										<!-- /.box-footer-->
 
-									
-									<!-- /.content -->
+										<!-- /.box -->
+
+
+										<!-- /.content -->
+									</div>
+
+
+
+
+									<script>
+										// 제이쿼리로 form submit 이벤트 처리
+										$(function() {
+											$("#writeForm")
+													.submit(
+															function(event) {
+																alert("리뷰가 등록되었습니다.");
+
+																var formData = { // Plain Object 변수에 form의 data 저장
+																	reviewContents : this.reviewContents.value,
+																	avgScore : this.avgScore.value
+																};
+
+																$
+																		.ajax({
+																			url : "writeMessage.do",
+																			method : "POST",
+																			data : formData,
+																			success : function() { // 요청 성공 시 (HTTP 200 OK)
+																				$(
+																						"#writeForm [name=reviewContents]")
+																						.val(
+																								""); // 입력했던 정보 비우기
+																				$(
+																						"#list")
+																						.load(
+																								window.location.href
+																										+ " #list"); // 글목록만 새로고침
+																			}
+																		});
+
+																event
+																		.preventDefault(); // submit 시 페이지 이동하지 않게
+
+															});
+
+										});
+									</script>
+
+
+
 								</div>
 
-
-
-
-								<script>
-									// 제이쿼리로 form submit 이벤트 처리
-									$(function() {
-										$("#writeForm")
-												.submit(
-														function(event) {
-															alert("리뷰가 등록되었습니다.");
-
-															var formData = { // Plain Object 변수에 form의 data 저장
-																reviewContents : this.reviewContents.value
-															/* avgScore : this.avgScore.value */
-															};
-
-															$
-																	.ajax({
-																		url : "writeMessage.do",
-																		method : "POST",
-																		data : formData,
-																		success : function() { // 요청 성공 시 (HTTP 200 OK)
-																			$(
-																					"#writeForm [name=reviewContents]")
-																					.val(
-																							""); // 입력했던 정보 비우기
-																			$(
-																					"#list")
-																					.load(
-																							window.location.href
-																									+ " #list"); // 글목록만 새로고침
-																		}
-																	});
-
-															event
-																	.preventDefault(); // submit 시 페이지 이동하지 않게
-
-														});
-
-									});
-
-									/* 											$(function() {
-																					$(
-																							"#writeForm")FoodDetailHandler.java
-																							.submit(
-																									alert("제출누름...");
-																									
-																									
-																									function() {
-																										var formData = { // Plain Object 변수에 form의 data 저장
-																											reviewcontents : this.reviewcontents.value
-																										};
-
-																										$
-																												.ajax({
-																													url : "/CARE/WEB-INF/view/guestbook/writeMessage.jsp",
-																													method : "POST",
-																													data : formData,
-																													success : function() { // 요청 성공 시 (HTTP 200 OK)
-																														$(
-																																"#writeForm [name=reviewcontents]")
-																																.val(
-																																		""); // 입력했던 정보 비우기
-																														$("#list")
-																																.load(window.location.href + " #list"); // 글목록만 새로고침
-																													}
-																												});
-
-																										event
-																												.preventDefault(); // submit 시 페이지 이동하지 않게
-																									});
-																				}); */
-								</script>
-
-
-
 							</div>
-							
-</div>
-</div>
-
-						
-			</div>
-
-
-
-
-
-
-
-		<!-- Reviews Form Box Ends -->
-		<!-- Reviews List Starts -->
-		<!-- Default box -->
-		<div class="box">
-			
-			<div class="box-body">
-
-				<div class="reviews-box">
-
-					<!-- Review #1 Starts -->
-					<div class="review-list">
-						<div class="clearfix">
-							<div class="float-left"></div>
-
-
-
 						</div>
-						<div class="review-list-content"></div>
-					</div>
-					<!-- Review #1 Ends -->
-					<!-- Review #2 Starts -->
-					<div class="review-list">
-						<div class="clearfix">
-							<div class="float-left"></div>
 
-						</div>
-						<div class="review-list-content"></div>
-					</div>
-					<!-- Review #2 Ends -->
-					<!-- Review #3 Starts -->
-					<div class="review-list">
-						<div class="clearfix">
-							<div class="float-left"></div>
 
-						</div>
-						<div class="review-list-content"></div>
 					</div>
-					<!-- Review #3 Ends -->
-					<!-- Review #4 Starts -->
-					<div class="review-list">
-						<div class="clearfix">
-							<div class="float-left"></div>
 
+
+
+
+
+
+
+					<!-- Reviews Form Box Ends -->
+					<!-- Reviews List Starts -->
+					<!-- Default box -->
+					<div class="box">
+
+						<div class="box-body">
+
+							<div class="reviews-box">
+
+								<!-- Review #1 Starts -->
+								<div class="review-list">
+									<div class="clearfix">
+										<div class="float-left"></div>
+
+
+
+									</div>
+									<div class="review-list-content"></div>
+								</div>
+								<!-- Review #1 Ends -->
+								<!-- Review #2 Starts -->
+								<div class="review-list">
+									<div class="clearfix">
+										<div class="float-left"></div>
+
+									</div>
+									<div class="review-list-content"></div>
+								</div>
+								<!-- Review #2 Ends -->
+								<!-- Review #3 Starts -->
+								<div class="review-list">
+									<div class="clearfix">
+										<div class="float-left"></div>
+
+									</div>
+									<div class="review-list-content"></div>
+								</div>
+								<!-- Review #3 Ends -->
+								<!-- Review #4 Starts -->
+								<div class="review-list">
+									<div class="clearfix">
+										<div class="float-left"></div>
+
+									</div>
+									<div class="review-list-content"></div>
+								</div>
+								<!-- Review #4 Ends -->
+							</div>
+							<!-- Reviews List Ends -->
+							<!-- Spacer Starts -->
+							<div class="spacer-1 condensed"></div>
+							<!-- Spacer Ends -->
+							<!-- Banners Starts -->
+							<div class="row text-center">
+								<div class="col-6"></div>
+								<div class="col-6"></div>
+							</div>
+							<!-- Banners Ends -->
 						</div>
-						<div class="review-list-content"></div>
+						<!-- Reviews Tab Pane Ends -->
 					</div>
-					<!-- Review #4 Ends -->
+					<!-- Right Column Ends -->
 				</div>
-				<!-- Reviews List Ends -->
+				<!-- Tab #4 Nested Row Ends -->
+			</div>
+			<!-- Tab #4 Ends -->
+			<!-- Tab #5 Starts -->
+			<div id="reachus" class="tab-pane fade">
+				<!-- Tab #5 Nested Row Starts -->
+				<div class="row">
+					<!-- Left Column Starts -->
+
+					<!-- Tab #5 Nested Row Ends -->
+				</div>
+				<!-- Tab #5 Ends -->
+			</div>
+			<!-- Menu Tabs Content Ends -->
+
+			<!-- Menu Tabs Ends -->
+
+			<!-- Mainarea Ends -->
+			<!-- Sidearea Starts -->
+			<div class="col-md-3 col-sm-12">
 				<!-- Spacer Starts -->
-				<div class="spacer-1 condensed"></div>
+				<div class="spacer-1 medium d-xs-block d-sm-block d-md-none"></div>
 				<!-- Spacer Ends -->
-				<!-- Banners Starts -->
-				<div class="row text-center">
-					<div class="col-6"></div>
-					<div class="col-6"></div>
-				</div>
-				<!-- Banners Ends -->
-			</div>
-			<!-- Reviews Tab Pane Ends -->
-		</div>
-		<!-- Right Column Ends -->
-	</div>
-	<!-- Tab #4 Nested Row Ends -->
-</div>
-<!-- Tab #4 Ends -->
-<!-- Tab #5 Starts -->
-<div id="reachus" class="tab-pane fade">
-	<!-- Tab #5 Nested Row Starts -->
-	<div class="row">
-		<!-- Left Column Starts -->
-		
-	<!-- Tab #5 Nested Row Ends -->
-</div>
-<!-- Tab #5 Ends -->
-</div>
-<!-- Menu Tabs Content Ends -->
-
-<!-- Menu Tabs Ends -->
-
-<!-- Mainarea Ends -->
-<!-- Sidearea Starts -->
-<div class="col-md-3 col-sm-12">
-	<!-- Spacer Starts -->
-	<div class="spacer-1 medium d-xs-block d-sm-block d-md-none"></div>
-	<!-- Spacer Ends -->
-	<!-- Your Order Starts -->
-	<div class="side-block-order border-radius-4">
-		<!-- Heading Starts -->
-		<h6 class="text-center">가게 메뉴</h6>
-		<!-- Heading Ends -->
-		<!-- Order Content Starts -->
+				<!-- Your Order Starts -->
+				<div class="side-block-order border-radius-4">
+					<!-- Heading Starts -->
+					<h6 class="text-center">가게 메뉴</h6>
+					<!-- Heading Ends -->
+					<!-- Order Content Starts -->
 
 
-		<%-- 	총 좌석 수: <span class="float-right text-spl-color">${detailinfo.totalSeat }개</span><br>
+					<%-- 	총 좌석 수: <span class="float-right text-spl-color">${detailinfo.totalSeat }개</span><br>
 				충전기가 있는 좌석 수: <span class="float-right text-spl-color">${detailinfo.socketSeat }개</span><br>
 				디저트: <span class="float-right text-spl-color">${detailinfo.dessertSales }</span><br>
 				테라스: <span class="float-right text-spl-color">${detailinfo.terrace }</span><br>
@@ -818,90 +787,90 @@
 				흡연존: <span class="float-right text-spl-color">${detailinfo.smokingArea }</span><br>
  --%>
 
-		<c:forEach var="menuInfo2" items="${menuListView.menuInfoList}">
-								   &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
-								    메뉴 이름: ${menuInfo2.menu }&ensp;<br>
-									&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
-									 -가격: <span class="float-right text-spl-color">${menuInfo2.price }
-				&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<br>
-			</span>
-			<%-- -사진: ${menuInfo2.menuPic }<br> <br> --%>
-			<br>
-		</c:forEach>
+					<c:forEach var="menuInfo2" items="${menuListView.menuInfoList}">
+								  &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+								    메뉴 이름:  ${menuInfo2.menu }&ensp;<br>
+									&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+									 -가격:  <span class="float-right text-spl-color">${menuInfo2.price }
+							&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<br>
+						</span>
+						<%-- -사진: ${menuInfo2.menuPic }<br> <br> --%>
+						<br>
+					</c:forEach>
 
 
-		<div class="side-block-order-content">
-			<!-- Order Item List Starts -->
+					<div class="side-block-order-content">
+						<!-- Order Item List Starts -->
 
 
 
-		
-			<!-- Order Item List Ends -->
-			<!-- Order Item Total Starts -->
 
-			<!-- Order Item Total Ends -->
+						<!-- Order Item List Ends -->
+						<!-- Order Item Total Starts -->
 
-		</div>
-		<!-- Order Content Ends -->
-	</div>
-	<!-- Your Order Ends -->
-	<!-- Sponsors Banners Starts -->
+						<!-- Order Item Total Ends -->
 
-
-	<!-- Sponsors Banners Ends -->
-</div>
-<!-- Sidearea Ends -->
-</div>
-<!-- Nested Row Ends -->
-
-<!-- Main Container Ends -->
-<!-- Newsletter Section Starts -->
-<section class="footer-top">
-	<!-- Nested Container Starts -->
-	<div class="container">
-		<h3 class="text-center text-weight-bold">Subscribe to our
-			Newsletter:</h3>
-		<ul class="list-unstyled list-inline text-center">
-			<li class="list-inline-item"><i class="fa fa-check-circle"></i>
-				Receive deals from all our top restaurants via e-mail</li>
-			<li class="list-inline-item"><i class="fa fa-check-circle"></i>
-				Don't miss out on our great offers</li>
-		</ul>
-		<!-- Newsletter Form Starts -->
-		<form class="newsletter-form">
-			<!-- Nested Row Starts -->
-			<div class="row">
-				<div class="col-md-4 col-sm-12">
-					<label class="sr-only" for="newsletter-city">Please Select
-						Your City</label> <input type="text" class="form-control"
-						id="newsletter-city" placeholder="Please Select Your City">
+					</div>
+					<!-- Order Content Ends -->
 				</div>
-				<div class="col-md-5 col-sm-12">
-					<label class="sr-only" for="newsletter-email">Email</label> <input
-						type="text" class="form-control" id="newsletter-email"
-						placeholder="Enter Your E-mail Id">
-				</div>
-				<div class="col-md-3 col-sm-12">
-					<button type="submit"
-						class="btn btn-prime btn-block text-uppercase text-weight-bold animation">Sign
-						Up Now</button>
-				</div>
-				<div class="col-sm-12 text-center">
-					<h6 class="text-weight-bold">
-						<label> <input type="checkbox"> <span>I
-								have read &amp; accepted the terms and conditions and privacy
-								policy</span>
-						</label>
-					</h6>
-				</div>
+				<!-- Your Order Ends -->
+				<!-- Sponsors Banners Starts -->
+
+
+				<!-- Sponsors Banners Ends -->
 			</div>
-			<!-- Nested Row Ends -->
-		</form>
-		<!-- Newsletter Form Ends -->
-	</div>
-	<!-- Nested Container Ends -->
-</section>
-<!-- Newsletter Section Ends -->
+			<!-- Sidearea Ends -->
+		</div>
+		<!-- Nested Row Ends -->
+
+		<!-- Main Container Ends -->
+		<!-- Newsletter Section Starts -->
+		<section class="footer-top">
+			<!-- Nested Container Starts -->
+			<div class="container">
+				<h3 class="text-center text-weight-bold">Subscribe to our
+					Newsletter:</h3>
+				<ul class="list-unstyled list-inline text-center">
+					<li class="list-inline-item"><i class="fa fa-check-circle"></i>
+						Receive deals from all our top restaurants via e-mail</li>
+					<li class="list-inline-item"><i class="fa fa-check-circle"></i>
+						Don't miss out on our great offers</li>
+				</ul>
+				<!-- Newsletter Form Starts -->
+				<form class="newsletter-form">
+					<!-- Nested Row Starts -->
+					<div class="row">
+						<div class="col-md-4 col-sm-12">
+							<label class="sr-only" for="newsletter-city">Please
+								Select Your City</label> <input type="text" class="form-control"
+								id="newsletter-city" placeholder="Please Select Your City">
+						</div>
+						<div class="col-md-5 col-sm-12">
+							<label class="sr-only" for="newsletter-email">Email</label> <input
+								type="text" class="form-control" id="newsletter-email"
+								placeholder="Enter Your E-mail Id">
+						</div>
+						<div class="col-md-3 col-sm-12">
+							<button type="submit"
+								class="btn btn-prime btn-block text-uppercase text-weight-bold animation">Sign
+								Up Now</button>
+						</div>
+						<div class="col-sm-12 text-center">
+							<h6 class="text-weight-bold">
+								<label> <input type="checkbox"> <span>I
+										have read &amp; accepted the terms and conditions and privacy
+										policy</span>
+								</label>
+							</h6>
+						</div>
+					</div>
+					<!-- Nested Row Ends -->
+				</form>
+				<!-- Newsletter Form Ends -->
+			</div>
+			<!-- Nested Container Ends -->
+		</section>
+		<!-- Newsletter Section Ends -->
 
 
-<%@ include file="../include/footer.jspf"%>
+		<%@ include file="../include/footer.jspf"%>

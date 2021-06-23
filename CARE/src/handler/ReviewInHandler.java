@@ -1,10 +1,12 @@
 package handler;
-//�̼��� �߰� ����
+
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import auth.service.GetMessageListViewService;
 import auth.service.LoginFailException;
+import auth.service.Message;
 import auth.service.MessageListView;
 import auth.service.ReviewInfoService;
 import member.model.ReviewInfo;
@@ -28,20 +30,18 @@ public class ReviewInHandler implements CommandHandler {
 	}
 
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) {
-
-		
 		
 		try {
-			// storeNo 받아오기
-			int storeNo = Integer.parseInt(req.getParameter("storeno"));
+			int storeNo = 1;
 			
-//			int storeNo = 1;
+			ReviewInfo reviewInfo = reviewInfoService.reviewInfo(storeNo);
+			req.getSession().setAttribute("reviewInfo", reviewInfo);
+			/*
+			 * Message message = message.avgScore(storeNo);
+			 */
+			//System.out.println("avgScore: "+reviewInfo.getAvgScore());
 			
-			ReviewInfo reviewinfo = reviewInfoService.reviewInfo(storeNo);
-			req.getSession().setAttribute("reviewinfo", reviewinfo);
-			
-			
-			
+		
 			
 			GetMessageListViewService viewService = GetMessageListViewService.getInstance();
 			String pageStr = req.getParameter("page");

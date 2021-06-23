@@ -31,8 +31,9 @@ public class MessageDao {
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement("insert into Reviewinfo "
-					+ "(reviewNo, userNo, storeNo, avgScore, reviewContents, reviewDate ) values (Reviewinfo_seq.nextval, 1, 1, 4.8, ?, sysdate)");
-			pstmt.setString(1, message.getReviewContents());
+					+ "(reviewNo, userNo, storeNo, avgScore, reviewContents, reviewDate ) values (Reviewinfo_seq.nextval, 1, 1, ?, ?, sysdate)");
+			pstmt.setDouble(1, message.getAvgScore());
+			pstmt.setString(2, message.getReviewContents());
 			return pstmt.executeUpdate();
 		} finally {
 			JdbcUtil.close(pstmt);
@@ -63,7 +64,7 @@ public class MessageDao {
 		message.setReviewNo(rs.getInt("reviewNo"));
 		message.setStoreNo(rs.getInt("storeNo"));
 		message.setUserNo(rs.getInt("userNo"));
-		message.setAvgScore(rs.getInt("avgScore"));
+		message.setAvgScore(rs.getDouble("avgScore"));
 		message.setReviewContents(rs.getString("reviewContents"));
 		message.setReviewDate(rs.getDate("reviewDate"));
 		
