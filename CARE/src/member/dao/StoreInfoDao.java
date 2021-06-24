@@ -140,105 +140,141 @@ public class StoreInfoDao {
 		}
 	}
 	
-	// main select
-		public List<StoreInfo> getSearch(Connection conn, int startRow, int size, String searchKeyword) throws SQLException {
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			
-			String sql = "select storeinfo.* "
-						+ "from (select rownum as rnum, storeinfo.* "
-						+ "from storeinfo "
-						+ "where storeinfo.storename LIKE '%'||?||'%' "
-				        + "OR storeinfo.address LIKE '%'||?||'%' "
-				        + "order by storeinfo.storeno desc) storeinfo "
-				        + "where rnum between ? and ?";
-			
-//			String sql = "select storeinfo.* "
-//					+ "from (select rownum as rnum, storeinfo.* "
-//					+ "from storeinfo, menuinfo "
-//					+ "where storeinfo.storeno = menuinfo.storeno "
-//					+ "and storeinfo.storename LIKE '%'||?||'%' "
-//			        + "OR storeinfo.address LIKE '%'||?||'%' "
-//			        + "OR menuinfo.menu LIKE '%'||?||'%' "
-//			        + "order by storeinfo.storeno desc) storeinfo, menuinfo "
-//			        + "where rnum between ? and ?";
-			
-			try {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, searchKeyword);
-				pstmt.setString(2, searchKeyword);
-//				pstmt.setString(3, searchKeyword);
-				pstmt.setInt(3, startRow);
-				pstmt.setInt(4, size);
-				rs = pstmt.executeQuery();
-				List<StoreInfo> result = new ArrayList<>();
-				while(rs.next()) {
-					result.add(convertStore(rs));
-				}
-				return result;
-			} finally {
-				JdbcUtil.close(rs);
-				JdbcUtil.close(pstmt);
+	// List<STOREINFO> avgScore select
+	public List<StoreInfo> selectAvgScore(Connection conn, int startRow, int size) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement("select s.* "
+					+ "from (select storeno , AVG(avgscore) as aa from reviewinfo "
+					+ "group by storeno order by aa DESC,storeno DESC) r, storeinfo s "
+					+ "where r.storeno = s.storeno and rownum between ? and ?");
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, size);
+			rs = pstmt.executeQuery();
+			List<StoreInfo> result = new ArrayList<>();
+			while (rs.next()) {
+				result.add(convertStore(rs));
 			}
+			return result;
+
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
 		}
-		
-		
-		
-		public static List<StoreInfo> selectByStoreNo(Connection conn, int storeNo) throws SQLException {
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			
-			String sql = "select * from storeinfo where storeno= ?";
-		
-			
-			try {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, storeNo);
-				
-				rs = pstmt.executeQuery();
-				List<StoreInfo> result = new ArrayList<>();
-				while(rs.next()) {
-					;
-				}
-				return result;
-			} finally {
-				JdbcUtil.close(rs);
-				JdbcUtil.close(pstmt);
-			}
-		}
-		
-		
-		public static List<StoreInfo> selectByUserNo(Connection conn, int userNo) throws SQLException {
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			
-			String sql = "select s.storeno, s.storename from storeinfo s , favorite f " +
-					     "where s.storeno=f.storeno and f.userno=?";
-			
-			try {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, userNo);
-				
-				rs = pstmt.executeQuery();
-				List<StoreInfo> result = new ArrayList<>();
-				while(rs.next()) {
-					StoreInfo storeInfo = new StoreInfo(rs.getInt("storeno"),rs.getString("storename"));
-					result.add(storeInfo);
-				}
-				return result;
-			} finally {
-				JdbcUtil.close(rs);
-				JdbcUtil.close(pstmt);
-			}
-		}
-		
-		
-		
-		
+	}
 	
+	// List<STOREINFO> ReviewCount select
+	public List<StoreInfo> selectReviewCnt(Connection conn, int startRow, int size) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement("SELECT A.* "
+					+ "FROM ( "
+						+ "SELECT A.*, ROWNUM AS RNUM "
+						+ "FROM ("
+							+ "SELECT A.* "
+							+ "FROM ( "
+								+ "SELECT A.*, "
+									+ "(SELECT COUNT(1) FROM REVIEWINFO R "
+									+ "WHERE A.STORENO = R.STORENO GROUP BY R.STORENO) AS REVIEW_CNT "
+									+ "FROM STOREINFO A "
+							+ ") A "
+							+ "ORDER BY REVIEW_CNT "
+						+ ") A "
+					+ ") A "
+					+ "WHERE RNUM BETWEEN ? AND ?");
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, size);
+			rs = pstmt.executeQuery();
+			List<StoreInfo> result = new ArrayList<>();
+			while (rs.next()) {
+				result.add(convertStore(rs));
+			}
+			return result;
+
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
+	
+	// main select
+	public List<StoreInfo> getSearch(Connection conn, int startRow, int size, String searchKeyword) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		
+		String sql = "select storeinfo.* "
+					+ "from (select rownum as rnum, storeinfo.* "
+					+ "from storeinfo "
+					+ "where storeinfo.storename LIKE '%'||?||'%' "
+			        + "OR storeinfo.address LIKE '%'||?||'%' "
+			        + "order by storeinfo.storeno desc) storeinfo "
+			        + "where rnum between ? and ?";
 		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, searchKeyword);
+			pstmt.setString(2, searchKeyword);
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, size);
+			rs = pstmt.executeQuery();
+			List<StoreInfo> result = new ArrayList<>();
+			while(rs.next()) {
+				result.add(convertStore(rs));
+			}
+			return result;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
 		
+	public static List<StoreInfo> selectByStoreNo(Connection conn, int storeNo) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select * from storeinfo where storeno= ?";
+	
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, storeNo);
+			
+			rs = pstmt.executeQuery();
+			List<StoreInfo> result = new ArrayList<>();
+			while(rs.next()) {
+				;
+			}
+			return result;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
+	
+	public static List<StoreInfo> selectByUserNo(Connection conn, int userNo) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select s.storeno, s.storename from storeinfo s , favorite f " +
+				     "where s.storeno=f.storeno and f.userno=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			
+			rs = pstmt.executeQuery();
+			List<StoreInfo> result = new ArrayList<>();
+			while(rs.next()) {
+				StoreInfo storeInfo = new StoreInfo(rs.getInt("storeno"),rs.getString("storename"));
+				result.add(storeInfo);
+			}
+			return result;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
 		
 	private StoreInfo convertStore(ResultSet rs) throws SQLException {
 		return new StoreInfo(rs.getInt("storeNo"),

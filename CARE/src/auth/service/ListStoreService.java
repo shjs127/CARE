@@ -15,14 +15,22 @@ public class ListStoreService {
 	private int endSize = 0;
 	
 
-	public StorePage getStorePage(int pageNum) {
+	public StorePage getStorePage(int pageNum, String orderBy) {
 		
 		endSize = pageNum * size;
 		
 		try (Connection conn = ConnectionProvider.getConnection()) {
 			int total = storeInfoDao.selectCount(conn);
-			List<StoreInfo> storeList = storeInfoDao.select(
-					conn, (pageNum - 1) * size + 1, endSize);
+			List<StoreInfo> storeList = null;
+			
+			if(orderBy.equals("orderStoreNo")) {
+				storeList = storeInfoDao.select(conn, (pageNum - 1) * size + 1, endSize);
+			}else if(orderBy.equals("orderAvgScore")) {
+				storeList = storeInfoDao.selectAvgScore(conn, (pageNum - 1) * size + 1, endSize);
+			}else if(orderBy.equals("orderReviewCnt")){
+				storeList = storeInfoDao.selectReviewCnt(conn, (pageNum - 1) * size + 1, endSize);
+			}
+			
 			return new StorePage(total, pageNum, size, storeList);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);

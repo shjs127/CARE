@@ -19,7 +19,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 
-		<title>Cafe Recommendation - CA RE</title>
+		<title>Ca Re - Cafe Recommendation</title>
 
 		<!-- Bootstrap -->
 		<link href="<%=request.getContextPath()%>/CARE/css/bootstrap.min.css" rel="stylesheet">
@@ -76,7 +76,7 @@ window.location.href="index.jsp?locale="+locale;
 					<div class="col-md-4 col-sm-12">
 					<!-- Logo Starts -->
 					<a href="${pageContext.request.contextPath}/main/index.do">
-						<img src="<%=request.getContextPath()%>/CARE/images/careitsir_logo6.png" alt="FoodBingo" class="logo img-fluid" width="200" height="200">
+						<img src="<%=request.getContextPath()%>/CARE/images/careitsir_logo.png" alt="FoodBingo" class="logo img-fluid" width="200" height="200">
 						</a>
 					<!-- Logo Ends -->
 					</div>

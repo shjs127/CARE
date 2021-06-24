@@ -52,11 +52,11 @@
 			<!-- Sidearea Filters Starts -->
 			<div class="sidearea-filter">
 				<!-- Sort By Field Starts -->
-				<select class="form-control rounded-0 sidearea-filter-sort" id="StoreOrder" name="StoreOrder">
+				<select class="form-control rounded-0 sidearea-filter-sort" id="orderBy" name="orderBy">
 					<option value="" disabled>정렬</option>
-					<option value="orderStoreNo">번호순</option>
-					<option value="orderAvgScore" selected>평점순</option>
-					<option value="orderReviewCnt">리뷰순</option>
+					<option value="orderStoreNo" <c:if test="${param.orderBy == 'orderStoreNo'}" > selected </c:if>>번호순</option>
+					<option value="orderAvgScore" <c:if test="${param.orderBy == 'orderAvgScore'}" > selected </c:if>>평점순</option>
+					<option value="orderReviewCnt" <c:if test="${param.orderBy == 'orderReviewCnt'}" > selected </c:if>>리뷰순</option>
 				</select>
 				<!-- Sort By Field Ends -->
 				<!-- Filter By Restaurants Starts -->
@@ -239,21 +239,21 @@
 						<c:forEach var="pNo" begin="${storePage.startPage}"
 							end="${storePage.endPage}">
 							<c:if test="${Keyword == null}">
-								<c:if test="${pNo == param.pageNo }">
+								<c:if test="${pNo == storePage.currentPage }">
 									<li class="page-item active"><a href="storelist.do?pageNo=${pNo}"
 								class="page-link">${pNo}</a></li>
 								</c:if>
-								<c:if test="${pNo != param.pageNo }">
+								<c:if test="${pNo != storePage.currentPage }">
 									<li class="page-item"><a href="storelist.do?pageNo=${pNo}"
 								class="page-link">${pNo}</a></li>
 								</c:if>
 							</c:if>
 							<c:if test="${Keyword != null}">
-								<c:if test="${pNo == param.pageNo }">
+								<c:if test="${pNo == storePage.currentPage }">
 									<li class="page-item active"><a href="search.do?pageNo=${pNo}&searchKeyword=${Keyword}"
 								class="page-link">${pNo}</a></li>
 								</c:if>
-								<c:if test="${pNo != param.pageNo }">
+								<c:if test="${pNo != storePage.currentPage }">
 									<li class="page-item"><a href="search.do?pageNo=${pNo}&searchKeyword=${Keyword}"
 								class="page-link">${pNo}</a></li>
 								</c:if>
@@ -288,22 +288,6 @@
                         </ul>
                     </div> -->
 			<!-- Pagination Ends -->
-			<!-- Banners Starts -->
-			<div class="row">
-				<div class="col-4">
-					<img src="images/banners/banner-img1.png" alt="Banner 1"
-						class="img-fluid">
-				</div>
-				<div class="col-4">
-					<img src="images/banners/banner-img2.png" alt="Banner 2"
-						class="img-fluid">
-				</div>
-				<div class="col-4">
-					<img src="images/banners/banner-img3.png" alt="Banner 3"
-						class="img-fluid">
-				</div>
-			</div>
-			<!-- Banners Ends -->
 		</div>
 		<!-- Mainarea Ends -->
 	</div>
@@ -451,6 +435,15 @@
 				$("#searchKeyword").focus();
 				return false;
 			}
+		});
+	});
+</script>
+
+<script>
+	$(function(){
+		$("#orderBy").change(function(){
+			var orderby = $(this).val();
+			$(location).attr('href', '${pageContext.request.contextPath}/board/storelist.do?orderBy='+orderby);
 		});
 	});
 </script>
