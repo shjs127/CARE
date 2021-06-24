@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import auth.service.DetailInfoService;
 import auth.service.FavoriteCheckService;
+import auth.service.FoodDetailsService;
 import auth.service.GetMenuListViewService;
 import auth.service.GetMessageListViewService;
 import auth.service.LoginFailException;
@@ -30,7 +31,8 @@ public class FoodDetailHandler implements CommandHandler {
 	private DetailInfoService detailinfoService = new DetailInfoService();
 	private ReviewInfoService reviewinfoService = new ReviewInfoService();
 	private FavoriteCheckService favoriteService=new FavoriteCheckService();
-	//private GetMenuListViewService getMenuListViewService = new GetMenuListViewService();
+	private FoodDetailsService foodDetailsService=new FoodDetailsService();
+
 
 	
 	
@@ -75,6 +77,7 @@ public class FoodDetailHandler implements CommandHandler {
 			
 			GetMenuListViewService getMenuListViewService = GetMenuListViewService.getInstance();
 			MenuListView menuListView = getMenuListViewService.getMenuListView(pageNum);
+			req.getSession().setAttribute("menuListView", menuListView);
 		
 			if(user!= null) {
 				
@@ -87,14 +90,9 @@ public class FoodDetailHandler implements CommandHandler {
 				
 				System.out.println("userNo="+user.getUserNo());
 			}
-			/*
-			 * for(int i=0; i<menuListView.getMenuInfoList().size(); i++) {
-			 * System.out.println(i+"="+menuListView.getMenuInfoList().get(i).getMenu());
-			 * System.out.println(i+"="+menuListView.getMenuInfoList().get(i).getMenuPic());
-			 * }
-			 */
 			
-			req.getSession().setAttribute("menuListView", menuListView);
+			  float storeAvg = foodDetailsService.storeAvg(storeNo);
+			  req.getSession().setAttribute("storeAvg", storeAvg);
 
 			return FORM_VIEW;
 		} catch (LoginFailException e) {

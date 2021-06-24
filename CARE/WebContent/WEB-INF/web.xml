@@ -74,7 +74,7 @@
 	
 		<!-- 초기 화면 -->
 	<welcome-file-list>
-		<welcome-file>/WEB-INF/view/main/index.jsp</welcome-file>
+		<welcome-file>/WEB-INF/view/main/welcome.jsp</welcome-file>
 	</welcome-file-list>
 <!-- 로그인 필터 -->
 	<filter> <filter-name>LoginCheck</filter-name> 

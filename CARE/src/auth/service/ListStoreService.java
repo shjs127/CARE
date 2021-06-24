@@ -45,4 +45,15 @@ public class ListStoreService {
 		
 	}
 	
+	public List<Store> storeTop(int top) {
+		
+		try (Connection conn = ConnectionProvider.getConnection()) {
+			List<Store> storageAvgTop = storeInfoDao.storeAvgTop(conn,top);
+	
+			return storageAvgTop;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
 }

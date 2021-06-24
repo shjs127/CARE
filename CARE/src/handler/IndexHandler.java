@@ -1,6 +1,7 @@
 package handler;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,12 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 import auth.service.DuplicateIdException;
 import auth.service.JoinRequest;
 import auth.service.JoinService;
+import auth.service.ListStoreService;
+import auth.service.Store;
+import auth.service.StorePage;
 import mvc.command.CommandHandler;
 
 public class IndexHandler implements CommandHandler {
-
 	private static final String FORM_VIEW = "/WEB-INF/view/main/index.jsp";
-	private JoinService joinService = new JoinService();
+	private ListStoreService listStoreService = new ListStoreService();
+
 	
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) {
@@ -32,25 +36,17 @@ public class IndexHandler implements CommandHandler {
 	}
 
 	private String processForm(HttpServletRequest req, HttpServletResponse res) {
+		int top=6;  
+		List<Store> storageAvgTop = listStoreService.storeTop(top);
+
+		req.setAttribute("storageAvgTop", storageAvgTop);
+
 		return FORM_VIEW;
 	}
 
 	/*
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) {
-		JoinRequest joinReq = new JoinRequest();
-		joinReq.setId(req.getParameter("id"));
-		joinReq.setName(req.getParameter("name"));
-		joinReq.setPassword(req.getParameter("password"));
-		joinReq.setConfirmPassword(req.getParameter("confirmPassword"));
-		
-		Map<String, Boolean> errors = new HashMap<>();
-		req.setAttribute("errors", errors);
-		
-		joinReq.validate(errors);  // errors = {"name":true, "confirmPw":true}
-		
-		if (!errors.isEmpty()) {
-			return FORM_VIEW;
-		}
+	
 		
 		try {
 			joinService.join(joinReq);
@@ -63,3 +59,4 @@ public class IndexHandler implements CommandHandler {
 	*/
 
 }
+

@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import auth.service.Store;
 import jdbc.JdbcUtil;
 import member.model.StoreInfo;
 
@@ -288,7 +289,54 @@ public class StoreInfoDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	public List<Store> storeAvgTop(Connection conn,int top) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(
+					"select r.storeno storeNo, r.aa storeAvg, s.storename storeName  from (select storeno , AVG(avgscore) as aa from reviewinfo "
+					+ "group by storeno order by aa DESC,storeno DESC) r, storeinfo s "
+					+ "where r.storeno = s.storeno and rownum<=? ");
+			pstmt.setInt(1, top);
+			rs = pstmt.executeQuery();
+			List<Store> result=new ArrayList<>();
+			while (rs.next()) {
+				result.add(convertStoreAvg(rs));
+			}
+			
+			return result;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
+	private Store convertStoreAvg(ResultSet rs) throws SQLException {
+		return new Store(rs.getInt("storeNo"), rs.getString("storeName"), rs.getFloat("storeAvg")); 
+			
+	}
+	
+	public float storeAvg(Connection conn, int storeNo) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		float count=0;
+		try {
+			pstmt = conn.prepareStatement(
+					"select AVG(avgscore) from reviewinfo "
+					+ "group by storeno "
+					+ "having storeno=?");
+			pstmt.setInt(1, storeNo);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				count=rs.getFloat(1);
+			
+			}
+			return count;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
+	
 }
 
 

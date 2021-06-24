@@ -118,31 +118,30 @@
 		${storeinfo.storeName}
 
 		<c:if test="${isExisFavoriteData}">
-		<button id="starCheck">
-		<ul class="list-unstyled list-inline grid-box-ratings float-lg-right text-lg-right">
-			<li class="list-inline-item star-rating">
-			<i class="fa fa-star"></i>
-			</li>
+			<button id="starCheck">
+				<ul
+					class="list-unstyled list-inline grid-box-ratings float-lg-right text-lg-right">
+					<li class="list-inline-item star-rating"><i class="fa fa-star"></i>
+					</li>
+				</ul>
+			</button>
+		</c:if>
+		<c:if test="${!isExisFavoriteData}">
+			<button id="starCheck">
+				<ul
+					class="list-unstyled list-inline grid-box-ratings float-lg-right text-lg-right">
+					<li class="list-inline-item star-rating"><i
+						class="fa fa-star-o"></i></li>
+				</ul>
+			</button>
+		</c:if>
+		<ul
+			class="list-unstyled list-inline grid-box-ratings float-lg-right text-lg-right">
+			<li class="list-inline-item star-rating">${storeAvg}</li>
 		</ul>
-		</button>
-	</c:if>
-	<c:if test="${!isExisFavoriteData}">
-		<button id="starCheck">
-		<ul class="list-unstyled list-inline grid-box-ratings float-lg-right text-lg-right">
-			<li class="list-inline-item star-rating">
-			<i class="fa fa-star-o"></i>
-			</li>
-		</ul>
-		</button>
-	</c:if>
-			<ul class="list-unstyled list-inline grid-box-ratings float-lg-right text-lg-right">
-			<li class="list-inline-item star-rating">${storeAvg}
-		
-			</li>
-		</ul>
-				
-		
-					
+
+
+
 	</h4>
 
 	<!-- Heading Ends -->
@@ -332,40 +331,48 @@
 										if (answer == true) {
 											location.href = "/CARE/login.do";
 										} else if (answer != true) {
-											
+
 										}
 
 									}
-									$(function(){
-										$("#starCheck").on("click",function(){
-			
-											var storeNo = "${storeinfo.storeNo}";
-											var userNo = "${authUser.userNo}";
-											var sendData = 'storeNo='+storeNo+'&userNo='+userNo;
-											
-											if (userNo == "") {
-												
-												let answer = confirm("로그인이 필요합니다.");
-												if (answer == true) {
-													location.href = "/CARE/login.do";
-												} else if (answer != true) {
-									
-												}
+									$(function() {
+										$("#starCheck")
+												.on(
+														"click",
+														function() {
 
-											} 
-											
-											$.ajax({
-												url: "favorite.do",
-												type: "POST",
-												data: sendData,
-								                success: function() {
-								                	location.reload();
-								                }
-											}); 
-										});
+															var storeNo = "${storeinfo.storeNo}";
+															var userNo = "${authUser.userNo}";
+															var sendData = 'storeNo='
+																	+ storeNo
+																	+ '&userNo='
+																	+ userNo;
+
+															if (userNo == "") {
+
+																let answer = confirm("로그인이 필요합니다.");
+																if (answer == true) {
+																	location.href = "/CARE/login.do";
+																} else if (answer != true) {
+
+																}
+
+															}
+
+															$
+																	.ajax({
+																		url : "favorite.do",
+																		type : "POST",
+																		data : sendData,
+																		success : function() {
+																			location
+																					.reload();
+																		}
+																	});
+														});
 									});
 								</script>
-		
+
 								<br>
 
 								<%-- 전체 : ${sessionScope.totalCount } <br> 
@@ -535,8 +542,7 @@
 															<option value="3">★★★☆☆</option>
 															<option value="4">★★★★☆</option>
 															<option value="5">★★★★★</option>
-														</select> <br>
-														<br>
+														</select> <br> <br>
 
 														<p>
 															<input type="submit" value="리뷰쓰기"
@@ -831,15 +837,15 @@
 					</c:forEach>
 
 
-						<!-- Order Item List Starts -->
+					<!-- Order Item List Starts -->
 
 
 
 
-						<!-- Order Item List Ends -->
-						<!-- Order Item Total Starts -->
+					<!-- Order Item List Ends -->
+					<!-- Order Item Total Starts -->
 
-						<!-- Order Item Total Ends -->
+					<!-- Order Item Total Ends -->
 
 					<!-- Order Content Ends -->
 				</div>
@@ -855,15 +861,15 @@
 
 		<!-- Main Container Ends -->
 		<!-- Newsletter Section Starts -->
-			<!-- Nested Container Starts -->
-				
-				<!-- Newsletter Form Starts -->
-				
-				<!-- Newsletter Form Ends -->
-			<!-- Nested Container Ends -->
+		<!-- Nested Container Starts -->
+
+		<!-- Newsletter Form Starts -->
+
+		<!-- Newsletter Form Ends -->
+		<!-- Nested Container Ends -->
 		<!-- Newsletter Section Ends -->
 
-</div>
+	</div>
 </div>
 
-		<%@ include file="../include/footer.jspf"%>
+<%@ include file="../include/footer.jspf"%>

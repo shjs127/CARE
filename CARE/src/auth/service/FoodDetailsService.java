@@ -95,6 +95,18 @@ public class FoodDetailsService {
 			// TODO Auto-generated method stub
 			return null;
 		}
+		
+		public float storeAvg(int storeNo) {
+			try (Connection conn = ConnectionProvider.getConnection()) {
+				float storeAvg = storeInfoDao.storeAvg(conn, storeNo);
+			
+				
+				return storeAvg;
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		
 
 }
 		
