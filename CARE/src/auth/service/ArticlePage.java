@@ -3,12 +3,14 @@ package auth.service;
 import java.util.List;
 
 import member.model.BoardInfo;
+import member.model.BoardPicInfo;
 
 public class ArticlePage {
 
 	private int total;  // 2
 	private int currentPage;  // 1
-	private List<BoardInfo> list;  // 2개 Article 객체포함한 리스트
+	private List<BoardInfo> list;  // 2媛� Article 媛앹껜�룷�븿�븳 由ъ뒪�듃
+	private List<BoardPicInfo> picList;
 	private int totalPages;  // 1
 	private int startPage;   // 1
 	private int endPage;     // 1
@@ -35,6 +37,10 @@ public class ArticlePage {
 			endPage = startPage + 4;  // 1+4 = 5
 			if (endPage > totalPages) endPage = totalPages;  // 1
 		}
+	}
+	
+	public ArticlePage(List<BoardPicInfo> picList) {
+		this.picList = picList;
 	}
 
 	public int getTotal() {
@@ -71,4 +77,13 @@ public class ArticlePage {
 	public int getPageV() {
 		return pageV;
 	}
+
+	public List<BoardPicInfo> getPicList() {
+		return picList;
+	}
+
+	public void setPicList(List<BoardPicInfo> picList) {
+		this.picList = picList;
+	}
+	
 }

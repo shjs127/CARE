@@ -66,27 +66,27 @@ button {
 			<b>게시글 작성</b>
 		</div>
 		<script>
-		function writeConfirm()
-		{
-		         if(document.getElementById('boardTitle').value == '') 
-		         {      
-		        alert("글 제목을 작성해주세요");
-		              document.getElementById('boardTitle').focus();
-		        return false;       
-		        }
-		         else if(document.getElementById('boardContents').value == '')
-		         {      
-		        alert("글 내용을 작성해주세요");
-		               document.getElementById('boardContents').focus();
-		        return false;       
-		        }
-		         else
-		           return true;
-		}
+			function writeConfirm() {
+				if (document.getElementById('boardTitle').value == '') {
+					alert("글 제목을 작성해주세요");
+					document.getElementById('boardTitle').focus();
+					return false;
+				} else if (document.getElementById('boardContents').value == '') {
+					alert("글 내용을 작성해주세요");
+					document.getElementById('boardContents').focus();
+					return false;
+				} else
+					return true;
+			}
 		</script>
-		<form  onsubmit="return writeConfirm();" action="write.do" method="post">
+		<form onsubmit="return writeConfirm();" action="write.do"
+			method="post" enctype="multipart/form-data">
 
 			<table>
+				<tr>
+					<td>파일명 :</td>
+					<td><input type="file" name="fileName1"></td>
+				</tr>
 				<tr>
 					<td>제목</td>
 					<td><input type="text" name="boardTitle" id="boardTitle" /></td>

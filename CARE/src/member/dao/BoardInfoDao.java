@@ -10,24 +10,25 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import auth.service.WriteRequest;
 import jdbc.JdbcUtil;
 import member.model.BoardInfo;
+import member.model.BoardPicInfo;
 
 public class BoardInfoDao {
 
 	// 寃뚯?��湲� insert
-	public BoardInfo insert(Connection conn, BoardInfo boardinfo) throws SQLException {
+	public Integer insert(Connection conn, BoardInfo boardinfo) throws SQLException {
 		PreparedStatement pstmt = null;
 		Statement stmt = null;
 		ResultSet rs = null;
 
 		try {
-			pstmt = conn.prepareStatement("insert into boardinfo values(BOARDNUM.NEXTVAL,?,?,?,?,0,?)");
+			pstmt = conn.prepareStatement("insert into boardinfo values(BOARDNUM.NEXTVAL,?,?,?,0,?)");
 			pstmt.setInt(1, boardinfo.getUserNo());
 			pstmt.setString(2, boardinfo.getBoardTitle());
 			pstmt.setString(3, boardinfo.getBoardContents());
-			pstmt.setString(4, boardinfo.getBoardPic());
-			pstmt.setTimestamp(5, new Timestamp(boardinfo.getBoardDate().getTime()));
+			pstmt.setTimestamp(4, new Timestamp(boardinfo.getBoardDate().getTime()));
 			int insertedCount = pstmt.executeUpdate();
 
 			if (insertedCount > 0) {
@@ -35,8 +36,7 @@ public class BoardInfoDao {
 				rs = stmt.executeQuery("select BOARDNUM.currval from boardinfo");
 				if (rs.next()) {
 					Integer newNo = rs.getInt(1);
-					return new BoardInfo(newNo, boardinfo.getUserNo(), boardinfo.getBoardTitle(),
-							boardinfo.getBoardContents(), boardinfo.getBoardPic(), 0, boardinfo.getBoardDate());
+					return newNo;
 				}
 			}
 			return null;
@@ -70,35 +70,34 @@ public class BoardInfoDao {
 	public int searchCount(Connection conn, String search) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		int count=0;
-		String sql=
-				"select count(*) from boardinfo WHERE BOARDTITLE LIKE '%'||?||'%' OR BOARDCONTENTS LIKE '%'||?||'%'";
+		int count = 0;
+		String sql = "select count(*) from boardinfo WHERE BOARDTITLE LIKE '%'||?||'%' OR BOARDCONTENTS LIKE '%'||?||'%'";
 		try {
-			pstmt=conn.prepareStatement(sql);
-				pstmt.setString(1,search);
-				pstmt.setString(2,search);
-				rs=pstmt.executeQuery();
-				if (rs.next()) {
-				count= rs.getInt(1);
-				}
-				return count;
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, search);
+			pstmt.setString(2, search);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				count = rs.getInt(1);
+			}
+			return count;
 		} finally {
 			JdbcUtil.close(rs);
 			JdbcUtil.close(pstmt);
 		}
 	}
+
 	public List<BoardInfo> search(Connection conn, int startRow, int size, String search) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			String sql="select boardinfo.* from (select rownum as rnum, boardinfo.* from boardinfo "
-					+"WHERE boardinfo.BOARDTITLE LIKE '%'||?||'%' OR boardinfo.BOARDCONTENTS LIKE '%'||?||'%' "
-					+"order by BOARDNO desc) boardinfo "
-					+ "where rnum between ? and ? ";
-			
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1,search);
-			pstmt.setString(2,search);
+			String sql = "select boardinfo.* from (select rownum as rnum, boardinfo.* from boardinfo "
+					+ "WHERE boardinfo.BOARDTITLE LIKE '%'||?||'%' OR boardinfo.BOARDCONTENTS LIKE '%'||?||'%' "
+					+ "order by BOARDNO desc) boardinfo " + "where rnum between ? and ? ";
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, search);
+			pstmt.setString(2, search);
 			pstmt.setInt(3, startRow);
 			pstmt.setInt(4, size);
 			rs = pstmt.executeQuery();
@@ -120,9 +119,9 @@ public class BoardInfoDao {
 		try {
 			pstmt = conn.prepareStatement(
 					"select boardinfo.* from (select rownum as rnum, boardinfo.* from boardinfo order by BOARDNO desc) boardinfo "
-					+ "where rnum between ? and ? ");
+							+ "where rnum between ? and ? ");
 			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, size); 
+			pstmt.setInt(2, size);
 			rs = pstmt.executeQuery();
 			List<BoardInfo> result = new ArrayList<>();
 			while (rs.next()) {
@@ -135,10 +134,10 @@ public class BoardInfoDao {
 			JdbcUtil.close(pstmt);
 		}
 	}
-	
+
 	private BoardInfo convertBoard(ResultSet rs) throws SQLException {
 		return new BoardInfo(rs.getInt("boardno"), rs.getInt("userno"), rs.getString("boardtitle"),
-				rs.getString("boardcontents"), rs.getString("boardpic"), rs.getInt("viewcount"),
+				rs.getString("boardcontents"), rs.getInt("viewcount"),
 				rs.getDate("boarddate"));
 	}
 
@@ -171,7 +170,7 @@ public class BoardInfoDao {
 			pstmt.executeUpdate();
 		}
 	}
-	
+
 	public int delete(Connection conn, int boardNo) throws SQLException {
 		try (PreparedStatement pstmt = conn.prepareStatement("delete from BOARDINFO " + "where BOARDNO = ?")) {
 			pstmt.setInt(1, boardNo);
@@ -227,13 +226,38 @@ public class BoardInfoDao {
 
 	public int update(Connection conn, int boardNo, String boardTitle) throws SQLException {
 		try (PreparedStatement pstmt = conn
-				.prepareStatement("update boardinfo set BOARDTITLE = ?" 
-								+ "where BOARDNO = ?")) {
+				.prepareStatement("update boardinfo set BOARDTITLE = ?" + "where BOARDNO = ?")) {
 			pstmt.setString(1, boardTitle);
 			pstmt.setInt(2, boardNo);
 			pstmt.executeUpdate();
 			return pstmt.executeUpdate();
 		}
+	}
+
+	public int PicInsert(Connection conn, WriteRequest writeRequest) throws SQLException {
+		try (PreparedStatement pstmt = conn
+				.prepareStatement("insert into BoardPic " + "(BoardNo, BoardPic1) values (?, ?) ")) {
+			pstmt.setInt(1, writeRequest.getBoardNo());
+			pstmt.setString(2, writeRequest.getBoardPicInfoList().get(0).getBoardPic1());
+			return pstmt.executeUpdate();
+		}
+	}
+
+	public List<BoardPicInfo> selectByBoardNo(Connection conn, int boardNo) throws SQLException {
+		ResultSet rs = null;
+		try (PreparedStatement pstmt = conn.prepareStatement("select * from BoardPic " + "where boardNo = ? ")) {
+			pstmt.setInt(1, boardNo);
+			rs = pstmt.executeQuery();
+			List<BoardPicInfo> result = new ArrayList<>();
+			while (rs.next()) {
+				result.add(convertBoardInfo(rs));
+			}
+			return result;
+		}
+	}
+
+	private BoardPicInfo convertBoardInfo(ResultSet rs) throws SQLException {
+		return new BoardPicInfo(rs.getString("boardPic1"));
 	}
 
 }

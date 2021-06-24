@@ -9,6 +9,7 @@ import auth.service.ArticleNotFoundException;
 import auth.service.LoginService;
 import auth.service.ReadArticleService;
 import auth.service.User;
+import member.model.BoardInfoList;
 import mvc.command.CommandHandler;
 
 public class ReadArticleHandler implements CommandHandler {
@@ -21,6 +22,9 @@ public class ReadArticleHandler implements CommandHandler {
 			throws Exception {
 		String noVal = req.getParameter("boardNo");
 		int articleNum = Integer.parseInt(noVal);
+		
+		BoardInfoList boardInfoList = readService.view(articleNum);
+		req.getSession().setAttribute("boardInfoList", boardInfoList);
 		try {
 			ArticleData articleData = readService.getArticle(articleNum, true);
 			User articleUser = loginService.selectByUserNo(articleData.getBoardInfo().getUserNo());

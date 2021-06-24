@@ -72,8 +72,7 @@
 
 			<!-- 검색창 Start -->
 			<div class="sidearea-filter">
-				<form class="teble-form" action="list.do"
-						method="post">
+				<form class="teble-form" action="list.do" method="post">
 					<select name="f">
 						<option value="title">제목</option>
 						<option value="content">내용</option>
@@ -89,25 +88,30 @@
 							</button>
 						</span>
 					</div>
-						<select id ="v" name = "v" class="form-control rounded-0 sidearea-filter-sort" onchange="this.form.submit()">
-					<option value = "10"></option>
-					<option value ="5" <c:if test="${articlePage.pageV == 5}" > selected </c:if>>5개씩보기</option>
-					<option value ="10"<c:if test="${articlePage.pageV == 10}">selected</c:if>>10개씩 보기</option>
+					<select id="v" name="v"
+						class="form-control rounded-0 sidearea-filter-sort"
+						onchange="this.form.submit()">
+						<option value="10"></option>
+						<option value="5"
+							<c:if test="${articlePage.pageV == 5}" > selected </c:if>>5개씩보기</option>
+						<option value="10"
+							<c:if test="${articlePage.pageV == 10}">selected</c:if>>10개씩
+							보기</option>
 					</select>
 				</form>
 				<!-- 검색창 Ends -->
 
 
 				<!-- Sort By Field Starts -->
-<!-- 				<form class="teble-form"> -->
-<!-- 					<select name="v" -->
-<!-- 						class="form-control rounded-0 sidearea-filter-sort" -->
-<!-- 						onchange="this.form.submit()"> -->
-<!-- 						<option></option> -->
-<!-- 						<option value="5">5개씩보기</option> -->
-<!-- 						<option value="10">10개씩 보기</option> -->
-<!-- 					</select> -->
-<!-- 				</form> -->
+				<!-- 				<form class="teble-form"> -->
+				<!-- 					<select name="v" -->
+				<!-- 						class="form-control rounded-0 sidearea-filter-sort" -->
+				<!-- 						onchange="this.form.submit()"> -->
+				<!-- 						<option></option> -->
+				<!-- 						<option value="5">5개씩보기</option> -->
+				<!-- 						<option value="10">10개씩 보기</option> -->
+				<!-- 					</select> -->
+				<!-- 				</form> -->
 				<!-- Sort By Field Ends -->
 			</div>
 		</div>
@@ -129,27 +133,44 @@
 					</c:if>
 					<c:forEach var="article" items="${articlePage.list}">
 						<div class="list-box clearfix">
-							<h5 class="list-box-info-title">
-								<a href="read.do?boardNo=${article.boardNo}">
-								<c:choose>
-								<c:when test = "${fn:length(article.boardTitle) gt 15}">
-								<c:out value = "${fn:substring(article.boardTitle,0,14)}...">
-								</c:out>
+							<c:set var="fname" value="${articlePage.picList.boardPic1}" />
+							<c:choose>
+								<c:when test="${fn:endsWith(fname, '.jpg')==true}">
+									<img src="/CARE/upload/${articlePage.picList.boardPic1}" width="200" />
+								</c:when>
+								<c:when test="${fn:endsWith(fname, '.png')==true}">
+									<img src="/CARE/upload/${articlePage.picList.boardPic1}" width="200" />
+								</c:when>
+								<c:when test="${fn:endsWith(fname, '.gif')==true}">
+									<img src="/CARE/upload/${articlePage.picList.boardPic1}" width="200" />
+								</c:when>
+								<c:when test="${fn:endsWith(fname, '.GIF')==true}">
+									<img src="/CARE/upload/${articlePage.picList.boardPic1}" width="200" />
 								</c:when>
 								<c:otherwise>
-								<c:out value= "${article.boardTitle}"></c:out></c:otherwise>
-								</c:choose>
+								</c:otherwise>
+							</c:choose>
+							<h5 class="list-box-info-title">
+								<a href="read.do?boardNo=${article.boardNo}"> <c:choose>
+										<c:when test="${fn:length(article.boardTitle) gt 15}">
+											<c:out value="${fn:substring(article.boardTitle,0,14)}...">
+											</c:out>
+										</c:when>
+										<c:otherwise>
+											<c:out value="${article.boardTitle}"></c:out>
+										</c:otherwise>
+									</c:choose>
 								</a>
 							</h5>
 							<a href="read.do?boardNo=${article.boardNo}"
-								class="dropdown-item"><i class="fa fa-angle-right"></i>
-								<c:choose>
-								<c:when test = "${fn:length(article.boardContents) gt 50}">
-								<c:out value = "${fn:substring(article.boardContents,0,49)}...">
-								</c:out>
-								</c:when>
-								<c:otherwise>
-								<c:out value= "${article.boardContents}"></c:out></c:otherwise>
+								class="dropdown-item"><i class="fa fa-angle-right"></i> <c:choose>
+									<c:when test="${fn:length(article.boardContents) gt 50}">
+										<c:out value="${fn:substring(article.boardContents,0,49)}...">
+										</c:out>
+									</c:when>
+									<c:otherwise>
+										<c:out value="${article.boardContents}"></c:out>
+									</c:otherwise>
 								</c:choose></a>
 							<!-- <ul class="list-unstyled list-inline list-box-info-tags">
 								<li class="list-inline-item"><a href="#">Pizza</a>,</li>
@@ -171,9 +192,11 @@
 									1.2 miles</li>
 							</ul> -->
 							<ul class="list-unstyled list-inline list-box-info-links">
+							<li class="list-inline-item"><i
+									class="fa fa-star-half-full"></i> <a href="">글번호 : ${article.boardNo}</a></li>
+									
 								<li class="list-inline-item"><i class="fa fa-info-circle"></i>${article.boardDate}</li>
-								<li class="list-inline-item"><i
-									class="fa fa-star-half-full"></i> <a href="">답글(몇개)</a></li>
+								
 								<li class="list-inline-item"><i class="fa fa-asterisk"></i>${article.viewCount}</li>
 							</ul>
 						</div>
@@ -182,7 +205,7 @@
 				<!-- List Descriptions Ends -->
 				<!-- Pagination Starts -->
 				<%
-				if (session.getAttribute("authUser") != null) {
+					if (session.getAttribute("authUser") != null) {
 				%>
 				<div style="float: right;">
 					<a href="write.do" class="btn btn-primary"
@@ -198,29 +221,32 @@
 						class="pagination animation float-lg-right">
 						<c:if test="${articlePage.startPage>1}">
 							<li class="page-item"><a
-								href="?p=${articlePage.startPage-5}&f=${param.f}&searching=${param.searching}&v=${articlePage.pageV}" class="page-link">&laquo;</a></li>
+								href="?p=${articlePage.startPage-5}&f=${param.f}&searching=${param.searching}&v=${articlePage.pageV}"
+								class="page-link">&laquo;</a></li>
 						</c:if>
 						<c:if test="${articlePage.startPage<=1}">
 							<li class="page-item" onclick="alert('이전 페이지가 없습니다.');"><a
 								class="page-link">&laquo;</a></li>
 						</c:if>
-						<c:forEach var="pNo" begin="${articlePage.startPage}" end="${articlePage.endPage}">
+						<c:forEach var="pNo" begin="${articlePage.startPage}"
+							end="${articlePage.endPage}">
 							<c:choose>
-								<c:when
-									test="${(param.p) == (pNo)}">
+								<c:when test="${(param.p) == (pNo)}">
 									<li class="page-item active"><a
 										href="?p=${pNo}&f=${param.f}&searching=${param.searching}&v=${articlePage.pageV}"
 										class="page-link">${pNo}</a></li>
 								</c:when>
 								<c:otherwise>
 									<li class="page-item"><a
-										href="?p=${pNo}&f=${param.f}&searching=${param.searching}&v=${articlePage.pageV}" class="page-link">${pNo}</a></li>
+										href="?p=${pNo}&f=${param.f}&searching=${param.searching}&v=${articlePage.pageV}"
+										class="page-link">${pNo}</a></li>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
 
 						<c:if test="${articlePage.startPage+5 <= articlePage.totalPages}">
-							<li class="page-item"><a href="?p=${articlePage.startPage+5}&f=${param.f}&searching=${param.searching}&v=${articlePage.pageV}"
+							<li class="page-item"><a
+								href="?p=${articlePage.startPage+5}&f=${param.f}&searching=${param.searching}&v=${articlePage.pageV}"
 								class="page-link">&raquo;</a></li>
 						</c:if>
 						<c:if test="${articlePage.startPage+5 > articlePage.totalPages}">
