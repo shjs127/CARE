@@ -39,19 +39,23 @@ public class WriteMessageHandler implements CommandHandler {
 		message.setReviewContents(req.getParameter("reviewContents"));
 		double avgScore = Double.parseDouble(req.getParameter("avgScore"));
 		message.setAvgScore(avgScore);
+		String storeNo = req.getParameter("storeNo");
 
 		System.out.println("message.reveiewContents=" + message.getReviewContents());
 		System.out.println("message.AvgScore=" + message.getAvgScore());
+		System.out.println("storeNo="+storeNo);
 
 		try {
 
 			WriteMessageService writeService = WriteMessageService.getInstance();
 			int writeResult = writeService.writeMessage(message); // 원래 메소드명은 write()였던 것으로 기억합니다.
-			// WriteMessageService 클래스에서 msgDAO.insert()의 리턴값을 반환하도록 수정해야 합니다.
+			//WriteMessageService 클래스에서 msgDAO.insert()의 리턴값을 반환하도록 수정해야 합니다.
 
-			req.getSession().setAttribute("view", writeResult);
-
-			return FORM_VIEW;
+			//req.getSession().setAttribute("storeno", storeno);
+			
+			res.sendRedirect("foodDetail.do?storeno="+storeNo);
+			return null;
+			//return "/WEB-INF/view/main/reviewSuccess.jsp";
 		} catch (LoginFailException e) {
 			return FORM_VIEW;
 

@@ -29,6 +29,8 @@ public class MessageDao {
 	}
 
 	public static int insert(Connection conn, Message message) throws SQLException {
+		System.out.println("message.avgScore="+message.getAvgScore());
+		System.out.println("message.reviewContents"+message.getReviewContents());
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement("insert into Reviewinfo "

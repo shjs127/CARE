@@ -527,8 +527,9 @@
 												%>
 
 												<div class="box-body">
-													<form method="post" id="writeForm">
+													<form action="writeMessage.do" method="post" id="writeForm">
 														<!-- // form에 ID 지정 -->
+														<input type="hidden" name="storeNo" value="${param.storeno }"/>
 														<p>
 															<textarea name="reviewContents" cols="60" rows="10"
 																placeholder="리뷰를 작성하세요"></textarea>
@@ -558,14 +559,6 @@
 														</tr>
 													</form>
 
-													<!-- <tr>
-												
-													<td colspan=2 align=center><input type="submit"
-														value="리뷰등록"
-														class="btn btn-black animation text-uppercase float-right"></td>
-												</tr> -->
-													<!-- <a href="#"
-													class="btn btn-black animation text-uppercase float-right">리뷰쓰기</a> -->
 													<%
 														}
 													%>
@@ -588,7 +581,6 @@
 
 
 											<div class="review-list">
-												<%--  // <c:if> 태그로 생성되는 글목록을 감싸는 wrapper 요소 --%>
 												<c:if test="${view.isEmpty()}">
 													<p>등록된 메시지가 없습니다.</p>
 												</c:if>
@@ -602,22 +594,6 @@
 																	</h6>
 																	<h6>회원 닉네임: ${userInfo.nickName}</h6>
 
-
-																	<!-- <ul class="list-unstyled list-inline rating-star-list">
-																			<li class="list-inline-item"><i
-																				class="fa fa-star"></i></li>
-																			<li class="list-inline-item"><i
-																				class="fa fa-star"></i></li>
-																			<li class="list-inline-item"><i
-																				class="fa fa-star"></i></li>
-																			<li class="list-inline-item"><i
-																				class="fa fa-star-o"></i></li>
-																			<li class="list-inline-item"><i
-																				class="fa fa-star-o"></i></li>
-																		</ul> -->
-
-
-
 																</div>
 																<img src="images/review-thumb-img1.png" alt="Image"
 																	class="img-fluid float-right">
@@ -626,22 +602,10 @@
 																<p>리뷰내용: ${message.reviewContents}</p>
 																<p>평점: ${message.avgScore}</p>
 																<p>메시지 번호: ${message.reviewNo}</p>
-
 															</div>
-
 														</c:forEach>
 													</table>
-													<%-- <tr>
-																<td>
-
-																	<p>
-																		<a
-																			href="confirmDeletion.jsp?messageId=${message.reviewno}">[삭제하기]
-																		
-																	</p>
-																</td>
-															</tr> --%>
-
+												
 													<div>
 														<c:forEach var="pageNum" begin="1"
 															end="${view.totalPages}">
@@ -652,73 +616,39 @@
 											</div>
 										</div>
 										<!-- /.box-body -->
-
 										<!-- /.box-footer-->
-
 										<!-- /.box -->
-
-
 										<!-- /.content -->
 									</div>
-
-
-
-
 									<script>
 										// 제이쿼리로 form submit 이벤트 처리
-										$(function() {
-											$("#writeForm")
-													.submit(
-															function(event) {
-																alert("리뷰가 등록되었습니다.");
-
-																var formData = { // Plain Object 변수에 form의 data 저장
-																	reviewContents : this.reviewContents.value,
-																	avgScore : this.avgScore.value
-																};
-
-																$
-																		.ajax({
-																			url : "writeMessage.do",
-																			method : "POST",
-																			data : formData,
-																			success : function() { // 요청 성공 시 (HTTP 200 OK)
-																				$(
-																						"#writeForm [name=reviewContents]")
-																						.val(
-																								""); // 입력했던 정보 비우기
-																				$(
-																						"#list")
-																						.load(
-																								window.location.href
-																										+ " #list"); // 글목록만 새로고침
-																			}
-																		});
-
-																event
-																		.preventDefault(); // submit 시 페이지 이동하지 않게
-
-															});
-
-										});
+								/*  $(function() {
+									$("#writeForm").submit(
+											function(event) {
+												alert("리뷰가 등록되었습니다.");
+												var formData = { // Plain Object 변수에 form의 data 저장
+													reviewContents : this.reviewContents.value,
+													avgScore : this.avgScore.value };
+												$.ajax({ 
+													url : "writeMessage.do",
+													type : "POST",
+													data : formData,
+													success : function() { // 요청 성공 시 (HTTP 200 OK)
+																alert("load success..");
+																//$("#writeForm [name=reviewContents]").val(""); // 입력했던 정보 비우기
+																//location.reload();
+															/* 	$("#writeForm").load(window.location.href+ " #writeForm");  */// 글목록만 새로고침
+													}
+												});
+												//event.preventDefault(); // submit 시 페이지 이동하지 않게
+											});
+								}); 
+										
 									</script>
-
-
-
 								</div>
-
 							</div>
 						</div>
-
-
 					</div>
-
-
-
-
-
-
-
 					<!-- Reviews Form Box Ends -->
 					<!-- Reviews List Starts -->
 					<!-- Default box -->
