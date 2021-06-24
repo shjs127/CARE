@@ -1,7 +1,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../include/header.jspf"%>
+<%@ include file="../include/header.jspf"%> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.sql.DriverManager"%>
 <%@ page import="java.sql.Connection"%>
@@ -11,7 +11,7 @@
 
 
 <%@ page import="auth.service.Message"
-	import="auth.service.MessageListView"
+	import="auth.service.MessageListView"  
 	import="auth.service.GetMessageListViewService"%>
 
 <!-- Main Container Starts -->
@@ -28,9 +28,8 @@
 					<li class="nav-item"><a href="#menu" class="nav-link active"
 						data-toggle="tab">개인정보</a></li>
 					<li class="nav-item"><a href="#information" class="nav-link"
-						data-toggle="tab">내가쓴 댓글</a></li>
-					<li class="nav-item"><a href="#gallery" class="nav-link"
-						data-toggle="tab">즐겨찾기</a></li>
+						data-toggle="tab">내 댓글 및 즐겨찾기</a></li>
+				
 				</ul>
 				<!-- Menu Tabs List Ends -->
 				<!-- Menu Tabs Content Starts -->
@@ -152,6 +151,7 @@
 						<!-- Tab #1 Nested Row Ends -->
 					</div>
 					<!-- Tab #1 Ends -->
+					
 					<!-- Tab #2 Starts -->
 					<div id="information" class="tab-pane fade">
 						<!-- Tab #2 Nested Row Starts -->
@@ -180,11 +180,10 @@
 									// 현재 로그인된 아이디가 있다면 (= session에 저장된 id가 있다면)
 									else {
 									%>
-									<li style="”color: white;" " class="list-inline-item">${authUser.nickName }
-										<%
-											out.print("님의 댓글 목록입니다.");
-										%>
-									</li>
+									
+										<h5>내 리뷰 목록</h5>
+											<br>
+									
 							     
 							      </div>
 									
@@ -206,76 +205,12 @@
 							       </tr>
 							        </c:forEach>
 							       </table>
-							      
+							       <br>
+							       <hr>
+							       <br>
 									
-										<!-- 	
-										<form>
-											<input type='button' value='수정' action='msgmodify.do'>
-											<input type='button' value='삭제' action='msgdelete.do'>
-										</form> -->
-									</div>
-									</div>
-									
-									
-									
-									<%
-										}
-									%>
-
-
-									<!-- Spacer Starts -->
-									<div class="spacer big"></div>
-									<!-- Spacer Ends -->
-
-									<!-- Delivery Hours Starts -->
-									<!-- Delivery Hours Ends -->
-									<!-- Takeway Hours Starts -->
-									<!-- Takeway Hours Ends -->
-									<!-- Spacer Starts -->
-									<!-- Spacer Ends -->
-									<!-- Banners Starts -->
-									<!-- Banners Ends -->
-								</div>
-								<!-- Information Tab Pane Ends -->
-							</div>
-							<!-- Right Column Ends -->
-						</div>
-						<!-- Tab #2 Nested Row Ends -->
-					</div>
-					</div>
-					</div>
-					<!-- Tab #2 Ends -->
-					<!-- Tab #3 Starts -->
-					<div id="gallery" class="tab-pane fade">
-						<!-- Image Gallery Starts -->
-						<div class="row">
-							<!-- Left Column Starts -->
-							<div class="col-md-4 col-sm-12">
-								
-							</div>
-							<!-- Left Column Ends -->
-							<!-- Right Column Starts -->
-							<div class="col-md-8 col-sm-12">
-								<!-- Information Tab Pane Starts -->
-								<div class="information-tab-pane">
-									<%
-										// 현재 로그인된 아이디가 없다면 (= session에 저장된 id가 없다면)
-									if (session.getAttribute("authUser") == null) {
-									%>
-									로그인을 해주세요.
-									<li class="list-inline-item"><a
-										href="${pageContext.request.contextPath }/login.do">로그인</a></li>
-									<%
-										}
-									// 현재 로그인된 아이디가 있다면 (= session에 저장된 id가 있다면)
-									else {
-									%>
-									<li style="”color: white;" " class="list-inline-item">${authUser.nickName }
-										<%
-											out.print("님의 즐겨찾기 목록입니다.");
-										%>
-									</li>
-									
+								<h5>내 즐겨찾기 목록</h5>
+								<br>
 									
 									
 									<table border="1">
@@ -291,47 +226,34 @@
 							       </tr>
 							        </c:forEach>
 							       </table>
-							      
+									</div>	
 										
 									</div>
+									</div>
+									
+									
+									
 									<%
 										}
 									%>
+
+
 								</div>
-								</div>
-							   <%-- <c:forEach var="storeinfo" items="${storeInfoListView.storeInfoList}">
-							   매장이름:${storeinfo.storeName }
-							   </c:forEach> --%>
-							<!-- Gallery Image #1 Ends -->
-					
-						<!-- Image Gallery Ends -->
+								<!-- Information Tab Pane Ends -->
+							</div>
+							<!-- Right Column Ends -->
+						</div>
+						<!-- Tab #2 Nested Row Ends -->
 					</div>
+					</div>
+					
+					
+					
+					<!-- Tab #2 Ends -->
+					<!-- Tab #3 Starts -->
+					
 					<!-- Tab #3 Ends -->
 					<!-- Tab #4 Starts -->
-					<div id="reviews" class="tab-pane fade">
-						<!-- Tab #4 Nested Row Starts -->
-						<div class="row">
-							<!-- Right Column Starts -->
-							<div class="col-md-8 col-sm-12">
-								<!-- Reviews Tab Pane Starts -->
-								<div class="reviews-tab-pane">
-									<!-- Menu Tabs Content Ends -->
-								</div>
-								<!-- Menu Tabs Ends -->
-							</div>
-							<!-- Mainarea Ends -->
-							<!-- Sidearea Starts -->
-							<div class="col-md-3 col-sm-12">
-								<!-- Spacer Starts -->
-								<div class="spacer-1 medium d-xs-block d-sm-block d-md-none"></div>
-								<!-- Spacer Ends -->
-
-							</div>
-							<!-- Sidearea Ends -->
-						</div>
-						<!-- Nested Row Ends -->
-					</div>
-					<!-- Main Container Ends -->
 
 
 					<%@ include file="../include/footer.jspf"%>
