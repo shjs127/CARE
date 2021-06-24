@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../include/header.jspf"%>
 
 <!-- Search Section Starts -->
 <section class="search-area condensed parallax">
 	<!-- Nested Container Starts -->
 	<div class="container text-center">
-		<h3 class="text-weight-normal">Find the best Restaurants, Cafes
-			&amp; Cuisine in Your Place</h3>
+		<h3 class="text-weight-normal">솔직한 리뷰, 믿을 수 있는 평점! <br> 카레</h3>
 		<form class="top-search" action="${pageContext.request.contextPath }/board/search.do" method="post" name="frm" id="frm">
 			<div class="input-group">
 				<div class="input-group-prepend search-panel">
@@ -26,10 +26,8 @@
 	<!-- Nested Container Starts -->
 	<div class="container text-xs-center text-sm-center text-md-left">
 		<ul class="list-unstyled list-inline">
-			<li class="list-inline-item"><a href="index.html">Home</a></li>
-			<li class="list-inline-item"><a href="#">Restaurants in
-					jacksonville</a></li>
-			<li class="active list-inline-item">Jack Hills</li>
+			<li class="list-inline-item"><a href="${pageContext.request.contextPath }/main/index.do">홈</a></li>
+			<li class="active list-inline-item">매장 리스트</li>
 		</ul>
 	</div>
 	<!-- Nested Container Ends -->
@@ -39,11 +37,12 @@
 <div class="main-container container">
 	<!-- Heading Starts -->
 	<h4 class="main-heading-1 text-xs-center text-sm-center text-md-left">
-		Order from 45 restaurants in Jack Hills, Jacksonville<br
+		솔직한 평점과 리뷰를 구경해 보세요 !
+		<!-- <br
 			class="d-xs-block d-sm-block d-md-none"> <a href="#"
 			class="btn btn-main animation" data-toggle="modal"
 			data-target="#change-location">Change Location <i
-			class="fa fa-angle-double-right"></i></a>
+			class="fa fa-angle-double-right"></i></a> -->
 	</h4>
 	<!-- Heading Ends -->
 	<!-- Starts -->
@@ -52,21 +51,12 @@
 		<div class="col-lg-3 col-md-4 col-sm-12">
 			<!-- Sidearea Filters Starts -->
 			<div class="sidearea-filter">
-				<!-- Search Field Starts -->
-				<div class="input-group sidearea-filter-search">
-					<input type="text" class="form-control rounded-0"
-						placeholder="검색..."> <span class="input-group-append">
-						<button class="btn btn-default rounded-0" type="button">
-							<i class="fa fa-search"></i>
-						</button>
-					</span>
-				</div>
-				<!-- Search Field Ends -->
 				<!-- Sort By Field Starts -->
-				<select class="form-control rounded-0 sidearea-filter-sort">
-					<option>정렬 : 인기순</option>
-					<option>평점순</option>
-					<option>조회순</option>
+				<select class="form-control rounded-0 sidearea-filter-sort" id="StoreOrder" name="StoreOrder">
+					<option value="" disabled>정렬</option>
+					<option value="orderStoreNo">번호순</option>
+					<option value="orderAvgScore" selected>평점순</option>
+					<option value="orderReviewCnt">리뷰순</option>
 				</select>
 				<!-- Sort By Field Ends -->
 				<!-- Filter By Restaurants Starts -->
@@ -168,18 +158,22 @@
 									<!-- Title Ends -->
 									<!-- Tags Starts -->
 									<ul class="list-unstyled list-inline grid-box-tags">
-										<li class="list-inline-item"><a href="#">Pizza</a>,</li>
-										<li class="list-inline-item"><a href="#">American</a>,</li>
-										<li class="list-inline-item"><a href="#">Pasta</a>,</li>
-										<li class="list-inline-item"><a href="#">Wraps</a></li>
+										<li class="list-inline-item">
+											<c:choose>
+											<c:when test = "${fn:length(storeinfo.address) gt 22}">
+											<c:out value = "${fn:substring(storeinfo.address,0,21)}..."></c:out>
+											</c:when>
+											<c:otherwise>
+											<c:out value="${storeinfo.address}"></c:out>
+											</c:otherwise>
+											</c:choose>
+										</li>
 									</ul>
 									<!-- Tags Ends -->
 									<!-- Offer Details Starts -->
 									<ul class="list-unstyled grid-box-info clearfix">
-										<li class="float-lg-left"><span class="sub-title"><i
-												class="fa fa-certificate"></i> Flat 10% Off</span></li>
-										<li class="float-lg-right text-lg-right"><a href="#"
-											class="btn btn-prime animation"> View Menu <i
+										<li class="float-lg-right text-lg-right"><a href="${pageContext.request.contextPath}/main/foodDetail.do?storeno=${storeinfo.storeNo}"
+											class="btn btn-prime animation"> 자세히 보기 <i
 												class="fa fa-chevron-right"></i>
 										</a></li>
 									</ul>
@@ -245,12 +239,24 @@
 						<c:forEach var="pNo" begin="${storePage.startPage}"
 							end="${storePage.endPage}">
 							<c:if test="${Keyword == null}">
-								<li class="page-item"><a href="storelist.do?pageNo=${pNo}"
+								<c:if test="${pNo == param.pageNo }">
+									<li class="page-item active"><a href="storelist.do?pageNo=${pNo}"
 								class="page-link">${pNo}</a></li>
+								</c:if>
+								<c:if test="${pNo != param.pageNo }">
+									<li class="page-item"><a href="storelist.do?pageNo=${pNo}"
+								class="page-link">${pNo}</a></li>
+								</c:if>
 							</c:if>
 							<c:if test="${Keyword != null}">
-								<li class="page-item"><a href="search.do?pageNo=${pNo}&searchKeyword=${Keyword}"
+								<c:if test="${pNo == param.pageNo }">
+									<li class="page-item active"><a href="search.do?pageNo=${pNo}&searchKeyword=${Keyword}"
 								class="page-link">${pNo}</a></li>
+								</c:if>
+								<c:if test="${pNo != param.pageNo }">
+									<li class="page-item"><a href="search.do?pageNo=${pNo}&searchKeyword=${Keyword}"
+								class="page-link">${pNo}</a></li>
+								</c:if>
 							</c:if>
 							
 						</c:forEach>
