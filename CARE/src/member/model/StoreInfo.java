@@ -11,6 +11,12 @@ public class StoreInfo {
 	private String callNumber;
 	private String manageNo;
 	
+	public StoreInfo(int storeNo, String storeName) {
+		super();
+		this.storeNo = storeNo;
+		this.storeName = storeName;
+	}
+
 	public StoreInfo(int storeNo, String storeName, String storePic, String address, String hours, String closedDays,
 			String callNumber, String manageNo) {
 		this.storeNo = storeNo;

@@ -28,7 +28,7 @@ public class GetFavoriteListViewService {
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
-			FavoriteDao msgDAO = FavoriteDao.getInstance();
+			FavoriteDao favoriteDAO = FavoriteDao.getInstance();
 
 			List<Favorite> favoriteList = null;
 			

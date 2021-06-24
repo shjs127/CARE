@@ -180,7 +180,65 @@ public class StoreInfoDao {
 				JdbcUtil.close(pstmt);
 			}
 		}
+		
+		
+		
+		public static List<StoreInfo> selectByStoreNo(Connection conn, int storeNo) throws SQLException {
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = "select * from storeinfo where storeno= ?";
+		
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, storeNo);
+				
+				rs = pstmt.executeQuery();
+				List<StoreInfo> result = new ArrayList<>();
+				while(rs.next()) {
+					;
+				}
+				return result;
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+		}
+		
+		
+		public static List<StoreInfo> selectByUserNo(Connection conn, int userNo) throws SQLException {
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = "select s.storeno, s.storename from storeinfo s , favorite f " +
+					     "where s.storeno=f.storeno and f.userno=?";
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, userNo);
+				
+				rs = pstmt.executeQuery();
+				List<StoreInfo> result = new ArrayList<>();
+				while(rs.next()) {
+					StoreInfo storeInfo = new StoreInfo(rs.getInt("storeno"),rs.getString("storename"));
+					result.add(storeInfo);
+				}
+				return result;
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+		}
+		
+		
+		
+		
 	
+		
+		
+		
+		
 	private StoreInfo convertStore(ResultSet rs) throws SQLException {
 		return new StoreInfo(rs.getInt("storeNo"),
 							rs.getString("storeName"), 
@@ -225,6 +283,12 @@ public class StoreInfoDao {
 			pstmt.executeUpdate();
 		}
 	}
+
+	public static StoreInfoDao getInstance() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
 
 

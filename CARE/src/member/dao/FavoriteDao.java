@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import auth.service.Message;
 import jdbc.JdbcUtil;
 import member.model.Favorite;
+import member.model.StoreInfo;
 
 public class FavoriteDao {
 
@@ -65,11 +65,7 @@ public class FavoriteDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			pstmt = conn.prepareStatement("select * "
-					+ "from favorite, storeinfo, userinfo "
-					+ "where  favorite.storeno = storeinfo.storeno "
-					+ "and favorite.userno = userinfo.userno "
-					+ "and favorite.userno= ?");
+			pstmt = conn.prepareStatement("select * from favorite where userNo= ? order by storeNo asc");
 			 pstmt.setInt(1, userNo); 
 			
 			// pstmt.setInt(2, endRow - firstRow + 1);
@@ -88,7 +84,20 @@ public class FavoriteDao {
 			JdbcUtil.close(pstmt);
 		}
 	}
-
+	
+	/*
+	 * public static List<StoreInfo> selectByStoreNo(Connection conn, int storeNo)
+	 * throws SQLException { PreparedStatement pstmt = null; ResultSet rs = null;
+	 * try { pstmt = conn.prepareStatement("select * " + "from storeinfo " +
+	 * "where storeno= ? " + "order by storeno asc"); pstmt.setInt(1, storeNo);
+	 * 
+	 * 
+	 * // pstmt.setInt(2, endRow - firstRow + 1); rs = pstmt.executeQuery(); if
+	 * (rs.next()) { List<StoreInfo> storeInfoList = new ArrayList<StoreInfo>();
+	 * 
+	 * return storeInfoList; } else { return Collections.emptyList(); } } finally {
+	 * JdbcUtil.close(rs); JdbcUtil.close(pstmt); } }
+	 */
 
 	
 	  public void delete(Connection conn, Favorite favorite) throws SQLException{

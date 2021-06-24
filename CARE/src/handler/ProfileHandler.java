@@ -1,6 +1,7 @@
 package handler;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +15,9 @@ import auth.service.InvalidPasswordException;
 import auth.service.LoginFailException;
 import auth.service.MemberNotFoundException;
 import auth.service.MessageListView;
+import auth.service.StoreInfoService;
 import auth.service.User;
+import member.model.StoreInfo;
 import member.model.UserInfo;
 import mvc.command.CommandHandler;
 
@@ -25,6 +28,11 @@ public class ProfileHandler implements CommandHandler {
 	private ChangePasswordService changePwdSvc = new ChangePasswordService();
 	private GetMessageListViewService getMessageListViewService = GetMessageListViewService.getInstance();
 	private GetFavoriteListViewService getFavoriteListViewService = GetFavoriteListViewService.getInstance();
+	private StoreInfoService storeInfoService = new StoreInfoService(); 
+	/*
+	 * private GetStoreInfoListViewService getStoreInfoListViewService =
+	 * GetStoreInfoListViewService.getInstance();
+	 */
 	
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -46,17 +54,30 @@ public class ProfileHandler implements CommandHandler {
 			UserInfo userInfo = (UserInfo) req.getSession().getAttribute("userInfo");
 			int userNo = userInfo.getUserNo();
 			
+			/*
+			 * StoreInfo storeInfo = (StoreInfo) req.getSession().getAttribute("storeInfo");
+			 * int storeNo = storeInfo.getStoreNo();
+			 */
+			
 			MessageListView messageListView = getMessageListViewService.selectByUserNo(userNo);
 			req.getSession().setAttribute("messageListView", messageListView);
 			
 			FavoriteListView favoriteListView = getFavoriteListViewService.selectByUserNo(userNo);
 			req.getSession().setAttribute("favoriteListView", favoriteListView);
 			
+			/*
+			 * StoreInfoListView storeInfoListView =
+			 * getStoreInfoListViewService.selectByStoreNo(storeNo);
+			 * req.getSession().setAttribute("storeInfoListView", storeInfoListView);
+			 * 
+			 */
+			
+			List<StoreInfo> storeInfoList = storeInfoService.selectByUserNo(userNo);
+			req.getSession().setAttribute("storeInfoList", storeInfoList);
+			
 			
 		
-		// 1. session에서 userInfo.userNo 구함
-		// 2. userNo를 갖고 reviewInfo 테이블에서 조회하여 review목록은 갖고 온다.
-		// 3. session.setAtribute("reviewInfoList", reviewInfoList);
+		
 			return FORM_VIEW;
 		} catch (LoginFailException e) {
 			return FORM_VIEW;

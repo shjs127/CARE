@@ -2,11 +2,11 @@ package auth.service;
 //�̼��� �߰� ����
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
 import member.dao.StoreInfoDao;
-import member.model.ReviewInfo;
 import member.model.StoreInfo;
 
 
@@ -27,6 +27,23 @@ public class StoreInfoService {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	
+	public List<StoreInfo> selectByUserNo(int userNo) {
+		try (Connection conn = ConnectionProvider.getConnection()) {
+			List<StoreInfo> storeInfoList = storeInfoDao.selectByUserNo(conn, userNo);
+			if (storeInfoList == null) {
+				JdbcUtil.rollback(conn);
+				throw new DuplicateIdException();
+			}
+			
+			return storeInfoList;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	
 
 }
 	

@@ -160,7 +160,7 @@
 							<div class="col-md-4 col-sm-12">
 								
 							</div>
-							</div>
+							
 							
 							
 							<!-- Left Column Ends -->
@@ -242,6 +242,8 @@
 						</div>
 						<!-- Tab #2 Nested Row Ends -->
 					</div>
+					</div>
+					</div>
 					<!-- Tab #2 Ends -->
 					<!-- Tab #3 Starts -->
 					<div id="gallery" class="tab-pane fade">
@@ -279,13 +281,13 @@
 									<table border="1">
 							       		<tr>
 							       		
-							       		<th><p>가게 번호: ${favorite.storeNo }</p></th>
-							       		<th><p>가게 이름: ${reviewInfo.storeName }</p> </th>
+							       		<th><p>가게 번호</p></th>
+							       		<th><p>가게 이름</p> </th>
 							       </tr>
-							       <c:forEach var="favorite" items="${favoriteListView.favoriteList}">
+							       <c:forEach var="storeInfo" items="${storeInfoList}">
 							       <tr>
-							       <td>${favorite.storeNo }</td>
-							       <td>${reviewInfo.storeName }</td>
+							       <td>${storeInfo.storeNo }</td>
+							       <td>${storeInfo.storeName }</td>
 							       </tr>
 							        </c:forEach>
 							       </table>
@@ -297,9 +299,11 @@
 									%>
 								</div>
 								</div>
-							</li>
+							   <%-- <c:forEach var="storeinfo" items="${storeInfoListView.storeInfoList}">
+							   매장이름:${storeinfo.storeName }
+							   </c:forEach> --%>
 							<!-- Gallery Image #1 Ends -->
-						</ul>
+					
 						<!-- Image Gallery Ends -->
 					</div>
 					<!-- Tab #3 Ends -->
@@ -328,6 +332,6 @@
 						<!-- Nested Row Ends -->
 					</div>
 					<!-- Main Container Ends -->
-</div>
+
 
 					<%@ include file="../include/footer.jspf"%>
