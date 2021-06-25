@@ -1,6 +1,5 @@
 package auth.service;
 
-//이수하 추가 파일
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -21,18 +20,12 @@ public class GetStoreInfoListViewService {
 	private GetStoreInfoListViewService() {
 	}
 
-	
-
 	public StoreInfoListView getStoreInfoListView(int pageNum) {
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
-			StoreInfoDao storeInfoDAO = StoreInfoDao.getInstance();
 
 			List<StoreInfo> storeInfoList = null;
-			
-
-			
 			
 			return new StoreInfoListView(storeInfoList);
 		} catch (SQLException e) {
@@ -46,11 +39,9 @@ public class GetStoreInfoListViewService {
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
-			StoreInfoDao storeInfoDao = StoreInfoDao.getInstance();
 
 			List<StoreInfo> storeInfoList = null;
 			storeInfoList = StoreInfoDao.selectByStoreNo(conn, storeNo);
-			System.out.println("storeList=" + storeInfoList);
 			return new StoreInfoListView(storeInfoList);
 		} catch (
 

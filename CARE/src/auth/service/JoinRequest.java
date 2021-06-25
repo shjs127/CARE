@@ -4,11 +4,11 @@ import java.util.Map;
 
 public class JoinRequest {
 
-	private String userId;  // "lee"
+	private String userId;
 	private String nickName;
-	private String name; // null
-	private String password;  // "a"
-	private String confirmPassword; // "a"
+	private String name;
+	private String password;
+	private String confirmPassword;
 	private String birth;
 	private String email;
 	private String gender;

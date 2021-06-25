@@ -7,7 +7,6 @@ import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
 import member.dao.UserInfoDao;
 import member.model.UserInfo;
-import auth.service.InvalidPasswordException; 
 
 public class ChangePasswordService {
 

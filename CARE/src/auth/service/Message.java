@@ -11,12 +11,9 @@ public class Message {
 	private String reviewContents;
 	private Date reviewDate;
 
-	
-	
+	public Message() {
+	}
 
-
-	public Message() {}
-	
 	public Message(int reviewNo, int storeNo, int userNo, double avgScore, String reviewContents, Date reviewDate) {
 		super();
 		this.reviewNo = reviewNo;
@@ -25,9 +22,7 @@ public class Message {
 		this.avgScore = avgScore;
 		this.reviewContents = reviewContents;
 		this.reviewDate = reviewDate;
-		
-		
-		
+
 	}
 
 	public int getReviewNo() {
@@ -78,6 +73,4 @@ public class Message {
 		this.reviewDate = reviewDate;
 	}
 
-
-	
 }

@@ -1,5 +1,5 @@
 package auth.service;
-//이수하 추가 파일
+
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -24,8 +24,7 @@ public class WriteMessageService {
 			MessageDao messageDao = MessageDao.getInstance();
 			MessageDao.insert(conn, message);
 		} catch (SQLException e) {
-			throw new ServiceException(
-					"에러 내용: " + e.getMessage(), e);
+			throw new ServiceException("에러 내용: " + e.getMessage(), e);
 		} finally {
 			JdbcUtil.close(conn);
 		}

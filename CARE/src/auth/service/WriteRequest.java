@@ -6,13 +6,13 @@ import member.model.BoardPicInfo;
 import member.model.Writer;
 
 public class WriteRequest {
-	
+
 	private int boardNo;
 	private Writer writer;
 	private String boardTitle;
 	private String boardContents;
 	private List<BoardPicInfo> boardPicInfoList;
-	
+
 	public WriteRequest(member.model.Writer writer, String boardTitle, String boardContents,
 			List<BoardPicInfo> boardPicInfoList) {
 		super();
@@ -21,7 +21,7 @@ public class WriteRequest {
 		this.boardContents = boardContents;
 		this.boardPicInfoList = boardPicInfoList;
 	}
-	
+
 	public int getBoardNo() {
 		return boardNo;
 	}
@@ -61,8 +61,5 @@ public class WriteRequest {
 	public void setBoardPicInfoList(List<BoardPicInfo> boardPicInfoList) {
 		this.boardPicInfoList = boardPicInfoList;
 	}
-	
-	
 
-	
 }

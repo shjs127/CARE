@@ -27,12 +27,6 @@ public class WriteArticleService {
 			if (newNo == null) {
 				throw new RuntimeException("fail to insert article");
 			}
-			/*
-			 * ArticleContent content = new ArticleContent( savedBoardinfo.getBoardNo(),
-			 * req.getBoardContents()); ArticleContent savedContent =
-			 * contentDao.insert(conn, content); if (savedContent == null) { throw new
-			 * RuntimeException("fail to insert article_content"); }
-			 */
 
 			conn.commit();
 
@@ -50,8 +44,6 @@ public class WriteArticleService {
 
 	private BoardInfo toBoardInfo(WriteRequest req, User user) {
 		Date now = new Date();
-		// return new BOARDINFO(null, req.getWriter(), req.getBoardTitle(),
-		// req.getBoardContents(), null, 0, now);
 		return new BoardInfo(1, user.getUserNo(), req.getBoardTitle(), req.getBoardContents(), 0, now);
 	}
 

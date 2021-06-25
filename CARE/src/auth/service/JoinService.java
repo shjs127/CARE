@@ -2,9 +2,6 @@ package auth.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Date;
-
-import javax.xml.crypto.Data;
 
 import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
@@ -26,8 +23,9 @@ public class JoinService {
 				JdbcUtil.rollback(conn);
 				throw new DuplicateIdException();
 			}
-			
-			userinfoDao.insert(conn, new UserInfo(0,joinReq.getUserId() ,joinReq.getPassword(),joinReq.getName(),joinReq.getNickName(),joinReq.getBirth(),joinReq.getEmail(),joinReq.getGender(),"x"));
+
+			userinfoDao.insert(conn, new UserInfo(0, joinReq.getUserId(), joinReq.getPassword(), joinReq.getName(),
+					joinReq.getNickName(), joinReq.getBirth(), joinReq.getEmail(), joinReq.getGender(), "x"));
 			conn.commit();
 		} catch (SQLException e) {
 			JdbcUtil.rollback(conn);

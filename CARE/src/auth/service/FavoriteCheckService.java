@@ -14,14 +14,13 @@ public class FavoriteCheckService {
 	public boolean isExistFavoriteData(Favorite favorite) throws SQLException {
 		Connection conn = null;
 		conn = ConnectionProvider.getConnection();
-		
+
 		return favoriteDao.selectCheck(conn, favorite) != null;
 	}
 
 	public void changeFavoriteData(Favorite favorite) throws SQLException {
 		Connection conn = null;
 		conn = ConnectionProvider.getConnection();
-		// conn.setAutoCommit(false);
 		if (favorite.getFavoriteCheck().equals("y")) {
 			favoriteDao.delete(conn, favorite);
 		} else {

@@ -7,17 +7,13 @@ import member.model.StoreInfo;
 public class StoreInfoListView {
 
 	private List<StoreInfo> storeInfoList;
-	
-	
+
 	public StoreInfoListView(List<StoreInfo> storeInfoList) {
 		this.storeInfoList = storeInfoList;
 
 	}
 
-
-
 	private boolean isEmpty() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -29,10 +25,4 @@ public class StoreInfoListView {
 		this.storeInfoList = storeInfoList;
 	}
 
-	
-	
-
-
 }
-	
-	

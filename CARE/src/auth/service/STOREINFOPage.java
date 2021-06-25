@@ -28,10 +28,12 @@ public class STOREINFOPage {
 			}
 			int modVal = currentPage % 5;
 			startPage = currentPage / 5 * 5 + 1;
-			if (modVal == 0) startPage -= 5;
-			
+			if (modVal == 0)
+				startPage -= 5;
+
 			endPage = startPage + 4;
-			if (endPage > totalPages) endPage = totalPages;
+			if (endPage > totalPages)
+				endPage = totalPages;
 		}
 	}
 
@@ -46,7 +48,7 @@ public class STOREINFOPage {
 	public boolean hasArticles() {
 		return total > 0;
 	}
-	
+
 	public int getCurrentPage() {
 		return currentPage;
 	}
@@ -62,7 +64,7 @@ public class STOREINFOPage {
 	public int getStartPage() {
 		return startPage;
 	}
-	
+
 	public int getEndPage() {
 		return endPage;
 	}

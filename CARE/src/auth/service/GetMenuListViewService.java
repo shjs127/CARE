@@ -1,5 +1,5 @@
 package auth.service;
-//이수하 추가 파일
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Collections;
@@ -9,18 +9,19 @@ import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
 import member.model.MenuInfo;
 import member.dao.MenuInfoDao;
-import member.dao.StoreInfoDao;
-
 
 public class GetMenuListViewService {
-	
+
 	private MenuInfoDao menuInfoDao = new MenuInfoDao();
 
 	private static GetMenuListViewService instance = new GetMenuListViewService();
+
 	public static GetMenuListViewService getInstance() {
 		return instance;
 	}
-	public GetMenuListViewService() {}
+
+	public GetMenuListViewService() {
+	}
 
 	private static final int MSG_PER_PAGE = 3;
 
@@ -31,10 +32,9 @@ public class GetMenuListViewService {
 
 			List<MenuInfo> menuInfoList = null;
 			int totalMenu = 1;
-			System.out.println("totalMenu="+totalMenu);
 			int currentPage = pageNum;
 			int firstRow = 0, endRow = 0;
-			
+
 			if (totalMenu > 0) {
 				firstRow = 1;
 				endRow = 1;

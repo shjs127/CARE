@@ -15,15 +15,12 @@ public class StoreLoginService {
 	public Store login(String manageNo, int storeNo) {
 		try (Connection conn = ConnectionProvider.getConnection()) {
 			StoreInfo storeinfo = storeinfoDao.selectById(conn, storeNo);
-			System.out.println("����");
 			if (storeinfo == null) {
 				throw new LoginFailException();
 			}
-			System.out.println("storeinfo =null");
 			if (!storeinfo.matchStoreNo(storeNo)) {
 				throw new LoginFailException();
 			}
-			System.out.println("return");
 			return new Store(storeinfo.getManageNo(), storeinfo.getStoreNo());
 		} catch (SQLException e) {
 			throw new RuntimeException(e);

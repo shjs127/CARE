@@ -19,19 +19,16 @@ public class ModifyArticleService {
 		try {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
-			BoardInfo boardInfo = boardinfoDao.selectById(conn, 
-					modReq.getBoardNo());
+			BoardInfo boardInfo = boardinfoDao.selectById(conn, modReq.getBoardNo());
 			if (boardInfo == null) {
 				throw new ArticleNotFoundException();
 			}
 			if (!canModify(modReq.getUserNo(), boardInfo)) {
 				throw new PermissionDeniedException();
 			}
-			
-			boardinfoDao.update(conn, 
-					modReq.getBoardNo(), modReq.getBoardTitle());
-			contentDao.update(conn, 
-					modReq.getBoardNo(), modReq.getBoardContents());
+
+			boardinfoDao.update(conn, modReq.getBoardNo(), modReq.getBoardTitle());
+			contentDao.update(conn, modReq.getBoardNo(), modReq.getBoardContents());
 			conn.commit();
 		} catch (SQLException e) {
 			JdbcUtil.rollback(conn);

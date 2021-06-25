@@ -5,32 +5,28 @@ import java.util.Map;
 public class StoreRequest {
 
 	private int storeNo;
-	private String storeName;  // "lee"
+	private String storeName;
 	private String storePic;
 	private String address;
 	private String hours;
 	private String closedDays;
 	private String callNumber;
-	private String manageNo; // null
-
-	
-
+	private String manageNo;
 
 	public void validate(Map<String, Boolean> errors) {
 		checkEmpty(errors, storeName, "storeName");
 		checkEmpty(errors, address, "address");
 		checkEmpty(errors, manageNo, "manageNo");
-
-
 	}
 
 	public int getStoreNo() {
 		return storeNo;
-		}
+	}
+
 	public void setStoreNo(int storeNo) {
 		this.storeNo = storeNo;
-		}
-		
+	}
+
 	public String getStorePic() {
 		return storePic;
 	}
@@ -87,9 +83,7 @@ public class StoreRequest {
 		this.manageNo = manageNo;
 	}
 
-
-	private void checkEmpty(Map<String, Boolean> errors, 
-			String value, String fieldName) {
+	private void checkEmpty(Map<String, Boolean> errors, String value, String fieldName) {
 		if (value == null || value.isEmpty())
 			errors.put(fieldName, Boolean.TRUE);
 	}

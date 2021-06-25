@@ -2,9 +2,6 @@ package auth.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Date;
-
-import javax.xml.crypto.Data;
 
 import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
@@ -26,10 +23,12 @@ public class DetailService {
 				JdbcUtil.rollback(conn);
 				throw new DuplicateIdException();
 			}
-			
-			detailinfoDao.insert(conn, new DetailInfo(
-				0,detailReq.getTotalSeat() ,detailReq.getSocketSeat(),detailReq.getDessertSales(),detailReq.getTerrace(),
-				detailReq.getRoofTop(),detailReq.getWifi(),detailReq.getCompanionDog(),detailReq.getParkingSpace(),detailReq.getNokidsZone(),detailReq.getSmokingArea()));
+
+			detailinfoDao.insert(conn,
+					new DetailInfo(0, detailReq.getTotalSeat(), detailReq.getSocketSeat(), detailReq.getDessertSales(),
+							detailReq.getTerrace(), detailReq.getRoofTop(), detailReq.getWifi(),
+							detailReq.getCompanionDog(), detailReq.getParkingSpace(), detailReq.getNokidsZone(),
+							detailReq.getSmokingArea()));
 			conn.commit();
 		} catch (SQLException e) {
 			JdbcUtil.rollback(conn);

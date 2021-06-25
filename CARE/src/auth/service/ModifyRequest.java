@@ -2,8 +2,6 @@ package auth.service;
 
 import java.util.Map;
 
-/*import javafx.scene.control.IndexRange;*/
-
 public class ModifyRequest {
 
 	private String userId;
@@ -27,11 +25,10 @@ public class ModifyRequest {
 	public int getUserNo() {
 		return userNo;
 	}
-	
+
 	public int getBoardNo() {
 		return boardNo;
 	}
-
 
 	public String getBoardTitle() {
 		return boardTitle;
@@ -47,5 +44,4 @@ public class ModifyRequest {
 		}
 	}
 
-	
 }

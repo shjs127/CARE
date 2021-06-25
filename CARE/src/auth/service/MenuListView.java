@@ -32,7 +32,6 @@ public class MenuListView {
 	}
 
 	private boolean isEmpty() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

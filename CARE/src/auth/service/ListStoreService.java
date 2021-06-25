@@ -13,7 +13,6 @@ public class ListStoreService {
 	private StoreInfoDao storeInfoDao = new StoreInfoDao();
 	private int size = 9;
 	private int endSize = 0;
-	
 
 	public StorePage getStorePage(int pageNum, String orderBy) {
 		

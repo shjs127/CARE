@@ -1,11 +1,12 @@
 package auth.service;
-//이수하 추가파일
+
 import java.sql.Connection;
 import java.sql.SQLException;
 
 import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
 import member.dao.MessageDao;
+
 public class DeleteMessageService {
 	
 	private MessageDao messageDao = new MessageDao();

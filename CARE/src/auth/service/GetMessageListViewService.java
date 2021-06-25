@@ -1,6 +1,5 @@
 package auth.service;
 
-//이수하 추가 파일
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Collections;
@@ -31,7 +30,6 @@ public class GetMessageListViewService {
 
 			List<Message> messageList = null;
 			int totalMessages = msgDAO.selectCount(conn);
-			System.out.println("totalMessages=" + totalMessages);
 			int currentPage = pageNum;
 			int firstRow = 0, endRow = 0;
 
@@ -60,7 +58,6 @@ public class GetMessageListViewService {
 
 			List<Message> messageList = null;
 			messageList = msgDAO.selectByUserNo(conn, userNo);
-			System.out.println("messageList=" + messageList);
 			return new MessageListView(messageList);
 		} catch (
 
