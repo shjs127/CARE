@@ -50,14 +50,12 @@ public class ApiHandler implements CommandHandler {
 
 		JSONObject jsonObj = null;
 		JSONObject jsonObj2 = null;
-		String list_total_count = "";		//전체 api row 갯수
-		
-		// TODO API 전체 갯수 확인
-		
+		String list_total_count = "";
+
 		try {
 			BufferedReader br = null;
 			String chkTotalCountResult = "";
-			
+
 			String urlstr = "http://openapi.seoul.go.kr:8088/56504d68436c6565353067596b7578/json/LOCALDATA_072405/1/1/";
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -67,32 +65,29 @@ public class ApiHandler implements CommandHandler {
 			while ((line = br.readLine()) != null) {
 				chkTotalCountResult = chkTotalCountResult + line;
 			}
-			
-			//list_total_count
+
 			JSONParser parser = new JSONParser();
 			jsonObj = (JSONObject) parser.parse(chkTotalCountResult);
 			jsonObj2 = (JSONObject) jsonObj.get("LOCALDATA_072405");
 			list_total_count = jsonObj2.get("list_total_count").toString();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		int endNo = Integer.parseInt(list_total_count)/500;
-		int lastNo = Integer.parseInt(list_total_count)%500;
+
+		int endNo = Integer.parseInt(list_total_count) / 500;
+		int lastNo = Integer.parseInt(list_total_count) % 500;
 		int pageNo = 500;
-		
-		for(int j=0; j<endNo; j++ ) {
-			
+
+		for (int j = 0; j < endNo; j++) {
+
 			String urlstr = "http://openapi.seoul.go.kr:8088/56504d68436c6565353067596b7578/json/LOCALDATA_072405/";
-			if(j==endNo-1) {
-				urlstr = urlstr+((j*pageNo)+1)+"/"+((j*pageNo)+lastNo)+"/";
-			}else {
-				urlstr = urlstr+((j*pageNo)+1)+"/"+((j*pageNo)+pageNo)+"/";
+			if (j == endNo - 1) {
+				urlstr = urlstr + ((j * pageNo) + 1) + "/" + ((j * pageNo) + lastNo) + "/";
+			} else {
+				urlstr = urlstr + ((j * pageNo) + 1) + "/" + ((j * pageNo) + pageNo) + "/";
 			}
-			
-			// TODO API 통신
-			
+
 			String result = "";
 			BufferedReader br = null;
 
@@ -102,15 +97,13 @@ public class ApiHandler implements CommandHandler {
 				br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
 
 				String line;
-				
+
 				while ((line = br.readLine()) != null) {
 					result = result + line;
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
-			// TODO 데이터 변환
 
 			try {
 				JSONParser parser = new JSONParser();
@@ -124,26 +117,30 @@ public class ApiHandler implements CommandHandler {
 					jsonObj3 = (JSONObject) jsonArray.get(i);
 
 					StoreRequest storeReq = new StoreRequest();
-					
-					if (jsonObj3.get("BPLCNM").toString() != null && !jsonObj3.get("BPLCNM").toString().trim().equals("")) {
+
+					if (jsonObj3.get("BPLCNM").toString() != null
+							&& !jsonObj3.get("BPLCNM").toString().trim().equals("")) {
 						if (jsonObj3.get("RDNWHLADDR").toString() != null
 								&& !jsonObj3.get("RDNWHLADDR").toString().trim().equals("")) {
-							if (jsonObj3.get("DTLSTATEGBN").toString().equals("01")) { // 01:영업, 02:폐업
-								if (jsonObj3.get("UPTAENM").toString().equals("과자점") || jsonObj3.get("UPTAENM").toString().equals("떡카페")
-										|| jsonObj3.get("UPTAENM").toString().equals("아이스크림") || jsonObj3.get("UPTAENM").toString().equals("전통찻집")
-										|| jsonObj3.get("UPTAENM").toString().equals("커피숍")) {
-									
+							if (jsonObj3.get("DTLSTATEGBN").toString().equals("01")) { // 01:�쁺�뾽, 02:�룓�뾽
+								if (jsonObj3.get("UPTAENM").toString().equals("怨쇱옄�젏")
+										|| jsonObj3.get("UPTAENM").toString().equals("�뼞移댄럹")
+										|| jsonObj3.get("UPTAENM").toString().equals("�븘�씠�뒪�겕由�")
+										|| jsonObj3.get("UPTAENM").toString().equals("�쟾�넻李살쭛")
+										|| jsonObj3.get("UPTAENM").toString().equals("而ㅽ뵾�닄")) {
+
 									storeReq.setStoreName(jsonObj3.get("BPLCNM").toString());
 									storeReq.setAddress(jsonObj3.get("RDNWHLADDR").toString());
 									storeReq.setManageNo(jsonObj3.get("MGTNO").toString());
-									
-									if(jsonObj3.get("SITETEL").toString() == null || "".equals(jsonObj3.get("SITETEL").toString())) {
+
+									if (jsonObj3.get("SITETEL").toString() == null
+											|| "".equals(jsonObj3.get("SITETEL").toString())) {
 										storeReq.setCallNumber(null);
-									}else {
+									} else {
 										String callNum = jsonObj3.get("SITETEL").toString().replaceAll(" ", "");
 										storeReq.setCallNumber(callNum);
 									}
-									
+
 									storeService.store(storeReq);
 								}
 							}
@@ -154,7 +151,7 @@ public class ApiHandler implements CommandHandler {
 				e.printStackTrace();
 			}
 		}
-		
+
 		try {
 			return "WEB-INF/view/api/apiSuccess.jsp";
 		} catch (DuplicateStoreNoExcetpion e) {

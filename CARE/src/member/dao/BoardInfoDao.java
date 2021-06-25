@@ -18,7 +18,6 @@ import member.model.BoardPicInfo;
 
 public class BoardInfoDao {
 
-	// 寃뚯?��湲� insert
 	public Integer insert(Connection conn, BoardInfo boardinfo) throws SQLException {
 		PreparedStatement pstmt = null;
 		Statement stmt = null;
@@ -138,8 +137,7 @@ public class BoardInfoDao {
 
 	private BoardInfo convertBoard(ResultSet rs) throws SQLException {
 		return new BoardInfo(rs.getInt("boardno"), rs.getInt("userno"), rs.getString("boardtitle"),
-				rs.getString("boardcontents"), rs.getInt("viewcount"),
-				rs.getDate("boarddate"));
+				rs.getString("boardcontents"), rs.getInt("viewcount"), rs.getDate("boarddate"));
 	}
 
 	private Date toDate(Timestamp timestamp) {
@@ -214,32 +212,31 @@ public class BoardInfoDao {
 	private BoardPicInfo convertBoardInfo(ResultSet rs) throws SQLException {
 		return new BoardPicInfo(rs.getString("boardPic1"));
 	}
-	
-	public List<Board> boardViewTop(Connection conn,int top) throws SQLException {
+
+	public List<Board> boardViewTop(Connection conn, int top) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			pstmt = conn.prepareStatement(
-					"select b.boardno, b.boardtitle, b.vc from ( "
-					+ "select boardno , boardtitle, viewcount as vc from boardinfo "
-					+ "order by vc DESC ) "
-					+ "where ROWNUm <=6 " );
+			pstmt = conn.prepareStatement("select b.boardno, b.boardtitle, b.vc from ( "
+					+ "select boardno , boardtitle, viewcount as vc from boardinfo " + "order by vc DESC ) "
+					+ "where ROWNUm <=6 ");
 			pstmt.setInt(1, top);
 			rs = pstmt.executeQuery();
-			List<Board> result=new ArrayList<>();
+			List<Board> result = new ArrayList<>();
 			while (rs.next()) {
 				result.add(convertBoardTop(rs));
 			}
-			
+
 			return result;
 		} finally {
 			JdbcUtil.close(rs);
 			JdbcUtil.close(pstmt);
 		}
 	}
+
 	private Board convertBoardTop(ResultSet rs) throws SQLException {
-		return new Board(rs.getInt("b.boardno"), rs.getString("b.boardtitle"), rs.getInt("b.vc")); 
-			
+		return new Board(rs.getInt("b.boardno"), rs.getString("b.boardtitle"), rs.getInt("b.vc"));
+
 	}
 
 }

@@ -18,11 +18,10 @@ public class ReadArticleHandler implements CommandHandler {
 	private LoginService loginService = new LoginService();
 
 	@Override
-	public String process(HttpServletRequest req, HttpServletResponse res) 
-			throws Exception {
+	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		String noVal = req.getParameter("boardNo");
 		int articleNum = Integer.parseInt(noVal);
-		
+
 		BoardInfoList boardInfoList = readService.view(articleNum);
 		req.getSession().setAttribute("boardInfoList", boardInfoList);
 		try {

@@ -1,7 +1,5 @@
 package member.model;
 
-import java.util.Date;
-
 public class Favorite {
 
 	private int userNo;

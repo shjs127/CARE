@@ -23,8 +23,7 @@ public class ModifyArticleHandler implements CommandHandler {
 	private ModifyArticleService modifyService = new ModifyArticleService();
 
 	@Override
-	public String process(HttpServletRequest req, HttpServletResponse res)
-			throws Exception {
+	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		if (req.getMethod().equalsIgnoreCase("GET")) {
 			return processForm(req, res);
 		} else if (req.getMethod().equalsIgnoreCase("POST")) {
@@ -35,8 +34,7 @@ public class ModifyArticleHandler implements CommandHandler {
 		}
 	}
 
-	private String processForm(HttpServletRequest req, HttpServletResponse res)
-			throws IOException {
+	private String processForm(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		try {
 			String noVal = req.getParameter("boardNo");
 			int boardNo = Integer.parseInt(noVal);
@@ -47,8 +45,7 @@ public class ModifyArticleHandler implements CommandHandler {
 				return null;
 			}
 			ModifyRequest modReq = new ModifyRequest(authUser.getUserId(), authUser.getUserNo(), boardNo,
-					articleData.getBoardInfo().getBoardTitle(),
-					articleData.getContent());
+					articleData.getBoardInfo().getBoardTitle(), articleData.getContent());
 
 			req.setAttribute("modReq", modReq);
 			return FORM_VIEW;
@@ -63,14 +60,12 @@ public class ModifyArticleHandler implements CommandHandler {
 		return authUser.getUserNo() == userNo;
 	}
 
-	private String processSubmit(HttpServletRequest req, HttpServletResponse res)
-			throws Exception {
+	private String processSubmit(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		User authUser = (User) req.getSession().getAttribute("authUser");
 		String noVal = req.getParameter("boardNo");
 		int boardNo = Integer.parseInt(noVal);
 		ModifyRequest modReq = new ModifyRequest(authUser.getUserId(), authUser.getUserNo(), boardNo,
-				req.getParameter("boardTitle"),
-				req.getParameter("boardContents"));
+				req.getParameter("boardTitle"), req.getParameter("boardContents"));
 		req.setAttribute("modReq", modReq);
 		Map<String, Boolean> errors = new HashMap<>();
 		req.setAttribute("errors", errors);

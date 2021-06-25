@@ -16,10 +16,8 @@ public class StoreInHandler implements CommandHandler {
 	private static final String FORM_VIEW = "/WEB-INF/view/login/login.jsp";
 	private StoreLoginService storeLoginService = new StoreLoginService();
 
-
 	@Override
-	public String process(HttpServletRequest req, HttpServletResponse res) 
-	throws Exception {
+	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		if (req.getMethod().equalsIgnoreCase("GET")) {
 			return processForm(req, res);
 		} else if (req.getMethod().equalsIgnoreCase("POST")) {
@@ -34,19 +32,17 @@ public class StoreInHandler implements CommandHandler {
 		return FORM_VIEW;
 	}
 
-	
-	private String processSubmit(HttpServletRequest req, HttpServletResponse res) 
-	throws Exception {
+	private String processSubmit(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		String manageNo = trim(req.getParameter("manageNo"));
 		String storeVal = trim(req.getParameter("storeNo"));
-		int storeNo=Integer.parseInt(storeVal);
-		
+		int storeNo = Integer.parseInt(storeVal);
+
 		Map<String, Boolean> errors = new HashMap<>();
 		req.setAttribute("errors", errors);
 
 		if (manageNo == null || manageNo.isEmpty())
 			errors.put("manageNoErr", Boolean.TRUE);
-		if (storeVal == null || storeVal.isEmpty()/*"".equals(storeNo)*/)
+		if (storeVal == null || storeVal.isEmpty()/* "".equals(storeNo) */)
 			errors.put("storeNoErr", Boolean.TRUE);
 
 		if (!errors.isEmpty()) {
@@ -67,4 +63,3 @@ public class StoreInHandler implements CommandHandler {
 		return str == null ? null : str.trim();
 	}
 }
-

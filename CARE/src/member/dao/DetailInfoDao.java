@@ -16,24 +16,15 @@ public class DetailInfoDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			pstmt = conn.prepareStatement(
-					"select * from DETAILINFO where storeNo = ?");
+			pstmt = conn.prepareStatement("select * from DETAILINFO where storeNo = ?");
 			pstmt.setInt(1, storeNo);
 			rs = pstmt.executeQuery();
 			DetailInfo detailinfo = null;
 			if (rs.next()) {
-				detailinfo = new DetailInfo(
-						rs.getInt("storeNo"),
-						rs.getInt("totalSeat"), 
-						rs.getInt("socketSeat"),
-						rs.getString("dessertSales"), 
-						rs.getString("terrace"),
-						rs.getString("roofTop"),
-						rs.getString("wifi"),
-						rs.getString("companionDog"),
-						rs.getString("parkingSpace"),
-						rs.getString("noKidsZone"),
-						rs.getString("smokingArea"));
+				detailinfo = new DetailInfo(rs.getInt("storeNo"), rs.getInt("totalSeat"), rs.getInt("socketSeat"),
+						rs.getString("dessertSales"), rs.getString("terrace"), rs.getString("roofTop"),
+						rs.getString("wifi"), rs.getString("companionDog"), rs.getString("parkingSpace"),
+						rs.getString("noKidsZone"), rs.getString("smokingArea"));
 			}
 			return detailinfo;
 		} finally {
@@ -42,18 +33,13 @@ public class DetailInfoDao {
 		}
 	}
 
-
 	private Date toDate(Timestamp date) {
 		return date == null ? null : new Date(date.getTime());
 	}
 
-
-
-
 	public DetailInfo insert(Connection conn, DetailInfo detailinfo) throws SQLException {
 
-		try (PreparedStatement pstmt = 
-				conn.prepareStatement("insert into detailinfo values(?,?,?,?,?,?,?,?,?,?,?)")) {
+		try (PreparedStatement pstmt = conn.prepareStatement("insert into detailinfo values(?,?,?,?,?,?,?,?,?,?,?)")) {
 
 			pstmt.setInt(1, detailinfo.getStoreNo());
 			pstmt.setInt(2, detailinfo.getTotalSeat());
@@ -66,23 +52,9 @@ public class DetailInfoDao {
 			pstmt.setString(9, detailinfo.getParkingSpace());
 			pstmt.setString(10, detailinfo.getNoKidsZone());
 			pstmt.setString(11, detailinfo.getSmokingArea());
-	
+
 			pstmt.executeUpdate();
 		}
 		return detailinfo;
 	}
-
-	/*
-	 * public void update(Connection conn, detailinfo detailinfo) throws SQLException
-	 * { try (PreparedStatement pstmt = conn.prepareStatement(
-	 * "update detailinfo set USERNAME = ?, PASSWORD = ? where USERID = ?")) {
-	 * pstmt.setString(1, detailinfo.getName()); pstmt.setString(2,
-	 * detailinfo.getPassword()); pstmt.setString(3, detailinfo.getUserId());
-	 * pstmt.executeUpdate(); } }
-	 */
 }
-
-
-
-
-

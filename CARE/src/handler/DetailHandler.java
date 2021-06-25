@@ -1,8 +1,5 @@
 package handler;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -44,23 +41,11 @@ public class DetailHandler implements CommandHandler {
 		detailReq.setParkingSpace(req.getParameter("parkingSpace"));
 		detailReq.setNokidsZone(req.getParameter("nokidsZone"));
 		detailReq.setSmokingArea(req.getParameter("smokingArea"));
-
-		
-		/*
-		 * Map<String, Boolean> errors = new HashMap<>(); req.setAttribute("errors",
-		 * errors);
-		 * 
-		 * detailReq.validate(errors); // errors = {"name":true, "confirmPw":true}
-		 */
-		/*
-		 * if (!errors.isEmpty()) { return FORM_VIEW; }
-		 */
 		
 		try {
 			detailService.detail(detailReq);
 			return "/WEB-INF/view/main/storageSuccess.jsp";
 		} catch (DuplicateIdException e) {
-			/* errors.put("duplicateId", Boolean.TRUE); */
 			return FORM_VIEW;
 		}
 	}

@@ -16,18 +16,13 @@ public class CommentInfoDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			pstmt = conn.prepareStatement(
-					"select * from COMMENTINFO where BOARDNO = ?");
+			pstmt = conn.prepareStatement("select * from COMMENTINFO where BOARDNO = ?");
 			pstmt.setString(1, boardNo);
 			rs = pstmt.executeQuery();
 			CommentInfo commentinfo = null;
 			if (rs.next()) {
-				commentinfo = new CommentInfo(
-						rs.getInt("boardNo"),
-						rs.getInt("commentNo"), 
-						rs.getInt("userNo"),
-						rs.getString("commentContents"), 
-						toDate(rs.getTimestamp("commentDate")));
+				commentinfo = new CommentInfo(rs.getInt("boardNo"), rs.getInt("commentNo"), rs.getInt("userNo"),
+						rs.getString("commentContents"), toDate(rs.getTimestamp("commentDate")));
 			}
 			return commentinfo;
 		} finally {
@@ -36,39 +31,20 @@ public class CommentInfoDao {
 		}
 	}
 
-
 	private Date toDate(Timestamp date) {
 		return date == null ? null : new Date(date.getTime());
 	}
 
-
-
-
 	public void insert(Connection conn, CommentInfo commentinfo) throws SQLException {
-		try (PreparedStatement pstmt = 
-				conn.prepareStatement("insert into commentinfo values(?,COMMENTNUM.NEXTVAL,?,?,?)")) {
+		try (PreparedStatement pstmt = conn
+				.prepareStatement("insert into commentinfo values(?,COMMENTNUM.NEXTVAL,?,?,?)")) {
 
 			pstmt.setInt(1, commentinfo.getBoardNo());
 			pstmt.setInt(2, commentinfo.getUserNo());
 			pstmt.setString(3, commentinfo.getCommentContents());
 			pstmt.setTimestamp(4, new Timestamp(commentinfo.getCommentDate().getTime()));
-	
 
 			pstmt.executeUpdate();
 		}
 	}
-
-	/*
-	 * public void update(Connection conn, commentinfo commentinfo) throws SQLException
-	 * { try (PreparedStatement pstmt = conn.prepareStatement(
-	 * "update commentinfo set USERNAME = ?, PASSWORD = ? where USERID = ?")) {
-	 * pstmt.setString(1, commentinfo.getName()); pstmt.setString(2,
-	 * commentinfo.getPassword()); pstmt.setString(3, commentinfo.getUserId());
-	 * pstmt.executeUpdate(); } }
-	 */
 }
-
-
-
-
-

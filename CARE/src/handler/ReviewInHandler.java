@@ -1,6 +1,5 @@
 package handler;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -30,24 +29,18 @@ public class ReviewInHandler implements CommandHandler {
 	}
 
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) {
-		
+
 		try {
 			int storeNo = 1;
-			
+
 			ReviewInfo reviewInfo = reviewInfoService.reviewInfo(storeNo);
 			req.getSession().setAttribute("reviewInfo", reviewInfo);
-			/*
-			 * Message message = message.avgScore(storeNo);
-			 */
-			//System.out.println("avgScore: "+reviewInfo.getAvgScore());
-			
-		
-			
+
 			GetMessageListViewService viewService = GetMessageListViewService.getInstance();
 			String pageStr = req.getParameter("page");
 			int pageNum = pageStr == null ? 1 : Integer.parseInt(pageStr);
 			MessageListView view = viewService.getMessageListView(pageNum);
-			
+
 			req.getSession().setAttribute("view", view);
 
 			return FORM_VIEW;
@@ -59,7 +52,7 @@ public class ReviewInHandler implements CommandHandler {
 	private String processForm(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
 		try {
-			
+
 			return FORM_VIEW;
 		} catch (LoginFailException e) {
 			return FORM_VIEW;

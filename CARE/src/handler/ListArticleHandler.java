@@ -12,7 +12,6 @@ import mvc.command.CommandHandler;
 
 public class ListArticleHandler implements CommandHandler {
 	
-	private static final String FORM_VIEW = "/WEB-INF/view/board/listArticle.jsp";
 	private ListArticleService listService = new ListArticleService();
 
 	@Override

@@ -1,2 +1,8 @@
 eclipse.preferences.version=1
 encoding//src/auth/service/StoreService.java=UTF-8
+encoding//src/handler/ApiHandler.java=UTF-8
+encoding//src/handler/ProfileHandler.java=UTF-8
+encoding//src/handler/WriteArticleHandler.java=UTF-8
+encoding//src/handler/WriteAvgHandler.java=UTF-8
+encoding//src/handler/WriteMessageHandler.java=UTF-8
+encoding//src/member/dao/MenuInfoDao.java=UTF-8

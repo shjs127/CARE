@@ -11,15 +11,14 @@ import mvc.command.CommandHandler;
 public class WriteAvgHandler implements CommandHandler {
 
 	private static final String FORM_VIEW = "/WEB-INF/view/main/food-details.jsp";
-	
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		if (req.getMethod().equalsIgnoreCase("GET")) {
-			System.out.println("WriteAvgHandler GET 실행...");
+			System.out.println("WriteAvgHandler GET �떎�뻾...");
 			return processForm(req, res);
 		} else if (req.getMethod().equalsIgnoreCase("POST")) {
-			System.out.println("WriteAvgHandler POST 실행...");
+			System.out.println("WriteAvgHandler POST �떎�뻾...");
 			return processSubmit(req, res);
 		} else {
 			res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
@@ -35,13 +34,12 @@ public class WriteAvgHandler implements CommandHandler {
 
 		try {
 			Message message = new Message();
-			
+
 			message.setReviewContents(req.getParameter("avgScore"));
 			System.out.println("message.avgScore=" + message.getAvgScore());
 
 			WriteAvgService writeAvgService = WriteAvgService.getInstance();
-			int writeResult = writeAvgService.writeAvg(message); // 원래 메소드명은 write()였던 것으로 기억합니다.
-			// WriteMessageService 클래스에서 msgDAO.insert()의 리턴값을 반환하도록 수정해야 합니다.
+			int writeResult = writeAvgService.writeAvg(message);
 
 			req.getSession().setAttribute("view", writeResult);
 

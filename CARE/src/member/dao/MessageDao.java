@@ -1,6 +1,5 @@
 package member.dao;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,15 +7,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import auth.service.Message;
 import jdbc.JdbcUtil;
-import member.model.ReviewInfo;
-
-
-
 
 public class MessageDao {
 	private static MessageDao MESSAGEDao = new MessageDao();
@@ -29,8 +23,8 @@ public class MessageDao {
 	}
 
 	public static int insert(Connection conn, Message message) throws SQLException {
-		System.out.println("message.avgScore="+message.getAvgScore());
-		System.out.println("message.reviewContents"+message.getReviewContents());
+		System.out.println("message.avgScore=" + message.getAvgScore());
+		System.out.println("message.reviewContents" + message.getReviewContents());
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement("insert into Reviewinfo "
@@ -51,7 +45,6 @@ public class MessageDao {
 			pstmt.setInt(1, messageId);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				// return makeMessageFromResultSet(rs);
 				return null;
 			} else {
 				return null;
@@ -70,8 +63,7 @@ public class MessageDao {
 		message.setAvgScore(rs.getDouble("avgScore"));
 		message.setReviewContents(rs.getString("reviewContents"));
 		message.setReviewDate(rs.getDate("reviewDate"));
-		
-		
+
 		return message;
 	}
 
@@ -94,8 +86,6 @@ public class MessageDao {
 		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement("select * from Reviewinfo " + "order by reviewNo desc");
-			// pstmt.setInt(1, firstRow - 1);
-			// pstmt.setInt(2, endRow - firstRow + 1);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				List<Message> messageList = new ArrayList<Message>();
@@ -111,15 +101,13 @@ public class MessageDao {
 			JdbcUtil.close(pstmt);
 		}
 	}
-	
-	
+
 	public List<Message> selectByUserNo(Connection conn, int userNo) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			pstmt = conn.prepareStatement("select * from Reviewinfo "  + "where userNo = ?" + "order by reviewno asc");
+			pstmt = conn.prepareStatement("select * from Reviewinfo " + "where userNo = ?" + "order by reviewno asc");
 			pstmt.setInt(1, userNo);
-			// pstmt.setInt(2, endRow - firstRow + 1);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				List<Message> messageList = new ArrayList<Message>();
@@ -146,8 +134,5 @@ public class MessageDao {
 			JdbcUtil.close(pstmt);
 		}
 	}
-
-	
-
 
 }

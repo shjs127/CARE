@@ -1,6 +1,5 @@
 package handler;
 
-//�̼��� �߰� ����
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,11 +16,11 @@ public class WriteMessageHandler implements CommandHandler {
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		if (req.getMethod().equalsIgnoreCase("GET")) {
 
-			System.out.println("WriteMessageHandler GET 실행...");
+			System.out.println("WriteMessageHandler GET �떎�뻾...");
 			return processForm(req, res);
 
 		} else if (req.getMethod().equalsIgnoreCase("POST")) {
-			System.out.println("WriteMessageHandler POST 실행...");
+			System.out.println("WriteMessageHandler POST �떎�뻾...");
 			return processSubmit(req, res);
 		} else {
 			res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
@@ -48,14 +47,10 @@ public class WriteMessageHandler implements CommandHandler {
 		try {
 
 			WriteMessageService writeService = WriteMessageService.getInstance();
-			int writeResult = writeService.writeMessage(message); // 원래 메소드명은 write()였던 것으로 기억합니다.
-			//WriteMessageService 클래스에서 msgDAO.insert()의 리턴값을 반환하도록 수정해야 합니다.
-
-			//req.getSession().setAttribute("storeno", storeno);
+			int writeResult = writeService.writeMessage(message);
 			
 			res.sendRedirect("foodDetail.do?storeno="+storeNo);
 			return null;
-			//return "/WEB-INF/view/main/reviewSuccess.jsp";
 		} catch (LoginFailException e) {
 			return FORM_VIEW;
 

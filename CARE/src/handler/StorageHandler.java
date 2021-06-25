@@ -7,18 +7,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import auth.service.DetailRequest;
-import auth.service.DetailService;
 import auth.service.DuplicateIdException;
 import auth.service.StoreRequest;
 import auth.service.StoreService;
-import member.model.StoreInfo;
 import mvc.command.CommandHandler;
 
 public class StorageHandler implements CommandHandler {
 
 	private static final String FORM_VIEW = "/WEB-INF/view/main/storeStorage.jsp";
 	private StoreService storeService = new StoreService();
-	private DetailService detailService = new DetailService();
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) {

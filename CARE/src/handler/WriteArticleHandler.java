@@ -48,19 +48,15 @@ public class WriteArticleHandler implements CommandHandler {
 
 		WriteRequest writeReq = createWriteRequest(user, req);
 
-		//writeReq.validate(errors);
-
 		if (!errors.isEmpty()) {
 			return FORM_VIEW;
 		}
 
-		// 글 등록
 		Integer boardNo = writeService.write(writeReq, user);
-		
-		// 첨부파일 등록
+
 		writeReq.setBoardNo(boardNo);
 		writeService.upload(writeReq);
-	
+
 		req.setAttribute("newArticleNo", boardNo);
 
 		return "/WEB-INF/view/board/success.jsp";
@@ -68,8 +64,7 @@ public class WriteArticleHandler implements CommandHandler {
 
 	private WriteRequest createWriteRequest(User user, HttpServletRequest req) throws IOException {
 		String uploadPath = req.getRealPath("upload");
-		System.out.println(uploadPath);
-		int size = 10 * 1024 * 1024; // 10MB, 理쒕� 2GB
+		int size = 10 * 1024 * 1024; // 10MB, 筌ㅼ뮆占� 2GB
 		String fileName1 = "";
 
 		BoardPicInfo boardPicInfo = null;
@@ -88,7 +83,6 @@ public class WriteArticleHandler implements CommandHandler {
 			filename = multi.getFilesystemName(file);
 			origfilename = multi.getOriginalFileName(file);
 
-			// System.out.println("filename="+filename);
 			if (filename == null) {
 				continue;
 			}
@@ -96,13 +90,6 @@ public class WriteArticleHandler implements CommandHandler {
 			boardPicInfo = new BoardPicInfo(filename);
 			boardPicInfoList.add(boardPicInfo);
 		}
-
-
-		//BoardInfoList boardInfoList = new BoardInfoList(fileName1, list);
-
-		// req.getSession().setAttribute("name", name);
-		// req.getSession().setAttribute("subject", subject);
-		//req.getSession().setAttribute("boardInfoList", boardInfoList);
 		return new WriteRequest(new Writer(user.getUserId(), user.getNickName()), multi.getParameter("boardTitle"),
 				multi.getParameter("boardContents"), boardPicInfoList);
 	}

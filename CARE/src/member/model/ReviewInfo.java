@@ -21,7 +21,6 @@ public class ReviewInfo {
 		this.reviewDate = reviewDate;
 	}
 	public ReviewInfo() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public int getReviewNo() {

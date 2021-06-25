@@ -4,7 +4,7 @@ package member.model;
 public class UserInfo {
 
 	private int userNo;
-	private String userId;  // "lee"
+	private String userId;
 	private String password;
 	private String name;
 	private String nickName;
@@ -25,15 +25,6 @@ public class UserInfo {
 		this.gender = gender;
 		this.administer = administer;
 	}
-	/*
-	 * public Member(int userNo, String userId, String password, String name ,String
-	 * nickName ,String birth ,String email ,String gender, String adminster ) {
-	 * this.userId = userId; this.userNo=userNo; this.birth=birth; this.email=email;
-	 * this.gender=gender; this.nickName=nickName; this.name = name; this.password =
-	 * password; this.adminster=adminster; }
-	 */
-	
-	
 
 	public String getUserId() {
 		return userId;
