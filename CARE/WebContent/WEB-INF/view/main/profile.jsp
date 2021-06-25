@@ -49,6 +49,30 @@
 													<h3 class="panel-title">Personal Information</h3>
 												</div>
 												<div class="panel-body">
+												
+												<script>
+												$(function() {
+												$("form").submit(function() {
+												var nameChk = /^[가-힣a-zA-Z]{0,10}$/;
+													if (!nameChk.test($("#nickname").val())) {
+													alert("닉네임 - 1글자 미만 , 10글자 초과 사용 및 특수문자는 사용 불가입니다!");
+													$("#nickname").focus();
+													return false;
+													}
+														});
+															});
+												
+												$(function() {
+													$("form").submit(function() {
+														var nameChk = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
+														if (!nameChk.test($("#birth").val())) {
+															alert("생년월일 8자리를 입력하여 주세요!");
+															$("#birth").focus();
+															return false;
+														}
+													});
+												});
+												</script>
 													<!-- Registration Form Starts -->
 													<form class="form-horizontal" action="profile.do"
 														method="post">
@@ -61,7 +85,7 @@
 																<input type="text" class="form-control"
 																	name="newUserName" placeholder="${userInfo.name}"
 																	required readonly>
-																<%-- 	<p>${userInfo.name}</p> --%>
+																
 															</div>
 														</div>
 														<div class="form-group row">
@@ -84,18 +108,14 @@
 															<div class="col-sm-9">
 																<input type="password" class="form-control"
 																	name="newPwd" placeholder="새비밀번호">
-																<%-- <c:choose>
-																	<c:when test="${errors.newPwd}">새 비밀번호를 입력하세요</c:when>
-																	<c:when test="${newPwd==null}">새 비밀번호를 입력하세요</c:when>
-
-																</c:choose> --%>
+																
 															</div>
 														</div>
 														<div class="form-group row">
 															<label for="inputFname"
 																class="col-sm-3 col-form-label text-right">닉네임 :</label>
 															<div class="col-sm-9">
-																<input type="text" class="form-control"
+																<input id="nickname" type="text" class="form-control"
 																	name="newNickName" placeholder="${userInfo.nickName}">
 															</div>
 														</div>
@@ -103,7 +123,7 @@
 															<label for="inputBirth"
 																class="col-sm-3 col-form-label text-right">생 일 :</label>
 															<div class="col-sm-9">
-																<input type="text" class="form-control" name="newBirth"
+																<input id="birth" type="date" class="form-control" name="newBirth"
 																	placeholder="${userInfo.birth}">
 															</div>
 														</div>

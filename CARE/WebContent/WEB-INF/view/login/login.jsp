@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jspf"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<!-- Main Menu Ends -->
 	<!-- Main Container Starts -->
 		<div class="main-container container">
@@ -14,29 +14,66 @@
                         <h4 class="text-spl-color">기존 회원 로그인</h4>
                     <!-- Login Form Starts -->
                     <p class="login-box-msg">
-<%--  		<c:if test="${errors.idOrPwNotMatch}">
-					아이디와 암호가 일치하지 않습니다.
+                   
+                   <script type = "text/javascript">
+                  
+                       				
+                    <c:if test="${errors.idOrPwNotMatch}">
+					alert("아이디와 암호가 일치하지 않습니다.")
 				</c:if> 
-				<c:if test="${errors.id}">ID를 입력하세요.</c:if>
-				<c:if test="${errors.password}">암호를 입력하세요.</c:if> --%>
+       				
+					
+				/* <c:if test="${errors.id}">ID를 입력하세요.</c:if>
+				<c:if test="${errors.password}">암호를 입력하세요.</c:if> */
+				</script>
 			</p>
+			
+			<script>
+			$(function() {
+				$("#a").submit(function() {
+					var nameChk = /^[가-힣a-zA-Z0-9]{1,20}$/;
+					if (!nameChk.test($("#ID").val())) {
+						alert("아이디를 확인해주세요.");
+						$("#ID").focus();
+						return false;
+					}
+				});
+			});
+			
+			
+			$(function() {
+				$("#a").submit(function() {
+					var PwChk = /^[가-힣a-zA-Z0-9]{1,20}$/;
+					if (!PwChk.test($("#PW").val())) {
+						alert("비밀번호를 확인해주세요.");
+						$("#PW").focus();
+						return false;
+					}
+				});
+			});
+			
 
-                        <form action="${pageContext.request.contextPath}/login.do" method="post">
+		
+			</script>
+			
+			
+
+                        <form action="${pageContext.request.contextPath}/login.do" method="post" id="a">
 
                             <div class="form-group">
                            
-                                <input type="text" class="form-control" name="id" id="login-email" placeholder="ID">
+                                <input  type="text" class="form-control" name="id" id="ID" placeholder="ID">
                             </div>
                             <div class="form-group">
                
-                                <input type="password" class="form-control" name="password" id="login-password" placeholder="Password">
+                                <input type="password" class="form-control" name="password" id="PW" placeholder="Password">
                             </div>
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox"> Remember me
                                 </label>
                             </div>
-                            <button type="submit" class="btn btn-block btn-prime animation">
+                            <button  type="submit" class="btn btn-block btn-prime animation">
                                 Login <i class="fa fa-caret-right"></i>
                             </button>
                             <br>
@@ -60,16 +97,42 @@
                     <!-- Login Form Starts -->
                     <p class="login-box-msg">
 					</p>
+					
+					 <script>
+					$(function() {
+						$("#b").submit(function() {
+							var nameChk = /^[0-9]{1,20}$/;
+							if (!nameChk.test($("#Login-Id").val())) {
+								alert("기업회원 번호를 확인해주세요.");
+								$("#Login-Id").focus();
+								return false;
+							}
+						});
+					});
+					
+					
+					
+					$(function() {
+						$("#b").submit(function() {
+							var nameChk = /^[0-9]{1,20}$/;
+							if (!nameChk.test($("#Login-password").val())) {
+								alert("매장 번호를 확인해주세요.");
+								$("#Login-password").focus();
+								return false;
+							}
+						});
+					});
+					</script>
 
-                        <form action="${pageContext.request.contextPath}/storein.do" method="post">
+                        <form action="${pageContext.request.contextPath}/storein.do" method="post" id="b">
 
                             <div class="form-group">
                            
-                                <input type="text" class="form-control" name="manageNo" id="login-email" placeholder="manageNo">
+                                <input type="text" class="form-control" name="manageNo" id="Login-Id" placeholder="manageNo">
                             </div>
                             <div class="form-group">
                
-                                <input type="password" class="form-control" name="storeNo" id="login-password" placeholder="storeNo">
+                                <input type="password" class="form-control" name="storeNo" id="Login-password" placeholder="storeNo">
                             </div>
                             <div class="checkbox">
                                 <label>
@@ -120,6 +183,7 @@
                         <h4 class="modal-title text-spl-color" id="registerModalLabel">Register Here</h4>
                     </div>
                     <div class="modal-body">
+                    
                     <!-- Register Form Starts -->
                         <form>
                             <div class="form-group">

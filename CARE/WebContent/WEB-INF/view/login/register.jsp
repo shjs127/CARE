@@ -13,25 +13,72 @@
 		<script>
 			$(function() {
 				$("form").submit(function() {
-					var nameChk = /^[가-힣a-zA-Z]{2,10}$/;
-					if (!nameChk.test($("#name").val())) {
-						alert("2글자 미만 , 10글자 초과 사용 및 특수문자는 사용 불가입니다!");
-						$("#name").focus();
-						return false;
-					}
-				});
-			});
-
-			$(function() {
-				$("form").submit(function() {
 					var nameChk = /^[가-힣a-zA-Z0-9]{1,20}$/;
 					if (!nameChk.test($("#ID").val())) {
-						alert("1글자 미만 , 20글자 초과 사용 및 특수문자는 사용 불가입니다!");
+						alert("ID - 1글자 미만 , 20글자 초과 사용 및 특수문자는 사용 불가입니다!");
 						$("#ID").focus();
 						return false;
 					}
 				});
 			});
+			
+			$(function() {
+				$("form").submit(function() {
+					var nameChk = /^[가-힣a-zA-Z0-9]{1,20}$/;
+					if (!nameChk.test($("#pw").val())) {
+						alert("비밀번호를 입력하여 주십시오!");
+						$("#pw").focus();
+						return false;
+					}
+				});
+			});
+			
+			$(function() {
+				$("form").submit(function() {
+			      var p1 = document.getElementById('pw').value;
+			      var p2 = document.getElementById('repw').value;
+			      if( p1 != p2 ) {
+			        alert("비밀번호가 일치 하지 않습니다");
+			        $("#repw").focus();
+			        return false;
+			      } 
+
+			    });
+			});
+			
+			$(function() {
+				$("form").submit(function() {
+					var nameChk = /^[가-힣a-zA-Z]{2,10}$/;
+					if (!nameChk.test($("#name").val())) {
+						alert("name - 2글자 미만 , 10글자 초과 사용 및 특수문자는 사용 불가입니다!");
+						$("#name").focus();
+						return false;
+					}
+				});
+			});
+			
+			$(function() {
+				$("form").submit(function() {
+					var nameChk = /^[가-힣a-zA-Z]{1,10}$/;
+					if (!nameChk.test($("#nickname").val())) {
+						alert("닉네임 - 1글자 미만 , 10글자 초과 사용 및 특수문자는 사용 불가입니다!");
+						$("#nickname").focus();
+						return false;
+					}
+				});
+			});
+			
+			$(function() {
+				$("form").submit(function() {
+					var nameChk = /^[0-9]{6}$/;
+					if (!nameChk.test($("#birth").val())) {
+						alert("주민번호 앞 6자리를 입력하여주세요!");
+						$("#birth").focus();
+						return false;
+					}
+				});
+			});
+
 		</script>
 <div class="register-box">
 		<div class="register-box-body">
@@ -54,12 +101,12 @@
 						class="glyphicon glyphicon-user form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
-					<input type="password" class="form-control" name="password"
+					<input id="pw" type="password" class="form-control" name="password"
 						placeholder="Password"> <span
 						class="glyphicon glyphicon-lock form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
-					<input type="password" class="form-control" name="confirmPassword"
+					<input id="repw" type="password" class="form-control" name="confirmPassword"
 						placeholder="Retype password"> <span
 						class="glyphicon glyphicon-log-in form-control-feedback"></span>
 				</div>
@@ -70,13 +117,13 @@
 				</div>
 
 				<div class="form-group has-feedback">
-					<input type="text" class="form-control" name="nickname"
+					<input id="nickname" type="text" class="form-control" name="nickname"
 						placeholder="닉네임"> <span
 						class="glyphicon glyphicon-user form-control-feedback"></span>
 				</div>
 
 				<div class="form-group has-feedback">
-					<input type="number" class="form-control" name="birth"
+					<input id="birth" type="number" class="form-control" name="birth"
 						placeholder="생년월일"> <span
 						class="glyphicon glyphicon-user form-control-feedback"></span>
 				</div>
@@ -91,10 +138,8 @@
 					<span class="col-sm-3 col-form-label text-right">성별 :</span>
 					<div class="col-sm-9has-feedbarck">
 						<div class="radio">
-							<label> <input type="radio" name="sex" value="male">
-								남성 <input type="radio" name="sex" value="female" checked>
-								여성
-							</label>
+							<label> <input type="radio" name="sex" value="male">남성 
+							<input type="radio" name="sex" value="female" checked>여성</label>
 						</div>
 					</div>
 				</div>
