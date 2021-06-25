@@ -3,9 +3,6 @@
 
 <%@ include file="../include/header.jspf"%>
 
-
-
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
@@ -41,19 +38,12 @@
 			</div>
 			<div class="box-body">
 
-
-
-
 				<form action="deleteMessage.jsp" method="post">
 					<input type="hidden" name="messageId" value="${param.messageId}">
 					메시지를 삭제하시려면 암호를 입력하세요:<br> 암호: <input type="password"
 						name="password"> <br> <input type="submit"
 						value="메시지 삭제하기">
 				</form>
-
-
-
-
 
 			</div>
 			<!-- /.box-body -->

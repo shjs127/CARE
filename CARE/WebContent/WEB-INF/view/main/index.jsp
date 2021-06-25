@@ -33,11 +33,6 @@
 <section class="welcome section">
 	<!-- Nested Container Starts -->
 	<div class="container">
-		<!-- Welcome Content Starts -->
-
-		<!-- Welcome Content Ends -->
-		<!-- Food Menu Grid Starts -->
-
 		<hr>
 		<h4>평점 Top6</h4>
 
@@ -137,91 +132,17 @@
 
 		<hr>
 		<h4>
-			즐겨찾기 <a href="#"
+			게시판 추천 <a href="#"
 				class="btn btn-prime text-weight-bold text-uppercase animation">더보기</a>
 		</h4>
 		<div class="food-menu-grid row text-center">
-			<!-- Food Menu #1 Starts -->
-			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="hover-content">
-					<a href="#" target="_blank"> <img
-						src="<%=request.getContextPath()%>/CARE/images/menu/thumb/chinese-menu.jpg"
-						alt="chinese" class="img-fluid animation">
-					</a>
-					<h4 class="text-uppercase">cafe</h4>
-				</div>
-			</div>
-			<!-- Food Menu #1 Ends -->
-			<!-- Food Menu #2 Starts -->
-			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="hover-content">
-					<a href="#" target="_blank"> <img
-						src="<%=request.getContextPath()%>/CARE/images/menu/thumb/chinese-menu.jpg"
-						alt="chinese" class="img-fluid animation">
-					</a>
-					<h4 class="text-uppercase">cafe</h4>
-				</div>
-			</div>
-			<!-- Food Menu #2 Ends -->
-			<!-- Food Menu #3 Starts -->
-			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="hover-content">
-					<a href="#" target="_blank"> <img
-						src="<%=request.getContextPath()%>/CARE/images/menu/thumb/chinese-menu.jpg"
-						alt="chinese" class="img-fluid animation">
-					</a>
-					<h4 class="text-uppercase">cafe</h4>
-				</div>
-			</div>
-			<!-- Food Menu #3 Ends -->
-			<!-- Food Menu #4 Starts -->
-			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="hover-content">
-					<a href="#" target="_blank"> <img
-						src="<%=request.getContextPath()%>/CARE/images/menu/thumb/chinese-menu.jpg"
-						alt="chinese" class="img-fluid animation">
-					</a>
-					<h4 class="text-uppercase">cafe</h4>
-				</div>
-			</div>
-			<!-- Food Menu #4 Ends -->
-			<!-- Food Menu #5 Starts -->
-			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="hover-content">
-					<a href="#" target="_blank"> <img
-						src="<%=request.getContextPath()%>/CARE/images/menu/thumb/chinese-menu.jpg"
-						alt="chinese" class="img-fluid animation">
-					</a>
-					<h4 class="text-uppercase">cafe</h4>
-				</div>
-			</div>
-			<!-- Food Menu #5 Ends -->
-			<!-- Food Menu #6 Starts -->
-			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="hover-content">
-					<a href="#" target="_blank"> <img
-						src="<%=request.getContextPath()%>/CARE/images/menu/thumb/chinese-menu.jpg"
-						alt="chinese" class="img-fluid animation">
-					</a>
-					<h4 class="text-uppercase">cafe</h4>
-				</div>
-			</div>
-			<!-- Food Menu #6 Ends -->
+	
 
 		</div>
 		<!-- Food Menu Grid Ends -->
 	</div>
 	<!-- Nested Container Ends -->
 </section>
-<!-- Welcome Section Ends -->
-<!-- Nested Container Ends -->
-<!-- News & Events Section Starts -->
-<!-- News & Events Section Ends -->
-<!-- Download App Section Starts -->
-<!-- Download App Section Ends -->
-<!-- Newsletter Section Starts -->
-<!-- Nested Container Ends -->
-<!-- Newsletter Section Ends -->
 
 <script type="text/javascript">
 	$(function() {

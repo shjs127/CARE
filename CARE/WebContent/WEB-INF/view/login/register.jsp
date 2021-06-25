@@ -12,7 +12,7 @@
 
 		<script>
 			$(function() {
-				$("form").submit(function() {
+				$("form").submit(function() {F
 					var nameChk = /^[가-힣a-zA-Z0-9]{1,20}$/;
 					if (!nameChk.test($("#ID").val())) {
 						alert("ID - 1글자 미만 , 20글자 초과 사용 및 특수문자는 사용 불가입니다!");

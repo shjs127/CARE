@@ -1,23 +1,20 @@
 package handler;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import auth.service.DuplicateIdException;
-import auth.service.JoinRequest;
-import auth.service.JoinService;
+import auth.service.Board;
+import auth.service.ListArticleService;
 import auth.service.ListStoreService;
 import auth.service.Store;
-import auth.service.StorePage;
 import mvc.command.CommandHandler;
 
 public class IndexHandler implements CommandHandler {
 	private static final String FORM_VIEW = "/WEB-INF/view/main/index.jsp";
 	private ListStoreService listStoreService = new ListStoreService();
+	private ListArticleService listArticleService=new ListArticleService();
 
 	
 	@Override
@@ -38,8 +35,12 @@ public class IndexHandler implements CommandHandler {
 	private String processForm(HttpServletRequest req, HttpServletResponse res) {
 		int top=6;  
 		List<Store> storageAvgTop = listStoreService.storeTop(top);
-
 		req.setAttribute("storageAvgTop", storageAvgTop);
+		
+		/*
+		 * List<Board> boardViewTop = listArticleService.boardViewTop(top);
+		 * req.setAttribute("boardViewTop", boardViewTop);
+		 */
 
 		return FORM_VIEW;
 	}

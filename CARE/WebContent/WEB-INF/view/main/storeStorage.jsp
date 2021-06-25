@@ -79,153 +79,125 @@
 									placeholder="manageNo">
 							</div>
 						</div>
-					<!-- 	<div class="form-group row">
 
-							<button type="submit" class="btn btn-block btn-prime animation">
-								저장 <i class="fa fa-caret-right"></i>
-							</button>
+						<!-- Personal Information Ends -->
 
-						</div>
-					</form> -->
-					<!-- Personal Information Ends -->
-		
 						<h3 class="panel-heading inner">매장 상세정보</h3>
-						
-						<!-- Delivery Information Starts -->
-						
-					<%-- 		<form class="form-horizontal"	action="${pageContext.request.contextPath}/main/detail.do"
-							method="post">
-							 --%>
-								<div class="form-group row">
-							<label for="inputFax" class="col-sm-3 col-form-label text-right">총 테이블수
-								 :</label>
+
+						<div class="form-group row">
+							<label for="inputFax" class="col-sm-3 col-form-label text-right">총
+								테이블수 :</label>
 							<div class="col-sm-9">
 								<input type="text" class="form-control" name="totalSeat"
 									placeholder="totalSeat">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="inputFax" class="col-sm-3 col-form-label text-right">콘센트 테이블 수
-								:</label>
+							<label for="inputFax" class="col-sm-3 col-form-label text-right">콘센트
+								테이블 수 :</label>
 							<div class="col-sm-9">
 								<input type="text" class="form-control" name="socketSeat"
 									placeholder="socketSeat">
 							</div>
 						</div>
-								    <div class="form-group row">
-                                        <span class="col-sm-3 col-form-label text-right">디저트 판매 :</span>
-                                        <div class="col-sm-9">
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="dessertSales" value="Y" >
-                                                    있음(가능)           
-                                                      <input type="radio" name="dessertSales" value="N" checked>
-                                                    없음(불가능)      
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                       <div class="form-group row">
-                                        <span class="col-sm-3 col-form-label text-right">테라스 :</span>
-                                        <div class="col-sm-9">
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="terrace" value="Y" >
-                                                    있음(가능)           
-                                                      <input type="radio" name="terrace" value="N" checked>
-                                                    없음(불가능)      
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                       <div class="form-group row">
-                                        <span class="col-sm-3 col-form-label text-right">루프탑 :</span>
-                                        <div class="col-sm-9">
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="roofTop" value="Y" >
-                                                    있음(가능)           
-                                                      <input type="radio" name="roofTop" value="N" checked>
-                                                    없음(불가능)      
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                       <div class="form-group row">
-                                        <span class="col-sm-3 col-form-label text-right">와이파이 :</span>
-                                        <div class="col-sm-9">
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="wifi" value="Y" >
-                                                    있음(가능)           
-                                                      <input type="radio" name="wifi" value="N" checked>
-                                                    없음(불가능)      
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                       <div class="form-group row">
-                                        <span class="col-sm-3 col-form-label text-right">애견동반:</span>
-                                        <div class="col-sm-9">
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="companionDog" value="Y" >
-                                                    있음(가능)           
-                                                      <input type="radio" name="companionDog" value="N" checked>
-                                                    없음(불가능)      
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                       <div class="form-group row">
-                                        <span class="col-sm-3 col-form-label text-right">주차공간 :</span>
-                                        <div class="col-sm-9">
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="parkingSpace" value="Y" >
-                                                    있음(가능)           
-                                                      <input type="radio" name="parkingSpace" value="N" checked>
-                                                    없음(불가능)      
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                       <div class="form-group row">
-                                        <span class="col-sm-3 col-form-label text-right">노키즈존 :</span>
-                                        <div class="col-sm-9">
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="noKidsZone" value="Y" >
-                                                    있음(가능)           
-                                                      <input type="radio" name="noKidsZone" value="N" checked>
-                                                    없음(불가능)      
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                       <div class="form-group row">
-                                        <span class="col-sm-3 col-form-label text-right">흡연구역 :</span>
-                                        <div class="col-sm-9">
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="smokingArea" value="Y" >
-                                                    있음(가능)           
-                                                      <input type="radio" name="smokingArea" value="N" checked>
-                                                    없음(불가능)      
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-								
-									<button type="submit" class="btn btn-block btn-prime animation">
-								저장 <i class="fa fa-caret-right"></i>
-							</button>
-							</form>
-							<!-- Delivery Information Ends -->
+						<div class="form-group row">
+							<span class="col-sm-3 col-form-label text-right">디저트 판매 :</span>
+							<div class="col-sm-9">
+								<div class="radio">
+									<label> <input type="radio" name="dessertSales"
+										value="Y"> 있음(가능) <input type="radio"
+										name="dessertSales" value="N" checked> 없음(불가능)
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group row">
+							<span class="col-sm-3 col-form-label text-right">테라스 :</span>
+							<div class="col-sm-9">
+								<div class="radio">
+									<label> <input type="radio" name="terrace" value="Y">
+										있음(가능) <input type="radio" name="terrace" value="N" checked>
+										없음(불가능)
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group row">
+							<span class="col-sm-3 col-form-label text-right">루프탑 :</span>
+							<div class="col-sm-9">
+								<div class="radio">
+									<label> <input type="radio" name="roofTop" value="Y">
+										있음(가능) <input type="radio" name="roofTop" value="N" checked>
+										없음(불가능)
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group row">
+							<span class="col-sm-3 col-form-label text-right">와이파이 :</span>
+							<div class="col-sm-9">
+								<div class="radio">
+									<label> <input type="radio" name="wifi" value="Y">
+										있음(가능) <input type="radio" name="wifi" value="N" checked>
+										없음(불가능)
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group row">
+							<span class="col-sm-3 col-form-label text-right">애견동반:</span>
+							<div class="col-sm-9">
+								<div class="radio">
+									<label> <input type="radio" name="companionDog"
+										value="Y"> 있음(가능) <input type="radio"
+										name="companionDog" value="N" checked> 없음(불가능)
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group row">
+							<span class="col-sm-3 col-form-label text-right">주차공간 :</span>
+							<div class="col-sm-9">
+								<div class="radio">
+									<label> <input type="radio" name="parkingSpace"
+										value="Y"> 있음(가능) <input type="radio"
+										name="parkingSpace" value="N" checked> 없음(불가능)
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group row">
+							<span class="col-sm-3 col-form-label text-right">노키즈존 :</span>
+							<div class="col-sm-9">
+								<div class="radio">
+									<label> <input type="radio" name="noKidsZone" value="Y">
+										있음(가능) <input type="radio" name="noKidsZone" value="N" checked>
+										없음(불가능)
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group row">
+							<span class="col-sm-3 col-form-label text-right">흡연구역 :</span>
+							<div class="col-sm-9">
+								<div class="radio">
+									<label> <input type="radio" name="smokingArea"
+										value="Y"> 있음(가능) <input type="radio"
+										name="smokingArea" value="N" checked> 없음(불가능)
+									</label>
+								</div>
+							</div>
+						</div>
+
+						<button type="submit" class="btn btn-block btn-prime animation">
+							저장 <i class="fa fa-caret-right"></i>
+						</button>
+					</form>
+					<!-- Delivery Information Ends -->
 
 
-			
-						<!-- Registration Form Starts -->
+
+					<!-- Registration Form Starts -->
 				</div>
 			</div>
 			<!-- Registration Block Ends -->

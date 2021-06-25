@@ -101,18 +101,6 @@
 				</form>
 				<!-- 검색창 Ends -->
 
-
-				<!-- Sort By Field Starts -->
-				<!-- 				<form class="teble-form"> -->
-				<!-- 					<select name="v" -->
-				<!-- 						class="form-control rounded-0 sidearea-filter-sort" -->
-				<!-- 						onchange="this.form.submit()"> -->
-				<!-- 						<option></option> -->
-				<!-- 						<option value="5">5개씩보기</option> -->
-				<!-- 						<option value="10">10개씩 보기</option> -->
-				<!-- 					</select> -->
-				<!-- 				</form> -->
-				<!-- Sort By Field Ends -->
 			</div>
 		</div>
 		<!-- Spacer For Smaller Ends -->
@@ -136,16 +124,20 @@
 							<c:set var="fname" value="${articlePage.picList.boardPic1}" />
 							<c:choose>
 								<c:when test="${fn:endsWith(fname, '.jpg')==true}">
-									<img src="/CARE/upload/${articlePage.picList.boardPic1}" width="200" />
+									<img src="/CARE/upload/${articlePage.picList.boardPic1}"
+										width="200" />
 								</c:when>
 								<c:when test="${fn:endsWith(fname, '.png')==true}">
-									<img src="/CARE/upload/${articlePage.picList.boardPic1}" width="200" />
+									<img src="/CARE/upload/${articlePage.picList.boardPic1}"
+										width="200" />
 								</c:when>
 								<c:when test="${fn:endsWith(fname, '.gif')==true}">
-									<img src="/CARE/upload/${articlePage.picList.boardPic1}" width="200" />
+									<img src="/CARE/upload/${articlePage.picList.boardPic1}"
+										width="200" />
 								</c:when>
 								<c:when test="${fn:endsWith(fname, '.GIF')==true}">
-									<img src="/CARE/upload/${articlePage.picList.boardPic1}" width="200" />
+									<img src="/CARE/upload/${articlePage.picList.boardPic1}"
+										width="200" />
 								</c:when>
 								<c:otherwise>
 								</c:otherwise>
@@ -172,31 +164,14 @@
 										<c:out value="${article.boardContents}"></c:out>
 									</c:otherwise>
 								</c:choose></a>
-							<!-- <ul class="list-unstyled list-inline list-box-info-tags">
-								<li class="list-inline-item"><a href="#">Pizza</a>,</li>
-								<li class="list-inline-item"><a href="#">American</a>,</li>
-								<li class="list-inline-item"><a href="#">Sandwiches</a>,</li>
-								<li class="list-inline-item"><a href="#">Steak House</a>,</li>
-								<li class="list-inline-item"><a href="#">Pasta</a>,</li>
-								<li class="list-inline-item"><a href="#">Wraps</a></li>
-							</ul>
-							<ul
-								class="list-unstyled list-inline list-box-info-description text-weight-bold">
-								<li class="list-inline-item"><span>Delivery In</span><br>
-									1h 15min</li>
-								<li class="list-inline-item"><span>Delivery Fee</span><br>
-									$5.00</li>
-								<li class="list-inline-item"><span>Min Order</span><br>
-									$30.00</li>
-								<li class="list-inline-item"><span>Distance</span><br>
-									1.2 miles</li>
-							</ul> -->
+
 							<ul class="list-unstyled list-inline list-box-info-links">
-							<li class="list-inline-item"><i
-									class="fa fa-star-half-full"></i> <a href="">글번호 : ${article.boardNo}</a></li>
-									
+								<li class="list-inline-item"><i
+									class="fa fa-star-half-full"></i> <a href="">글번호 :
+										${article.boardNo}</a></li>
+
 								<li class="list-inline-item"><i class="fa fa-info-circle"></i>${article.boardDate}</li>
-								
+
 								<li class="list-inline-item"><i class="fa fa-asterisk"></i>${article.viewCount}</li>
 							</ul>
 						</div>
@@ -214,7 +189,6 @@
 				<%
 					}
 				%>
-
 
 				<div class="pagination">
 					<ul style="margin: 0 auto;"

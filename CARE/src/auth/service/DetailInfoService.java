@@ -16,7 +16,7 @@ public class DetailInfoService {
 		try (Connection conn = ConnectionProvider.getConnection()) {
 			DetailInfo detailinfo = detailInfoDao.selectById(conn, storeNo);
 			if (detailinfo == null) {
-				//throw new LoginFailException();
+				
 			}
 			
 			return detailinfo;

@@ -25,7 +25,8 @@
 			<td>${articleData.boardInfo.viewCount}</td>
 		</tr>
 		<tr class="content">
-			<td colspan="4" style="word-break:break-all; padding-left: 30px; padding-right: 100px;">${articleData.boardInfo.boardContents}</td>
+			<td colspan="4"
+				style="word-break: break-all; padding-left: 30px; padding-right: 100px;">${articleData.boardInfo.boardContents}</td>
 		</tr>
 	</tbody>
 </table>
@@ -52,40 +53,38 @@
 <input type="hidden" name="boardNo">
 <div style="text-align: right;">
 
-		<c:if test="${articleData.boardInfo.userNo == authUser.userNo}"> 
-	<form name="removefrm" action="delete.do" method="post">
-		<!-- <td> -->
-		<button class="btn1" onclick="removeCheck()">삭제</button>
-			<input type="hidden" name="boardContents" value="${articleData.boardInfo.boardContents}">
-			<input type="hidden" name="boardTitle" value="${articleData.boardInfo.boardTitle}">
-			<input type="hidden" name="boardNo" value="${articleData.boardInfo.boardNo}">
-		<script>
-			function removeCheck() {
+	<c:if test="${articleData.boardInfo.userNo == authUser.userNo}">
+		<form name="removefrm" action="delete.do" method="post">
+			<!-- <td> -->
+			<button class="btn1" onclick="removeCheck()">삭제</button>
+			<input type="hidden" name="boardContents"
+				value="${articleData.boardInfo.boardContents}"> <input
+				type="hidden" name="boardTitle"
+				value="${articleData.boardInfo.boardTitle}"> <input
+				type="hidden" name="boardNo"
+				value="${articleData.boardInfo.boardNo}">
+			<script>
+				function removeCheck() {
 
-				if (confirm("정말 삭제하시겠습니까??") == true) { //확인
+					if (confirm("정말 삭제하시겠습니까??") == true) { //확인
 
-					document.removefrm.submit();
+						document.removefrm.submit();
 
-				} else { //취소
+					} else { //취소
 
-					return false;
+						return false;
+
+					}
 
 				}
+			</script>
+		</form>
 
-			}
-		</script>
-	</form>
-
-	<!-- </a> -->
-	<!-- </td> -->
-
-
-	<!-- <td> -->
-	<a href="modify.do?boardNo=${articleData.boardInfo.boardNo}">
-		<button class="btn1">수정</button>
-	</a>
-	<!-- </td> -->
-	</c:if> 
+		<a href="modify.do?boardNo=${articleData.boardInfo.boardNo}">
+			<button class="btn1">수정</button>
+		</a>
+		<!-- </td> -->
+	</c:if>
 </div>
 <!-- 	</form> -->
 

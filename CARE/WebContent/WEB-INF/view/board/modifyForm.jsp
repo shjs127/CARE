@@ -39,7 +39,6 @@ table {
 textarea {
 	width: 800px;
 	height: 400px;
-	
 }
 
 .button {

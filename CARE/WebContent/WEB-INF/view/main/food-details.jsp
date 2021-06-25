@@ -49,16 +49,6 @@
 	margin-top: 2%;
 }
 </style>
-<%--  <%
- 	GetMessageListViewService viewService = GetMessageListViewService.getInstance();
-	String pageStr = request.getParameter("page");
-	int pageNum = pageStr == null ? 1 : Integer.parseInt(pageStr);
-    MessageListView view = viewService.getMessageListView(pageNum);
-%>   --%>
-
-<%-- <c:set var="view" value="<%= view %>" /> 
- --%>
-
 <!-- Search Section Starts -->
 <section class="search-area condensed parallax">
 	<!-- Nested Container Starts -->
@@ -321,11 +311,6 @@
 							<div class="col-md-4 col-sm-12">
 								<script>
 									function wishList1() {
-
-										/*  let answer;
-										    let YesUrl="/viewLike.jsp"; 
-										    let NoUrl="./food-details.jsp"; */
-
 										let answer = confirm("로그인이 필요합니다.");
 
 										if (answer == true) {
@@ -374,12 +359,6 @@
 								</script>
 
 								<br>
-
-								<%-- 전체 : ${sessionScope.totalCount } <br> 
-								오늘 : ${sessionScope.todayCount } <br> --%>
-
-
-
 							</div>
 
 							<!-- Left Column Ends -->
@@ -529,7 +508,8 @@
 												<div class="box-body">
 													<form action="writeMessage.do" method="post" id="writeForm">
 														<!-- // form에 ID 지정 -->
-														<input type="hidden" name="storeNo" value="${param.storeno }"/>
+														<input type="hidden" name="storeNo"
+															value="${param.storeno }" />
 														<p>
 															<textarea name="reviewContents" cols="60" rows="10"
 																placeholder="리뷰를 작성하세요"></textarea>
@@ -605,7 +585,7 @@
 															</div>
 														</c:forEach>
 													</table>
-												
+
 													<div>
 														<c:forEach var="pageNum" begin="1"
 															end="${view.totalPages}">
@@ -615,36 +595,9 @@
 												</c:if>
 											</div>
 										</div>
-										<!-- /.box-body -->
-										<!-- /.box-footer-->
-										<!-- /.box -->
-										<!-- /.content -->
+
 									</div>
-									<script>
-										// 제이쿼리로 form submit 이벤트 처리
-								/*  $(function() {
-									$("#writeForm").submit(
-											function(event) {
-												alert("리뷰가 등록되었습니다.");
-												var formData = { // Plain Object 변수에 form의 data 저장
-													reviewContents : this.reviewContents.value,
-													avgScore : this.avgScore.value };
-												$.ajax({ 
-													url : "writeMessage.do",
-													type : "POST",
-													data : formData,
-													success : function() { // 요청 성공 시 (HTTP 200 OK)
-																alert("load success..");
-																//$("#writeForm [name=reviewContents]").val(""); // 입력했던 정보 비우기
-																//location.reload();
-															/* 	$("#writeForm").load(window.location.href+ " #writeForm");  */// 글목록만 새로고침
-													}
-												});
-												//event.preventDefault(); // submit 시 페이지 이동하지 않게
-											});
-								}); 
-										
-									</script>
+
 								</div>
 							</div>
 						</div>
@@ -725,12 +678,7 @@
 				</div>
 				<!-- Tab #5 Ends -->
 			</div>
-			<!-- Menu Tabs Content Ends -->
 
-			<!-- Menu Tabs Ends -->
-
-			<!-- Mainarea Ends -->
-			<!-- Sidearea Starts -->
 			<div class="col-md-3 col-sm-12">
 				<!-- Spacer Starts -->
 				<div class="spacer-1 medium d-xs-block d-sm-block d-md-none"></div>
@@ -742,19 +690,6 @@
 					<!-- Heading Ends -->
 					<!-- Order Content Starts -->
 
-
-					<%-- 	총 좌석 수: <span class="float-right text-spl-color">${detailinfo.totalSeat }개</span><br>
-				충전기가 있는 좌석 수: <span class="float-right text-spl-color">${detailinfo.socketSeat }개</span><br>
-				디저트: <span class="float-right text-spl-color">${detailinfo.dessertSales }</span><br>
-				테라스: <span class="float-right text-spl-color">${detailinfo.terrace }</span><br>
-				루프탑: <span class="float-right text-spl-color">${detailinfo.roofTop }</span><br>
-				와이파이: <span class="float-right text-spl-color">${detailinfo.wifi }</span><br>
-				애견동반: <span class="float-right text-spl-color">${detailinfo.companionDog }</span><br>
-				주차공간: <span class="float-right text-spl-color">${detailinfo.parkingSpace }</span><br>
-				노키즈존: <span class="float-right text-spl-color">${detailinfo.noKidsZone }</span><br>
-				흡연존: <span class="float-right text-spl-color">${detailinfo.smokingArea }</span><br>
- --%>
-
 					<c:forEach var="menuInfo2" items="${menuListView.menuInfoList}">
 								  &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
 								    메뉴 이름:  ${menuInfo2.menu }&ensp;<br>
@@ -762,42 +697,15 @@
 									 -가격:  <span class="float-right text-spl-color">${menuInfo2.price }
 							&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<br>
 						</span>
-						<%-- -사진: ${menuInfo2.menuPic }<br> <br> --%>
+
 						<br>
 					</c:forEach>
 
-
-					<!-- Order Item List Starts -->
-
-
-
-
-					<!-- Order Item List Ends -->
-					<!-- Order Item Total Starts -->
-
-					<!-- Order Item Total Ends -->
-
-					<!-- Order Content Ends -->
 				</div>
-				<!-- Your Order Ends -->
-				<!-- Sponsors Banners Starts -->
 
-
-				<!-- Sponsors Banners Ends -->
 			</div>
-			<!-- Sidearea Ends -->
+
 		</div>
-		<!-- Nested Row Ends -->
-
-		<!-- Main Container Ends -->
-		<!-- Newsletter Section Starts -->
-		<!-- Nested Container Starts -->
-
-		<!-- Newsletter Form Starts -->
-
-		<!-- Newsletter Form Ends -->
-		<!-- Nested Container Ends -->
-		<!-- Newsletter Section Ends -->
 
 	</div>
 </div>

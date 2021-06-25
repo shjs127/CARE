@@ -85,22 +85,4 @@ public class DetailRequest {
 	}
 
 	
-	
-	/*
-	 * public void validate(Map<String, Boolean> errors) { checkEmpty(errors,
-	 * storeName, "storeName"); checkEmpty(errors, address, "address");
-	 * checkEmpty(errors, manageNo, "manageNo");
-	 * 
-	 * 
-	 * }
-	 */
-
-	
-
-
-	/*
-	 * private void checkEmpty(Map<String, Boolean> errors, String value, String
-	 * fieldName) { if (value == null || value.isEmpty()) errors.put(fieldName,
-	 * Boolean.TRUE); }
-	 */
 }

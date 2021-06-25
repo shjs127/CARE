@@ -2,21 +2,22 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jspf"%>
 <%@ page import="auth.service.Message"
-		 import="auth.service.WriteMessageService" %>
+	import="auth.service.WriteMessageService"%>
 
 
 
 <html>
 
 <head>
-	<title>방명록 메시지 남김</title>
+<title>방명록 메시지 남김</title>
 </head>
 
 <body>
-	방명록에 메시지를 남겼습니다.<br>
+	방명록에 메시지를 남겼습니다.
+	<br>
 
 </body>
 
 </html>
-	
+
 <%@ include file="../include/footer.jspf"%>

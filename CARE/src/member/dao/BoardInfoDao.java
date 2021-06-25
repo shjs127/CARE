@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import auth.service.Board;
 import auth.service.WriteRequest;
 import jdbc.JdbcUtil;
 import member.model.BoardInfo;
@@ -178,52 +179,6 @@ public class BoardInfoDao {
 		}
 	}
 
-//	public BOARDINFO selectById(Connection conn, String boardNo) throws SQLException {
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		try {
-//			pstmt = conn.prepareStatement(
-//					"select * from BOARDINFO where BOARDNO = ?");
-//			pstmt.setString(1, boardNo);
-//			rs = pstmt.executeQuery();
-//			BOARDINFO boardinfo = null;
-//			if (rs.next()) {
-//				boardinfo = new BOARDINFO(
-//						rs.getInt("boardNo"),
-//						rs.getInt("userNo"), 
-//						rs.getString("boardTitle"),
-//						rs.getString("boardContents"), 
-//						rs.getString("boardPic"), 
-//						rs.getInt("viewCount"),
-//						toDate(rs.getTimestamp("regdate")));
-//			}
-//			return boardinfo;
-//		} finally {
-//			JdbcUtil.close(rs);
-//			JdbcUtil.close(pstmt);
-//		}
-//	}
-
-//	private Date toDate(Timestamp date) {
-//		return date == null ? null : new Date(date.getTime());
-//	}
-
-//	public void insert(Connection conn, BOARDINFO boardinfo) throws SQLException {
-//		try (PreparedStatement pstmt = 
-//				conn.prepareStatement("insert into boardinfo values(BOARDNUM.NEXTVAL,?,?,?,?,?,?)")) {
-//
-//			pstmt.setInt(1, boardinfo.getUserNo());
-//			pstmt.setString(2, boardinfo.getBoardTitle());
-//			pstmt.setString(3, boardinfo.getBoardContents());
-//			pstmt.setString(4, boardinfo.getBoardPic());
-//			pstmt.setInt(5, boardinfo.getViewCount());
-//			pstmt.setTimestamp(4, new Timestamp(boardinfo.getBoardDate().getTime()));
-//	
-//
-//			pstmt.executeUpdate();
-//		}
-//	}
-
 	public int update(Connection conn, int boardNo, String boardTitle) throws SQLException {
 		try (PreparedStatement pstmt = conn
 				.prepareStatement("update boardinfo set BOARDTITLE = ?" + "where BOARDNO = ?")) {
@@ -258,6 +213,33 @@ public class BoardInfoDao {
 
 	private BoardPicInfo convertBoardInfo(ResultSet rs) throws SQLException {
 		return new BoardPicInfo(rs.getString("boardPic1"));
+	}
+	
+	public List<Board> boardViewTop(Connection conn,int top) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(
+					"select b.boardno, b.boardtitle, b.vc from ( "
+					+ "select boardno , boardtitle, viewcount as vc from boardinfo "
+					+ "order by vc DESC ) "
+					+ "where ROWNUm <=6 " );
+			pstmt.setInt(1, top);
+			rs = pstmt.executeQuery();
+			List<Board> result=new ArrayList<>();
+			while (rs.next()) {
+				result.add(convertBoardTop(rs));
+			}
+			
+			return result;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
+	private Board convertBoardTop(ResultSet rs) throws SQLException {
+		return new Board(rs.getInt("b.boardno"), rs.getString("b.boardtitle"), rs.getInt("b.vc")); 
+			
 	}
 
 }

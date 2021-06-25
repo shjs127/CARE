@@ -64,7 +64,7 @@ public class StorageHandler implements CommandHandler {
 		Map<String, Boolean> errors = new HashMap<>();
 		req.setAttribute("errors", errors);
 
-		storeReq.validate(errors); // errors = {"name":true, "confirmPw":true}
+		storeReq.validate(errors);
 
 		if (!errors.isEmpty()) {
 			return FORM_VIEW;

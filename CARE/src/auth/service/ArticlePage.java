@@ -7,8 +7,8 @@ import member.model.BoardPicInfo;
 
 public class ArticlePage {
 
-	private int total;  // 2
-	private int currentPage;  // 1
+	private int total; 
+	private int currentPage; 
 	private List<BoardInfo> list;  // 2媛� Article 媛앹껜�룷�븿�븳 由ъ뒪�듃
 	private List<BoardPicInfo> picList;
 	private int totalPages;  // 1
