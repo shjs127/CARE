@@ -28,7 +28,7 @@ public class MessageDao {
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement("insert into Reviewinfo "
-					+ "(reviewNo, userNo, storeNo, avgScore, reviewContents, reviewDate ) values (Reviewinfo_seq.nextval, 1, 1, ?, ?, sysdate)");
+					+ "(reviewNo, userNo, storeNo, avgScore, reviewContents, reviewDate ) values (reviewnum.nextval, 1, 1, ?, ?, sysdate)");
 			pstmt.setDouble(1, message.getAvgScore());
 			pstmt.setString(2, message.getReviewContents());
 			return pstmt.executeUpdate();
