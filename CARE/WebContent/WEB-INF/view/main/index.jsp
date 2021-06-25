@@ -136,7 +136,23 @@
 				class="btn btn-prime text-weight-bold text-uppercase animation">더보기</a>
 		</h4>
 		<div class="food-menu-grid row text-center">
-	
+			<c:forEach var="board" items="${boardTop}">
+				<div class="col-lg-4 col-md-6 col-sm-12">
+					<div class="hover-content">
+						<a
+							href="${pageContext.request.contextPath}/board/read.do?boardNo=${board.boardNo}">
+							<img
+							src="<%=request.getContextPath()%>/CARE/images/hotels/thumb/hotel-grid-thumb-img1.jpg"
+							alt="Eagle Boys Village Plaza" class="img-fluid img-center">
+						</a> <a
+							href="${pageContext.request.contextPath}/board/read.do?boardNo=${board.boardNo}">
+							<h5 class="text-uppercase">${board.boardTitle}
+								${board.viewCount}</h5>
+						</a>
+					</div>
+				</div>
+			</c:forEach>
+
 
 		</div>
 		<!-- Food Menu Grid Ends -->

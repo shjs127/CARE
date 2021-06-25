@@ -25,4 +25,15 @@ public class ListArticleService {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	public List<Board> boardTop(int top) {
+		
+		try (Connection conn = ConnectionProvider.getConnection()) {
+			List<Board> boardTop = boardInfoDao.boardViewTop(conn,top);
+	
+			return boardTop;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }

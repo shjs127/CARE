@@ -217,9 +217,10 @@ public class BoardInfoDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			pstmt = conn.prepareStatement("select b.boardno, b.boardtitle, b.vc from ( "
-					+ "select boardno , boardtitle, viewcount as vc from boardinfo " + "order by vc DESC ) "
-					+ "where ROWNUm <=6 ");
+			pstmt = conn.prepareStatement("select b.boardno bno, b.boardtitle btitle, b.vc bvc from ( "
+					+ "select boardno , boardtitle, viewcount as vc from boardinfo "
+					+ "order by vc DESC ) b "
+					+ "where ROWNUM <= ? ");
 			pstmt.setInt(1, top);
 			rs = pstmt.executeQuery();
 			List<Board> result = new ArrayList<>();
@@ -235,7 +236,7 @@ public class BoardInfoDao {
 	}
 
 	private Board convertBoardTop(ResultSet rs) throws SQLException {
-		return new Board(rs.getInt("b.boardno"), rs.getString("b.boardtitle"), rs.getInt("b.vc"));
+		return new Board(rs.getInt("bno"), rs.getString("btitle"), rs.getInt("bvc"));
 
 	}
 
