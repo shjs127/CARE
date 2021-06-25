@@ -12,21 +12,13 @@ public class DeleteMessageService {
 	private MessageDao messageDao = new MessageDao();
 	private int messageUserNo;
 	
-	public void delete(MessageRequest msgReq) {
+	public void delete(int reviewNo) {
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
 			
-			Message message = messageDao.select(conn, msgReq.getStoreNo());
-			if (message == null) {
-				throw new ArticleNotFoundException();
-			}
-			if (!canMessage(msgReq.getUserNo(), message)) {
-				throw new PermissionDeniedException();
-			}
-			messageDao.delete(conn, 
-					msgReq.getStoreNo());
+			messageDao.delete(conn, reviewNo);
 			conn.commit();
 		} catch (SQLException e) {
 			JdbcUtil.rollback(conn);

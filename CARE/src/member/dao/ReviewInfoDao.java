@@ -50,6 +50,20 @@ public class ReviewInfoDao {
 			pstmt.executeUpdate();
 		}
 	}
+	public void insert1(Connection conn, ReviewInfo reviewinfo) throws SQLException {
+		try (PreparedStatement pstmt = conn
+				.prepareStatement("insert into reviewinfo values(REVIEWNUM.NEXTVAL,?,?,?,?,?)")) {
+
+			pstmt.setInt(1, reviewinfo.getUserNo());
+			pstmt.setInt(2, reviewinfo.getStoreNo());
+			pstmt.setDouble(3, reviewinfo.getAvgScore());
+			pstmt.setString(4, reviewinfo.getReviewContents());
+			pstmt.setTimestamp(5, new Timestamp(reviewinfo.getReviewDate().getTime()));
+
+			pstmt.executeUpdate();
+		}
+	}
+
 
 	public ReviewInfo selectByREVIEWINFOId(Connection conn, int storeNo) {
 		return null;

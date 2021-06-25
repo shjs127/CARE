@@ -508,8 +508,7 @@
 												<div class="box-body">
 													<form action="writeMessage.do" method="post" id="writeForm">
 														<!-- // form에 ID 지정 -->
-														<input type="hidden" name="storeNo"
-															value="${param.storeno }" />
+														<input type="hidden" name="storeNo" value="${param.storeno }" />
 														<p>
 															<textarea name="reviewContents" cols="60" rows="10"
 																placeholder="리뷰를 작성하세요"></textarea>

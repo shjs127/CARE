@@ -22,15 +22,16 @@ public class MessageDao {
 	public MessageDao() {
 	}
 
-	public static int insert(Connection conn, Message message) throws SQLException {
-		System.out.println("message.avgScore=" + message.getAvgScore());
-		System.out.println("message.reviewContents" + message.getReviewContents());
+	public int insert(Connection conn, Message message) throws SQLException {
+		
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement("insert into Reviewinfo "
 					+ "(reviewNo, userNo, storeNo, avgScore, reviewContents, reviewDate ) values (reviewnum.nextval, 1, 1, ?, ?, sysdate)");
 			pstmt.setDouble(1, message.getAvgScore());
 			pstmt.setString(2, message.getReviewContents());
+			System.out.println("message.avgScore=" + message.getAvgScore());
+			System.out.println("message.reviewContents" + message.getReviewContents());
 			return pstmt.executeUpdate();
 		} finally {
 			JdbcUtil.close(pstmt);
@@ -101,6 +102,24 @@ public class MessageDao {
 			JdbcUtil.close(pstmt);
 		}
 	}
+	public List<Message> selectReviewList(Connection conn, int reviewNo) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement("select * from Reviewinfo order by reviewNo desc");
+			rs = pstmt.executeQuery();
+			List<Message> RvList = new ArrayList<>();
+			while (rs.next()) {
+
+					RvList.add(makeMessageFromResultSet(rs));
+			}
+				return RvList;
+
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
 
 	public List<Message> selectByUserNo(Connection conn, int userNo) throws SQLException {
 		PreparedStatement pstmt = null;
@@ -124,11 +143,11 @@ public class MessageDao {
 		}
 	}
 
-	public int delete(Connection conn, int messageId) throws SQLException {
+	public int delete(Connection conn, int reviewNo) throws SQLException {
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement("delete from Reviewinfo where reviewNo = ?");
-			pstmt.setInt(1, messageId);
+			pstmt.setInt(1, reviewNo);
 			return pstmt.executeUpdate();
 		} finally {
 			JdbcUtil.close(pstmt);

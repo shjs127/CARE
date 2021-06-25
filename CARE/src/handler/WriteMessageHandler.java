@@ -16,11 +16,11 @@ public class WriteMessageHandler implements CommandHandler {
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		if (req.getMethod().equalsIgnoreCase("GET")) {
 
-			System.out.println("WriteMessageHandler GET �떎�뻾...");
+			System.out.println("WriteMessageHandler GET");
 			return processForm(req, res);
 
 		} else if (req.getMethod().equalsIgnoreCase("POST")) {
-			System.out.println("WriteMessageHandler POST �떎�뻾...");
+			System.out.println("WriteMessageHandler POST");
 			return processSubmit(req, res);
 		} else {
 			res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
@@ -47,7 +47,7 @@ public class WriteMessageHandler implements CommandHandler {
 		try {
 
 			WriteMessageService writeService = WriteMessageService.getInstance();
-			int writeResult = writeService.writeMessage(message);
+			 writeService.writeMessage(message);
 			
 			res.sendRedirect("foodDetail.do?storeno="+storeNo);
 			return null;

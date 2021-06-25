@@ -1,7 +1,9 @@
 package handler;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,12 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import auth.service.DeleteMessageService;
 import auth.service.GetMessageListViewService;
 import auth.service.Message;
-import auth.service.MessageData;
 import auth.service.MessageNotFoundException;
 import auth.service.MessageRequest;
 import auth.service.PermissionDeniedException;
 import auth.service.User;
 import auth.service.WriteMessageService;
+import member.model.ReviewInfo;
 import mvc.command.CommandHandler;
 
 public class DeleteMessageHandler implements CommandHandler {
@@ -25,7 +27,9 @@ public class DeleteMessageHandler implements CommandHandler {
 	private Message message = new Message();
 	private GetMessageListViewService getMessageListViewService = GetMessageListViewService.getInstance();
 	private DeleteMessageService deleteService = new DeleteMessageService();
-
+	
+	
+	
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res)
 			throws Exception {
@@ -43,17 +47,16 @@ public class DeleteMessageHandler implements CommandHandler {
 			throws IOException {
 		try {
 			String noVal = req.getParameter("reviewNo");
+			System.out.println("reviewNo="+noVal);
 			
 			int reviewNo= Integer.parseInt(noVal);
-			MessageData messageData = getMessageListViewService.getMessageListView();
+			ReviewInfo getReviewInfo1 = (ReviewInfo) req.getSession().getAttribute("reviewInfo");
 			User authUser = (User) req.getSession().getAttribute("authUser");
-			if (!canMessage(authUser, messageData)) {
+			if (!canMessage(reviewNo, getReviewInfo1)) {
 				res.sendError(HttpServletResponse.SC_FORBIDDEN);
 				return null;
 			}
-			MessageRequest msgReq = new MessageRequest(authUser.getUserId(), authUser.getUserNo(), reviewNo,
-					messageData.getMessage(),
-					messageData.getContent());
+			MessageRequest msgReq = new MessageRequest(getReviewInfo1.getReviewNo(),authUser.getUserNo(), getReviewInfo1.getStoreNo(),getReviewInfo1.getAvgScore(), getReviewInfo1.getReviewContents(), getReviewInfo1.getReviewDate());
 
 			req.setAttribute("msgReq", msgReq);
 			return FORM_VIEW;
@@ -63,31 +66,34 @@ public class DeleteMessageHandler implements CommandHandler {
 		}
 	}
 
-	private boolean canMessage(User authUser, MessageData messageData) {
-		int userNo = messageData.getMessage().getUserNo();
-		return authUser.getUserNo() == userNo;
+	private boolean canMessage(int reviewNo, ReviewInfo reviewInfo) {
+		int s = reviewInfo.getReviewNo();
+		return s == reviewNo;
 	}
 
 
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res)
 			throws Exception {
 		User authUser = (User) req.getSession().getAttribute("authUser");
+		//ReviewInfo reviewInfo = (ReviewInfo) req.getSession().getAttribute("reviewinfo"); 
+		
 		String noVal = req.getParameter("reviewNo");
-		int boardNo = Integer.parseInt(noVal);
+		System.out.println("reviewNo="+noVal);
+		
+		int reviewNo = Integer.parseInt(noVal);
 
-		MessageRequest msgReq = new MessageRequest(authUser.getUserId(), authUser.getUserNo(), storeNo,
-				req.getParameter("reviewContents"));
-		req.setAttribute("msgReq", msgReq);
+		//MessageRequest msgReq = new MessageRequest( reviewInfo.getReviewNo(),authUser.getUserNo(),reviewInfo.getStoreNo(), reviewInfo.getAvgScore(), reviewInfo.getReviewContents(), reviewInfo.getReviewDate());
+		//req.setAttribute("msgReq", msgReq);
 
-		Map<String, Boolean> errors = new HashMap<>();
-		req.setAttribute("errors", errors);
-		msgReq.validate(errors);
-		if (!errors.isEmpty()) {
-			return FORM_VIEW;
-		}
+		/*
+		 * Map<String, Boolean> errors = new HashMap<>(); req.setAttribute("errors",
+		 * errors); msgReq.validate(errors); if (!errors.isEmpty()) { return FORM_VIEW;
+		 * }
+		 */
+		
 		try {
-			deleteService.delete(msgReq);
-			return "/WEB-INF/view/board/success.jsp";
+			deleteService.delete(reviewNo);
+			return "/WEB-INF/view/main/reviewSuccess.jsp";
 		} catch (MessageNotFoundException e) {
 			res.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;

@@ -22,13 +22,14 @@ public class WriteMessageService {
 		try {
 			conn = ConnectionProvider.getConnection();
 			MessageDao messageDao = MessageDao.getInstance();
-			MessageDao.insert(conn, message);
+			int a =messageDao.insert(conn, message);
+			return a;
 		} catch (SQLException e) {
 			throw new ServiceException("에러 내용: " + e.getMessage(), e);
 		} finally {
 			JdbcUtil.close(conn);
 		}
-		return 0;
+		
 	}
 
 }

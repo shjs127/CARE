@@ -67,5 +67,24 @@ public class GetMessageListViewService {
 			JdbcUtil.close(conn);
 		}
 	}
+	public int deleteByReviewNo(int reviewNo) {
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			MessageDao msgDAO = MessageDao.getInstance();
+
+			
+			int messageList = msgDAO.delete(conn, reviewNo);
+			
+			System.out.println("messageList=" + messageList);
+			return messageList;
+		} catch (
+
+		SQLException e) {
+			throw new ServiceException("목록 구하기 실패: " + e.getMessage(), e);
+		} finally {
+			JdbcUtil.close(conn);
+		}
+	}
 
 }
