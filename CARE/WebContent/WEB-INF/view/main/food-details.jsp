@@ -518,23 +518,11 @@
 														<input type="hidden" name="storeNo"
 															value="${param.storeno }" />
 														<p>
-															<textarea name="reviewContents" cols="60" rows="10"
+															<textarea name="reviewContents" cols="60" rows="10" id="reviewContents"
 																placeholder="리뷰를 작성하세요"></textarea>
 														</p>
 
-														<script type="text/javascript">
-															$(function() {
-																$("#writeForm")
-																		.submit(
-																				function() {
-																					if ($("#reviewContents").val() == "") {
-																						alert("리뷰 내용을 입력하세요!");
-																						$("#reviewContents").focus();
-																						return false;
-																					}
-																				});
-															});
-														</script>
+														
 <!-- 리뷰변경 -->
 
 														<h9>별점을 선택하세요.</h9>
@@ -731,5 +719,17 @@
 
 	</div>
 </div>
+
+<script type="text/javascript">
+	$(function() {
+		$("#writeForm").submit(function() {
+					if ($("#reviewContents").val() == "") {
+						alert("리뷰 내용을 입력하세요!");
+						$("#reviewContents").focus();
+						return false;
+					}
+				});
+	});
+</script>
 
 <%@ include file="../include/footer.jspf"%>
