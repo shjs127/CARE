@@ -535,7 +535,7 @@
 																				});
 															});
 														</script>
-
+<!-- 리뷰변경 -->
 
 														<h9>별점을 선택하세요.</h9>
 														<select name="avgScore">
