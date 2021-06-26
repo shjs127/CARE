@@ -80,6 +80,7 @@ public class StoreInfoDao {
 		}
 	}
 
+	// main storeno select
 	public int selectSearchCount(Connection conn, String searchKeyword) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -103,6 +104,83 @@ public class StoreInfoDao {
 		}
 	}
 
+	public int selectAvgScoreSearchCount(Connection conn, String searchKeyword) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "select count(1) "
+				+ "from (select storeinfo.* "
+					+ "from (select storeinfo.* "
+						+ "from storeinfo "
+						+ "where storeinfo.storename LIKE '%'||?||'%' "
+						+ "OR storeinfo.address LIKE '%'||?||'%' "
+						+ "order by storeinfo.storeno desc) "
+						+ "storeinfo ) a, (select storeno , AVG(avgscore) as aa "
+										+ "from reviewinfo "
+										+ "group by storeno "
+										+ "order by aa DESC,storeno DESC) r "
+				+ "where a.storeno = r.storeno";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, searchKeyword);
+			pstmt.setString(2, searchKeyword);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+			return 0;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
+		
+	public int selectReviewCntSearchCount(Connection conn, String searchKeyword) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "SELECT COUNT(1) "
+				+ "FROM ( "
+					+ "SELECT A.*, ROWNUM AS RNUM "
+					+ "FROM ( "
+						+ "SELECT A.* "
+						+ "FROM ( "
+							+ "SELECT A.*,(SELECT COUNT(1) "
+							+ "FROM REVIEWINFO R "
+							+ "WHERE A.STORENO = R.STORENO "
+							+ "GROUP BY R.STORENO) AS REVIEW_CNT "
+							+ "FROM (select storeinfo.* "
+									+ "from (select storeinfo.* "
+											+ "from storeinfo "
+											+ "where storeinfo.storename LIKE '%'||?||'%' "
+											+ "OR storeinfo.address LIKE '%'||?||'%' "
+											+ "order by storeinfo.storeno desc"
+									+ ") storeinfo"
+							+ ") A "
+						+ ") A "
+						+ "WHERE NOT REVIEW_CNT IS NULL "
+						+ "ORDER BY REVIEW_CNT DESC "
+					+ ") A "
+				+ ") A";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, searchKeyword);
+			pstmt.setString(2, searchKeyword);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+			return 0;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
+		
 	// List<STOREINFO> select
 	public List<StoreInfo> select(Connection conn, int startRow, int size) throws SQLException {
 		PreparedStatement pstmt = null;
@@ -156,7 +234,8 @@ public class StoreInfoDao {
 			pstmt = conn.prepareStatement("SELECT A.* " + "FROM ( " + "SELECT A.*, ROWNUM AS RNUM " + "FROM ("
 					+ "SELECT A.* " + "FROM ( " + "SELECT A.*, " + "(SELECT COUNT(1) FROM REVIEWINFO R "
 					+ "WHERE A.STORENO = R.STORENO GROUP BY R.STORENO) AS REVIEW_CNT " + "FROM STOREINFO A " + ") A "
-					+ "ORDER BY REVIEW_CNT " + ") A " + ") A " + "WHERE RNUM BETWEEN ? AND ?");
+					+ "WHERE NOT REVIEW_CNT IS NULL "
+					+ "ORDER BY REVIEW_CNT DESC" + ") A " + ") A " + "WHERE RNUM BETWEEN ? AND ?");
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, size);
 			rs = pstmt.executeQuery();
@@ -172,15 +251,102 @@ public class StoreInfoDao {
 		}
 	}
 
-	// main select
-	public List<StoreInfo> getSearch(Connection conn, int startRow, int size, String searchKeyword)
+	// main storeno select
+	public List<StoreInfo> getSearchStoreNo(Connection conn, int startRow, int size, String searchKeyword)
 			throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		String sql = "select storeinfo.* " + "from (select rownum as rnum, storeinfo.* " + "from storeinfo "
-				+ "where storeinfo.storename LIKE '%'||?||'%' " + "OR storeinfo.address LIKE '%'||?||'%' "
-				+ "order by storeinfo.storeno desc) storeinfo " + "where rnum between ? and ?";
+				+ "where storeinfo.storename LIKE '%'||?||'%' " 
+				+ "OR storeinfo.address LIKE '%'||?||'%' "
+				+ "order by storeinfo.storeno desc) storeinfo " 
+				+ "where rnum between ? and ?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, searchKeyword);
+			pstmt.setString(2, searchKeyword);
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, size);
+			rs = pstmt.executeQuery();
+			List<StoreInfo> result = new ArrayList<>();
+			while (rs.next()) {
+				result.add(convertStore(rs));
+			}
+			return result;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
+		
+	// main orderAvgScore select
+	public List<StoreInfo> getSearchOrderAvgScore(Connection conn, int startRow, int size, String searchKeyword)
+			throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "select a.* "
+				+ "from (select storeinfo.* "
+				+ "from (select storeinfo.* "
+				+ "from storeinfo "
+				+ "where storeinfo.storename LIKE '%'||?||'%' "
+				+ "OR storeinfo.address LIKE '%'||?||'%' "
+				+ "order by storeinfo.storeno desc) storeinfo ) a, (select storeno , AVG(avgscore) as aa "
+				+ "from reviewinfo "
+				+ "group by storeno "
+				+ "order by aa DESC,storeno DESC) r "
+				+ "where a.storeno = r.storeno "
+				+ "and rownum between ? and ?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, searchKeyword);
+			pstmt.setString(2, searchKeyword);
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, size);
+			rs = pstmt.executeQuery();
+			List<StoreInfo> result = new ArrayList<>();
+			while (rs.next()) {
+				result.add(convertStore(rs));
+			}
+			return result;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
+		
+	// main orderReviewCnt select
+	public List<StoreInfo> getSearchOrderReviewCnt(Connection conn, int startRow, int size, String searchKeyword)
+			throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "SELECT A.* "
+					+ "FROM ( "
+						+ "SELECT A.*, ROWNUM AS RNUM "
+						+ "FROM ( "
+							+ "SELECT A.* "
+							+ "FROM ( "
+								+ "SELECT A.*,(SELECT COUNT(1) "
+										+ "FROM REVIEWINFO R "
+										+ "WHERE A.STORENO = R.STORENO "
+										+ "GROUP BY R.STORENO) AS REVIEW_CNT "
+								+ "FROM (select storeinfo.* "
+									+ "from (select storeinfo.* "
+										+ "from storeinfo "
+										+ "where storeinfo.storename LIKE '%'||?||'%' "
+										+ "OR storeinfo.address LIKE '%'||?||'%' "
+										+ "order by storeinfo.storeno desc) "
+									+ "storeinfo) A "
+								+ ") A "
+								+ "WHERE NOT REVIEW_CNT IS NULL "
+								+ "ORDER BY REVIEW_CNT DESC "
+							+ ") A "
+						+ ") A "
+					+ "WHERE RNUM BETWEEN ? AND ?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);

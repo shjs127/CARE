@@ -14,12 +14,12 @@
 			솔직한 리뷰, 믿을 수 있는 평점! <br> 카레
 		</h3>
 		<form class="top-search"
-			action="${pageContext.request.contextPath }/board/search.do"
+			action="${pageContext.request.contextPath }/board/storelist.do"
 			method="post" name="frm" id="frm">
 			<div class="input-group">
 				<div class="input-group-prepend search-panel"></div>
 				<input type="text" class="form-control input-lg rounded-0"
-					name="searchKeyword" id="searchKeyword" placeholder="지역, 카페 또는 메뉴"
+					name="searchKeyword" id="searchKeyword" placeholder="지역 또는 카페"
 					value="${param.searchKeyword}">
 				<button class="btn btn-lg btn-prime animation text-uppercase"
 					type="submit">검색</button>
@@ -114,17 +114,5 @@
 	</div>
 	<!-- Nested Container Ends -->
 </section>
-
-<script type="text/javascript">
-	$(function() {
-		$("#frm").submit(function() {
-			if ($("#searchKeyword").val() == "") {
-				alert("검색어를 입력하세요!");
-				$("#searchKeyword").focus();
-				return false;
-			}
-		});
-	});
-</script>
 
 <%@ include file="../include/footer.jspf"%>

@@ -8,13 +8,19 @@
 <section class="search-area condensed parallax">
 	<!-- Nested Container Starts -->
 	<div class="container text-center">
-		<h3 class="text-weight-normal">솔직한 리뷰, 믿을 수 있는 평점! <br> 카레</h3>
-		<form class="top-search" action="${pageContext.request.contextPath }/board/search.do" method="post" name="frm" id="frm">
+		<h3 class="text-weight-normal">
+			솔직한 리뷰, 믿을 수 있는 평점! <br> 카레
+		</h3>
+		<form class="top-search"
+			action="${pageContext.request.contextPath }/board/storelist.do"
+			method="post" name="frm" id="frm">
 			<div class="input-group">
-				<div class="input-group-prepend search-panel">
-				</div>
-				<input type="text" class="form-control input-lg rounded-0" name="searchKeyword" id="searchKeyword" placeholder="지역, 카페 또는 메뉴" value="${param.searchKeyword}">
-				<button class="btn btn-lg btn-prime animation text-uppercase" type="submit">검색</button>
+				<div class="input-group-prepend search-panel"></div>
+				<input type="text" class="form-control input-lg rounded-0"
+					name="searchKeyword" id="searchKeyword" placeholder="지역 또는 카페"
+					value="${param.searchKeyword}">
+				<button class="btn btn-lg btn-prime animation text-uppercase"
+					type="submit">검색</button>
 			</div>
 		</form>
 	</div>
@@ -226,68 +232,107 @@
 					<ul class="pagination animation float-lg-right">
 						<c:if test="${storePage.startPage > 5}">
 							<c:if test="${Keyword == null}">
-								<li class="page-item">
-									<a href="storelist.do?pageNo=${storePage.startPage -5}"
-										class="page-link">&laquo;</a></li>
+								<c:if test="${orderBy == null || orderBy == 'orderStoreNo'}">
+									<li class="page-item">
+										<a href="storelist.do?pageNo=${storePage.startPage -5}&orderBy=${orderBy}"
+											class="page-link">&laquo;</a></li>
+								</c:if>
+								<c:if test="${orderBy != null}">
+									<li class="page-item">
+										<a href="storelist.do?pageNo=${storePage.startPage -5}&orderBy=${orderBy}"
+											class="page-link">&laquo;</a></li>
+								</c:if>
 							</c:if>
 							<c:if test="${Keyword != null}">
-								<li class="page-item"><a
-								href="search.do?pageNo=${storePage.startPage -5}&searchKeyword=${Keyword}"
-								class="page-link">&laquo;</a></li>
+								<c:if test="${orderBy == null || orderBy == 'orderStoreNo'}">
+									<li class="page-item"><a
+									href="storelist?pageNo=${storePage.startPage -5}&searchKeyword=${Keyword}&orderBy=${orderBy}"
+									class="page-link">&laquo;</a></li>
+								</c:if>
+								<c:if test="${orderBy != null}">
+									<li class="page-item"><a
+									href="storelist?pageNo=${storePage.startPage -5}&searchKeyword=${Keyword}&orderBy=${orderBy}"
+									class="page-link">&laquo;</a></li>
+								</c:if>
 							</c:if>
 						</c:if>
 						<c:forEach var="pNo" begin="${storePage.startPage}"
 							end="${storePage.endPage}">
 							<c:if test="${Keyword == null}">
-								<c:if test="${pNo == storePage.currentPage }">
-									<li class="page-item active"><a href="storelist.do?pageNo=${pNo}"
-								class="page-link">${pNo}</a></li>
+								<c:if test="${orderBy == null || orderBy == 'orderStoreNo'}">
+									<c:if test="${pNo == storePage.currentPage }">
+										<li class="page-item active"><a href="storelist.do?pageNo=${pNo}&orderBy=${orderBy}"
+									class="page-link">${pNo}</a></li>
+									</c:if>
+									<c:if test="${pNo != storePage.currentPage }">
+										<li class="page-item"><a href="storelist.do?pageNo=${pNo}&orderBy=${orderBy}"
+									class="page-link">${pNo}</a></li>
+									</c:if>
 								</c:if>
-								<c:if test="${pNo != storePage.currentPage }">
-									<li class="page-item"><a href="storelist.do?pageNo=${pNo}"
-								class="page-link">${pNo}</a></li>
+								<c:if test="${orderBy != null}">
+									<c:if test="${pNo == storePage.currentPage }">
+										<li class="page-item active"><a href="storelist.do?pageNo=${pNo}&orderBy=${orderBy}"
+									class="page-link">${pNo}</a></li>
+									</c:if>
+									<c:if test="${pNo != storePage.currentPage }">
+										<li class="page-item"><a href="storelist.do?pageNo=${pNo}&orderBy=${orderBy}"
+									class="page-link">${pNo}</a></li>
+									</c:if>
 								</c:if>
 							</c:if>
 							<c:if test="${Keyword != null}">
-								<c:if test="${pNo == storePage.currentPage }">
-									<li class="page-item active"><a href="search.do?pageNo=${pNo}&searchKeyword=${Keyword}"
-								class="page-link">${pNo}</a></li>
+								<c:if test="${orderBy == null || orderBy == 'orderStoreNo'}">
+									<c:if test="${pNo == storePage.currentPage }">
+										<li class="page-item active"><a href="storelist.do?pageNo=${pNo}&searchKeyword=${Keyword}&orderBy=${orderBy}"
+									class="page-link">${pNo}</a></li>
+									</c:if>
+									<c:if test="${pNo != storePage.currentPage }">
+										<li class="page-item"><a href="storelist.do?pageNo=${pNo}&searchKeyword=${Keyword}&orderBy=${orderBy}"
+									class="page-link">${pNo}</a></li>
+									</c:if>
 								</c:if>
-								<c:if test="${pNo != storePage.currentPage }">
-									<li class="page-item"><a href="search.do?pageNo=${pNo}&searchKeyword=${Keyword}"
-								class="page-link">${pNo}</a></li>
+								<c:if test="${orderBy != null}">
+									<c:if test="${pNo == storePage.currentPage }">
+										<li class="page-item active"><a href="storelist.do?pageNo=${pNo}&searchKeyword=${Keyword}&orderBy=${orderBy}"
+									class="page-link">${pNo}</a></li>
+									</c:if>
+									<c:if test="${pNo != storePage.currentPage }">
+										<li class="page-item"><a href="storelist.do?pageNo=${pNo}&searchKeyword=${Keyword}&orderBy=${orderBy}"
+									class="page-link">${pNo}</a></li>
+									</c:if>
 								</c:if>
 							</c:if>
 							
 						</c:forEach>
 						<c:if test="${storePage.endPage < storePage.totalPages}">
 							<c:if test="${Keyword == null}">
-								<li class="page-item"><a
-									href="storelist.do?pageNo=${storePage.startPage + 5}"
-									class="page-link">&raquo;</a></li>
+								<c:if test="${orderBy == null || orderBy == 'orderStoreNo'}">
+									<li class="page-item"><a
+										href="storelist.do?pageNo=${storePage.startPage + 5}&orderBy=${orderBy}"
+										class="page-link">&raquo;</a></li>
+								</c:if>
+								<c:if test="${orderBy != null}">
+									<li class="page-item"><a
+										href="storelist.do?pageNo=${storePage.startPage + 5}&orderBy=${orderBy}"
+										class="page-link">&raquo;</a></li>
+								</c:if>
 							</c:if>
 							<c:if test="${Keyword != null}">
-								<li class="page-item"><a
-								href="search.do?pageNo=${storePage.startPage + 5}&searchKeyword=${Keyword}"
-								class="page-link">&raquo;</a></li>
+								<c:if test="${orderBy == null || orderBy == 'orderStoreNo'}">
+									<li class="page-item"><a
+									href="storelist.do?pageNo=${storePage.startPage + 5}&searchKeyword=${Keyword}&orderBy=${orderBy}"
+									class="page-link">&raquo;</a></li>
+								</c:if>
+								<c:if test="${orderBy != null}">
+									<li class="page-item"><a
+									href="storelist.do?pageNo=${storePage.startPage + 5}&searchKeyword=${Keyword}&orderBy=${orderBy}"
+									class="page-link">&raquo;</a></li>
+								</c:if>
 							</c:if>
 						</c:if>
 					</ul>
 				</div>
 			</c:if>
-			<!-- Pagination Starts -->
-			<!-- <div class="pagination-block clearfix">
-                        <ul class="pagination animation float-lg-right">
-                            <li class="page-item"><a href="#" class="page-link">&laquo;</a></li>
-                            <li class="page-item active"><a href="#" class="page-link">1</a></li>
-                            <li class="page-item"><a href="#" class="page-link">2</a></li>
-                            <li class="page-item"><a href="#" class="page-link">3</a></li>
-                            <li class="page-item"><a href="#" class="page-link">4</a></li>
-                            <li class="page-item"><a href="#" class="page-link">5</a></li>
-                            <li class="page-item"><a href="#" class="page-link">&raquo;</a></li>
-                        </ul>
-                    </div> -->
-			<!-- Pagination Ends -->
 		</div>
 		<!-- Mainarea Ends -->
 	</div>

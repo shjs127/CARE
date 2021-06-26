@@ -15,6 +15,7 @@ public class ListStoreHandler implements CommandHandler {
 	public String process(HttpServletRequest req, HttpServletResponse res) 
 			throws Exception {
 		
+		String searchKeyword = req.getParameter("searchKeyword");
 		String orderByVal = req.getParameter("orderBy");
 		String orderBy = "orderStoreNo";
 		String pageNoVal = req.getParameter("pageNo");
@@ -27,9 +28,19 @@ public class ListStoreHandler implements CommandHandler {
 		if (pageNoVal != null) {
 			pageNo = Integer.parseInt(pageNoVal);
 		}
-		StorePage storePage = listStoreService.getStorePage(pageNo, orderBy);
-		req.setAttribute("storePage", storePage);
-		return "/WEB-INF/view/board/cafeGrid.jsp";
+		
+		if(searchKeyword == null || searchKeyword.equals("")) {
+			StorePage storePage = listStoreService.getStorePage(pageNo, orderBy);
+			req.setAttribute("storePage", storePage);
+			req.setAttribute("orderBy", orderBy);
+			return "/WEB-INF/view/board/cafeGrid.jsp";
+		}else {
+			StorePage storePage = listStoreService.getStoreSelectPage(pageNo, orderBy, searchKeyword);
+			req.setAttribute("storePage", storePage);
+			req.setAttribute("orderBy", orderBy);
+			req.setAttribute("Keyword", searchKeyword);
+			return "/WEB-INF/view/board/cafeGrid.jsp";
+		}
 	}
 
 }

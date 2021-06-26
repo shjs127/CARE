@@ -37,15 +37,26 @@ public class ListStoreService {
 		}
 	}
 	
-	public StorePage getStoreSelectPage(int pageNum, String searchKeyword) {
+	public StorePage getStoreSelectPage(int pageNum, String orderBy, String searchKeyword) {
 		
 		endSize = pageNum * size;
 		
 		try (Connection conn = ConnectionProvider.getConnection() ) {
-			int total = storeInfoDao.selectSearchCount(conn, searchKeyword);
-			List<StoreInfo> storeList = storeInfoDao.getSearch(
-					conn, (pageNum -1) * size + 1, endSize, searchKeyword);
-	
+			List<StoreInfo> storeList = null;
+			int total = 0;
+			
+			
+			if(orderBy.equals("orderStoreNo")) {
+				total = storeInfoDao.selectSearchCount(conn, searchKeyword);
+				storeList = storeInfoDao.getSearchStoreNo(conn, (pageNum - 1) * size + 1, endSize, searchKeyword);
+			}else if(orderBy.equals("orderAvgScore")) {
+				total = storeInfoDao.selectAvgScoreSearchCount(conn, searchKeyword);
+				storeList = storeInfoDao.getSearchOrderAvgScore(conn, (pageNum - 1) * size + 1, endSize, searchKeyword);
+			}else if(orderBy.equals("orderReviewCnt")){
+				total = storeInfoDao.selectReviewCntSearchCount(conn, searchKeyword);
+				storeList = storeInfoDao.getSearchOrderReviewCnt(conn, (pageNum - 1) * size + 1, endSize, searchKeyword);
+			}
+					
 			return new StorePage(total, pageNum, size, storeList);	
 		} catch (SQLException e) {
 			throw new RuntimeException(e);

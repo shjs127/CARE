@@ -16,12 +16,12 @@
 			<!-- Page Links Starts -->
 			<div class="col-lg-6 col-sm-12">
 				<ul class="list-unstyled list-inline page-links text-center">
-					<li class="list-inline-item"><a href="index.html">Home</a></li>
+					<li class="list-inline-item"><a href="${pageContext.request.contextPath}/main/index.do">Home</a></li>
 					<li class="list-inline-item"><a href="/CARE/CARE/about.jsp">회사 소개</a></li>
 					<li class="list-inline-item"><a href="#">광고 문의</a></li>
-					<li class="list-inline-item"><a href="#">이용 약관</a></li>
+					<li class="list-inline-item"><a href="${pageContext.request.contextPath}/main/index.do">이용 약관</a></li>
 					<li class="list-inline-item"><a
-						href="${pageContext.request.contextPath}/main/storage.do">매장
+						href="${pageContext.request.contextPath}/main/terms.do">매장
 							등록</a></li>
 				</ul>
 			</div>
@@ -51,20 +51,21 @@
 		<!-- Address Section Starts -->
 		<section
 			class="foot-address text-xs-center text-sm-center text-md-left">
-			<h5 class="mt-4 mb-3">주소지 :</h5>
 			<!-- Nested Row Starts -->
 			<div class="row">
 				<ul class="list-unstyled col-md-4 col-sm-12">
-					<li>경기도 부천시</li>
+					<li>주소지 : </li>
+					<li>서울시 강남구</li>
 					<li>카레구 이서2동 카레빌딩</li>
 				</ul>
 				<ul class="list-unstyled col-md-4 col-sm-12">
-					<li>전화번호: +82-1234-5678</li>
+					<li>전화번호: </li>
+					<li>+82-1234-5678</li>
 
 				</ul>
 				<ul class="list-unstyled col-md-4 col-sm-12">
 					<li>FAX: +1-800-999-9898</li>
-					<li>E-mail: <a href="mailto:mail@foodbingodemo.com">careitsir@naver.com</a></li>
+					<li>E-mail: <a href="careitsir@gmail.com">careitsir@gmail.com</a></li>
 				</ul>
 			</div>
 			<!-- Nested Row Ends -->
