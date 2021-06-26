@@ -170,7 +170,7 @@
 					<ul class="nav navbar-nav text-uppercase text-weight-bold">
 						<li class="nav-item active"><a href="index.html"
 							class="nav-link">Home</a></li>
-						<li class="nav-item"><a href="about.html" class="nav-link">회사
+						<li class="nav-item"><a href="/CARE/CARE/about.jsp" class="nav-link">회사
 								소개</a></li>
 						<li class="nav-item"><a
 							href="${pageContext.request.contextPath }/board/storelist.do"
@@ -192,7 +192,7 @@
 							<ul class="dropdown-menu rounded-0 float-md-right">
 								<a href="index.html" class="dropdown-item active"><i
 									class="fa fa-angle-right"></i> Home</a>
-								<a href="about.html" class="dropdown-item"><i
+								<a href="/CARE/CARE/about.jsp" class="dropdown-item"><i
 									class="fa fa-angle-right"></i> 회사 소개</a>
 								<a href="food-listing.html" class="dropdown-item"><i
 									class="fa fa-angle-right"></i> 카페 리스트</a>
