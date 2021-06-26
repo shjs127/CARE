@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <%@ include file="../include/header.jspf"%>
 
@@ -26,7 +26,33 @@
 		</tr>
 		<tr class="content">
 			<td colspan="4"
-				style="word-break: break-all; padding-left: 30px; padding-right: 100px;">${articleData.boardInfo.boardContents}</td>
+				style="word-break: break-all; padding-left: 30px; padding-right: 100px;">
+				<c:forEach var="file" items="${boardInfoList.files}">
+					<c:set var="fname" value="${file.boardPic1}" />
+					<c:choose>
+						<c:when test="${fn:endsWith(fname, '.jpg')==true}">
+							<img src="/CARE/upload/${file.boardPic1}" width="200" />
+						</c:when>
+						<c:when test="${fn:endsWith(fname, '.JPG')==true}">
+							<img src="/CARE/upload/${file.boardPic1}" width="200" />
+						</c:when>
+						<c:when test="${fn:endsWith(fname, '.png')==true}">
+							<img src="/CARE/upload/${file.boardPic1}" width="200" />
+						</c:when>
+						<c:when test="${fn:endsWith(fname, '.PNG')==true}">
+							<img src="/CARE/upload/${file.boardPic1}" width="200" />
+						</c:when>
+						<c:when test="${fn:endsWith(fname, '.gif')==true}">
+							<img src="/CARE/upload/${file.boardPic1}" width="200" />
+						</c:when>
+						<c:when test="${fn:endsWith(fname, '.GIF')==true}">
+							<img src="/CARE/upload/${file.boardPic1}" width="200" />
+						</c:when>
+						<c:otherwise>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach><br> ${articleData.boardInfo.boardContents}
+			</td>
 		</tr>
 	</tbody>
 </table>
