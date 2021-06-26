@@ -6,6 +6,7 @@ import java.util.List;
 
 import jdbc.connection.ConnectionProvider;
 import member.dao.StoreInfoDao;
+import member.model.ReviewInfo;
 import member.model.StoreInfo;
 
 public class ListStoreService {
@@ -63,4 +64,14 @@ public class ListStoreService {
 		}
 	}
 	
+public List<Store> reviewTop(int top) {
+		
+		try (Connection conn = ConnectionProvider.getConnection()) {
+			List<Store> reviewTop = storeInfoDao.reviewTop(conn,top);
+	
+			return reviewTop;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }

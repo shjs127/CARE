@@ -9,6 +9,7 @@ import auth.service.Board;
 import auth.service.ListArticleService;
 import auth.service.ListStoreService;
 import auth.service.Store;
+import member.model.ReviewInfo;
 import mvc.command.CommandHandler;
 
 public class IndexHandler implements CommandHandler {
@@ -29,6 +30,8 @@ public class IndexHandler implements CommandHandler {
 		List<Board> boardTop = listArticleService.boardTop(top);
 		req.setAttribute("boardTop", boardTop);
 		
+		List<Store> reviewTop=listStoreService.reviewTop(top);
+		req.setAttribute("reviewTop", reviewTop);
 		return FORM_VIEW;
 	}
 }
