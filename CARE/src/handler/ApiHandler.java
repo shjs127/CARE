@@ -60,7 +60,6 @@ public class ApiHandler implements CommandHandler {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 			br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
-
 			String line;
 			while ((line = br.readLine()) != null) {
 				chkTotalCountResult = chkTotalCountResult + line;
@@ -70,7 +69,6 @@ public class ApiHandler implements CommandHandler {
 			jsonObj = (JSONObject) parser.parse(chkTotalCountResult);
 			jsonObj2 = (JSONObject) jsonObj.get("LOCALDATA_072405");
 			list_total_count = jsonObj2.get("list_total_count").toString();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -123,11 +121,11 @@ public class ApiHandler implements CommandHandler {
 						if (jsonObj3.get("RDNWHLADDR").toString() != null
 								&& !jsonObj3.get("RDNWHLADDR").toString().trim().equals("")) {
 							if (jsonObj3.get("DTLSTATEGBN").toString().equals("01")) { // 01:�쁺�뾽, 02:�룓�뾽
-								if (jsonObj3.get("UPTAENM").toString().equals("怨쇱옄�젏")
-										|| jsonObj3.get("UPTAENM").toString().equals("�뼞移댄럹")
-										|| jsonObj3.get("UPTAENM").toString().equals("�븘�씠�뒪�겕由�")
-										|| jsonObj3.get("UPTAENM").toString().equals("�쟾�넻李살쭛")
-										|| jsonObj3.get("UPTAENM").toString().equals("而ㅽ뵾�닄")) {
+								if (jsonObj3.get("UPTAENM").toString().equals("떡카페")
+										|| jsonObj3.get("UPTAENM").toString().equals("과자점")
+										|| jsonObj3.get("UPTAENM").toString().equals("아이스크림")
+										|| jsonObj3.get("UPTAENM").toString().equals("전통찻집")
+										|| jsonObj3.get("UPTAENM").toString().equals("커피숍")) {
 
 									storeReq.setStoreName(jsonObj3.get("BPLCNM").toString());
 									storeReq.setAddress(jsonObj3.get("RDNWHLADDR").toString());
