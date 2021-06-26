@@ -26,7 +26,7 @@ public class ApiHandler implements CommandHandler {
 	private static final String FORM_VIEW = "WEB-INF/view/api/apiSync.jsp";
 
 	private StoreService storeService = new StoreService();
-
+//
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		if (req.getMethod().equalsIgnoreCase("GET")) {
