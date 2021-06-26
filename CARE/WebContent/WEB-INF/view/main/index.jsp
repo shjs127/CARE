@@ -34,8 +34,10 @@
 	<!-- Nested Container Starts -->
 	<div class="container">
 		<hr>
-		<h4>평점 Top6</h4>
-
+		<h4>평점 Top
+		<a href="${pageContext.request.contextPath}/board/storelist.do?orderBy=orderAvgScore"
+			class="btn btn-prime text-weight-bold text-uppercase animation">더보기</a>
+			</h4>
 		<div class="food-menu-grid row text-center">
 			<!-- Food Menu #1 Starts -->
 			<c:forEach var="storea" items="${storageAvgTop}">
@@ -58,7 +60,7 @@
 		</div>
 		<hr>
 		<h4>
-			조회수 Top6 <a href="#"
+			리뷰 Top <a href="${pageContext.request.contextPath}/board/storelist.do?orderBy=orderReviewCnt"
 				class="btn btn-prime text-weight-bold text-uppercase animation">더보기</a>
 		</h4>
 		<div class="food-menu-grid row text-center">
@@ -73,8 +75,8 @@
 							alt="Eagle Boys Village Plaza" class="img-fluid img-center">
 						</a> <a
 							href="${pageContext.request.contextPath}/main/foodDetail.do?storeno=${reviewT.storeNo}">
-							<h5 class="text-uppercase">${reviewT.storeName} 
-							(${reviewT.reviewCount})</h5>
+							<h5 class="text-uppercase">${reviewT.storeName}
+								(${reviewT.reviewCount})</h5>
 						</a>
 					</div>
 				</div>
@@ -85,7 +87,7 @@
 
 		<hr>
 		<h4>
-			게시판 추천 <a href="#"
+			게시판Top<a href="${pageContext.request.contextPath}/board/list.do"
 				class="btn btn-prime text-weight-bold text-uppercase animation">더보기</a>
 		</h4>
 		<div class="food-menu-grid row text-center">
