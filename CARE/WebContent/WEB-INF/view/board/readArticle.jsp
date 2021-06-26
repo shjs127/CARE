@@ -62,15 +62,35 @@
 		<tbody>
 
 			<tr>
-				<td class="text-align-left text-indent"><a
-					class="text-blue text-strong"
-					href="read.do?boardNo=${articleData.boardInfo.boardNo-1}">이전글</a></td>
+				<c:choose>
+					<c:when test="${prevBoardNo == 0}">
+						<td class="text-align-left text-indent"><a
+							class="text-blue text-strong" href="#"
+							onclick="alert('이전 글이 없습니다.');">이전글</a></td>
+					</c:when>
+					<c:otherwise>
+						<td class="text-align-left text-indent"><a
+							class="text-blue text-strong"
+							href="read.do?boardNo=${prevBoardNo}">이전글</a></td>
+					</c:otherwise>
+				</c:choose>
 
 				<td class=" text-align-center text-indent"><a
 					class="btn btn-list" href="list.do">목록</a></td>
 
-				<td class="text-align-right text-indent"><a
-					href="read.do?boardNo=${articleData.boardInfo.boardNo+1}">다음글</a></td>
+
+				<c:choose>
+					<c:when test="${nextBoardNo == 0}">
+						<td class="text-align-rigth text-indent"><a
+							class="text-blue text-strong" href="#"
+							onclick="alert('다음 글이 없습니다.');">다음글</a></td>
+					</c:when>
+					<c:otherwise>
+						<td class="text-align-rigth text-indent"><a
+							class="text-blue text-strong"
+							href="read.do?boardNo=${nextBoardNo}">다음글</a></td>
+					</c:otherwise>
+				</c:choose>
 			</tr>
 		</tbody>
 	</table>
@@ -82,16 +102,14 @@
 	<c:if test="${articleData.boardInfo.userNo == authUser.userNo}">
 		<form name="removefrm" action="delete.do" method="post">
 			<!-- <td> -->
-			<input type="button" onclick="removeCheck()" value="삭제"> 
-			
-			<input
+			<input type="button" onclick="removeCheck()" value="삭제"> <input
 				type="hidden" name="boardContents"
 				value="${articleData.boardInfo.boardContents}"> <input
 				type="hidden" name="boardTitle"
 				value="${articleData.boardInfo.boardTitle}"> <input
 				type="hidden" name="boardNo"
-				value="${articleData.boardInfo.boardNo}"> 
-			
+				value="${articleData.boardInfo.boardNo}">
+
 			<script>
 				function removeCheck() {
 

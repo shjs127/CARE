@@ -29,8 +29,11 @@ public class ModifyArticleService {
 
 			boardinfoDao.update(conn, modReq.getBoardNo(), modReq.getBoardTitle());
 			contentDao.update(conn, modReq.getBoardNo(), modReq.getBoardContents());
+			if (modReq.getBoardPicInfoList().size() == 0) {
+				boardinfoDao.picUpdate(conn, modReq.getBoardNo(), null);
+			}else {
 			boardinfoDao.picUpdate(conn, modReq.getBoardNo(), modReq.getBoardPicInfoList().get(0).getBoardPic1());
-
+			}
 			conn.commit();
 
 		} catch (SQLException e) {

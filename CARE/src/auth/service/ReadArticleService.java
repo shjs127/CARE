@@ -46,4 +46,21 @@ public class ReadArticleService {
 		}
 
 	}
+
+	public int nextView(int boardNo, boolean increaseReadCount) {
+		try (Connection conn = ConnectionProvider.getConnection()) {
+			int nextBoardNo = boardInfoDao.nextView(conn, boardNo);
+			return nextBoardNo;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+	}
+	}
+	public int prevView(int boardNo, boolean increaseReadCount) {
+		try (Connection conn = ConnectionProvider.getConnection()) {
+			int prevBoardNo = boardInfoDao.prevView(conn, boardNo);
+			return prevBoardNo;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+}
 }

@@ -139,6 +139,10 @@ public class BoardInfoDao {
 		return new BoardInfo(rs.getInt("boardno"), rs.getInt("userno"), rs.getString("boardtitle"),
 				rs.getString("boardcontents"), rs.getInt("viewcount"), rs.getDate("boarddate"));
 	}
+	
+	private int convertBoardNo(ResultSet rs) throws SQLException{
+		return rs.getInt("nextNo");
+	}
 
 	private Date toDate(Timestamp timestamp) {
 		return new Date(timestamp.getTime());
@@ -201,11 +205,14 @@ public class BoardInfoDao {
 		try (PreparedStatement pstmt = conn
 				.prepareStatement("insert into BoardPic " + "(BoardNo, BoardPic1) values (?, ?) ")) {
 			pstmt.setInt(1, writeRequest.getBoardNo());
+			if(writeRequest.getBoardPicInfoList().size()==0) {
+				pstmt.setNString(2, null);
+			}else {
 			pstmt.setString(2, writeRequest.getBoardPicInfoList().get(0).getBoardPic1());
+			}
 			return pstmt.executeUpdate();
-		}
 	}
-
+	}
 	public List<BoardPicInfo> selectByBoardNo(Connection conn, int boardNo) throws SQLException {
 		ResultSet rs = null;
 		try (PreparedStatement pstmt = conn.prepareStatement("select * from BoardPic " + "where boardNo = ? ")) {
@@ -248,6 +255,46 @@ public class BoardInfoDao {
 	private Board convertBoardTop(ResultSet rs) throws SQLException {
 		return new Board(rs.getInt("bno"), rs.getString("btitle"), rs.getInt("bvc"));
 
+	}
+
+	public int nextView(Connection conn, int boardNo) throws SQLException {
+		ResultSet rs = null;
+		try (PreparedStatement pstmt = conn.prepareStatement(" select * " + 
+				" from( " + 
+				" select boardNo, " + 
+				" lead(boardno) over (order by boardno) nextNo " + 
+				" from boardinfo order by boardNo " + 
+				" ) " + 
+				" where boardNo = ? ");
+				) {
+			pstmt.setInt(1, boardNo);
+			rs = pstmt.executeQuery();
+			int nextBoardNo = 0;
+			if (rs.next()) {
+				nextBoardNo = convertBoardNo(rs);
+			}
+			return nextBoardNo;
+		}
+	}
+	
+	public int prevView(Connection conn, int boardNo) throws SQLException {
+		ResultSet rs = null;
+		try (PreparedStatement pstmt = conn.prepareStatement(" select * " + 
+				" from( " + 
+				" select boardNo, " + 
+				" lag(boardno) over (order by boardno) nextNo " + 
+				" from boardinfo order by boardNo " + 
+				" ) " + 
+				" where boardNo = ? ");
+				) {
+			pstmt.setInt(1, boardNo);
+			rs = pstmt.executeQuery();
+			int prevBoardNo = 0;
+			if (rs.next()) {
+				prevBoardNo = convertBoardNo(rs);
+			}
+			return prevBoardNo;
+		}
 	}
 
 }

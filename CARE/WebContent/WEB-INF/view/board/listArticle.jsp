@@ -62,7 +62,7 @@
 <!-- Main Container Starts -->
 <div class="main-container container">
 	<!-- Heading Starts -->
-	<h2 class=main-heading-1>게 시 판</h2>
+	<h2 style = "text-align : center" class=main-heading-1>게 시 판</h2>
 	<!-- Heading Ends -->
 	<!-- Starts -->
 	<div class="row">
@@ -73,11 +73,6 @@
 			<!-- 검색창 Start -->
 			<div class="sidearea-filter">
 				<form class="teble-form" action="list.do" method="post">
-					<select name="f">
-						<option value="title">제목</option>
-						<option value="content">내용</option>
-						<option value="writer">작성자</option>
-					</select>
 					<!-- Search Field Starts -->
 					<div class="input-group sidearea-filter-search">
 						<input type="text" name="searching" class="form-control rounded-0"
@@ -92,6 +87,8 @@
 						class="form-control rounded-0 sidearea-filter-sort"
 						onchange="this.form.submit()">
 						<option value="10"></option>
+						<option value="3"
+							<c:if test="${articlePage.pageV == 3}" > selected </c:if>>3개씩보기</option>
 						<option value="5"
 							<c:if test="${articlePage.pageV == 5}" > selected </c:if>>5개씩보기</option>
 						<option value="10"
@@ -195,7 +192,7 @@
 						class="pagination animation float-lg-right">
 						<c:if test="${articlePage.startPage>1}">
 							<li class="page-item"><a
-								href="?p=${articlePage.startPage-5}&f=${param.f}&searching=${param.searching}&v=${articlePage.pageV}"
+								href="?p=${articlePage.startPage-5}&searching=${param.searching}&v=${articlePage.pageV}"
 								class="page-link">&laquo;</a></li>
 						</c:if>
 						<c:if test="${articlePage.startPage<=1}">
@@ -207,12 +204,12 @@
 							<c:choose>
 								<c:when test="${(param.p) == (pNo)}">
 									<li class="page-item active"><a
-										href="?p=${pNo}&f=${param.f}&searching=${param.searching}&v=${articlePage.pageV}"
+										href="?p=${pNo}&searching=${param.searching}&v=${articlePage.pageV}"
 										class="page-link">${pNo}</a></li>
 								</c:when>
 								<c:otherwise>
 									<li class="page-item"><a
-										href="?p=${pNo}&f=${param.f}&searching=${param.searching}&v=${articlePage.pageV}"
+										href="?p=${pNo}&searching=${param.searching}&v=${articlePage.pageV}"
 										class="page-link">${pNo}</a></li>
 								</c:otherwise>
 							</c:choose>
@@ -220,7 +217,7 @@
 
 						<c:if test="${articlePage.startPage+5 <= articlePage.totalPages}">
 							<li class="page-item"><a
-								href="?p=${articlePage.startPage+5}&f=${param.f}&searching=${param.searching}&v=${articlePage.pageV}"
+								href="?p=${articlePage.startPage+5}&searching=${param.searching}&v=${articlePage.pageV}"
 								class="page-link">&raquo;</a></li>
 						</c:if>
 						<c:if test="${articlePage.startPage+5 > articlePage.totalPages}">

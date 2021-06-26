@@ -60,7 +60,6 @@ public class ListArticleHandler implements CommandHandler {
 				if(pageView != null) {
 					pageV = Integer.parseInt(pageView);
 				}
-				System.out.println("�뜲�씠�꽣 �엯�젰");
 				ArticlePage articlePage = listService.getArticlePage(pageNo,pageV,search);
 				req.setAttribute("articlePage", articlePage);
 					return "/WEB-INF/view/board/listArticle.jsp";

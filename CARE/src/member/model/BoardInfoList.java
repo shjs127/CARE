@@ -18,6 +18,12 @@ public class BoardInfoList {
 		this.boardNo = boardNo;
 		this.files = files;
 	}
+	
+
+	public BoardInfoList(List<BoardPicInfo> files) {
+		super();
+		this.files = files;
+	}
 
 	public String getFileName1() {
 		return fileName1;

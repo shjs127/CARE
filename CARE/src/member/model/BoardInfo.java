@@ -21,6 +21,10 @@ public class BoardInfo {
 		this.viewCount = viewCount;
 		this.boardDate = boardDate;
 	}
+	public BoardInfo(int boardNo) {
+	
+		this.boardNo = boardNo;
+	}
 
 
 	public int getBoardNo() {

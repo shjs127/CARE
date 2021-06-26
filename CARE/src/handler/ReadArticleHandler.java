@@ -26,7 +26,11 @@ public class ReadArticleHandler implements CommandHandler {
 			ArticleData articleData = readService.getArticle(articleNum, true);
 			User articleUser = loginService.selectByUserNo(articleData.getBoardInfo().getUserNo());
 			BoardInfoList boardInfoList = readService.view(articleNum);
+			int nextBoardNo = readService.nextView(articleNum, true);
+			int prevBoardNo = readService.prevView(articleNum, true);
 			req.setAttribute("boardInfoList", boardInfoList);
+			req.setAttribute("nextBoardNo", nextBoardNo);
+			req.setAttribute("prevBoardNo", prevBoardNo);
 			req.getSession().setAttribute("articleUser", articleUser);
 			req.setAttribute("articleData", articleData);
 			return "/WEB-INF/view/board/readArticle.jsp";

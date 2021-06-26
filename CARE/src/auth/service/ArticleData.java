@@ -12,6 +12,9 @@ public class ArticleData {
 		this.boardInfo = boardInfo;
 		this.content = content;
 	}
+	public ArticleData(BoardInfo boardInfo) {
+		this.boardInfo = boardInfo;
+	}
 
 	public BoardInfo getBoardInfo() {
 		return boardInfo;

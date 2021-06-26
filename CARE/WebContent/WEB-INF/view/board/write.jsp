@@ -109,7 +109,7 @@ button {
 			</a>
 		</div>
 		<div>
-			<a href="home.do">
+			<a href="../main/index.do">
 				<button>홈으로</button>
 			</a>
 		</div>
