@@ -65,14 +65,12 @@ public class WriteArticleHandler implements CommandHandler {
 	private WriteRequest createWriteRequest(User user, HttpServletRequest req) throws IOException {
 		String uploadPath = req.getRealPath("upload");
 		int size = 10 * 1024 * 1024; // 10MB, 筌ㅼ뮆占� 2GB
-		String fileName1 = "";
 
 		BoardPicInfo boardPicInfo = null;
 		List<BoardPicInfo> boardPicInfoList = new ArrayList<BoardPicInfo>();
 
 		MultipartRequest multi = new MultipartRequest(req, uploadPath, size, "utf-8", new DefaultFileRenamePolicy());
 
-		fileName1 = multi.getParameter("fileName1");
 
 		Enumeration files = multi.getFileNames();
 

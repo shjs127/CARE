@@ -186,6 +186,16 @@ public class BoardInfoDao {
 			return pstmt.executeUpdate();
 		}
 	}
+	
+	public int picUpdate(Connection conn, int boardNo, String boardPic1) throws SQLException {
+		try (PreparedStatement pstmt = conn
+				.prepareStatement("update BOARDPIC set BOARDPIC1 = ?" + "where BOARDNO = ?")) {
+			pstmt.setString(1, boardPic1);
+			pstmt.setInt(2, boardNo);
+			pstmt.executeUpdate();
+			return pstmt.executeUpdate();
+		}
+	}
 
 	public int PicInsert(Connection conn, WriteRequest writeRequest) throws SQLException {
 		try (PreparedStatement pstmt = conn

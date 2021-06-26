@@ -22,11 +22,11 @@ public class ReadArticleHandler implements CommandHandler {
 		String noVal = req.getParameter("boardNo");
 		int articleNum = Integer.parseInt(noVal);
 
-		BoardInfoList boardInfoList = readService.view(articleNum);
-		req.getSession().setAttribute("boardInfoList", boardInfoList);
 		try {
 			ArticleData articleData = readService.getArticle(articleNum, true);
 			User articleUser = loginService.selectByUserNo(articleData.getBoardInfo().getUserNo());
+			BoardInfoList boardInfoList = readService.view(articleNum);
+			req.setAttribute("boardInfoList", boardInfoList);
 			req.getSession().setAttribute("articleUser", articleUser);
 			req.setAttribute("articleData", articleData);
 			return "/WEB-INF/view/board/readArticle.jsp";

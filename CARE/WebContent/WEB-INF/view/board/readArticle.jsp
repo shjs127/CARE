@@ -82,13 +82,16 @@
 	<c:if test="${articleData.boardInfo.userNo == authUser.userNo}">
 		<form name="removefrm" action="delete.do" method="post">
 			<!-- <td> -->
-			<input type="button" onclick="removeCheck()" value="삭제">
-			<input type="hidden" name="boardContents"
+			<input type="button" onclick="removeCheck()" value="삭제"> 
+			
+			<input
+				type="hidden" name="boardContents"
 				value="${articleData.boardInfo.boardContents}"> <input
 				type="hidden" name="boardTitle"
 				value="${articleData.boardInfo.boardTitle}"> <input
 				type="hidden" name="boardNo"
-				value="${articleData.boardInfo.boardNo}">
+				value="${articleData.boardInfo.boardNo}"> 
+			
 			<script>
 				function removeCheck() {
 
@@ -106,8 +109,8 @@
 			</script>
 		</form>
 
-		<a href="modify.do?boardNo=${articleData.boardInfo.boardNo}">
-			<input type="button" value="수정">
+		<a href="modify.do?boardNo=${articleData.boardInfo.boardNo}"> <input
+			type="button" value="수정">
 		</a>
 		<!-- </td> -->
 	</c:if>

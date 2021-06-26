@@ -68,9 +68,13 @@ textarea {
 				return true;
 		}
 	</script>
-	<form onsubmit="return modify()" action="modify.do" method="post">
+	<form onsubmit="return modify()" action="modify.do" method="post" enctype="multipart/form-data">
 		<table class="table">
 			<tbody>
+				<tr>
+					<td>파일명 :</td>
+					<td><input type="file" name="fileName1"></td>
+				</tr>
 				<tr>
 					<th>제목</th>
 					<td class="text-align-left text-indent text-strong text-orange"
