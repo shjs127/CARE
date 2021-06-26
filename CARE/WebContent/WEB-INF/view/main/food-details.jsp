@@ -527,9 +527,9 @@
 																$("#writeForm")
 																		.submit(
 																				function() {
-																					if ($("#writeForm").val() == "") {
+																					if ($("#reviewContents").val() == "") {
 																						alert("리뷰 내용을 입력하세요!");
-																						$("#writeForm").focus();
+																						$("#reviewContents").focus();
 																						return false;
 																					}
 																				});
