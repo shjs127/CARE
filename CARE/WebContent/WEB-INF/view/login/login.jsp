@@ -148,26 +148,7 @@
 	<!-- Content Login Wrap Ends -->
 	<!-- Banners Starts -->
 	<div class="row">
-		<div class="col-3">
-			<a href="#"><img
-				src="<%=request.getContextPath()%>/CARE/images/banners/banner-img1.png"
-				alt="Banner 1" class="img-fluid"></a>
-		</div>
-		<div class="col-3">
-			<a href="#"><img
-				src="<%=request.getContextPath()%>/CARE/images/banners/banner-img2.png"
-				alt="Banner 2" class="img-fluid"></a>
-		</div>
-		<div class="col-3">
-			<a href="#"><img
-				src="<%=request.getContextPath()%>/CARE/images/banners/banner-img3.png"
-				alt="Banner 3" class="img-fluid"></a>
-		</div>
-		<div class="col-3">
-			<a href="#"><img
-				src="<%=request.getContextPath()%>/CARE/images/banners/banner-img1.png"
-				alt="Banner 1" class="img-fluid"></a>
-		</div>
+	
 	</div>
 	<!-- Banners Ends -->
 </div>
@@ -240,68 +221,13 @@
 								to receive emails with deals and discount codes
 							</label>
 						</div>
-						<p class="help-block">
-							By logging in I agree to the <a href="#">Terms of Use</a> and <a
-								href="#">Privacy Policy</a>.
-						</p>
+						
 					</div>
-					<button type="submit"
-						class="btn btn-lg btn-block btn-tertiary animation">
-						Continue To Register <i class="fa fa-caret-right"></i>
-					</button>
+				
 				</form>
 				<!-- Register Form Ends -->
 			</div>
 		</div>
 	</div>
 </div>
-<!-- Register Modal Window Ends -->
-<!-- Newsletter Section Starts -->
-<section class="footer-top">
-	<!-- Nested Container Starts -->
-	<div class="container">
-		<h3 class="text-center text-weight-bold">Subscribe to our
-			Newsletter:</h3>
-		<ul class="list-unstyled list-inline text-center">
-			<li class="list-inline-item"><i class="fa fa-check-circle"></i>
-				Receive deals from all our top restaurants via e-mail</li>
-			<li class="list-inline-item"><i class="fa fa-check-circle"></i>
-				Don't miss out on our great offers</li>
-		</ul>
-		<!-- Newsletter Form Starts -->
-		<form class="newsletter-form">
-			<!-- Nested Row Starts -->
-			<div class="row">
-				<div class="col-md-4 col-sm-12">
-					<label class="sr-only" for="newsletter-city">Please Select
-						Your City</label> <input type="text" class="form-control"
-						id="newsletter-city" placeholder="Please Select Your City">
-				</div>
-				<div class="col-md-5 col-sm-12">
-					<label class="sr-only" for="newsletter-email">Email</label> <input
-						type="text" class="form-control" id="newsletter-email"
-						placeholder="Enter Your E-mail Id">
-				</div>
-				<div class="col-md-3 col-sm-12">
-					<button type="submit"
-						class="btn btn-prime btn-block text-uppercase text-weight-bold animation">Sign
-						Up Now</button>
-				</div>
-				<div class="col-sm-12 text-center">
-					<h6 class="text-weight-bold">
-						<label> <input type="checkbox"> <span>I
-								have read &amp; accepted the terms and conditions and privacy
-								policy</span>
-						</label>
-					</h6>
-				</div>
-			</div>
-			<!-- Nested Row Ends -->
-		</form>
-		<!-- Newsletter Form Ends -->
-	</div>
-	<!-- Nested Container Ends -->
-</section>
-<!-- Newsletter Section Ends -->
-
 <%@ include file="../include/footer.jspf"%>
