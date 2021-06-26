@@ -107,32 +107,39 @@
 	<h4 class="main-heading-1 text-xs-center text-sm-center text-md-left">
 		${storeinfo.storeName}
 
+
+
+
+
+		<ul class="list-unstyled float-lg-right text-lg-right">
+			<li class="list-inline-item">${storeAvg}</li>
+		</ul>
+		
+		
 		<c:if test="${isExisFavoriteData}">
+
 			<button id="starCheck">
-				<ul
-					class="list-unstyled list-inline grid-box-ratings float-lg-right text-lg-right">
-					<li class="list-inline-item star-rating"><i class="fa fa-star"></i>
-					</li>
+
+				<ul class="list-unstyled list-inline rating-star-list">
+					<li class="list-inline-item"><i class="fa fa-star"></i></li>
 				</ul>
+
 			</button>
 		</c:if>
 		<c:if test="${!isExisFavoriteData}">
 			<button id="starCheck">
-				<ul
-					class="list-unstyled list-inline grid-box-ratings float-lg-right text-lg-right">
-					<li class="list-inline-item star-rating"><i
-						class="fa fa-star-o"></i></li>
+				
+
+				<ul class="list-unstyled list-inline rating-star-list">
+					<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
 				</ul>
+
 			</button>
 		</c:if>
-		<ul
-			class="list-unstyled list-inline grid-box-ratings float-lg-right text-lg-right">
-			<li class="list-inline-item star-rating">${storeAvg}</li>
-		</ul>
-
-
-
+		
 	</h4>
+
+
 
 	<!-- Heading Ends -->
 	<!-- Main Banner Starts -->
@@ -508,11 +515,27 @@
 												<div class="box-body">
 													<form action="writeMessage.do" method="post" id="writeForm">
 														<!-- // form에 ID 지정 -->
-														<input type="hidden" name="storeNo" value="${param.storeno }" />
+														<input type="hidden" name="storeNo"
+															value="${param.storeno }" />
 														<p>
 															<textarea name="reviewContents" cols="60" rows="10"
 																placeholder="리뷰를 작성하세요"></textarea>
 														</p>
+
+														<script type="text/javascript">
+															$(function() {
+																$("#writeForm")
+																		.submit(
+																				function() {
+																					if ($("#writeForm").val() == "") {
+																						alert("리뷰 내용을 입력하세요!");
+																						$("#writeForm").focus();
+																						return false;
+																					}
+																				});
+															});
+														</script>
+
 
 														<h9>별점을 선택하세요.</h9>
 														<select name="avgScore">
@@ -521,7 +544,7 @@
 															<option value="2">★★☆☆☆</option>
 															<option value="3">★★★☆☆</option>
 															<option value="4">★★★★☆</option>
-															<option value="5">★★★★★</option>
+															<option value="5" selected>★★★★★</option>
 														</select> <br> <br>
 
 														<p>
