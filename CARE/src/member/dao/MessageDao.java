@@ -22,14 +22,17 @@ public class MessageDao {
 	public MessageDao() {
 	}
 
-	public int insert(Connection conn, Message message) throws SQLException {
+	public int insert(Connection conn, Message message, int userNo, int storeNo) throws SQLException {
 		
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement("insert into Reviewinfo "
-					+ "(reviewNo, userNo, storeNo, avgScore, reviewContents, reviewDate ) values (reviewnum.nextval, 1, 1, ?, ?, sysdate)");
-			pstmt.setDouble(1, message.getAvgScore());
-			pstmt.setString(2, message.getReviewContents());
+					+ "(reviewNo, userNo, storeNo, avgScore, reviewContents, reviewDate ) values (reviewnum.nextval, ?, ?, ?, ?, sysdate)");
+			
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, storeNo);
+			pstmt.setDouble(3, message.getAvgScore());
+			pstmt.setString(4, message.getReviewContents());
 			System.out.println("message.avgScore=" + message.getAvgScore());
 			System.out.println("message.reviewContents" + message.getReviewContents());
 			return pstmt.executeUpdate();

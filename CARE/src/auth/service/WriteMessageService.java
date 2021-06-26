@@ -17,12 +17,12 @@ public class WriteMessageService {
 	public WriteMessageService() {
 	}
 
-	public int writeMessage(Message message) {
+	public int writeMessage(Message message,int userNo,int storeNo) {
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
 			MessageDao messageDao = MessageDao.getInstance();
-			int a =messageDao.insert(conn, message);
+			int a =messageDao.insert(conn, message, userNo, storeNo);
 			return a;
 		} catch (SQLException e) {
 			throw new ServiceException("에러 내용: " + e.getMessage(), e);
