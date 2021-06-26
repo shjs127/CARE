@@ -6,7 +6,17 @@ public class Store {
 	private int storeNo;
 	private float storeAvg;
 	private String storeName;
+	private int reviewCount;
 
+	public int getReviewCount() {
+		return reviewCount;
+	}
+
+	public Store(int storeNo,String storeName, int reviewCount) {
+		this.storeNo = storeNo;
+		this.storeName = storeName;
+		this.reviewCount = reviewCount;
+	}
 	public Store(String manageNo, int storeNo) {
 		this.manageNo = manageNo;
 		this.storeNo = storeNo;

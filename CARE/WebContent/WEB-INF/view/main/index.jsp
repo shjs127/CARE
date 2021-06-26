@@ -63,71 +63,24 @@
 		</h4>
 		<div class="food-menu-grid row text-center">
 			<!-- Food Menu #1 Starts -->
-			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="hover-content">
-					<a href="#" target="_blank"> <img
-						src="<%=request.getContextPath()%>/CARE/images/menu/thumb/chinese-menu.jpg"
-						alt="chinese" class="img-fluid animation">
-					</a>
-					<h4 class="text-uppercase">cafe</h4>
+			<c:forEach var="reviewT" items="${reviewTop}">
+				<div class="col-lg-4 col-md-6 col-sm-12">
+					<div class="hover-content">
+						<a
+							href="${pageContext.request.contextPath}/main/foodDetail.do?storeno=${reviewT.storeNo}">
+							<img
+							src="<%=request.getContextPath()%>/CARE/images/hotels/thumb/hotel-grid-thumb-img1.jpg"
+							alt="Eagle Boys Village Plaza" class="img-fluid img-center">
+						</a> <a
+							href="${pageContext.request.contextPath}/main/foodDetail.do?storeno=${reviewT.storeNo}">
+							<h5 class="text-uppercase">${reviewT.storeName} 
+							(${reviewT.reviewCount})</h5>
+						</a>
+					</div>
 				</div>
-			</div>
+			</c:forEach>
 			<!-- Food Menu #1 Ends -->
-			<!-- Food Menu #2 Starts -->
-			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="hover-content">
-					<a href="#" target="_blank"> <img
-						src="<%=request.getContextPath()%>/CARE/images/menu/thumb/chinese-menu.jpg"
-						alt="chinese" class="img-fluid animation">
-					</a>
-					<h4 class="text-uppercase">cafe</h4>
-				</div>
-			</div>
-			<!-- Food Menu #2 Ends -->
-			<!-- Food Menu #3 Starts -->
-			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="hover-content">
-					<a href="#" target="_blank"> <img
-						src="<%=request.getContextPath()%>/CARE/images/menu/thumb/chinese-menu.jpg"
-						alt="chinese" class="img-fluid animation">
-					</a>
-					<h4 class="text-uppercase">cafe</h4>
-				</div>
-			</div>
-			<!-- Food Menu #3 Ends -->
-			<!-- Food Menu #4 Starts -->
-			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="hover-content">
-					<a href="#" target="_blank"> <img
-						src="<%=request.getContextPath()%>/CARE/images/menu/thumb/chinese-menu.jpg"
-						alt="chinese" class="img-fluid animation">
-					</a>
-					<h4 class="text-uppercase">cafe</h4>
-				</div>
-			</div>
-			<!-- Food Menu #4 Ends -->
-			<!-- Food Menu #5 Starts -->
-			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="hover-content">
-					<a href="#" target="_blank"> <img
-						src="<%=request.getContextPath()%>/CARE/images/menu/thumb/chinese-menu.jpg"
-						alt="chinese" class="img-fluid animation">
-					</a>
-					<h4 class="text-uppercase">cafe</h4>
-				</div>
-			</div>
-			<!-- Food Menu #5 Ends -->
-			<!-- Food Menu #6 Starts -->
-			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="hover-content">
-					<a href="#" target="_blank"> <img
-						src="<%=request.getContextPath()%>/CARE/images/menu/thumb/chinese-menu.jpg"
-						alt="chinese" class="img-fluid animation">
-					</a>
-					<h4 class="text-uppercase">cafe</h4>
-				</div>
-			</div>
-			<!-- Food Menu #6 Ends -->
+
 		</div>
 
 		<hr>

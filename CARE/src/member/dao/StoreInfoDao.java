@@ -10,6 +10,7 @@ import java.util.List;
 
 import auth.service.Store;
 import jdbc.JdbcUtil;
+import member.model.ReviewInfo;
 import member.model.StoreInfo;
 
 public class StoreInfoDao {
@@ -338,5 +339,32 @@ public class StoreInfoDao {
 			JdbcUtil.close(pstmt);
 		}
 	}
+	
+	public List<Store> reviewTop(Connection conn, int top) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement("SELECT A.* " + "FROM ( " + "SELECT A.*, ROWNUM AS RNUM " + "FROM ("
+					+ "SELECT A.* " + "FROM ( " + "SELECT A.*, " + "(SELECT COUNT(1) FROM REVIEWINFO R "
+					+ "WHERE A.STORENO = R.STORENO GROUP BY R.STORENO) AS REVIEW_CNT " + "FROM STOREINFO A " + ") A "
+					+ "WHERE NOT REVIEW_CNT IS NULL ORDER BY REVIEW_CNT DESC " + ") A " + ") A " + "WHERE RNUM BETWEEN 1 AND ?");
+			pstmt.setInt(1, top);
+			rs = pstmt.executeQuery();
+			List<Store> result = new ArrayList<>();
+			while (rs.next()) {
+				result.add(convertReview(rs));
+			}
+			return result;
 
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
+
+	private Store convertReview(ResultSet rs) throws SQLException {
+		return new Store(
+				rs.getInt("storeno"), rs.getString("storename"), rs.getInt("review_cnt")
+				);
+	}
 }
