@@ -9,8 +9,8 @@
 			<!-- Logo Starts -->
 			<div
 				class="col-lg-3 col-sm-12 text-xs-center text-sm-center text-lg-left">
-				<img src="<%=request.getContextPath()%>/CARE/images/logo.png"
-					alt="FoodBingo" class="img-fluid">
+				<img src="<%=request.getContextPath()%>/CARE/images/careitsir_logo.png"
+					alt="FoodBingo" class="img-fluid" width="200" height="200">
 			</div>
 			<!-- Logo Ends -->
 			<!-- Page Links Starts -->

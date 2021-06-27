@@ -144,40 +144,24 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-xs-8">
-						<div class="checkbox icheck">
-							<label> <input type="checkbox"> I agree to the <a
-								href="#">terms</a>
-							</label>
-						</div>
+					<div class="col-xs-4">
 					</div>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<div class="col-xs-4">
+							<a href="login.do" class="btn btn-prime text-uppercase animation text-right">가입 취소</a> 
+					</div>
+					&nbsp;&nbsp;&nbsp;&nbsp;
 					<!-- /.col -->
 					<div class="col-xs-4">
-						<button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+								
+						<button type="submit" class="btn btn-prime btn-block btn-flat" style="margin : 0 auto">가입</button> 
 					</div>
 					<!-- /.col -->
 				</div>
 			</form>
 		</div>
-		<!-- Register Col Starts -->
-		<div class="col-md-5 col-sm-12 offset-md-2">
-			<h4 class="text-spl-color">Login for first time user?</h4>
-			<p>Lorem Ipsum is simply dummy text of the printing and
-				typesetting industry. Lorem Ipsum has been the industry's standard..</p>
-			<button type="submit" class="btn btn-block btn-tertiary animation"
-				data-toggle="modal" data-target="#registerModal">
-				Continue To Register <i class="fa fa-caret-right"></i>
-			</button>
-			<hr>
-			<a href="#" class="btn btn-block btn-twitter animation"> <i
-				class="fa fa-twitter"></i> Sign in with Twitter
-			</a> <a href="#" class="btn btn-block btn-fb animation"><i
-				class="fa fa-facebook"></i> Sign in with Facebook</a> <a href="#"
-				class="btn btn-block btn-prime tiny animation"><i
-				class="fa fa-google-plus"></i> Sign in with Google</a>
-		</div>
 
-		<a href="login.do" class="text-center">가입 취소</a>
+		
 	</div>
 	<!-- /.form-box -->
 	</div>
