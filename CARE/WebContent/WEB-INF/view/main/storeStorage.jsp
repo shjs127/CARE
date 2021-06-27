@@ -5,7 +5,7 @@
 
 <!-- Main Heading Starts -->
 <h2 class="main-heading text-center">
-	Register <br /> <span>Create New Account</span>
+	매장 등록</span>
 </h2>
 <!-- Main Heading Ends -->
 <!-- Registration Section Starts -->
