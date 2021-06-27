@@ -12,7 +12,7 @@
 
 		<script>
 			$(function() {
-				$("form").submit(function() {F
+				$("form").submit(function() {
 					var nameChk = /^[가-힣a-zA-Z0-9]{1,20}$/;
 					if (!nameChk.test($("#ID").val())) {
 						alert("ID - 1글자 미만 , 20글자 초과 사용 및 특수문자는 사용 불가입니다!");
@@ -69,10 +69,10 @@
 			});
 			
 			$(function() {
-				$("form").submit(function() {
-					var nameChk = /^[0-9]{6}$/;
+				$("#registForm").submit(function() {
+					var nameChk = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
 					if (!nameChk.test($("#birth").val())) {
-						alert("주민번호 앞 6자리를 입력하여주세요!");
+						alert("생년월일 8자리를 입력하여 주세요!");
 						$("#birth").focus();
 						return false;
 					}
@@ -123,7 +123,7 @@
 				</div>
 
 				<div class="form-group has-feedback">
-					<input id="birth" type="number" class="form-control" name="birth"
+					<input id="birth" type="date" class="form-control" max="9999-12-31" name="birth"
 						placeholder="생년월일"> <span
 						class="glyphicon glyphicon-user form-control-feedback"></span>
 				</div>

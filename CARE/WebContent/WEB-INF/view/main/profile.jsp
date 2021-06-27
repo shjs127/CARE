@@ -123,7 +123,7 @@
 															<label for="inputBirth"
 																class="col-sm-3 col-form-label text-right">생 일 :</label>
 															<div class="col-sm-9">
-																<input id="birth" type="date" class="form-control" name="newBirth"
+																<input id="birth" max="9999-12-31" type="date" class="form-control" name="newBirth"
 																	placeholder="${userInfo.birth}">
 															</div>
 														</div>

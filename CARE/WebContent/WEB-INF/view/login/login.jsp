@@ -19,6 +19,9 @@
 						<c:if test="${errors.idOrPwNotMatch}">
 						alert("아이디와 암호가 일치하지 않습니다.")
 						</c:if>
+						</script>
+						</p>
+						
 						<script>
 						$(function() {
 							$("#a").submit(function() {
