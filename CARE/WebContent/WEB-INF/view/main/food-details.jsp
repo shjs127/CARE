@@ -545,12 +545,7 @@
 														</c:forEach>
 													</table>
 
-													<div>
-														<c:forEach var="pageNum" begin="1"
-															end="${view.totalPages}">
-															<span><a href="messageList.jsp?page=${pageNum}">[${pageNum}]</a></span>
-														</c:forEach>
-													</div>
+													
 												</c:if>
 											</div>
 										</div>
