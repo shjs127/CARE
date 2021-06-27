@@ -20,14 +20,17 @@ public class ListStoreService {
 		endSize = pageNum * size;
 		
 		try (Connection conn = ConnectionProvider.getConnection()) {
-			int total = storeInfoDao.selectCount(conn);
+			int total = 0;
 			List<StoreInfo> storeList = null;
 			
 			if(orderBy.equals("orderStoreNo")) {
+				total = storeInfoDao.selectCount(conn);
 				storeList = storeInfoDao.select(conn, (pageNum - 1) * size + 1, endSize);
 			}else if(orderBy.equals("orderAvgScore")) {
+				total = storeInfoDao.selectAvgScoreCount(conn);
 				storeList = storeInfoDao.selectAvgScore(conn, (pageNum - 1) * size + 1, endSize);
 			}else if(orderBy.equals("orderReviewCnt")){
+				total = storeInfoDao.selectReviewCount(conn);
 				storeList = storeInfoDao.selectReviewCnt(conn, (pageNum - 1) * size + 1, endSize);
 			}
 			

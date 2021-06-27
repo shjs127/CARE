@@ -316,7 +316,9 @@
 	$(function(){
 		$("#orderBy").change(function(){
 			var orderby = $(this).val();
-			$(location).attr('href', '${pageContext.request.contextPath}/board/storelist.do?orderBy='+orderby);
+			var searchKeyword = $('#searchKeyword').val();
+			
+			$(location).attr('href', '${pageContext.request.contextPath}/board/storelist.do?orderBy='+orderby+'&searchKeyword='+searchKeyword);
 		});
 	});
 </script>

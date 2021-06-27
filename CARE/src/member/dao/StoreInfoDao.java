@@ -79,6 +79,55 @@ public class StoreInfoDao {
 			JdbcUtil.close(stmt);
 		}
 	}
+	
+	// avgScoreCnt
+	public int selectAvgScoreCount(Connection conn) throws SQLException {
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("select count(1) from ("
+					+ "select storeinfo.* from storeinfo ) a, (select storeno , AVG(avgscore) as aa "
+					+ "from reviewinfo "
+					+ "group by storeno order by aa DESC,storeno DESC) r "
+					+ "where a.storeno = r.storeno");
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+			return 0;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(stmt);
+		}
+	}
+	
+	// ReviewCnt
+	public int selectReviewCount(Connection conn) throws SQLException {
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("SELECT COUNT(1) "
+								+ "FROM ( SELECT A.*, ROWNUM AS RNUM "
+										+ "FROM ( SELECT A.* "
+												+ "FROM ( SELECT A.*,(SELECT COUNT(1) "
+																	+ "FROM REVIEWINFO R "
+																	+ "WHERE A.STORENO = R.STORENO "
+																	+ "GROUP BY R.STORENO) AS REVIEW_CNT "
+														+ "FROM (select storeinfo.* from storeinfo) A "
+												+ " ) A "
+												+ "WHERE NOT REVIEW_CNT IS NULL ORDER BY REVIEW_CNT DESC "
+										+ ") A "
+								+ ") A");
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+			return 0;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(stmt);
+		}
+	}
 
 	// main storeno select
 	public int selectSearchCount(Connection conn, String searchKeyword) throws SQLException {
