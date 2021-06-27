@@ -164,27 +164,6 @@
 						data-toggle="tab">리뷰</a></li>
 
 				</ul>
-				<%
-					int count;
-
-				if (session.getAttribute("count") != null) {
-					count = ((Integer) session.getAttribute("count")).intValue();
-
-				}
-
-				else {
-					count = 0;
-				}
-
-				count++;
-				%>
-
-				- 방문 횟수 :
-				<%=count%>
-
-				<%
-					session.setAttribute("count", new Integer(count));
-				%>
 				<br> <br>
 
 				<!-- Menu Tabs List Ends -->
