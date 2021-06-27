@@ -104,12 +104,12 @@ button {
 			</table>
 		</form>
 		<div>
-			<a href="board.do">
+			<a href="${pageContext.request.contextPath }/board/list.do">
 				<button>게시판</button>
 			</a>
 		</div>
 		<div>
-			<a href="../main/index.do">
+			<a href="${pageContext.request.contextPath }/main/index.do">
 				<button>홈으로</button>
 			</a>
 		</div>

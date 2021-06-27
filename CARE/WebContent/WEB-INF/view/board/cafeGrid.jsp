@@ -232,24 +232,14 @@
 					<ul class="pagination animation float-lg-right">
 						<c:if test="${storePage.startPage > 5}">
 							<c:if test="${Keyword == null}">
-								<c:if test="${orderBy == null || orderBy == 'orderStoreNo'}">
-									<li class="page-item">
-										<a href="storelist.do?pageNo=${storePage.startPage -5}&orderBy=${orderBy}"
-											class="page-link">&laquo;</a></li>
-								</c:if>
-								<c:if test="${orderBy != null}">
+								<c:if test="${orderBy == null || orderBy != null}">
 									<li class="page-item">
 										<a href="storelist.do?pageNo=${storePage.startPage -5}&orderBy=${orderBy}"
 											class="page-link">&laquo;</a></li>
 								</c:if>
 							</c:if>
 							<c:if test="${Keyword != null}">
-								<c:if test="${orderBy == null || orderBy == 'orderStoreNo'}">
-									<li class="page-item"><a
-									href="storelist?pageNo=${storePage.startPage -5}&searchKeyword=${Keyword}&orderBy=${orderBy}"
-									class="page-link">&laquo;</a></li>
-								</c:if>
-								<c:if test="${orderBy != null}">
+								<c:if test="${orderBy == null || orderBy != null}">
 									<li class="page-item"><a
 									href="storelist?pageNo=${storePage.startPage -5}&searchKeyword=${Keyword}&orderBy=${orderBy}"
 									class="page-link">&laquo;</a></li>
@@ -259,17 +249,7 @@
 						<c:forEach var="pNo" begin="${storePage.startPage}"
 							end="${storePage.endPage}">
 							<c:if test="${Keyword == null}">
-								<c:if test="${orderBy == null || orderBy == 'orderStoreNo'}">
-									<c:if test="${pNo == storePage.currentPage }">
-										<li class="page-item active"><a href="storelist.do?pageNo=${pNo}&orderBy=${orderBy}"
-									class="page-link">${pNo}</a></li>
-									</c:if>
-									<c:if test="${pNo != storePage.currentPage }">
-										<li class="page-item"><a href="storelist.do?pageNo=${pNo}&orderBy=${orderBy}"
-									class="page-link">${pNo}</a></li>
-									</c:if>
-								</c:if>
-								<c:if test="${orderBy != null}">
+								<c:if test="${orderBy == null || orderBy != null}">
 									<c:if test="${pNo == storePage.currentPage }">
 										<li class="page-item active"><a href="storelist.do?pageNo=${pNo}&orderBy=${orderBy}"
 									class="page-link">${pNo}</a></li>
@@ -281,17 +261,7 @@
 								</c:if>
 							</c:if>
 							<c:if test="${Keyword != null}">
-								<c:if test="${orderBy == null || orderBy == 'orderStoreNo'}">
-									<c:if test="${pNo == storePage.currentPage }">
-										<li class="page-item active"><a href="storelist.do?pageNo=${pNo}&searchKeyword=${Keyword}&orderBy=${orderBy}"
-									class="page-link">${pNo}</a></li>
-									</c:if>
-									<c:if test="${pNo != storePage.currentPage }">
-										<li class="page-item"><a href="storelist.do?pageNo=${pNo}&searchKeyword=${Keyword}&orderBy=${orderBy}"
-									class="page-link">${pNo}</a></li>
-									</c:if>
-								</c:if>
-								<c:if test="${orderBy != null}">
+								<c:if test="${orderBy == null || orderBy != null}">
 									<c:if test="${pNo == storePage.currentPage }">
 										<li class="page-item active"><a href="storelist.do?pageNo=${pNo}&searchKeyword=${Keyword}&orderBy=${orderBy}"
 									class="page-link">${pNo}</a></li>
@@ -306,24 +276,14 @@
 						</c:forEach>
 						<c:if test="${storePage.endPage < storePage.totalPages}">
 							<c:if test="${Keyword == null}">
-								<c:if test="${orderBy == null || orderBy == 'orderStoreNo'}">
-									<li class="page-item"><a
-										href="storelist.do?pageNo=${storePage.startPage + 5}&orderBy=${orderBy}"
-										class="page-link">&raquo;</a></li>
-								</c:if>
-								<c:if test="${orderBy != null}">
+								<c:if test="${orderBy == null || orderBy != null}">
 									<li class="page-item"><a
 										href="storelist.do?pageNo=${storePage.startPage + 5}&orderBy=${orderBy}"
 										class="page-link">&raquo;</a></li>
 								</c:if>
 							</c:if>
 							<c:if test="${Keyword != null}">
-								<c:if test="${orderBy == null || orderBy == 'orderStoreNo'}">
-									<li class="page-item"><a
-									href="storelist.do?pageNo=${storePage.startPage + 5}&searchKeyword=${Keyword}&orderBy=${orderBy}"
-									class="page-link">&raquo;</a></li>
-								</c:if>
-								<c:if test="${orderBy != null}">
+								<c:if test="${orderBy == null || orderBy != null}">
 									<li class="page-item"><a
 									href="storelist.do?pageNo=${storePage.startPage + 5}&searchKeyword=${Keyword}&orderBy=${orderBy}"
 									class="page-link">&raquo;</a></li>
@@ -339,138 +299,6 @@
 	<!-- Ends -->
 </div>
 <!-- Main Container Ends -->
-<!-- Change Location Modal Window Starts -->
-<div class="modal fade" id="change-location" tabindex="-1" role="dialog"
-	aria-labelledby="change-location">
-	<div class="modal-dialog" role="document">
-		<!-- Modal Content Starts -->
-		<div class="modal-content">
-			<!-- Modal Header Starts -->
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title">Choose your location in Jacksonville</h4>
-			</div>
-			<!-- Modal Header Ends -->
-			<!-- Modal Body Starts -->
-			<div class="modal-body">
-				<!-- Nested Container Starts -->
-				<div class="container-fluid">
-					<h4>Jacksonville City</h4>
-					<div class="row">
-						<div class="col-md-4 col-sm-12">
-							<ul class="list-unstyled">
-								<li><a href="#">Abids</a></li>
-								<li><a href="#">Adikmet</a></li>
-								<li><a href="#">Amberpet</a></li>
-								<li><a href="#">Ameerpet</a></li>
-								<li><a href="#">Attapur</a></li>
-								<li><a href="#">Balanagar</a></li>
-								<li><a href="#">Banjara Hills</a></li>
-								<li><a href="#">Basheer Bagh</a></li>
-								<li><a href="#">Begum Bazaar</a></li>
-								<li><a href="#">Begumpet</a></li>
-								<li><a href="#">Chanda Nagar</a></li>
-								<li><a href="#">Chandrayanagutta</a></li>
-								<li><a href="#">Charminar</a></li>
-								<li><a href="#">Dilsukhnagar</a></li>
-							</ul>
-						</div>
-						<div class="col-md-4 col-sm-12">
-							<ul class="list-unstyled">
-								<li><a href="#">Abids</a></li>
-								<li><a href="#">Adikmet</a></li>
-								<li><a href="#">Amberpet</a></li>
-								<li><a href="#">Ameerpet</a></li>
-								<li><a href="#">Attapur</a></li>
-								<li><a href="#">Balanagar</a></li>
-								<li><a href="#">Banjara Hills</a></li>
-								<li><a href="#">Basheer Bagh</a></li>
-								<li><a href="#">Begum Bazaar</a></li>
-								<li><a href="#">Begumpet</a></li>
-								<li><a href="#">Chanda Nagar</a></li>
-								<li><a href="#">Chandrayanagutta</a></li>
-								<li><a href="#">Charminar</a></li>
-								<li><a href="#">Dilsukhnagar</a></li>
-							</ul>
-						</div>
-						<div class="col-md-4 col-sm-12">
-							<ul class="list-unstyled">
-								<li><a href="#">Abids</a></li>
-								<li><a href="#">Adikmet</a></li>
-								<li><a href="#">Amberpet</a></li>
-								<li><a href="#">Ameerpet</a></li>
-								<li><a href="#">Attapur</a></li>
-								<li><a href="#">Balanagar</a></li>
-								<li><a href="#">Banjara Hills</a></li>
-								<li><a href="#">Basheer Bagh</a></li>
-								<li><a href="#">Begum Bazaar</a></li>
-								<li><a href="#">Begumpet</a></li>
-								<li><a href="#">Chanda Nagar</a></li>
-								<li><a href="#">Chandrayanagutta</a></li>
-								<li><a href="#">Charminar</a></li>
-								<li><a href="#">Dilsukhnagar</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<!-- Nested Container Ends -->
-			</div>
-			<!-- Modal Body Ends -->
-		</div>
-		<!-- Modal Content Ends -->
-	</div>
-</div>
-<!-- Change Location Modal Window Ends -->
-<!-- Newsletter Section Starts -->
-<section class="footer-top">
-	<!-- Nested Container Starts -->
-	<div class="container">
-		<h3 class="text-center text-weight-bold">Subscribe to our
-			Newsletter:</h3>
-		<ul class="list-unstyled list-inline text-center">
-			<li class="list-inline-item"><i class="fa fa-check-circle"></i>
-				Receive deals from all our top restaurants via e-mail</li>
-			<li class="list-inline-item"><i class="fa fa-check-circle"></i>
-				Don't miss out on our great offers</li>
-		</ul>
-		<!-- Newsletter Form Starts -->
-		<form class="newsletter-form">
-			<!-- Nested Row Starts -->
-			<div class="row">
-				<div class="col-md-4 col-sm-12">
-					<label class="sr-only" for="newsletter-city">Please Select
-						Your City</label> <input type="text" class="form-control"
-						id="newsletter-city" placeholder="Please Select Your City">
-				</div>
-				<div class="col-md-5 col-sm-12">
-					<label class="sr-only" for="newsletter-email">Email</label> <input
-						type="text" class="form-control" id="newsletter-email"
-						placeholder="Enter Your E-mail Id">
-				</div>
-				<div class="col-md-3 col-sm-12">
-					<button type="submit"
-						class="btn btn-prime btn-block text-uppercase text-weight-bold animation">Sign
-						Up Now</button>
-				</div>
-				<div class="col-sm-12 text-center">
-					<h6 class="text-weight-bold">
-						<label> <input type="checkbox"> <span>I
-								have read &amp; accepted the terms and conditions and privacy
-								policy</span>
-						</label>
-					</h6>
-				</div>
-			</div>
-			<!-- Nested Row Ends -->
-		</form>
-		<!-- Newsletter Form Ends -->
-	</div>
-	<!-- Nested Container Ends -->
-</section>
-<!-- Newsletter Section Ends -->
 
 <script type="text/javascript">
 	$(function(){

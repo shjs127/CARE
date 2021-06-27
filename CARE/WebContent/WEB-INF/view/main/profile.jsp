@@ -144,6 +144,8 @@
 																	<label> <input type="radio" name="newGender"
 																		value="male"
 																		<c:if test="${userInfo.gender eq 'male'}">checked="checked"</c:if>>남성
+																	</label>
+																	<label>
 																		<input type="radio" name="newGender" value="female"
 																		<c:if test="${userInfo.gender eq 'female'}">checked="checked"</c:if>>여성
 																	</label>

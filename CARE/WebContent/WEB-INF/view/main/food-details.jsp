@@ -49,52 +49,39 @@
 	margin-top: 2%;
 }
 </style>
+
 <!-- Search Section Starts -->
 <section class="search-area condensed parallax">
 	<!-- Nested Container Starts -->
 	<div class="container text-center">
-		<h3 class="text-weight-normal">Find the best Restaurants, Cafes
-			&amp; Cuisine in Your Place</h3>
-		<form class="top-search">
+		<h3 class="text-weight-normal">
+			솔직한 리뷰, 믿을 수 있는 평점! <br> 카레
+		</h3>
+		<form class="top-search"
+			action="${pageContext.request.contextPath }/board/storelist.do"
+			method="post" name="frm" id="frm">
 			<div class="input-group">
-				<div class="input-group-prepend search-panel">
-					<button type="button"
-						class="btn btn-lg btn-default dropdown-toggle"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<span class="fa fa-map-marker"></span> <span class="text-label">Please
-							type location</span>
-					</button>
-					<ul class="dropdown-menu rounded-0">
-						<a href="#" class="dropdown-item">All of Texas</a>
-						<a href="#" class="dropdown-item lead text-uppercase">Popular
-							Places</a>
-						<a href="#" class="dropdown-item">Huston, Texas</a>
-						<a href="#" class="dropdown-item">San Antonio, Texas</a>
-						<a href="#" class="dropdown-item">Galveston, Texas</a>
-						<a href="#" class="dropdown-item">Corpus Christi, Texas</a>
-					</ul>
-				</div>
+				<div class="input-group-prepend search-panel"></div>
 				<input type="text" class="form-control input-lg rounded-0"
-					name="search-location"
-					placeholder="Search for a Restaurants, Cafes, Cuisine, etc..,">
+					name="searchKeyword" id="searchKeyword" placeholder="지역 또는 카페"
+					value="${param.searchKeyword}">
 				<button class="btn btn-lg btn-prime animation text-uppercase"
-					type="button">Search</button>
+					type="submit">검색</button>
 			</div>
 		</form>
 	</div>
 	<!-- Nested Container Ends -->
 </section>
 <!-- Search Section Ends -->
+
 <!-- BreadCrumb Starts -->
 <div class="breadcrumb rounded-0">
 	<!-- Nested Container Starts -->
 	<div class="container text-xs-center text-sm-center text-md-left">
 		<ul class="list-unstyled list-inline">
-			<li class="list-inline-item"><a href="index.html">Home</a></li>
-			<li class="list-inline-item"><a href="#">Restaurants in
-					Hyderabad</a></li>
-			<li class="list-inline-item"><a href="#">Begumpet</a></li>
-			<li class="active list-inline-item">Hyderabad Spl Food Dabha</li>
+			<li class="list-inline-item"><a href="${pageContext.request.contextPath }/main/index.do">홈</a></li>
+			<li class="list-inline-item"><a href="${pageContext.request.contextPath }/board/storelist.do">매장 리스트</a></li>
+			<li class="active list-inline-item">매장 상세 정보</li>
 		</ul>
 
 	</div>
@@ -107,39 +94,25 @@
 	<h4 class="main-heading-1 text-xs-center text-sm-center text-md-left">
 		${storeinfo.storeName}
 
-
-
-
-
 		<ul class="list-unstyled float-lg-right text-lg-right">
 			<li class="list-inline-item">${storeAvg}</li>
 		</ul>
 		
-		
 		<c:if test="${isExisFavoriteData}">
-
 			<button id="starCheck">
-
 				<ul class="list-unstyled list-inline rating-star-list">
 					<li class="list-inline-item"><i class="fa fa-star"></i></li>
 				</ul>
-
 			</button>
 		</c:if>
 		<c:if test="${!isExisFavoriteData}">
 			<button id="starCheck">
-				
-
 				<ul class="list-unstyled list-inline rating-star-list">
 					<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
 				</ul>
-
 			</button>
 		</c:if>
-		
 	</h4>
-
-
 
 	<!-- Heading Ends -->
 	<!-- Main Banner Starts -->
@@ -197,7 +170,6 @@
 									&ensp;&ensp;흡연존: <span class="float-right text-spl-color">${detailinfo.smokingArea }&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span><br>
 
 								</div>
-
 
 							</div>
 							<!-- Left Column Ends -->
@@ -273,7 +245,6 @@
 															}
 														});
 									</script>
-
 
 
 									<!-- Spacer Starts -->
@@ -667,8 +638,8 @@
 				</div>
 				<!-- Tab #5 Ends -->
 			</div>
-
-			<div class="col-md-3 col-sm-12">
+		</div>
+		<div class="col-md-3 col-sm-12">
 				<!-- Spacer Starts -->
 				<div class="spacer-1 medium d-xs-block d-sm-block d-md-none"></div>
 				<!-- Spacer Ends -->
@@ -678,24 +649,27 @@
 					<h6 class="text-center">가게 메뉴</h6>
 					<!-- Heading Ends -->
 					<!-- Order Content Starts -->
-
-					<c:forEach var="menuInfo2" items="${menuListView.menuInfoList}">
-								  &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
-								    메뉴 이름:  ${menuInfo2.menu }&ensp;<br>
-									&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
-									 -가격:  <span class="float-right text-spl-color">${menuInfo2.price }
-							&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<br>
+					<div class="side-block-order-content">
+						<c:forEach var="menuInfo2" items="${menuListView.menuInfoList}">
+						<ul class="list-unstyled order-item-list">
+							<li class="clearfix">
+								<span class="float-left"> ${menuInfo2.menu } </span>
+								<span class="float-right text-sql-color">${menuInfo2.price }</span>
+							</li>
+						</ul>
+						</c:forEach>
+					</div>
+					<%-- <c:forEach var="menuInfo2" items="${menuListView.menuInfoList}">
+						 ${menuInfo2.menu }  &nbsp;&nbsp;&nbsp;
+						 <span class="float-right text-spl-color">${menuInfo2.price }<br>
 						</span>
 
 						<br>
-					</c:forEach>
+					</c:forEach> --%>
 
 				</div>
 
 			</div>
-
-		</div>
-
 	</div>
 </div>
 

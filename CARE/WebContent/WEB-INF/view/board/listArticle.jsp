@@ -8,37 +8,24 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <%@ include file="../include/header.jspf"%>
+
 <!-- Search Section Starts -->
 <section class="search-area condensed parallax">
 	<!-- Nested Container Starts -->
 	<div class="container text-center">
-		<h3 class="text-weight-normal">Find the best Restaurants, Cafes
-			&amp; Cuisine in Your Place</h3>
-		<form class="top-search">
+		<h3 class="text-weight-normal">
+			솔직한 리뷰, 믿을 수 있는 평점! <br> 카레
+		</h3>
+		<form class="top-search"
+			action="${pageContext.request.contextPath }/board/storelist.do"
+			method="post" name="frm" id="frm">
 			<div class="input-group">
-				<div class="input-group-prepend search-panel">
-					<button type="button"
-						class="btn btn-lg btn-default dropdown-toggle"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<span class="fa fa-map-marker"></span> <span class="text-label">Please
-							type location</span>
-					</button>
-					<!-- 위치변경 삭제 -->
-					<ul class="dropdown-menu rounded-0">
-						<a href="#" class="dropdown-item">All of Texas</a>
-						<a href="#" class="dropdown-item lead text-uppercase">Popular
-							Places</a>
-						<a href="#" class="dropdown-item">Huston, Texas</a>
-						<a href="#" class="dropdown-item">San Antonio, Texas</a>
-						<a href="#" class="dropdown-item">Galveston, Texas</a>
-						<a href="#" class="dropdown-item">Corpus Christi, Texas</a>
-					</ul>
-				</div>
+				<div class="input-group-prepend search-panel"></div>
 				<input type="text" class="form-control input-lg rounded-0"
-					name="search-location"
-					placeholder="Search for a Restaurants, Cafes, Cuisine, etc..,">
+					name="searchKeyword" id="searchKeyword" placeholder="지역 또는 카페"
+					value="${param.searchKeyword}">
 				<button class="btn btn-lg btn-prime animation text-uppercase"
-					type="button">Search</button>
+					type="submit">검색</button>
 			</div>
 		</form>
 	</div>
@@ -50,11 +37,10 @@
 	<!-- Nested Container Starts -->
 	<div class="container text-xs-center text-sm-center text-md-left">
 		<ul class="list-unstyled list-inline">
-			<li class="list-inline-item"><a href="index.html">Home</a></li>
-			<li class="list-inline-item"><a href="#">Restaurants in
-					jacksonville</a></li>
-			<li class="active list-inline-item">Jack Hills</li>
+			<li class="list-inline-item"><a href="${pageContext.request.contextPath }/main/index.do">홈</a></li>
+			<li class="active list-inline-item">게시판</li>
 		</ul>
+
 	</div>
 	<!-- Nested Container Ends -->
 </div>
@@ -76,7 +62,7 @@
 					<!-- Search Field Starts -->
 					<div class="input-group sidearea-filter-search">
 						<input type="text" name="searching" class="form-control rounded-0"
-							placeholder="Search for..." value="${param.searching}"><span
+							placeholder="검색..." value="${param.searching}"><span
 							class="input-group-append">
 							<button class="btn btn-default rounded-0" type="submit">
 								<i class="fa fa-search"></i>
@@ -180,7 +166,7 @@
 					if (session.getAttribute("authUser") != null) {
 				%>
 				<div style="float: right;">
-					<a href="write.do" class="btn btn-primary"
+					<a href="write.do" class="btn btn-prime text-weight-bold text-uppercase animation"
 						style="margin-bottom: 14px;">글쓰기</a>
 				</div>
 				<%
@@ -202,7 +188,7 @@
 						<c:forEach var="pNo" begin="${articlePage.startPage}"
 							end="${articlePage.endPage}">
 							<c:choose>
-								<c:when test="${(param.p) == (pNo)}">
+								<c:when test="${pNo == articlePage.currentPage}">
 									<li class="page-item active"><a
 										href="?p=${pNo}&searching=${param.searching}&v=${articlePage.pageV}"
 										class="page-link">${pNo}</a></li>
