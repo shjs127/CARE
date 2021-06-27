@@ -59,7 +59,7 @@
 			
 			$(function() {
 				$("form").submit(function() {
-					var nameChk = /^[가-힣a-zA-Z]{1,10}$/;
+					var nameChk = /^[가-힣a-zA-Z0-9]{1,10}$/;
 					if (!nameChk.test($("#nickname").val())) {
 						alert("닉네임 - 1글자 미만 , 10글자 초과 사용 및 특수문자는 사용 불가입니다!");
 						$("#nickname").focus();
