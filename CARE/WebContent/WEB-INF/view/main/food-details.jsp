@@ -535,8 +535,7 @@
 																	<h6>회원 닉네임: ${userInfo.nickName}</h6>
 
 																</div>
-																<img src="images/review-thumb-img1.png" alt="Image"
-																	class="img-fluid float-right">
+																
 															</div>
 															<div class="review-list-content">
 																<p>리뷰내용: ${message.reviewContents}</p>
